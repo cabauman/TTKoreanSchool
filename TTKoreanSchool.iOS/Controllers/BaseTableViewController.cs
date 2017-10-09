@@ -1,0 +1,43 @@
+﻿using System;
+using System.Drawing;
+using System.Reactive.Disposables;
+using CoreFoundation;
+using Foundation;
+using ReactiveUI;
+using TTKoreanSchool.ViewModels;
+using UIKit;
+
+namespace TTKoreanSchool.iOS.Controllers
+{
+    [Register("BaseTableViewController")]
+    public class BaseTableViewController<TViewModel> : ReactiveTableViewController<TViewModel>
+        where TViewModel : class, IScreenViewModel
+    {
+        public BaseTableViewController()
+        {
+        }
+
+        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+
+        public override void DidReceiveMemoryWarning()
+        {
+            // Releases the view if it doesn't have a superview.
+            base.DidReceiveMemoryWarning();
+
+            // Release any cached data, images, etc that aren't in use.
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            // Perform any additional setup after loading the view
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            SubscriptionDisposables.Clear();
+        }
+    }
+}
