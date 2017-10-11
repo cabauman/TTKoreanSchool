@@ -80,6 +80,22 @@
   </array>
 	<key>CFBundleURLTypes</key>
 	<array>
+    <dict>
+      <key>CFBundleURLTypes</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>com.googleusercontent.apps.447724422483-60uujhpoubt37bl29tom4i58sv7gp5ue</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleURLTypes</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>com.google.firebase.quickstart.database</string>
+      </array>
+    </dict>
 		<dict>
 			<key>CFBundleURLName</key>
 			<string>Facebook</string>

@@ -2,6 +2,7 @@
 using Facebook.CoreKit;
 using Firebase.Core;
 using Foundation;
+using Google.SignIn;
 using ReactiveUI;
 using Splat;
 using System;
@@ -45,6 +46,10 @@ namespace TTKoreanSchool.iOS
         {
             App.Configure();
 
+            // Google Sign-in
+            var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
+            SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
+
             // This is false by default,
             // If you set true, you can handle the user profile info once is logged into FB with the Profile.Notifications.ObserveDidChange notification,
             // If you set false, you need to get the user Profile info by hand with a GraphRequest
@@ -55,7 +60,7 @@ namespace TTKoreanSchool.iOS
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
             //Window.RootViewController = new UINavigationController();
 
-            Window.RootViewController = new FacebookLoginController();
+            Window.RootViewController = new GoogleSignInViewController(); // new FacebookLoginController();
 
             RegisterServices();
             //var navService = Locator.Current.GetService<INavigationService>();
@@ -101,8 +106,9 @@ namespace TTKoreanSchool.iOS
         // For iOS 9 or newer
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
         {
-            //var openUrlOptions = new UIApplicationOpenUrlOptions(options);
-            //return Google.SignIn.SignIn.SharedInstance.HandleUrl(url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
+            // Google sign-in instructions say to use this line but Facebook return statement is already used.
+            // return Google.SignIn.SignIn.SharedInstance.HandleUrl(url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
+
             var openUrlOptions = new UIApplicationOpenUrlOptions(options);
             return OpenUrl(app, url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
         }
@@ -110,12 +116,12 @@ namespace TTKoreanSchool.iOS
         // For iOS 8 and older
         public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
         {
-            // Handle Sign In
-            // var result = Google.SignIn.SignIn.SharedInstance.HandleUrl(url, sourceApplication, annotation);
-            // if(result)
-            // {
-            //    return result;
-            // }
+            // Google Sign-in
+            var result = SignIn.SharedInstance.HandleUrl(url, sourceApplication, annotation);
+            if(result)
+            {
+                return result;
+            }
 
             // We need to handle URLs by passing them to their own OpenUrl in order to make the SSO authentication works.
             return ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, annotation);
