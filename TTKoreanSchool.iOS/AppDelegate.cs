@@ -1,7 +1,10 @@
 ﻿using CoreGraphics;
+using Facebook.CoreKit;
+using Firebase.Core;
 using Foundation;
 using ReactiveUI;
 using Splat;
+using System;
 using TTKoreanSchool.iOS.Controllers;
 using TTKoreanSchool.iOS.Services;
 using TTKoreanSchool.Services;
@@ -16,20 +19,52 @@ namespace TTKoreanSchool.iOS
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
+        private string _appId = "409378669430587";
+        private string _appName = "TT Korean School";
+
         public override UIWindow Window { get; set; }
+
+        public static void ShowMessage(string title, string message, UIViewController fromViewController, Action actionForOk = null)
+        {
+            if(UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                var alert = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
+                alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, (obj) =>
+                {
+                    actionForOk?.Invoke();
+                }));
+                fromViewController.PresentViewController(alert, true, null);
+            }
+            else
+            {
+                new UIAlertView(title, message, null, "Ok", null).Show();
+            }
+        }
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            App.Configure();
+
+            // This is false by default,
+            // If you set true, you can handle the user profile info once is logged into FB with the Profile.Notifications.ObserveDidChange notification,
+            // If you set false, you need to get the user Profile info by hand with a GraphRequest
+            Profile.EnableUpdatesOnAccessTokenChange(true);
+            Settings.AppID = _appId;
+            Settings.DisplayName = _appName;
+
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            Window.RootViewController = new UINavigationController();
+            //Window.RootViewController = new UINavigationController();
+
+            Window.RootViewController = new FacebookLoginController();
 
             RegisterServices();
-            var navService = Locator.Current.GetService<INavigationService>();
-            navService.PushScreen(new HomeViewModel());
+            //var navService = Locator.Current.GetService<INavigationService>();
+            //navService.PushScreen(new HomeViewModel());
 
             Window.MakeKeyAndVisible();
 
-            return true;
+            // This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
+            return ApplicationDelegate.SharedInstance.FinishedLaunching(application, launchOptions);
         }
 
         public override void OnResignActivation(UIApplication application)
@@ -63,6 +98,29 @@ namespace TTKoreanSchool.iOS
             // Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
         }
 
+        // For iOS 9 or newer
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            //var openUrlOptions = new UIApplicationOpenUrlOptions(options);
+            //return Google.SignIn.SignIn.SharedInstance.HandleUrl(url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
+            var openUrlOptions = new UIApplicationOpenUrlOptions(options);
+            return OpenUrl(app, url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
+        }
+
+        // For iOS 8 and older
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
+            // Handle Sign In
+            // var result = Google.SignIn.SignIn.SharedInstance.HandleUrl(url, sourceApplication, annotation);
+            // if(result)
+            // {
+            //    return result;
+            // }
+
+            // We need to handle URLs by passing them to their own OpenUrl in order to make the SSO authentication works.
+            return ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, annotation);
+        }
+
         private void RegisterServices()
         {
             Locator.CurrentMutable.InitializeSplat();
@@ -76,8 +134,8 @@ namespace TTKoreanSchool.iOS
             Locator.CurrentMutable.Register(() => new StudentPortalController(), typeof(IViewFor<IStudentPortalViewModel>));
             Locator.CurrentMutable.Register(() => new VideoFeedController(), typeof(IViewFor<IVideoFeedViewModel>));
 
-            var navService = new NavigationService(Window.RootViewController);
-            Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
+            //var navService = new NavigationService(Window.RootViewController);
+            //Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
             Locator.CurrentMutable.RegisterConstant(new LoggingService(), typeof(ILogger));
         }
     }
