@@ -84,8 +84,14 @@
     <Reference Include="Firebase.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Firebase.iOS.Core.4.0.3\lib\Xamarin.iOS10\Firebase.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Database, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.Database.4.0.0\lib\Xamarin.iOS10\Firebase.Database.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.InstanceID, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Firebase.iOS.InstanceID.2.0.0\lib\Xamarin.iOS10\Firebase.InstanceID.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\lib\Xamarin.iOS10\Firebase.Storage.dll</HintPath>
     </Reference>
     <Reference Include="Google.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Google.iOS.Core.3.0.3.7\lib\Xamarin.iOS10\Google.Core.dll</HintPath>
@@ -258,6 +264,8 @@
     <Error Condition="!Exists('..\packages\Xamarin.Firebase.iOS.Auth.4.0.0\build\Xamarin.Firebase.iOS.Auth.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Firebase.iOS.Auth.4.0.0\build\Xamarin.Firebase.iOS.Auth.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Google.iOS.Core.3.0.3.7\build\Xamarin.Google.iOS.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Google.iOS.Core.3.0.3.7\build\Xamarin.Google.iOS.Core.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Google.iOS.SignIn.4.0.2.2\build\Xamarin.Google.iOS.SignIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Google.iOS.SignIn.4.0.2.2\build\Xamarin.Google.iOS.SignIn.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Firebase.iOS.Database.4.0.0\build\Xamarin.Firebase.iOS.Database.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Firebase.iOS.Database.4.0.0\build\Xamarin.Firebase.iOS.Database.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\build\Xamarin.Firebase.iOS.Storage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\build\Xamarin.Firebase.iOS.Storage.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.targets')" />
   <Import Project="..\packages\Xamarin.Firebase.iOS.Core.4.0.3\build\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Core.4.0.3\build\Xamarin.Firebase.iOS.Core.targets')" />
@@ -266,4 +274,6 @@
   <Import Project="..\packages\Xamarin.Firebase.iOS.Auth.4.0.0\build\Xamarin.Firebase.iOS.Auth.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Auth.4.0.0\build\Xamarin.Firebase.iOS.Auth.targets')" />
   <Import Project="..\packages\Xamarin.Google.iOS.Core.3.0.3.7\build\Xamarin.Google.iOS.Core.targets" Condition="Exists('..\packages\Xamarin.Google.iOS.Core.3.0.3.7\build\Xamarin.Google.iOS.Core.targets')" />
   <Import Project="..\packages\Xamarin.Google.iOS.SignIn.4.0.2.2\build\Xamarin.Google.iOS.SignIn.targets" Condition="Exists('..\packages\Xamarin.Google.iOS.SignIn.4.0.2.2\build\Xamarin.Google.iOS.SignIn.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.Database.4.0.0\build\Xamarin.Firebase.iOS.Database.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Database.4.0.0\build\Xamarin.Firebase.iOS.Database.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\build\Xamarin.Firebase.iOS.Storage.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\build\Xamarin.Firebase.iOS.Storage.targets')" />
 </Project>
