@@ -11,6 +11,7 @@ using TTKoreanSchool.iOS.Views.Cells;
 using TTKoreanSchool.iOS.Views.Headers;
 using TTKoreanSchool.ViewModels;
 using UIKit;
+using TTKoreanSchool.Utils;
 
 namespace TTKoreanSchool.iOS.Controllers
 {
@@ -68,7 +69,7 @@ namespace TTKoreanSchool.iOS.Controllers
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view
-            CollectionView.BackgroundColor = ColorUtil.Amber;
+            CollectionView.BackgroundColor = ColorPalette.Amber.ToNative();
 
             CollectionView.RegisterNibForCell(AppSectionCell.Nib, AppSectionCell.Key);
             CollectionView.RegisterClassForSupplementaryView(

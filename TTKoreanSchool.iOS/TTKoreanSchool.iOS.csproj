@@ -93,6 +93,9 @@
     <Reference Include="Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\lib\Xamarin.iOS10\Firebase.Storage.dll</HintPath>
     </Reference>
+    <Reference Include="GameCtor.Firebase.iOS.Database.Rx, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GameCtor.Firebase.Database.Rx.1.0.0\lib\Xamarin.iOS10\GameCtor.Firebase.iOS.Database.Rx.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Google.iOS.Core.3.0.3.7\lib\Xamarin.iOS10\Google.Core.dll</HintPath>
     </Reference>
@@ -222,7 +225,6 @@
     <Compile Include="Controllers\VideoFeedController.cs" />
     <Compile Include="Controllers\StudentPortalController.cs" />
     <Compile Include="Controllers\GrammarZoneController.cs" />
-    <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Controllers\BaseCollectionViewController.cs" />
     <Compile Include="Controllers\BaseTableViewController.cs" />
     <Compile Include="Controllers\BaseViewController.cs" />
@@ -230,7 +232,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\FirebaseDatabaseService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Utils\ViewUtil.cs" />
     <Compile Include="Views\Cells\AppSectionCell.cs" />
     <Compile Include="Views\Cells\AppSectionCell.designer.cs">

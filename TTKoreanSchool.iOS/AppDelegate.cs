@@ -143,6 +143,7 @@ namespace TTKoreanSchool.iOS
             //var navService = new NavigationService(Window.RootViewController);
             //Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
             Locator.CurrentMutable.RegisterConstant(new LoggingService(), typeof(ILogger));
+            Locator.CurrentMutable.RegisterConstant(new FirebaseDatabaseService(), typeof(IFirebaseDatabaseService));
         }
     }
 }

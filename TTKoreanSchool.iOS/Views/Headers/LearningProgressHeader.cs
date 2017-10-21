@@ -5,6 +5,7 @@ using DACircularProgress;
 using Foundation;
 using TTKoreanSchool.iOS.Utils;
 using UIKit;
+using TTKoreanSchool.Utils;
 
 namespace TTKoreanSchool.iOS.Views.Headers
 {
@@ -32,7 +33,7 @@ namespace TTKoreanSchool.iOS.Views.Headers
                 RoundedCorners = true,
                 ThicknessRatio = 0.1f,
                 TrackTintColor = UIColor.Black,
-                ProgressTintColor = ColorUtil.Amber,
+                ProgressTintColor = ColorPalette.Amber.ToNative()
             };
 
             progressView.ProgressLabel.Center = new CGPoint(progressView.ProgressLabel.Center.X, progressView.ProgressLabel.Center.Y + 30f);
