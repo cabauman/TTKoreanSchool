@@ -6,8 +6,12 @@ namespace TTKoreanSchool.Services.Interfaces
 {
     public interface IFirebaseDatabaseService
     {
-        IObservable<IReadOnlyList<Term>> GetTerms(string studySetId);
+        IObservable<IReadOnlyList<VocabSection>> LoadVocabSections();
 
-        IObservable<IReadOnlyList<Term>> GetSentences();
+        IObservable<IReadOnlyList<VocabSectionChild>> LoadVocabSetsInSubsection(string subsectionId);
+
+        IObservable<IReadOnlyList<Term>> LoadTerms(string studySetId);
+
+        IObservable<IReadOnlyList<ExampleSentence>> LoadSentences();
     }
 }
