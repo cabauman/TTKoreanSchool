@@ -2,7 +2,7 @@
 
 namespace TTKoreanSchool.ViewModels
 {
-    public class CourseRegistrationFormViewModel : BaseViewModel
+    public class CourseRegistrationFormViewModel : BaseScreenViewModel
     {
         private string _courseTitle;
 

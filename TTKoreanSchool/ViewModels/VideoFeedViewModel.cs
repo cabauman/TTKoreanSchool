@@ -10,7 +10,7 @@ namespace TTKoreanSchool.ViewModels
     {
     }
 
-    public class VideoFeedViewModel : BaseViewModel, IVideoFeedViewModel
+    public class VideoFeedViewModel : BaseScreenViewModel, IVideoFeedViewModel
     {
     }
 }

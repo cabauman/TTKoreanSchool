@@ -44,27 +44,18 @@ namespace TTKoreanSchool.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            App.Configure();
+            Firebase.Core.App.Configure();
 
-            // Google Sign-in
-            var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
-            SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
-
-            // This is false by default,
-            // If you set true, you can handle the user profile info once is logged into FB with the Profile.Notifications.ObserveDidChange notification,
-            // If you set false, you need to get the user Profile info by hand with a GraphRequest
-            Profile.EnableUpdatesOnAccessTokenChange(true);
-            Settings.AppID = _appId;
-            Settings.DisplayName = _appName;
+            InitializeAuthentication();
 
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            //Window.RootViewController = new UINavigationController();
+            Window.RootViewController = new UINavigationController();
 
-            Window.RootViewController = new GoogleSignInViewController(); // new FacebookLoginController();
+            //Window.RootViewController = new GoogleSignInViewController(); // new FacebookLoginController();
 
             RegisterServices();
-            //var navService = Locator.Current.GetService<INavigationService>();
-            //navService.PushScreen(new HomeViewModel());
+            var navService = Locator.Current.GetService<INavigationService>();
+            navService.PushScreen(new HomeViewModel());
 
             Window.MakeKeyAndVisible();
 
@@ -127,6 +118,20 @@ namespace TTKoreanSchool.iOS
             return ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, annotation);
         }
 
+        private void InitializeAuthentication()
+        {
+            // Google Sign-in
+            var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
+            SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
+
+            // This is false by default,
+            // If you set true, you can handle the user profile info once is logged into FB with the Profile.Notifications.ObserveDidChange notification,
+            // If you set false, you need to get the user Profile info by hand with a GraphRequest
+            Profile.EnableUpdatesOnAccessTokenChange(true);
+            Settings.AppID = _appId;
+            Settings.DisplayName = _appName;
+        }
+
         private void RegisterServices()
         {
             Locator.CurrentMutable.InitializeSplat();
@@ -140,10 +145,15 @@ namespace TTKoreanSchool.iOS
             Locator.CurrentMutable.Register(() => new StudentPortalController(), typeof(IViewFor<IStudentPortalViewModel>));
             Locator.CurrentMutable.Register(() => new VideoFeedController(), typeof(IViewFor<IVideoFeedViewModel>));
 
-            //var navService = new NavigationService(Window.RootViewController);
-            //Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
+            Locator.CurrentMutable.Register(() => new MiniFlashcardSetController(), typeof(IViewFor<IMiniFlashcardSetViewModel>));
+            Locator.CurrentMutable.Register(() => new DetailedFlashcardSetController(), typeof(IViewFor<IDetailedFlashcardSetViewModel>));
+            Locator.CurrentMutable.Register(() => new VocabSubsectionController(), typeof(IViewFor<IVocabSubsectionViewModel>));
+
+            var navService = new NavigationService(Window.RootViewController);
+            Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
             Locator.CurrentMutable.RegisterConstant(new LoggingService(), typeof(ILogger));
             Locator.CurrentMutable.RegisterConstant(new FirebaseDatabaseService(), typeof(IFirebaseDatabaseService));
+            Locator.CurrentMutable.RegisterConstant(new DialogService(), typeof(IDialogService));
         }
     }
 }

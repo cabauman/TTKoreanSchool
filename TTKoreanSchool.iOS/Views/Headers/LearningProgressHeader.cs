@@ -4,8 +4,8 @@ using CoreGraphics;
 using DACircularProgress;
 using Foundation;
 using TTKoreanSchool.iOS.Utils;
-using UIKit;
 using TTKoreanSchool.Utils;
+using UIKit;
 
 namespace TTKoreanSchool.iOS.Views.Headers
 {

@@ -10,7 +10,7 @@ namespace TTKoreanSchool.ViewModels
     {
     }
 
-    public class GrammarZoneViewModel : BaseViewModel, IGrammarZoneViewModel
+    public class GrammarZoneViewModel : BaseScreenViewModel, IGrammarZoneViewModel
     {
     }
 }

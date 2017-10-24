@@ -9,7 +9,7 @@ namespace TTKoreanSchool.ViewModels
         AppSectionViewModel[] AppSections { get; }
     }
 
-    public class HomeViewModel : BaseViewModel, IHomeViewModel
+    public class HomeViewModel : BaseScreenViewModel, IHomeViewModel
     {
         public HomeViewModel()
         {

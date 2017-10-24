@@ -10,7 +10,7 @@ namespace TTKoreanSchool.ViewModels
     {
     }
 
-    public class ConjugatorViewModel : BaseViewModel, IConjugatorViewModel
+    public class ConjugatorViewModel : BaseScreenViewModel, IConjugatorViewModel
     {
     }
 }

@@ -94,7 +94,7 @@
       <HintPath>..\packages\Xamarin.Firebase.iOS.Storage.2.0.0\lib\Xamarin.iOS10\Firebase.Storage.dll</HintPath>
     </Reference>
     <Reference Include="GameCtor.Firebase.iOS.Database.Rx, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GameCtor.Firebase.Database.Rx.1.0.0\lib\Xamarin.iOS10\GameCtor.Firebase.iOS.Database.Rx.dll</HintPath>
+      <HintPath>..\packages\GameCtor.Firebase.Database.Rx.1.0.1\lib\Xamarin.iOS10\GameCtor.Firebase.iOS.Database.Rx.dll</HintPath>
     </Reference>
     <Reference Include="Google.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Google.iOS.Core.3.0.3.7\lib\Xamarin.iOS10\Google.Core.dll</HintPath>
@@ -218,6 +218,9 @@
     <None Include="TTKoreanSchool.iOS.ruleset" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DetailedFlashcardSetController.cs" />
+    <Compile Include="Controllers\VocabSubsectionController.cs" />
+    <Compile Include="Controllers\MiniFlashcardSetController.cs" />
     <Compile Include="Controllers\FacebookLoginController.cs" />
     <Compile Include="Controllers\GoogleSignInViewController.cs" />
     <Compile Include="Controllers\HangulZoneController.cs" />
@@ -232,6 +235,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\FirebaseDatabaseService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />

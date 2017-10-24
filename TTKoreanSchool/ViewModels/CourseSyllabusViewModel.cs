@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TTKoreanSchool.ViewModels
 {
-    public class CourseSyllabusViewModel : BaseViewModel
+    public class CourseSyllabusViewModel : BaseScreenViewModel
     {
     }
 }

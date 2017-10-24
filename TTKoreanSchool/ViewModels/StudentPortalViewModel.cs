@@ -10,7 +10,7 @@ namespace TTKoreanSchool.ViewModels
     {
     }
 
-    public class StudentPortalViewModel : BaseViewModel, IStudentPortalViewModel
+    public class StudentPortalViewModel : BaseScreenViewModel, IStudentPortalViewModel
     {
     }
 }
