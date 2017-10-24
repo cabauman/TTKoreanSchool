@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Reactive.Disposables;
+using System.Reactive.Subjects;
 using CoreFoundation;
 using Foundation;
 using ReactiveUI;
@@ -10,7 +11,7 @@ using UIKit;
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("BaseViewController")]
-    public class BaseViewController<TViewModel> : ReactiveViewController<TViewModel>
+    public class BaseViewController<TViewModel> : ReactiveViewController<TViewModel>, IScreenView
         where TViewModel : class, IScreenViewModel
     {
         public BaseViewController()
@@ -38,6 +39,16 @@ namespace TTKoreanSchool.iOS.Controllers
         {
             base.ViewWillDisappear(animated);
             SubscriptionDisposables.Clear();
+        }
+
+        public override void WillMoveToParentViewController(UIViewController parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            if(parent == null)
+            {
+                ViewModel.ScreenPopped();
+            }
         }
     }
 }

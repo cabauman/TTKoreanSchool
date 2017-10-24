@@ -40,6 +40,7 @@ namespace TTKoreanSchool.iOS.Services
             if(navController != null)
             {
                 var screen = LocatePageFor<UIViewController>(viewModel);
+
                 if(resetStack)
                 {
                     navController.SetViewControllers(null, false);
@@ -68,15 +69,16 @@ namespace TTKoreanSchool.iOS.Services
 
         protected override void PresentScreenNative(IScreenViewModel viewModel, bool animate, Action onComplete, bool withNavStack)
         {
-            var screenToPresent = LocatePageFor<UIViewController>(viewModel);
+            var screen = LocatePageFor<UIViewController>(viewModel);
+
             if(withNavStack)
             {
                 var navController = new UINavigationController();
-                navController.PushViewController(screenToPresent, animate);
-                screenToPresent = navController;
+                navController.PushViewController(screen, animate);
+                screen = navController;
             }
 
-            RootViewController.PresentViewController(screenToPresent, animate, onComplete);
+            RootViewController.PresentViewController(screen, animate, onComplete);
         }
 
         protected override void DismissScreenNative(bool animate, Action onComplete)

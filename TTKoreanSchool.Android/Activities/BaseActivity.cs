@@ -12,13 +12,6 @@ namespace TTKoreanSchool.Android.Activities
     public class BaseActivity<TViewModel> : ReactiveActivity<TViewModel>, IScreenView
         where TViewModel : class, IScreenViewModel
     {
-        private readonly Subject<IScreenViewModel> _pagePopped = new Subject<IScreenViewModel>();
-
-        public IObservable<IScreenViewModel> PagePopped
-        {
-            get { return _pagePopped as IObservable<IScreenViewModel>; }
-        }
-
         protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -28,8 +21,7 @@ namespace TTKoreanSchool.Android.Activities
 
         public override void OnBackPressed()
         {
-            _pagePopped.OnNext(ViewModel);
-            _pagePopped.OnCompleted();
+            ViewModel.ScreenPopped();
             base.OnBackPressed();
         }
 

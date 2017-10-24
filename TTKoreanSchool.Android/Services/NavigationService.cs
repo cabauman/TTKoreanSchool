@@ -28,11 +28,6 @@ namespace TTKoreanSchool.Android.Services
                     activity =>
                     {
                         CurrentActivity = activity;
-                        CurrentScreen = activity as IScreenView;
-                        if(CurrentScreen != null)
-                        {
-                            ScreenPopped();
-                        }
                     });
         }
 

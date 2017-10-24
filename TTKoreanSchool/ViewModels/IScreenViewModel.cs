@@ -6,5 +6,6 @@ namespace TTKoreanSchool.ViewModels
 {
     public interface IScreenViewModel
     {
+        void ScreenPopped();
     }
 }

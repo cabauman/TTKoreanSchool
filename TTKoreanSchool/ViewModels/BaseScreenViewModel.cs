@@ -1,9 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reactive.Disposables;
+using System.Text;
+using ReactiveUI;
+using Splat;
+using TTKoreanSchool.Services.Interfaces;
 
 namespace TTKoreanSchool.ViewModels
 {
-    public interface IScreenView
+    public abstract class BaseScreenViewModel : BaseViewModel, IScreenViewModel
     {
-        IObservable<IScreenViewModel> PagePopped { get; }
+        public void ScreenPopped()
+        {
+            var navService = Locator.Current.GetService<INavigationService>();
+            navService.ScreenPopped();
+        }
     }
 }

@@ -10,6 +10,9 @@ namespace TTKoreanSchool.Services
 {
     public class NavigationScreenViewModel : Stack<IScreenViewModel>, IScreenViewModel
     {
+        public void ScreenPopped()
+        {
+        }
     }
 
     public abstract class NavigationServiceBase : INavigationService, IEnableLogger
@@ -30,8 +33,6 @@ namespace TTKoreanSchool.Services
         public Stack<IScreenViewModel> ModalStack { get; }
 
         public IViewLocator ViewLocator { get; }
-
-        public IScreenView CurrentScreen { get; protected set; }
 
         public IScreenViewModel TopMostPage
         {
@@ -112,27 +113,20 @@ namespace TTKoreanSchool.Services
 
         public void ScreenPopped()
         {
-            CurrentScreen
-                .PagePopped
-                .Do(
-                    poppedViewModel =>
-                    {
-                        var navScreen = TopMostPage as NavigationScreenViewModel;
-                        if(navScreen != null)
-                        {
-                            var removedScreen = navScreen.Pop();
-                            this.Log().Debug("Removed page '{0}' from stack.", removedScreen.GetType().Name);
-                        }
-                        else
-                        {
-                            if(ModalStack?.Count > 0)
-                            {
-                                var removedModal = ModalStack.Pop();
-                                this.Log().Debug("Removed modal '{0}' from stack.", removedModal.GetType().Name);
-                            }
-                        }
-                    })
-                .Subscribe();
+            var navScreen = TopMostPage as NavigationScreenViewModel;
+            if(navScreen != null)
+            {
+                var removedScreen = navScreen.Pop();
+                this.Log().Debug("Removed page '{0}' from stack.", removedScreen.GetType().Name);
+            }
+            else
+            {
+                if(ModalStack?.Count > 0)
+                {
+                    var removedModal = ModalStack.Pop();
+                    this.Log().Debug("Removed modal '{0}' from stack.", removedModal.GetType().Name);
+                }
+            }
         }
 
         protected abstract void PushScreenNative(IScreenViewModel viewModel, bool resetStack, bool animate);
