@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.Reactive.Linq;
 using CoreFoundation;
 using Foundation;
+using ReactiveUI;
+using TTKoreanSchool.Extensions;
 using TTKoreanSchool.ViewModels;
 using UIKit;
-using ReactiveUI;
-using System.Reactive.Linq;
-using TTKoreanSchool.Extensions;
 
 namespace TTKoreanSchool.iOS.Controllers
 {

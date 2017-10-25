@@ -7,13 +7,17 @@ using TTKoreanSchool.Extensions;
 using TTKoreanSchool.ViewModels;
 using UIKit;
 using System.Reactive.Linq;
+using CoreGraphics;
 
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("MiniFlashcardsController")]
     public class MiniFlashcardSetController : BaseTableViewController<IMiniFlashcardSetViewModel>
     {
-        private static readonly string _cellId = "Cell";
+        private static readonly string _parentCellId = "ParentCell";
+        private static readonly string _childCellId = "ChildCell";
+
+        private int _currentExpandedIndex = -1;
 
         public MiniFlashcardSetController()
         {
@@ -46,7 +50,9 @@ namespace TTKoreanSchool.iOS.Controllers
 
         public override nint RowsInSection(UITableView tableView, nint section)
         {
-            return ViewModel.Terms?.Count ?? 0;
+            int numExpandedCells = (_currentExpandedIndex > -1) ? 1 : 0;
+
+            return ViewModel.Terms?.Count + numExpandedCells ?? 0;
         }
 
         public override nint NumberOfSections(UITableView tableView)
@@ -56,24 +62,85 @@ namespace TTKoreanSchool.iOS.Controllers
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = tableView.DequeueReusableCell(_cellId);
+            var cellId = IsChild(indexPath) ? _childCellId : _parentCellId;
+            UITableViewCell cell = tableView.DequeueReusableCell(cellId);
+
             if(cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, _cellId);
-                cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+                cell = new UITableViewCell(UITableViewCellStyle.Default, cellId);
+                if(cellId == _childCellId)
+                {
+                    cell.BackgroundColor = UIColor.FromRGB(245, 245, 245);
+                    cell.Layer.CornerRadius = 3;
+                    cell.Layer.ShadowColor = UIColor.LightGray.CGColor;
+                    cell.Layer.ShadowOffset = new CGSize(0, 1);
+                    cell.Layer.ShadowOpacity = 1;
+                    cell.Layer.ShadowRadius = 2;
+                    cell.SeparatorInset = UIEdgeInsets.Zero;
+                }
             }
 
-            cell.TextLabel.Text = ViewModel.Terms[indexPath.Row].Ko;
+            if(cellId == _parentCellId)
+            {
+                int parentIdx = (_currentExpandedIndex > -1 && indexPath.Row > _currentExpandedIndex) ? indexPath.Row - 1 : indexPath.Row;
+                cell.TextLabel.Text = ViewModel.Terms[parentIdx].Ko;
+            }
+            else
+            {
+                cell.TextLabel.Text = ViewModel.Terms[indexPath.Row - 1].Translation;
+            }
 
             return cell;
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            //var term = ViewModel.Terms[indexPath.Row];
-            //ViewModel.ItemSelected(term);
+            if(IsChild(indexPath))
+            {
+                // Handle selection of child cell
+                tableView.DeselectRow(indexPath, true);
+                return;
+            }
 
-            TableView.DeselectRow(indexPath, true);
+            tableView.BeginUpdates();
+
+            if(_currentExpandedIndex == indexPath.Row)
+            {
+                CollapseSubItemsAtIndex(tableView, _currentExpandedIndex);
+                _currentExpandedIndex = -1;
+                tableView.DeselectRow(indexPath, true);
+            }
+            else
+            {
+                var shouldCollapse = _currentExpandedIndex > -1;
+                if(shouldCollapse)
+                {
+                    CollapseSubItemsAtIndex(tableView, _currentExpandedIndex);
+                }
+
+                _currentExpandedIndex = (shouldCollapse && indexPath.Row > _currentExpandedIndex) ? indexPath.Row - 1 : indexPath.Row;
+                ExpandItemAtIndex(tableView, _currentExpandedIndex);
+            }
+
+            tableView.EndUpdates();
+        }
+
+        private bool IsChild(NSIndexPath indexPath)
+        {
+            return _currentExpandedIndex > -1 &&
+                indexPath.Row > _currentExpandedIndex &&
+                indexPath.Row <= _currentExpandedIndex + 1;
+        }
+
+        private void CollapseSubItemsAtIndex(UITableView tableView, int index)
+        {
+            tableView.DeleteRows(new[] { NSIndexPath.FromRowSection(index + 1, 0) }, UITableViewRowAnimation.Fade);
+        }
+
+        private void ExpandItemAtIndex(UITableView tableView, int index)
+        {
+            int insertPos = index + 1;
+            tableView.InsertRows(new[] { NSIndexPath.FromRowSection(insertPos++, 0) }, UITableViewRowAnimation.Fade);
         }
     }
 }

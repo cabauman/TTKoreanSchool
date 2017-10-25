@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReactiveUI;
 using Splat;
 using TTKoreanSchool.Models;
 using TTKoreanSchool.Services.Interfaces;
-using ReactiveUI;
 
 namespace TTKoreanSchool.ViewModels
 {
