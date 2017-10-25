@@ -46,7 +46,7 @@ namespace TTKoreanSchool.Services
             SetVocabSubsectionRef(subsectionId);
 
             return Query(VocabSubsectionRef)
-                .Select(snapshot => ConstructVocabSubsection(snapshot));
+                .Select(snapshot => ConstructVocabSetsInSubsection(snapshot));
         }
 
         public IObservable<IReadOnlyList<Term>> LoadTerms(string studySetId)
@@ -72,7 +72,7 @@ namespace TTKoreanSchool.Services
 
         protected abstract IReadOnlyList<VocabSection> ConstructVocabSections(TSnapshot snapshot);
 
-        protected abstract IReadOnlyList<VocabSectionChild> ConstructVocabSubsection(TSnapshot snapshot);
+        protected abstract IReadOnlyList<VocabSectionChild> ConstructVocabSetsInSubsection(TSnapshot snapshot);
 
         protected abstract IReadOnlyList<Term> ConstructTerms(Dictionary<string, TSnapshot> snapHash);
 

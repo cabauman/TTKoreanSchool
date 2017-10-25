@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using Splat;
 using TTKoreanSchool.Models;
 using TTKoreanSchool.Services.Interfaces;
+using ReactiveUI;
 
 namespace TTKoreanSchool.ViewModels
 {
     public interface IVocabSubsectionViewModel : IScreenViewModel
     {
+        IReadOnlyList<VocabSectionChild> VocabSets { get; }
+
+        void ItemSelected(VocabSectionChild selectedItem);
     }
 
     public class VocabSubsectionViewModel : BaseScreenViewModel, IVocabSubsectionViewModel
     {
+        private IReadOnlyList<VocabSectionChild> _vocabSets;
+
         public VocabSubsectionViewModel(string subsectionId)
         {
             var database = Locator.Current.GetService<IFirebaseDatabaseService>();
@@ -27,7 +33,11 @@ namespace TTKoreanSchool.ViewModels
                     });
         }
 
-        public IReadOnlyList<VocabSectionChild> VocabSets { get; private set; }
+        public IReadOnlyList<VocabSectionChild> VocabSets
+        {
+            get { return _vocabSets; }
+            set { this.RaiseAndSetIfChanged(ref _vocabSets, value); }
+        }
 
         public void ItemSelected(VocabSectionChild selectedItem)
         {

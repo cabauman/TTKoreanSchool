@@ -90,31 +90,28 @@ namespace TTKoreanSchool.iOS.Services
             return children.AsReadOnly();
         }
 
-        protected override IReadOnlyList<VocabSectionChild> ConstructVocabSubsection(DataSnapshot snapshot)
+        protected override IReadOnlyList<VocabSectionChild> ConstructVocabSetsInSubsection(DataSnapshot snapshot)
         {
             if(!snapshot.Exists)
             {
                 return null;
             }
 
-            var studySetList = new List<VocabSectionChild>((int)snapshot.ChildrenCount);
+            var vocabSets = new List<VocabSectionChild>((int)snapshot.ChildrenCount);
             NSEnumerator studySets = snapshot.Children;
             var studySetSnap = studySets.NextObject() as DataSnapshot;
 
             while(studySetSnap != null)
             {
-                var data = studySetSnap.GetValue<NSDictionary>();
-
                 string id = studySetSnap.Key;
-                string title = data["title"].ToString();
-                string iconId = data["iconId"].ToString();
+                string title = studySetSnap.GetValue<NSString>();
 
-                var studySet = new VocabSectionChild(id, title, iconId, false);
-                studySetList.Add(studySet);
+                var studySet = new VocabSectionChild(id, title, null, false);
+                vocabSets.Add(studySet);
                 studySetSnap = studySets.NextObject() as DataSnapshot;
             }
 
-            return studySetList.AsReadOnly();
+            return vocabSets.AsReadOnly();
         }
 
         protected override IReadOnlyList<Term> ConstructTerms(Dictionary<string, DataSnapshot> snapHash)
