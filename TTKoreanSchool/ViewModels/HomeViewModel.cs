@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using Splat;
+using System;
 using TTKoreanSchool.Services.Interfaces;
 
 namespace TTKoreanSchool.ViewModels
@@ -15,6 +16,18 @@ namespace TTKoreanSchool.ViewModels
         {
             AppSections = InitAppSections();
             NavService = Locator.Current.GetService<INavigationService>();
+
+            var database = Locator.Current.GetService<IFirebaseDatabaseService>();
+            database.LoadSentences()
+                .Subscribe(
+                    sentences =>
+                    {
+                        Console.WriteLine(sentences.Count);
+                    },
+                    error =>
+                    {
+                        this.Log().Error(error.Message);
+                    });
         }
 
         public INavigationService NavService { get; }

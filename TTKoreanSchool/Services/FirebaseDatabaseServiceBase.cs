@@ -12,14 +12,16 @@ namespace TTKoreanSchool.Services
         private readonly string _termsPathFormat = "tt-study-sets/{0}";
         private readonly string _termTranslationsPathFormat = "tt-study-set-translations/{0}/{1}";
         private readonly string _sentencesPath = "sentences/examples";
-        private readonly string _sentenceTranslationsPath = "sentences/translations";
+        private readonly string _sentenceTranslationsPathFormat = "sentences/translations/{0}";
         private readonly string _vocabSectionsPath = "tt-study-set-sections2";
         private readonly string _vocabSubsectionsPathFormat = "tt-study-set-subsections/{0}";
+
+        // Temporary until we fetch the device language.
+        private readonly string _langCode = "en";
 
         public FirebaseDatabaseServiceBase()
         {
             SentencesRef = GetRef(_sentencesPath);
-            SentenceTranslationsRef = GetRef(_sentenceTranslationsPath);
             VocabSectionsRef = GetRef(_vocabSectionsPath);
         }
 
@@ -31,7 +33,7 @@ namespace TTKoreanSchool.Services
 
         protected TDatabaseRef SentencesRef { get; }
 
-        protected TDatabaseRef SentenceTranslationsRef { get; }
+        protected TDatabaseRef SentenceTranslationsRef { get; private set; }
 
         protected TDatabaseRef VocabSectionsRef { get; }
 
@@ -52,7 +54,7 @@ namespace TTKoreanSchool.Services
         public IObservable<IReadOnlyList<Term>> LoadTerms(string studySetId)
         {
             SetTermsRef(studySetId);
-            SetTermTranslationsRef(studySetId, "en");
+            SetTermTranslationsRef(studySetId, _langCode);
 
             return MultiQuery(TermsRef, TermTranslationsRef)
                 .Select(snapHash => ConstructTerms(snapHash));
@@ -60,6 +62,8 @@ namespace TTKoreanSchool.Services
 
         public IObservable<IReadOnlyList<ExampleSentence>> LoadSentences()
         {
+            SetSentenceTranslationsRef(_langCode);
+
             return MultiQuery(SentencesRef, SentenceTranslationsRef)
                 .Select(snapHash => ConstructSentences(snapHash));
         }
@@ -94,6 +98,12 @@ namespace TTKoreanSchool.Services
         {
             string path = string.Format(_vocabSubsectionsPathFormat, subsectionId);
             VocabSubsectionRef = GetRef(path);
+        }
+
+        private void SetSentenceTranslationsRef(string lang)
+        {
+            string path = string.Format(_sentenceTranslationsPathFormat, lang);
+            SentenceTranslationsRef = GetRef(path);
         }
     }
 }

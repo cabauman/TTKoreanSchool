@@ -82,8 +82,8 @@ namespace TTKoreanSchool.iOS.Services
                 bool isSubsection = childrenAreSubsections;
 
                 var sectionChild = new VocabSectionChild(id, title, iconId, isSubsection);
-
                 children.Add(sectionChild);
+
                 sectionChildSnap = sectionChildren.NextObject() as DataSnapshot;
             }
 
@@ -108,6 +108,7 @@ namespace TTKoreanSchool.iOS.Services
 
                 var studySet = new VocabSectionChild(id, title, null, false);
                 vocabSets.Add(studySet);
+
                 studySetSnap = studySets.NextObject() as DataSnapshot;
             }
 
@@ -146,8 +147,8 @@ namespace TTKoreanSchool.iOS.Services
                 var sentenceIds = termData["sentenceIds"]?.ToString().Split(',');
                 var translation = translationSnap.GetValue<NSString>();
 
-                var item = new Term(id, ko, romanization, translation, null, imageIds, sentenceIds);
-                terms.Add(item);
+                var term = new Term(id, ko, romanization, translation, null, imageIds, sentenceIds);
+                terms.Add(term);
 
                 termSnap = termsChildren.NextObject() as DataSnapshot;
                 translationSnap = translationsChildren.NextObject() as DataSnapshot;
@@ -158,7 +159,42 @@ namespace TTKoreanSchool.iOS.Services
 
         protected override IReadOnlyList<ExampleSentence> ConstructSentences(Dictionary<string, DataSnapshot> snapHash)
         {
-            throw new NotImplementedException();
+            foreach(var snap in snapHash.Values)
+            {
+                if(!snap.Exists)
+                {
+                    return null;
+                }
+            }
+
+            var sentenceListSnap = snapHash[SentencesRef.Url];
+            var translationListSnap = snapHash[SentenceTranslationsRef.Url];
+
+            var sentences = new List<ExampleSentence>((int)sentenceListSnap.ChildrenCount);
+
+            NSEnumerator sentencesChildren = sentenceListSnap.Children;
+            NSEnumerator translationsChildren = translationListSnap.Children;
+
+            var sentenceSnap = sentencesChildren.NextObject() as DataSnapshot;
+            var translationSnap = translationsChildren.NextObject() as DataSnapshot;
+
+            while(sentenceSnap != null)
+            {
+                var data = sentenceSnap.GetValue<NSDictionary>();
+
+                var id = sentenceSnap.Key;
+                var ko = data["ko"].ToString();
+                var romanization = data["romanization"].ToString();
+                var translation = translationSnap.GetValue<NSString>();
+
+                var sentence = new ExampleSentence(id, ko, romanization, translation);
+                sentences.Add(sentence);
+
+                sentenceSnap = sentencesChildren.NextObject() as DataSnapshot;
+                translationSnap = translationsChildren.NextObject() as DataSnapshot;
+            }
+
+            return sentences.AsReadOnly();
         }
     }
 }
