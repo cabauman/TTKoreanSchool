@@ -10,7 +10,7 @@ namespace TTKoreanSchool.Services
     public abstract class FirebaseDatabaseServiceBase<TDatabaseRef, TSnapshot> : IFirebaseDatabaseService, IEnableLogger
     {
         private readonly string _termsPathFormat = "tt-study-sets/{0}";
-        private readonly string _termTranslationsPathFormat = "tt-study-sets-translations/{0}/{1}";
+        private readonly string _termTranslationsPathFormat = "tt-study-set-translations/{0}/{1}";
         private readonly string _sentencesPath = "sentences/examples";
         private readonly string _sentenceTranslationsPath = "sentences/translations";
         private readonly string _vocabSectionsPath = "tt-study-set-sections2";

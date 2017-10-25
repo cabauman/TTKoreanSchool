@@ -127,19 +127,36 @@ namespace TTKoreanSchool.iOS.Services
                 }
             }
 
-            var termsSnap = snapHash[TermsRef.Url];
-            var translationsSnap = snapHash[TermTranslationsRef.Url];
+            var termListSnap = snapHash[TermsRef.Url];
+            var translationListSnap = snapHash[TermTranslationsRef.Url];
 
-            var termsData = termsSnap.GetValue<NSDictionary>();
-            var translationsData = translationsSnap.GetValue<NSDictionary>();
+            var terms = new List<Term>((int)termListSnap.ChildrenCount);
 
-            string username = termsData["username"].ToString();
-            bool isAdmin = ((NSNumber)termsData["isAdmin"]).BoolValue;
-            string email = translationsData["translation"].ToString();
+            NSEnumerator termsChildren = termListSnap.Children;
+            NSEnumerator translationsChildren = translationListSnap.Children;
 
-            var term = new Term();
+            var termSnap = termsChildren.NextObject() as DataSnapshot;
+            var translationSnap = translationsChildren.NextObject() as DataSnapshot;
 
-            return new List<Term> { term }.AsReadOnly();
+            while(termSnap != null)
+            {
+                var termData = termSnap.GetValue<NSDictionary>();
+
+                var id = termSnap.Key;
+                var ko = termData["ko"].ToString();
+                var romanization = termData["romanization"].ToString();
+                var imageIds = termData["imageIds"]?.ToString().Split(',');
+                var sentenceIds = termData["sentenceIds"]?.ToString().Split(',');
+                var translation = translationSnap.GetValue<NSString>();
+
+                var item = new Term(id, ko, romanization, translation, null, imageIds, sentenceIds);
+                terms.Add(item);
+
+                termSnap = termsChildren.NextObject() as DataSnapshot;
+                translationSnap = translationsChildren.NextObject() as DataSnapshot;
+            }
+
+            return terms.AsReadOnly();
         }
 
         protected override IReadOnlyList<ExampleSentence> ConstructSentences(Dictionary<string, DataSnapshot> snapHash)

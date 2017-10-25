@@ -6,10 +6,10 @@ using CoreFoundation;
 using Foundation;
 using ReactiveUI;
 using Splat;
+using TTKoreanSchool.Extensions;
 using TTKoreanSchool.Models;
 using TTKoreanSchool.ViewModels;
 using UIKit;
-using TTKoreanSchool.Extensions;
 
 namespace TTKoreanSchool.iOS.Controllers
 {
