@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Firebase.Database;
 using Foundation;
 using GameCtor.Firebase.Database.Rx;
@@ -12,6 +13,12 @@ namespace TTKoreanSchool.iOS.Services
     public class FirebaseDatabaseService : FirebaseDatabaseServiceBase<DatabaseReference, DataSnapshot>
     {
         private readonly DatabaseReference _root = Database.DefaultInstance.GetRootReference();
+
+        public override void SaveVocabImageUrl(string imageId, string url)
+        {
+            var dbRef = GetVocabImageUrlRef(imageId);
+            dbRef.SetValue((NSString)url);
+        }
 
         protected override DatabaseReference GetRef(string path)
         {
@@ -38,8 +45,8 @@ namespace TTKoreanSchool.iOS.Services
             }
 
             var sectionList = new List<VocabSection>((int)snapshot.ChildrenCount);
-            NSEnumerator sections = snapshot.Children;
-            var sectionSnap = sections.NextObject() as DataSnapshot;
+            NSEnumerator sectionItems = snapshot.Children;
+            var sectionSnap = sectionItems.NextObject() as DataSnapshot;
 
             while(sectionSnap != null)
             {
@@ -52,7 +59,7 @@ namespace TTKoreanSchool.iOS.Services
                 var sectionChildren = GetSectionChildren(sectionSnap);
                 var section = new VocabSection(id, title, colorTheme, sectionChildren);
                 sectionList.Add(section);
-                sectionSnap = sections.NextObject() as DataSnapshot;
+                sectionSnap = sectionItems.NextObject() as DataSnapshot;
             }
 
             return sectionList.AsReadOnly();
@@ -69,9 +76,10 @@ namespace TTKoreanSchool.iOS.Services
                 sectionChildrenSnap = sectionSnap.GetChildSnapshot("subsections");
             }
 
-            NSEnumerator sectionChildren = sectionChildrenSnap.Children;
-            var sectionChildSnap = sectionChildren.NextObject() as DataSnapshot;
             var children = new List<VocabSectionChild>();
+            NSEnumerator sectionItems = sectionChildrenSnap.Children;
+            var sectionChildSnap = sectionItems.NextObject() as DataSnapshot;
+
             while(sectionChildSnap != null)
             {
                 var data = sectionChildSnap.GetValue<NSDictionary>();
@@ -84,7 +92,7 @@ namespace TTKoreanSchool.iOS.Services
                 var sectionChild = new VocabSectionChild(id, title, iconId, isSubsection);
                 children.Add(sectionChild);
 
-                sectionChildSnap = sectionChildren.NextObject() as DataSnapshot;
+                sectionChildSnap = sectionItems.NextObject() as DataSnapshot;
             }
 
             return children.AsReadOnly();
@@ -98,26 +106,26 @@ namespace TTKoreanSchool.iOS.Services
             }
 
             var vocabSets = new List<VocabSectionChild>((int)snapshot.ChildrenCount);
-            NSEnumerator studySets = snapshot.Children;
-            var studySetSnap = studySets.NextObject() as DataSnapshot;
+            NSEnumerator vocabSetItems = snapshot.Children;
+            var vocabSetSnap = vocabSetItems.NextObject() as DataSnapshot;
 
-            while(studySetSnap != null)
+            while(vocabSetSnap != null)
             {
-                string id = studySetSnap.Key;
-                string title = studySetSnap.GetValue<NSString>();
+                string id = vocabSetSnap.Key;
+                string title = vocabSetSnap.GetValue<NSString>();
 
                 var studySet = new VocabSectionChild(id, title, null, false);
                 vocabSets.Add(studySet);
 
-                studySetSnap = studySets.NextObject() as DataSnapshot;
+                vocabSetSnap = vocabSetItems.NextObject() as DataSnapshot;
             }
 
             return vocabSets.AsReadOnly();
         }
 
-        protected override IReadOnlyList<Term> ConstructTerms(Dictionary<string, DataSnapshot> snapHash)
+        protected override IReadOnlyList<Term> ConstructTerms(Dictionary<string, DataSnapshot> snapMap)
         {
-            foreach(var snap in snapHash.Values)
+            foreach(var snap in snapMap.Values)
             {
                 if(!snap.Exists)
                 {
@@ -125,16 +133,16 @@ namespace TTKoreanSchool.iOS.Services
                 }
             }
 
-            var termListSnap = snapHash[TermsRef.Url];
-            var translationListSnap = snapHash[TermTranslationsRef.Url];
+            var termListSnap = snapMap[TermsRef.Url];
+            var translationListSnap = snapMap[TermTranslationsRef.Url];
 
             var terms = new List<Term>((int)termListSnap.ChildrenCount);
 
-            NSEnumerator termsChildren = termListSnap.Children;
-            NSEnumerator translationsChildren = translationListSnap.Children;
+            NSEnumerator termItems = termListSnap.Children;
+            NSEnumerator translationItems = translationListSnap.Children;
 
-            var termSnap = termsChildren.NextObject() as DataSnapshot;
-            var translationSnap = translationsChildren.NextObject() as DataSnapshot;
+            var termSnap = termItems.NextObject() as DataSnapshot;
+            var translationSnap = translationItems.NextObject() as DataSnapshot;
 
             while(termSnap != null)
             {
@@ -142,24 +150,26 @@ namespace TTKoreanSchool.iOS.Services
 
                 var id = termSnap.Key;
                 var ko = termData["ko"].ToString();
-                var romanization = termData["romanization"].ToString();
+                var romanization = termData["romanization"]?.ToString();
+                var extraInfoId = termData["extraInfoId"]?.ToString();
+                var audioVersion = termData["audioVersion"] == null ? 0 : ((NSNumber)termData["audioVersion"]).Int32Value;
                 var imageIds = termData["imageIds"]?.ToString().Split(',');
                 var sentenceIds = termData["sentenceIds"]?.ToString().Split(',');
                 var translation = translationSnap.GetValue<NSString>();
 
-                var term = new Term(id, ko, romanization, translation, null, imageIds, sentenceIds);
+                var term = new Term(id, ko, romanization, translation, extraInfoId, audioVersion, imageIds, sentenceIds);
                 terms.Add(term);
 
-                termSnap = termsChildren.NextObject() as DataSnapshot;
-                translationSnap = translationsChildren.NextObject() as DataSnapshot;
+                termSnap = termItems.NextObject() as DataSnapshot;
+                translationSnap = translationItems.NextObject() as DataSnapshot;
             }
 
             return terms.AsReadOnly();
         }
 
-        protected override IReadOnlyList<ExampleSentence> ConstructSentences(Dictionary<string, DataSnapshot> snapHash)
+        protected override IReadOnlyList<ExampleSentence> ConstructSentences(Dictionary<string, DataSnapshot> snapMap)
         {
-            foreach(var snap in snapHash.Values)
+            foreach(var snap in snapMap.Values)
             {
                 if(!snap.Exists)
                 {
@@ -167,16 +177,16 @@ namespace TTKoreanSchool.iOS.Services
                 }
             }
 
-            var sentenceListSnap = snapHash[SentencesRef.Url];
-            var translationListSnap = snapHash[SentenceTranslationsRef.Url];
+            var sentenceListSnap = snapMap[SentencesRef.Url];
+            var translationListSnap = snapMap[SentenceTranslationsRef.Url];
 
             var sentences = new List<ExampleSentence>((int)sentenceListSnap.ChildrenCount);
 
-            NSEnumerator sentencesChildren = sentenceListSnap.Children;
-            NSEnumerator translationsChildren = translationListSnap.Children;
+            NSEnumerator sentenceItems = sentenceListSnap.Children;
+            NSEnumerator translationItems = translationListSnap.Children;
 
-            var sentenceSnap = sentencesChildren.NextObject() as DataSnapshot;
-            var translationSnap = translationsChildren.NextObject() as DataSnapshot;
+            var sentenceSnap = sentenceItems.NextObject() as DataSnapshot;
+            var translationSnap = translationItems.NextObject() as DataSnapshot;
 
             while(sentenceSnap != null)
             {
@@ -190,11 +200,31 @@ namespace TTKoreanSchool.iOS.Services
                 var sentence = new ExampleSentence(id, ko, romanization, translation);
                 sentences.Add(sentence);
 
-                sentenceSnap = sentencesChildren.NextObject() as DataSnapshot;
-                translationSnap = translationsChildren.NextObject() as DataSnapshot;
+                sentenceSnap = sentenceItems.NextObject() as DataSnapshot;
+                translationSnap = translationItems.NextObject() as DataSnapshot;
             }
 
             return sentences.AsReadOnly();
+        }
+
+        protected override IReadOnlyDictionary<string, string> ConstructVocabImageUrlMap(DataSnapshot snapshot)
+        {
+            if(!snapshot.Exists)
+            {
+                return null;
+            }
+
+            var urls = new Dictionary<string, string>((int)snapshot.ChildrenCount);
+            NSEnumerator urlItems = snapshot.Children;
+            var urlSnap = urlItems.NextObject() as DataSnapshot;
+
+            while(urlSnap != null)
+            {
+                urls.Add(urlSnap.Key, urlSnap.GetValue<NSString>());
+                urlSnap = urlItems.NextObject() as DataSnapshot;
+            }
+
+            return new ReadOnlyDictionary<string, string>(urls);
         }
     }
 }

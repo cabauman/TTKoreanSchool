@@ -15,6 +15,8 @@ namespace TTKoreanSchool.Services
         private readonly string _sentenceTranslationsPathFormat = "sentences/translations/{0}";
         private readonly string _vocabSectionsPath = "tt-study-set-sections2";
         private readonly string _vocabSubsectionsPathFormat = "tt-study-set-subsections/{0}";
+        private readonly string _vocabImageUrlsPath = "vocab-image-urls";
+        private readonly string _vocabImageUrlPathFormat = "vocab-image-urls/{0}";
 
         // Temporary until we fetch the device language.
         private readonly string _langCode = "en";
@@ -57,7 +59,7 @@ namespace TTKoreanSchool.Services
             SetTermTranslationsRef(studySetId, _langCode);
 
             return MultiQuery(TermsRef, TermTranslationsRef)
-                .Select(snapHash => ConstructTerms(snapHash));
+                .Select(snapMap => ConstructTerms(snapMap));
         }
 
         public IObservable<IReadOnlyList<ExampleSentence>> LoadSentences()
@@ -65,8 +67,16 @@ namespace TTKoreanSchool.Services
             SetSentenceTranslationsRef(_langCode);
 
             return MultiQuery(SentencesRef, SentenceTranslationsRef)
-                .Select(snapHash => ConstructSentences(snapHash));
+                .Select(snapMap => ConstructSentences(snapMap));
         }
+
+        public IObservable<IReadOnlyDictionary<string, string>> LoadVocabImageUrls()
+        {
+            return Query(GetVocabImageUrlsRef())
+                .Select(snapshot => ConstructVocabImageUrlMap(snapshot));
+        }
+
+        public abstract void SaveVocabImageUrl(string imageId, string url);
 
         protected abstract TDatabaseRef GetRef(string path);
 
@@ -78,9 +88,23 @@ namespace TTKoreanSchool.Services
 
         protected abstract IReadOnlyList<VocabSectionChild> ConstructVocabSetsInSubsection(TSnapshot snapshot);
 
-        protected abstract IReadOnlyList<Term> ConstructTerms(Dictionary<string, TSnapshot> snapHash);
+        protected abstract IReadOnlyList<Term> ConstructTerms(Dictionary<string, TSnapshot> snapMap);
 
-        protected abstract IReadOnlyList<ExampleSentence> ConstructSentences(Dictionary<string, TSnapshot> snapHash);
+        protected abstract IReadOnlyList<ExampleSentence> ConstructSentences(Dictionary<string, TSnapshot> snapMap);
+
+        protected abstract IReadOnlyDictionary<string, string> ConstructVocabImageUrlMap(TSnapshot snapshot);
+
+        protected TDatabaseRef GetVocabImageUrlRef(string imageId)
+        {
+            string path = string.Format(_vocabImageUrlPathFormat, imageId);
+
+            return GetRef(path);
+        }
+
+        protected TDatabaseRef GetVocabImageUrlsRef()
+        {
+            return GetRef(_vocabImageUrlsPath);
+        }
 
         private void SetTermsRef(string studySetId)
         {
