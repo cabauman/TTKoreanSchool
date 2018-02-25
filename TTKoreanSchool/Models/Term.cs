@@ -10,6 +10,7 @@
             string romanization,
             string translation,
             string extraInfoId,
+            int audioVersion,
             string[] imageIds,
             string[] sentenceIds)
         {
@@ -18,6 +19,7 @@
             Romanization = romanization;
             Translation = translation;
             ExtraInfoId = extraInfoId;
+            AudioVersion = audioVersion;
             ImageIds = imageIds;
             SentenceIds = sentenceIds;
         }
@@ -31,6 +33,8 @@
         public string Translation { get; }
 
         public string ExtraInfoId { get; }
+
+        public int AudioVersion { get; }
 
         public string[] ImageIds { get; }
 

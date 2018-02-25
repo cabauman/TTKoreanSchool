@@ -8,6 +8,7 @@ using TTKoreanSchool.ViewModels;
 using UIKit;
 using System.Reactive.Linq;
 using CoreGraphics;
+using CoreAnimation;
 
 namespace TTKoreanSchool.iOS.Controllers
 {
@@ -71,12 +72,50 @@ namespace TTKoreanSchool.iOS.Controllers
                 if(cellId == _childCellId)
                 {
                     cell.BackgroundColor = UIColor.FromRGB(245, 245, 245);
-                    cell.Layer.CornerRadius = 3;
-                    cell.Layer.ShadowColor = UIColor.LightGray.CGColor;
-                    cell.Layer.ShadowOffset = new CGSize(0, 1);
-                    cell.Layer.ShadowOpacity = 1;
-                    cell.Layer.ShadowRadius = 2;
-                    cell.SeparatorInset = UIEdgeInsets.Zero;
+
+                    //var size = cell.Frame.Size;
+                    //cell.ClipsToBounds = true;
+                    //var layer = new CALayer();
+                    //layer.BackgroundColor = UIColor.LightGray.CGColor;
+                    //layer.Position = new CGPoint(size.Width / 2f, -size.Height / 2f + 0.5f);
+                    //layer.Bounds = new CGRect(0f, 0f, size.Width, size.Height);
+                    //layer.ShadowColor = UIColor.DarkGray.CGColor;
+                    //layer.ShadowOffset = new CGSize(0.5f, 0.5f);
+                    //layer.ShadowOpacity = 0.8f;
+                    //layer.ShadowRadius = 5.0f;
+                    //cell.Layer.AddSublayer(layer);
+
+                    cell.Layer.ShadowColor = UIColor.Black.CGColor;
+                    cell.Layer.ShadowOffset = new CGSize(0f, 1f);
+                    cell.Layer.ShadowOpacity = 0.6f;
+                    cell.Layer.ShadowRadius = 1f;
+                    cell.Layer.MasksToBounds = false;
+                    cell.ClipsToBounds = false;
+                    var shadowFrame = new CGRect(0f, 0f, cell.Frame.Width, cell.Frame.Height);
+                    var shadowPath = UIBezierPath.FromRect(shadowFrame).CGPath;
+                    cell.Layer.ShadowPath = shadowPath;
+
+                    //var layer = new CALayer();
+                    //layer.Frame = new CGRect(0, cell.Frame.Size.Height + 2f, cell.Frame.Size.Width, 2f);
+                    //layer.BackgroundColor = UIColor.White.CGColor;
+                    //layer.ShadowColor = UIColor.Black.CGColor;
+                    //layer.ShadowOffset = new CGSize(0f, 0f);
+                    //layer.ShadowRadius = 10f;
+                    //layer.ShadowOpacity = 0.7f;
+                    //cell.Layer.InsertSublayer(layer, 0);
+
+                    //UIImageView innerShadowView = new UIImageView(cell.Frame);
+                    //innerShadowView.ContentMode = UIViewContentMode.ScaleToFill;
+                    //innerShadowView.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+                    //cell.AddSubview(innerShadowView);
+                    //innerShadowView.Layer.MasksToBounds = true;
+                    //innerShadowView.Layer.BorderColor = UIColor.LightGray.CGColor;
+                    //innerShadowView.Layer.ShadowColor = UIColor.DarkGray.CGColor;
+                    //innerShadowView.Layer.BorderWidth = 1f;
+                    //innerShadowView.Layer.ShadowOffset = new CGSize(0f, 0f);
+                    //innerShadowView.Layer.ShadowOpacity = 0.5f;
+                    //// this is the inner shadow thickness
+                    //innerShadowView.Layer.ShadowRadius = 1.2f;
                 }
             }
 
@@ -106,9 +145,9 @@ namespace TTKoreanSchool.iOS.Controllers
 
             if(_currentExpandedIndex == indexPath.Row)
             {
+                GetCell(tableView, indexPath).BackgroundColor = UIColor.White;
                 CollapseSubItemsAtIndex(tableView, _currentExpandedIndex);
                 _currentExpandedIndex = -1;
-                tableView.DeselectRow(indexPath, true);
             }
             else
             {
@@ -120,9 +159,13 @@ namespace TTKoreanSchool.iOS.Controllers
 
                 _currentExpandedIndex = (shouldCollapse && indexPath.Row > _currentExpandedIndex) ? indexPath.Row - 1 : indexPath.Row;
                 ExpandItemAtIndex(tableView, _currentExpandedIndex);
+
+                GetCell(tableView, indexPath).BackgroundColor = UIColor.FromRGB(245, 245, 245);
             }
 
             tableView.EndUpdates();
+
+            tableView.DeselectRow(indexPath, true);
         }
 
         private bool IsChild(NSIndexPath indexPath)

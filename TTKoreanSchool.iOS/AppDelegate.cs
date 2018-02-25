@@ -22,6 +22,7 @@ namespace TTKoreanSchool.iOS
     {
         private string _appId = "409378669430587";
         private string _appName = "TT Korean School";
+        private IAudioService _audioService;
 
         public override UIWindow Window { get; set; }
 
@@ -152,8 +153,12 @@ namespace TTKoreanSchool.iOS
             var navService = new NavigationService(Window.RootViewController);
             Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
             Locator.CurrentMutable.RegisterConstant(new LoggingService(), typeof(ILogger));
-            Locator.CurrentMutable.RegisterConstant(new FirebaseDatabaseService(), typeof(IFirebaseDatabaseService));
             Locator.CurrentMutable.RegisterConstant(new DialogService(), typeof(IDialogService));
+            Locator.CurrentMutable.RegisterConstant(new FirebaseDatabaseService(), typeof(IFirebaseDatabaseService));
+            Locator.CurrentMutable.RegisterConstant(new FirebaseStorageService(), typeof(IFirebaseStorageService));
+            Locator.CurrentMutable.RegisterConstant(new SpeechService(), typeof(ISpeechService));
+            Locator.CurrentMutable.RegisterConstant(new AudioService(), typeof(IAudioService));
+            Locator.CurrentMutable.RegisterConstant(new LocalStorageService(), typeof(LocalStorageService));
         }
     }
 }
