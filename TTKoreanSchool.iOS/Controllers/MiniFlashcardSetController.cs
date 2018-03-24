@@ -1,27 +1,29 @@
 ﻿using System;
 using System.Drawing;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using CoreAnimation;
 using CoreFoundation;
+using CoreGraphics;
 using Foundation;
 using ReactiveUI;
-using TTKoreanSchool.Extensions;
 using TTKoreanSchool.ViewModels;
 using UIKit;
-using System.Reactive.Linq;
-using CoreGraphics;
-using CoreAnimation;
 
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("MiniFlashcardsController")]
-    public class MiniFlashcardSetController : BaseTableViewController<IMiniFlashcardSetViewModel>
+    public class MiniFlashcardSetController : ExpandableTableViewController<IMiniFlashcardsPageViewModel>
     {
-        private static readonly string _parentCellId = "ParentCell";
-        private static readonly string _childCellId = "ChildCell";
-
-        private int _currentExpandedIndex = -1;
+        private UIBarButtonItem _displayStudyActivitiesBtn;
 
         public MiniFlashcardSetController()
         {
+        }
+
+        protected override int ItemCount
+        {
+            get { return ViewModel.Terms?.Count ?? 0; }
         }
 
         public override void DidReceiveMemoryWarning()
@@ -38,152 +40,70 @@ namespace TTKoreanSchool.iOS.Controllers
 
             View.BackgroundColor = UIColor.White;
             Title = "Mini Flashcards";
+            TableView.RegisterClassForCellReuse(typeof(UITableViewCell), ParentCellId);
+            TableView.RegisterClassForCellReuse(typeof(UITableViewCell), ChildCellId);
 
-            ViewModel.WhenAnyValue(vm => vm.Terms)
-                .Where(terms => terms != null)
+            _displayStudyActivitiesBtn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
+            NavigationItem.SetRightBarButtonItem(_displayStudyActivitiesBtn, true);
+
+            ViewModel.WhenAnyValue(vm => vm.LoadVocabTerms)
+                .SelectMany(x => x.Execute())
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(
-                    terms =>
+                    x =>
                     {
                         TableView.ReloadData();
+                    },
+                    x =>
+                    {
+                        Console.WriteLine(x.Message);
+                    },
+                    () =>
+                    {
+                        Console.WriteLine("Complete");
                     })
                 .DisposeWith(SubscriptionDisposables);
-        }
 
-        public override nint RowsInSection(UITableView tableView, nint section)
-        {
-            int numExpandedCells = (_currentExpandedIndex > -1) ? 1 : 0;
-
-            return ViewModel.Terms?.Count + numExpandedCells ?? 0;
-        }
-
-        public override nint NumberOfSections(UITableView tableView)
-        {
-            return 1;
-        }
-
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            var cellId = IsChild(indexPath) ? _childCellId : _parentCellId;
-            UITableViewCell cell = tableView.DequeueReusableCell(cellId);
-
-            if(cell == null)
-            {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, cellId);
-                if(cellId == _childCellId)
+            this.WhenActivated(
+                disposables =>
                 {
-                    cell.BackgroundColor = UIColor.FromRGB(245, 245, 245);
+                    this.BindCommand(
+                        this.ViewModel,
+                        x => x.DisplayStudyActivities,
+                        x => x._displayStudyActivitiesBtn)
+                            .DisposeWith(disposables);
+                });
+        }
 
-                    //var size = cell.Frame.Size;
-                    //cell.ClipsToBounds = true;
-                    //var layer = new CALayer();
-                    //layer.BackgroundColor = UIColor.LightGray.CGColor;
-                    //layer.Position = new CGPoint(size.Width / 2f, -size.Height / 2f + 0.5f);
-                    //layer.Bounds = new CGRect(0f, 0f, size.Width, size.Height);
-                    //layer.ShadowColor = UIColor.DarkGray.CGColor;
-                    //layer.ShadowOffset = new CGSize(0.5f, 0.5f);
-                    //layer.ShadowOpacity = 0.8f;
-                    //layer.ShadowRadius = 5.0f;
-                    //cell.Layer.AddSublayer(layer);
-
-                    cell.Layer.ShadowColor = UIColor.Black.CGColor;
-                    cell.Layer.ShadowOffset = new CGSize(0f, 1f);
-                    cell.Layer.ShadowOpacity = 0.6f;
-                    cell.Layer.ShadowRadius = 1f;
-                    cell.Layer.MasksToBounds = false;
-                    cell.ClipsToBounds = false;
-                    var shadowFrame = new CGRect(0f, 0f, cell.Frame.Width, cell.Frame.Height);
-                    var shadowPath = UIBezierPath.FromRect(shadowFrame).CGPath;
-                    cell.Layer.ShadowPath = shadowPath;
-
-                    //var layer = new CALayer();
-                    //layer.Frame = new CGRect(0, cell.Frame.Size.Height + 2f, cell.Frame.Size.Width, 2f);
-                    //layer.BackgroundColor = UIColor.White.CGColor;
-                    //layer.ShadowColor = UIColor.Black.CGColor;
-                    //layer.ShadowOffset = new CGSize(0f, 0f);
-                    //layer.ShadowRadius = 10f;
-                    //layer.ShadowOpacity = 0.7f;
-                    //cell.Layer.InsertSublayer(layer, 0);
-
-                    //UIImageView innerShadowView = new UIImageView(cell.Frame);
-                    //innerShadowView.ContentMode = UIViewContentMode.ScaleToFill;
-                    //innerShadowView.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
-                    //cell.AddSubview(innerShadowView);
-                    //innerShadowView.Layer.MasksToBounds = true;
-                    //innerShadowView.Layer.BorderColor = UIColor.LightGray.CGColor;
-                    //innerShadowView.Layer.ShadowColor = UIColor.DarkGray.CGColor;
-                    //innerShadowView.Layer.BorderWidth = 1f;
-                    //innerShadowView.Layer.ShadowOffset = new CGSize(0f, 0f);
-                    //innerShadowView.Layer.ShadowOpacity = 0.5f;
-                    //// this is the inner shadow thickness
-                    //innerShadowView.Layer.ShadowRadius = 1.2f;
-                }
-            }
-
-            if(cellId == _parentCellId)
-            {
-                int parentIdx = (_currentExpandedIndex > -1 && indexPath.Row > _currentExpandedIndex) ? indexPath.Row - 1 : indexPath.Row;
-                cell.TextLabel.Text = ViewModel.Terms[parentIdx].Ko;
-            }
-            else
-            {
-                cell.TextLabel.Text = ViewModel.Terms[indexPath.Row - 1].Translation;
-            }
+        protected override UITableViewCell GetParentCell(UITableView tableView, int index)
+        {
+            UITableViewCell cell = tableView.DequeueReusableCell(ParentCellId);
+            StyleCell(cell);
+            cell.TextLabel.Text = ViewModel.Terms[index].Ko;
 
             return cell;
         }
 
-        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        protected override UITableViewCell GetChildCell(UITableView tableView, int index)
         {
-            if(IsChild(indexPath))
-            {
-                // Handle selection of child cell
-                tableView.DeselectRow(indexPath, true);
-                return;
-            }
+            UITableViewCell cell = tableView.DequeueReusableCell(ChildCellId);
+            StyleCell(cell);
+            cell.TextLabel.Text = ViewModel.Terms[index].Translation;
 
-            tableView.BeginUpdates();
-
-            if(_currentExpandedIndex == indexPath.Row)
-            {
-                GetCell(tableView, indexPath).BackgroundColor = UIColor.White;
-                CollapseSubItemsAtIndex(tableView, _currentExpandedIndex);
-                _currentExpandedIndex = -1;
-            }
-            else
-            {
-                var shouldCollapse = _currentExpandedIndex > -1;
-                if(shouldCollapse)
-                {
-                    CollapseSubItemsAtIndex(tableView, _currentExpandedIndex);
-                }
-
-                _currentExpandedIndex = (shouldCollapse && indexPath.Row > _currentExpandedIndex) ? indexPath.Row - 1 : indexPath.Row;
-                ExpandItemAtIndex(tableView, _currentExpandedIndex);
-
-                GetCell(tableView, indexPath).BackgroundColor = UIColor.FromRGB(245, 245, 245);
-            }
-
-            tableView.EndUpdates();
-
-            tableView.DeselectRow(indexPath, true);
+            return cell;
         }
 
-        private bool IsChild(NSIndexPath indexPath)
+        private void StyleCell(UITableViewCell cell)
         {
-            return _currentExpandedIndex > -1 &&
-                indexPath.Row > _currentExpandedIndex &&
-                indexPath.Row <= _currentExpandedIndex + 1;
-        }
-
-        private void CollapseSubItemsAtIndex(UITableView tableView, int index)
-        {
-            tableView.DeleteRows(new[] { NSIndexPath.FromRowSection(index + 1, 0) }, UITableViewRowAnimation.Fade);
-        }
-
-        private void ExpandItemAtIndex(UITableView tableView, int index)
-        {
-            int insertPos = index + 1;
-            tableView.InsertRows(new[] { NSIndexPath.FromRowSection(insertPos++, 0) }, UITableViewRowAnimation.Fade);
+            cell.Layer.ShadowColor = UIColor.Black.CGColor;
+            cell.Layer.ShadowOffset = new CGSize(0f, 1f);
+            cell.Layer.ShadowOpacity = 0.6f;
+            cell.Layer.ShadowRadius = 1f;
+            cell.Layer.MasksToBounds = false;
+            cell.ClipsToBounds = false;
+            var shadowFrame = new CGRect(0f, 0f, cell.Frame.Width, cell.Frame.Height);
+            var shadowPath = UIBezierPath.FromRect(shadowFrame).CGPath;
+            cell.Layer.ShadowPath = shadowPath;
         }
     }
 }

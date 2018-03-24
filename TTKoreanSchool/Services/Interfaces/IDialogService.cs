@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TTKoreanSchool.Services.Interfaces
 {
@@ -8,7 +7,9 @@ namespace TTKoreanSchool.Services.Interfaces
     {
         void DisplayAlert(string title, string message, string accept, string cancel);
 
-        void DisplayActionSheet(string title, string message, params AlertAction[] options);
+        void DisplayActionSheet(string title, string message, IEnumerable<AlertAction> options);
+
+        IObservable<T> DisplayActionSheet<T>(string title, string message, IEnumerable<T> options);
     }
 
     public struct AlertAction

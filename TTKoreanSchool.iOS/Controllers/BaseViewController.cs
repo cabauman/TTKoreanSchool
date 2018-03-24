@@ -11,8 +11,8 @@ using UIKit;
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("BaseViewController")]
-    public class BaseViewController<TViewModel> : ReactiveViewController<TViewModel>, IScreenView
-        where TViewModel : class, IScreenViewModel
+    public class BaseViewController<TViewModel> : ReactiveViewController<TViewModel>, IPageView
+        where TViewModel : class, IPageViewModel
     {
         public BaseViewController()
         {
@@ -47,7 +47,7 @@ namespace TTKoreanSchool.iOS.Controllers
 
             if(parent == null)
             {
-                ViewModel.ScreenPopped();
+                ViewModel.PagePopped();
             }
         }
     }

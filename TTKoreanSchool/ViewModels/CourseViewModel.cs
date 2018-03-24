@@ -1,15 +1,22 @@
 ﻿using ReactiveUI;
+using TTKoreanSchool.Models;
 
 namespace TTKoreanSchool.ViewModels
 {
     public class CourseViewModel : BaseViewModel
     {
+        private Course _course;
         private string _title;
         private string _tuition;
         private string _thisSemester;
 
         public CourseViewModel()
         {
+        }
+
+        public CourseViewModel(Course course)
+        {
+            _course = course;
         }
 
         public string Title

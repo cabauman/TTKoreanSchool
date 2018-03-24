@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
-using Splat;
+﻿extern alias SplatAlias;
+
+using System.Diagnostics;
+using SplatAlias::Splat;
 
 namespace TTKoreanSchool.Services
 {

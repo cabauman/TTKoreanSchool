@@ -14,7 +14,7 @@ using TTKoreanSchool.ViewModels;
 namespace TTKoreanSchool.Android.Activities
 {
     [Activity(Label = "StudentPortalActivity")]
-    public class StudentPortalActivity : BaseActivity<IStudentPortalViewModel>
+    public class StudentPortalActivity : BaseActivity<IStudentPortalPageViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

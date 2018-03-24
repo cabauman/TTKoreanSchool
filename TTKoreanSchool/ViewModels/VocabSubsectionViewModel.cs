@@ -1,66 +1,56 @@
-﻿using System;
+﻿extern alias SplatAlias;
+
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
 using ReactiveUI;
-using Splat;
+using SplatAlias::Splat;
 using TTKoreanSchool.Models;
 using TTKoreanSchool.Services.Interfaces;
 
 namespace TTKoreanSchool.ViewModels
 {
-    public interface IVocabSubsectionViewModel : IScreenViewModel
+    public interface IVocabSubsectionViewModel : IVocabSectionChildViewModel
     {
-        IReadOnlyList<VocabSectionChild> VocabSets { get; }
-
-        void ItemSelected(VocabSectionChild selectedItem);
+        IList<IVocabSetViewModel> VocabSets { get; }
     }
 
-    public class VocabSubsectionViewModel : BaseScreenViewModel, IVocabSubsectionViewModel
+    public class VocabSubsectionViewModel : BaseViewModel, IVocabSubsectionViewModel
     {
-        private IReadOnlyList<VocabSectionChild> _vocabSets;
+        private VocabSectionChild _model;
+        private IList<IVocabSetViewModel> _vocabSets;
+        private IDialogService _dialogService;
 
-        public VocabSubsectionViewModel(string subsectionId)
+        public VocabSubsectionViewModel(
+            VocabSectionChild model,
+            IList<IVocabSetViewModel> vocabSets,
+            IDialogService dialogService = null)
         {
-            var database = Locator.Current.GetService<IFirebaseDatabaseService>();
-            database.LoadVocabSetsInSubsection(subsectionId)
-                .Subscribe(
-                    vocabSets =>
-                    {
-                        VocabSets = vocabSets;
-                    },
-                    error =>
-                    {
-                        this.Log().Error(error.Message);
-                    });
+            _model = model;
+            _vocabSets = vocabSets;
+            _dialogService = dialogService ?? Locator.Current.GetService<IDialogService>();
         }
 
-        public IReadOnlyList<VocabSectionChild> VocabSets
+        public string Title
+        {
+            get { return _model.Title; }
+        }
+
+        public IList<IVocabSetViewModel> VocabSets
         {
             get { return _vocabSets; }
             set { this.RaiseAndSetIfChanged(ref _vocabSets, value); }
         }
 
-        public void ItemSelected(VocabSectionChild selectedItem)
+        public ReactiveCommand<string, Unit> ViewChildren { get; }
+
+        public void Selected()
         {
-            var navService = Locator.Current.GetService<INavigationService>();
-            var dialogService = Locator.Current.GetService<IDialogService>();
-            var options = new AlertAction[]
-            {
-                new AlertAction(
-                    "Mini Flashcards",
-                    () =>
-                    {
-                        navService.PushScreen(new MiniFlashcardSetViewModel(selectedItem.Id));
-                    }),
-
-                new AlertAction(
-                    "Detailed Flashcards",
-                    () =>
-                    {
-                        navService.PushScreen(new DetailedFlashcardSetViewModel(selectedItem.Id));
-                    })
-            };
-
-            dialogService.DisplayActionSheet("Study Activity", null, options);
+            _dialogService
+                .DisplayActionSheet("Vocab sets", "Select a vocab set.", _vocabSets)
+                .Subscribe(x => x.Selected());
         }
     }
 }

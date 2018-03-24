@@ -1,21 +1,14 @@
-﻿namespace TTKoreanSchool.Models
+﻿using Newtonsoft.Json;
+
+namespace TTKoreanSchool.Models
 {
-    public class ExampleSentence
+    public class ExampleSentence : BaseEntity
     {
-        public ExampleSentence(string id, string ko, string romanization, string translation)
-        {
-            Id = id;
-            Ko = ko;
-            Romanization = romanization;
-            Translation = translation;
-        }
+        public string Ko { get; set; }
 
-        public string Id { get; }
+        public string Romanization { get; set; }
 
-        public string Ko { get; }
-
-        public string Romanization { get; }
-
-        public string Translation { get; }
+        [JsonIgnore]
+        public string Translation { get; set; }
     }
 }

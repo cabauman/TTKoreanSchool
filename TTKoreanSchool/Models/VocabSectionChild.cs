@@ -1,23 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 
 namespace TTKoreanSchool.Models
 {
-    public class VocabSectionChild
+    public class VocabSectionChild : BaseEntity
     {
-        public VocabSectionChild(string id, string title, string iconId, bool isSubsection)
-        {
-            Id = id;
-            Title = title;
-            IconId = iconId;
-            IsSubsection = isSubsection;
-        }
+        [JsonProperty("title")]
+        public string Title { get; set; }
 
-        public string Id { get; }
-
-        public string Title { get; }
-
-        public string IconId { get; }
-
-        public bool IsSubsection { get; }
+        [JsonProperty("iconId")]
+        public string IconId { get; set; }
     }
 }

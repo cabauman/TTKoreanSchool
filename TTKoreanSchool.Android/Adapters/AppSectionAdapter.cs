@@ -16,9 +16,9 @@ namespace TTKoreanSchool.Android.Adapters
     public class AppSectionAdapter : BaseAdapter
     {
         private Context _context;
-        private AppSectionViewModel[] _appSections;
+        private ButtonViewModel[] _appSections;
 
-        public AppSectionAdapter(Context context, AppSectionViewModel[] appSections)
+        public AppSectionAdapter(Context context, ButtonViewModel[] appSections)
         {
             _context = context;
             _appSections = appSections;

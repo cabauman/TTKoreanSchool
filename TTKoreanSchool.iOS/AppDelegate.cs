@@ -1,14 +1,8 @@
-﻿using CoreGraphics;
-using Facebook.CoreKit;
-using Firebase.Core;
+﻿using Facebook.CoreKit;
 using Foundation;
 using Google.SignIn;
-using ReactiveUI;
 using Splat;
 using System;
-using TTKoreanSchool.iOS.Controllers;
-using TTKoreanSchool.iOS.Services;
-using TTKoreanSchool.Services;
 using TTKoreanSchool.Services.Interfaces;
 using TTKoreanSchool.ViewModels;
 using UIKit;
@@ -54,9 +48,18 @@ namespace TTKoreanSchool.iOS
 
             //Window.RootViewController = new GoogleSignInViewController(); // new FacebookLoginController();
 
-            RegisterServices();
+            var bootstrapper = new iOSBootstrapper(Window.RootViewController);
+            bootstrapper.Run();
+
             var navService = Locator.Current.GetService<INavigationService>();
-            navService.PushScreen(new HomeViewModel());
+            if(navService != null) // signed in
+            {
+                navService.PushPage(new HomePageViewModel());
+            }
+            else
+            {
+                navService.PushPage(new SignInPageViewModel());
+            }
 
             Window.MakeKeyAndVisible();
 
@@ -131,34 +134,6 @@ namespace TTKoreanSchool.iOS
             Profile.EnableUpdatesOnAccessTokenChange(true);
             Settings.AppID = _appId;
             Settings.DisplayName = _appName;
-        }
-
-        private void RegisterServices()
-        {
-            Locator.CurrentMutable.InitializeSplat();
-            Locator.CurrentMutable.InitializeReactiveUI();
-
-            Locator.CurrentMutable.Register(() => new HomeController(HomeController.GetLayout()), typeof(IViewFor<IHomeViewModel>));
-            Locator.CurrentMutable.Register(() => new HangulZoneController(), typeof(IViewFor<IHangulZoneViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabZoneController(), typeof(IViewFor<IVocabZoneViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarZoneController(), typeof(IViewFor<IGrammarZoneViewModel>));
-            Locator.CurrentMutable.Register(() => new ConjugatorController(), typeof(IViewFor<IConjugatorViewModel>));
-            Locator.CurrentMutable.Register(() => new StudentPortalController(), typeof(IViewFor<IStudentPortalViewModel>));
-            Locator.CurrentMutable.Register(() => new VideoFeedController(), typeof(IViewFor<IVideoFeedViewModel>));
-
-            Locator.CurrentMutable.Register(() => new MiniFlashcardSetController(), typeof(IViewFor<IMiniFlashcardSetViewModel>));
-            Locator.CurrentMutable.Register(() => new DetailedFlashcardSetController(), typeof(IViewFor<IDetailedFlashcardSetViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabSubsectionController(), typeof(IViewFor<IVocabSubsectionViewModel>));
-
-            var navService = new NavigationService(Window.RootViewController);
-            Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
-            Locator.CurrentMutable.RegisterConstant(new LoggingService(), typeof(ILogger));
-            Locator.CurrentMutable.RegisterConstant(new DialogService(), typeof(IDialogService));
-            Locator.CurrentMutable.RegisterConstant(new FirebaseDatabaseService(), typeof(IFirebaseDatabaseService));
-            Locator.CurrentMutable.RegisterConstant(new FirebaseStorageService(), typeof(IFirebaseStorageService));
-            Locator.CurrentMutable.RegisterConstant(new SpeechService(), typeof(ISpeechService));
-            Locator.CurrentMutable.RegisterConstant(new AudioService(), typeof(IAudioService));
-            Locator.CurrentMutable.RegisterConstant(new LocalStorageService(), typeof(LocalStorageService));
         }
     }
 }

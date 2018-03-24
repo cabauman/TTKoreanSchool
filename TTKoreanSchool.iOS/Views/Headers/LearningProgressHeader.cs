@@ -3,6 +3,7 @@ using System.Drawing;
 using CoreGraphics;
 using DACircularProgress;
 using Foundation;
+using Splat;
 using TTKoreanSchool.iOS.Utils;
 using TTKoreanSchool.Utils;
 using UIKit;

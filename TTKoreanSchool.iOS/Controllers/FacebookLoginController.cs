@@ -20,7 +20,7 @@ namespace TTKoreanSchool.iOS.Controllers
         {
         }
 
-        public override void ViewDidLoad()
+        public async override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
@@ -52,8 +52,9 @@ namespace TTKoreanSchool.iOS.Controllers
 
             if(AccessToken.CurrentAccessToken != null)
             {
-                var credential = FacebookAuthProvider.GetCredential(AccessToken.CurrentAccessToken.TokenString);
-                Auth.DefaultInstance.SignIn(credential, SignInOnCompletion);
+                await SignInWithFacebook(AccessToken.CurrentAccessToken.TokenString);
+                //var credential = FacebookAuthProvider.GetCredential(AccessToken.CurrentAccessToken.TokenString);
+                //Auth.DefaultInstance.SignIn(credential, SignInOnCompletion);
             }
 
             // The user image profile is set automatically once is logged in
@@ -70,6 +71,24 @@ namespace TTKoreanSchool.iOS.Controllers
             View.AddSubview(loginBtn);
             View.AddSubview(pictureView);
             View.AddSubview(_nameLabel);
+        }
+
+        public async System.Threading.Tasks.Task SignInWithFacebook(string accessToken)
+        {
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(""));
+            var auth = await authProvider.SignInWithOAuthAsync(FirebaseAuthType.Facebook, accessToken);
+        }
+
+        public async System.Threading.Tasks.Task SignInWithGoogle(string accessToken)
+        {
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(""));
+            var auth = await authProvider.SignInWithOAuthAsync(FirebaseAuthType.Google, accessToken);
+        }
+
+        public async System.Threading.Tasks.Task SignInAnonymously()
+        {
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(""));
+            var auth = await authProvider.SignInAnonymouslyAsync();
         }
 
         private void BtnLogin_Completed(object sender, LoginButtonCompletedEventArgs e)
@@ -89,48 +108,48 @@ namespace TTKoreanSchool.iOS.Controllers
             }
 
             // Get access token for the signed-in user and exchange it for a Firebase credential
-            var credential = FacebookAuthProvider.GetCredential(AccessToken.CurrentAccessToken.TokenString);
+            //var credential = FacebookAuthProvider.GetCredential(AccessToken.CurrentAccessToken.TokenString);
 
             // Authenticate with Firebase using the credential
-            Auth.DefaultInstance.SignIn(credential, SignInOnCompletion);
+            //Auth.DefaultInstance.SignIn(credential, SignInOnCompletion);
         }
 
-        private void SignInOnCompletion(User user, NSError error)
-        {
-            if(error != null)
-            {
-                AuthErrorCode errorCode;
-                if(IntPtr.Size == 8)
-                {
-                    // 64 bits devices
-                    errorCode = (AuthErrorCode)((long)error.Code);
-                }
-                else
-                {
-                    // 32 bits devices
-                    errorCode = (AuthErrorCode)((int)error.Code);
-                }
+        //private void SignInOnCompletion(User user, NSError error)
+        //{
+        //    if(error != null)
+        //    {
+        //        AuthErrorCode errorCode;
+        //        if(IntPtr.Size == 8)
+        //        {
+        //            // 64 bits devices
+        //            errorCode = (AuthErrorCode)((long)error.Code);
+        //        }
+        //        else
+        //        {
+        //            // 32 bits devices
+        //            errorCode = (AuthErrorCode)((int)error.Code);
+        //        }
 
-                // Posible error codes that SignIn method with credentials could throw
-                // Visit https://firebase.google.com/docs/auth/ios/errors for more information
-                switch(errorCode)
-                {
-                    case AuthErrorCode.InvalidCredential:
-                    case AuthErrorCode.InvalidEmail:
-                    case AuthErrorCode.OperationNotAllowed:
-                    case AuthErrorCode.EmailAlreadyInUse:
-                    case AuthErrorCode.UserDisabled:
-                    case AuthErrorCode.WrongPassword:
-                    default:
-                        AppDelegate.ShowMessage("Could not login!", error.LocalizedDescription, NavigationController);
-                        break;
-                }
+        //        // Posible error codes that SignIn method with credentials could throw
+        //        // Visit https://firebase.google.com/docs/auth/ios/errors for more information
+        //        switch(errorCode)
+        //        {
+        //            case AuthErrorCode.InvalidCredential:
+        //            case AuthErrorCode.InvalidEmail:
+        //            case AuthErrorCode.OperationNotAllowed:
+        //            case AuthErrorCode.EmailAlreadyInUse:
+        //            case AuthErrorCode.UserDisabled:
+        //            case AuthErrorCode.WrongPassword:
+        //            default:
+        //                AppDelegate.ShowMessage("Could not login!", error.LocalizedDescription, NavigationController);
+        //                break;
+        //        }
 
-                return;
-            }
+        //        return;
+        //    }
 
-            // Handle successful Firebase login.
-        }
+        //    // Handle successful Firebase login.
+        //}
 
         public class Acct
         {

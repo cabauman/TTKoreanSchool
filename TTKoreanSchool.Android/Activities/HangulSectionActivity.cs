@@ -14,7 +14,7 @@ using TTKoreanSchool.ViewModels;
 namespace TTKoreanSchool.Android.Activities
 {
     [Activity(Label = "HangulSectionActivity")]
-    public class HangulSectionActivity : BaseActivity<IHangulZoneViewModel>
+    public class HangulSectionActivity : BaseActivity<IHangulZoneLandingPageViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

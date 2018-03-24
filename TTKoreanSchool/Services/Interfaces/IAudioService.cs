@@ -2,6 +2,6 @@
 {
     public interface IAudioService
     {
-        void Play(string filename, string text);
+        void Play(string localUrl);
     }
 }

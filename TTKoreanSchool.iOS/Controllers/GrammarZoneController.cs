@@ -8,7 +8,7 @@ using UIKit;
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("GrammarZoneController")]
-    public class GrammarZoneController : BaseViewController<IGrammarZoneViewModel>
+    public class GrammarZoneController : BaseViewController<IGrammarZoneLandingPageViewModel>
     {
         public GrammarZoneController()
         {

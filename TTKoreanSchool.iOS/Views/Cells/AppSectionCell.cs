@@ -6,7 +6,7 @@ using UIKit;
 
 namespace TTKoreanSchool.iOS.Views.Cells
 {
-    public partial class AppSectionCell : ReactiveCollectionViewCell<IAppSectionViewModel>
+    public partial class AppSectionCell : ReactiveCollectionViewCell<IButtonViewModel>
     {
         public static readonly NSString Key = new NSString("AppSectionCell");
         public static readonly UINib Nib;

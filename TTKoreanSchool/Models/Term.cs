@@ -1,43 +1,28 @@
-﻿namespace TTKoreanSchool.Models
+﻿using Newtonsoft.Json;
+
+namespace TTKoreanSchool.Models
 {
-    public class Term
+    public class Term : BaseEntity
     {
-        public Term() { }
+        [JsonProperty("ko")]
+        public string Ko { get; set; }
 
-        public Term(
-            string id,
-            string ko,
-            string romanization,
-            string translation,
-            string extraInfoId,
-            int audioVersion,
-            string[] imageIds,
-            string[] sentenceIds)
-        {
-            Id = id;
-            Ko = ko;
-            Romanization = romanization;
-            Translation = translation;
-            ExtraInfoId = extraInfoId;
-            AudioVersion = audioVersion;
-            ImageIds = imageIds;
-            SentenceIds = sentenceIds;
-        }
+        [JsonProperty("romanization")]
+        public string Romanization { get; set; }
 
-        public string Id { get; }
+        [JsonProperty("translation")]
+        public string Translation { get; set; }
 
-        public string Ko { get; }
+        [JsonProperty("extraInfoId")]
+        public string ExtraInfoId { get; set; }
 
-        public string Romanization { get; }
+        [JsonProperty("audioVersion")]
+        public int AudioVersion { get; set; }
 
-        public string Translation { get; }
+        [JsonProperty("imageIds")]
+        public string[] ImageIds { get; set; }
 
-        public string ExtraInfoId { get; }
-
-        public int AudioVersion { get; }
-
-        public string[] ImageIds { get; }
-
-        public string[] SentenceIds { get; }
+        [JsonProperty("sentenceIds")]
+        public string[] SentenceIds { get; set; }
     }
 }

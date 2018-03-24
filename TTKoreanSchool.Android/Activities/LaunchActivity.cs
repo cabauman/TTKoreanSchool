@@ -14,8 +14,8 @@ namespace TTKoreanSchool.Android.Activities
             base.OnCreate(savedInstanceState);
 
             var navService = Locator.Current.GetService<INavigationService>();
-            var vm = new HomeViewModel();
-            navService.PushScreen(vm);
+            var vm = new HomePageViewModel();
+            navService.PushPage(vm);
         }
     }
 }

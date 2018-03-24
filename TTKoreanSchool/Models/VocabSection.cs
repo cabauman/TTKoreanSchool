@@ -1,25 +1,23 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TTKoreanSchool.Models
 {
-    public class VocabSection
+    public class VocabSection : BaseEntity
     {
-        public VocabSection(string id, string title, string colorTheme, IReadOnlyList<VocabSectionChild> children)
-        {
-            Id = id;
-            Title = title;
-            ColorTheme = colorTheme;
-            Children = children;
-        }
+        [JsonProperty("title")]
+        public string Title { get; set; }
 
-        public string Id { get; }
+        [JsonProperty("colorTheme")]
+        public string ColorTheme { get; set; }
 
-        public string Title { get; }
+        [JsonProperty("order")]
+        public int Order { get; set; }
 
-        public string ColorTheme { get; }
+        [JsonProperty("study-sets")]
+        public IDictionary<string, VocabSectionChild> StudySets { get; set; }
 
-        public int Order { get; }
-
-        public IReadOnlyList<VocabSectionChild> Children { get; }
+        [JsonProperty("subsections")]
+        public IDictionary<string, VocabSectionChild> Subsections { get; set; }
     }
 }

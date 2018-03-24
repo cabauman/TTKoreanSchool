@@ -8,7 +8,7 @@ using UIKit;
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("StudentPortalController")]
-    public class StudentPortalController : BaseViewController<IStudentPortalViewModel>
+    public class StudentPortalController : BaseViewController<IStudentPortalPageViewModel>
     {
         public StudentPortalController()
         {

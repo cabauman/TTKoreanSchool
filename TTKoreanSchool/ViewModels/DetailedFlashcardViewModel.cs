@@ -1,9 +1,11 @@
-﻿using System;
+﻿extern alias SplatAlias;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Splat;
+using SplatAlias::Splat;
 using TTKoreanSchool.Models;
 using TTKoreanSchool.Services.Interfaces;
 
@@ -22,6 +24,14 @@ namespace TTKoreanSchool.ViewModels
 
     public class DetailedFlashcardViewModel : BaseViewModel, IDetailedFlashcardViewModel
     {
+        public DetailedFlashcardViewModel(Term term)
+        {
+        }
+
+        public DetailedFlashcardViewModel(Term term, string translation)
+        {
+        }
+
         public DetailedFlashcardViewModel(Term term, IReadOnlyList<ExampleSentence> sentences)
         {
             Ko = term.Ko;
@@ -34,16 +44,16 @@ namespace TTKoreanSchool.ViewModels
                 return;
             }
 
-            var storage = Locator.Current.GetService<IFirebaseStorageService>();
-            storage.GetDownloadUrlForVocabImage(term.ImageIds[0])
-                .Subscribe(
-                    imageUrl =>
-                    {
-                    },
-                    error =>
-                    {
-                        this.Log().Error(error.Message);
-                    });
+            //var storage = Locator.Current.GetService<IStorageService>();
+            //storage.GetDownloadUrlForVocabImage(term.ImageIds[0])
+            //    .Subscribe(
+            //        imageUrl =>
+            //        {
+            //        },
+            //        error =>
+            //        {
+            //            this.Log().Error(error.Message);
+            //        });
         }
 
         public string Ko { get; }

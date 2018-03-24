@@ -12,7 +12,7 @@ using UIKit;
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("DetailedFlashcardSetController")]
-    public class DetailedFlashcardSetController : BaseViewController<IDetailedFlashcardSetViewModel>
+    public class DetailedFlashcardSetController : BaseViewController<IDetailedFlashcardsPageViewModel>
     {
         private readonly UIPageViewController _pageController;
 

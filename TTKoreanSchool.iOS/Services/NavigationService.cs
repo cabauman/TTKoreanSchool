@@ -6,7 +6,7 @@ using UIKit;
 
 namespace TTKoreanSchool.iOS.Services
 {
-    public class NavigationService : NavigationServiceBase
+    public class NavigationService : BaseNavigationService
     {
         public NavigationService(
             UIViewController rootViewController,
@@ -34,7 +34,7 @@ namespace TTKoreanSchool.iOS.Services
             }
         }
 
-        protected override void PushScreenNative(IScreenViewModel viewModel, bool resetStack, bool animate)
+        protected override void PushPageNative(IPageViewModel viewModel, bool resetStack, bool animate)
         {
             var navController = TopMostViewController as UINavigationController;
             if(navController != null)
@@ -54,7 +54,7 @@ namespace TTKoreanSchool.iOS.Services
             }
         }
 
-        protected override void PopScreenNative(bool animate)
+        protected override void PopPageNative(bool animate)
         {
             var navController = TopMostViewController as UINavigationController;
             if(navController != null)
@@ -67,7 +67,7 @@ namespace TTKoreanSchool.iOS.Services
             }
         }
 
-        protected override void PresentScreenNative(IScreenViewModel viewModel, bool animate, Action onComplete, bool withNavStack)
+        protected override void PresentPageNative(IPageViewModel viewModel, bool animate, Action onComplete, bool withNavStack)
         {
             var screen = LocatePageFor<UIViewController>(viewModel);
 
@@ -81,7 +81,7 @@ namespace TTKoreanSchool.iOS.Services
             RootViewController.PresentViewController(screen, animate, onComplete);
         }
 
-        protected override void DismissScreenNative(bool animate, Action onComplete)
+        protected override void DismissPageNative(bool animate, Action onComplete)
         {
             if(RootViewController.PresentedViewController != null)
             {

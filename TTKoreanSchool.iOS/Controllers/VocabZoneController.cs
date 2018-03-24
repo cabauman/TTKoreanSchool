@@ -14,7 +14,7 @@ using UIKit;
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("VocabZoneController")]
-    public class VocabZoneController : BaseTableViewController<IVocabZoneViewModel>
+    public class VocabZoneController : BaseTableViewController<IVocabZoneLandingPageViewModel>
     {
         private static readonly string _cellId = "Cell";
 
@@ -38,23 +38,33 @@ namespace TTKoreanSchool.iOS.Controllers
             Title = "Vocab";
             TableView = new UITableView(View.Bounds, UITableViewStyle.Grouped);
 
-            ViewModel.WhenAnyValue(vm => vm.Sections)
+            ViewModel.WhenAnyValue(vm => vm.LoadSections)
+                .SelectMany(x => x.Execute())
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(
-                    sections =>
+                    x =>
                     {
                         TableView.ReloadData();
-                    })
-                .DisposeWith(SubscriptionDisposables);
+                    });
+
+            //var abc = new ReactiveList<VocabSectionChild>();
+            //this.WhenActivated(disposable =>
+            //{
+            //    var source = new ReactiveTableViewSource<VocabSectionChild>(
+            //        TableView, abc, new NSString(""), 50f, x => x.AccessibilityIncrement());
+            //    source.ElementSelected.Subscribe(x => Console.WriteLine((x as VocabSection).Id));
+            //    TableView.Source = source;
+            //});
         }
 
         public override nint RowsInSection(UITableView tableView, nint section)
         {
-            return ViewModel.Sections[(int)section].Children.Count;
+            return ViewModel.Sections?[(int)section].Children.Count ?? 0;
         }
 
         public override nint NumberOfSections(UITableView tableView)
         {
-            return ViewModel.Sections.Count;
+            return ViewModel.Sections?.Count ?? 0;
         }
 
         public override string TitleForHeader(UITableView tableView, nint section)
@@ -82,7 +92,7 @@ namespace TTKoreanSchool.iOS.Controllers
             var section = ViewModel.Sections[indexPath.Section];
             var selectedItem = section.Children[indexPath.Row];
 
-            ViewModel.ItemSelected(selectedItem);
+            selectedItem.Selected();
 
             TableView.DeselectRow(indexPath, true);
         }

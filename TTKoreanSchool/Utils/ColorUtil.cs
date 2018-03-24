@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿extern alias SplatAlias;
+
+using SplatAlias::System.Drawing;
 using System.Globalization;
 
 namespace TTKoreanSchool.Utils

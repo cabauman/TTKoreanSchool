@@ -1,9 +1,11 @@
-﻿using System;
+﻿extern alias SplatAlias;
+
+using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Text;
 using ReactiveUI;
-using Splat;
+using SplatAlias::Splat;
 
 namespace TTKoreanSchool.ViewModels
 {

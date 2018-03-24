@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Drawing;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using CoreFoundation;
 using CoreGraphics;
 using Foundation;
 using ReactiveUI;
 using Splat;
-using TTKoreanSchool.Extensions;
 using TTKoreanSchool.iOS.Utils;
 using TTKoreanSchool.iOS.Views.Cells;
 using TTKoreanSchool.iOS.Views.Headers;
+using TTKoreanSchool.Utils;
 using TTKoreanSchool.ViewModels;
 using UIKit;
-using TTKoreanSchool.Utils;
 
 namespace TTKoreanSchool.iOS.Controllers
 {
     [Register("HomeController")]
-    public class HomeController : BaseCollectionViewController<IHomeViewModel>
+    public class HomeController : BaseCollectionViewController<IHomePageViewModel>
     {
         public HomeController()
-            : base()
+            : base(GetLayout())
         {
         }
 
@@ -27,6 +28,8 @@ namespace TTKoreanSchool.iOS.Controllers
             : base(layout)
         {
         }
+
+        private UIBarButtonItem _btn;
 
         public static UICollectionViewLayout GetLayout()
         {
@@ -69,6 +72,7 @@ namespace TTKoreanSchool.iOS.Controllers
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view
+            View.BackgroundColor = UIColor.White;
             CollectionView.BackgroundColor = ColorPalette.Amber.ToNative();
 
             CollectionView.RegisterNibForCell(AppSectionCell.Nib, AppSectionCell.Key);
@@ -76,6 +80,11 @@ namespace TTKoreanSchool.iOS.Controllers
                 typeof(LearningProgressHeader),
                 UICollectionElementKindSection.Header,
                 LearningProgressHeader.Key);
+
+            _btn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
+            NavigationItem.SetRightBarButtonItem(_btn, true);
+            _btn.Enabled = false;
+            this.BindCommand(ViewModel, x => x.Command, x => x._btn);
         }
 
         public override nint NumberOfSections(UICollectionView collectionView)
@@ -109,7 +118,7 @@ namespace TTKoreanSchool.iOS.Controllers
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             this.Log().Debug("Section selected");
-            ViewModel.AppSections[indexPath.Row].GoToSection
+            ViewModel.AppSections[indexPath.Row].Command
                 .Execute()
                 .Subscribe()
                 .DisposeWith(SubscriptionDisposables);

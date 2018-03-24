@@ -2,10 +2,8 @@
 
 namespace TTKoreanSchool.Models
 {
-    public class CourseRegistration
+    public class CourseRegistration : BaseEntity
     {
-        public string UserId { get; }
-
         public string CourseTitle { get; }
 
         public string DaysAvailable { get; }
