@@ -266,15 +266,12 @@
     <Compile Include="Views\DetailedFlashcardKoSide.designer.cs">
       <DependentUpon>DetailedFlashcardKoSide.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\FirebaseStorageExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\FirebaseStorageService.cs" />
     <Compile Include="Services\AudioService.cs" />
     <Compile Include="Services\SpeechService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Utils\ViewUtil.cs" />
     <Compile Include="Views\Cells\AppSectionCell.cs" />
     <Compile Include="Views\Cells\AppSectionCell.designer.cs">
@@ -294,6 +291,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
