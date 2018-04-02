@@ -1,8 +1,6 @@
-﻿using Facebook.CoreKit;
+﻿using System;
 using Foundation;
-using Google.SignIn;
 using Splat;
-using System;
 using TTKoreanSchool.iOS.Controllers;
 using TTKoreanSchool.iOS.Services;
 using TTKoreanSchool.Services.Interfaces;
@@ -38,10 +36,6 @@ namespace TTKoreanSchool.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            //Firebase.Core.App.Configure();
-
-            //InitializeAuthentication();
-
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             var bootstrapper = new iOSBootstrapper();
@@ -61,8 +55,7 @@ namespace TTKoreanSchool.iOS
 
             Window.MakeKeyAndVisible();
 
-            // This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
-            return ApplicationDelegate.SharedInstance.FinishedLaunching(application, launchOptions);
+            return true;
         }
 
         public override void OnResignActivation(UIApplication application)
