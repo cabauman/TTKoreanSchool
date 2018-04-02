@@ -2,13 +2,13 @@
 using Android.App;
 using Android.OS;
 using Android.Runtime;
-using Splat;
+using Plugin.CurrentActivity;
 using static Android.App.Application;
 
 namespace TTKoreanSchool.Android
 {
     [Application(Theme = "@android:style/Theme.Material.Light")]
-    public class App : Application, IActivityLifecycleCallbacks, IEnableLogger
+    public class App : Application, IActivityLifecycleCallbacks
     {
         public App(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -16,8 +16,6 @@ namespace TTKoreanSchool.Android
             var bootstrapper = new AndroidBootstrapper();
             bootstrapper.Run();
         }
-
-        public static Activity CurrentActivity { get; private set; }
 
         public override void OnCreate()
         {
@@ -33,7 +31,7 @@ namespace TTKoreanSchool.Android
 
         public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
         {
-            CurrentActivity = activity;
+            CrossCurrentActivity.Current.Activity = activity;
         }
 
         public void OnActivityDestroyed(Activity activity)
@@ -46,7 +44,7 @@ namespace TTKoreanSchool.Android
 
         public void OnActivityResumed(Activity activity)
         {
-            CurrentActivity = activity;
+            CrossCurrentActivity.Current.Activity = activity;
         }
 
         public void OnActivitySaveInstanceState(Activity activity, Bundle outState)
@@ -55,7 +53,7 @@ namespace TTKoreanSchool.Android
 
         public void OnActivityStarted(Activity activity)
         {
-            CurrentActivity = activity;
+            CrossCurrentActivity.Current.Activity = activity;
         }
 
         public void OnActivityStopped(Activity activity)
