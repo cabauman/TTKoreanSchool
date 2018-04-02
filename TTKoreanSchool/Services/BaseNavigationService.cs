@@ -18,13 +18,9 @@ namespace TTKoreanSchool.Services
 
     public abstract class BaseNavigationService : INavigationService, IEnableLogger
     {
-        public BaseNavigationService(bool rootIsNavStack = true, IViewLocator viewlocator = null)
+        public BaseNavigationService(IViewLocator viewlocator = null)
         {
-            if(rootIsNavStack)
-            {
-                Root = new NavigationPageViewModel();
-            }
-
+            Root = new NavigationPageViewModel();
             ModalStack = new Stack<IPageViewModel>();
             ViewLocator = viewlocator ?? Locator.Current.GetService<IViewLocator>();
         }
