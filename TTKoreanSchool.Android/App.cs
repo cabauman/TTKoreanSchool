@@ -13,8 +13,6 @@ namespace TTKoreanSchool.Android
         public App(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            var bootstrapper = new AndroidBootstrapper();
-            bootstrapper.Run();
         }
 
         public override void OnCreate()

@@ -1,8 +1,5 @@
 ﻿using Android.App;
 using Android.OS;
-using Splat;
-using TTKoreanSchool.Services.Interfaces;
-using TTKoreanSchool.ViewModels;
 
 namespace TTKoreanSchool.Android.Activities
 {
@@ -13,9 +10,8 @@ namespace TTKoreanSchool.Android.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            var navService = Locator.Current.GetService<INavigationService>();
-            var vm = new HomePageViewModel();
-            navService.PushPage(vm);
+            var bootstrapper = new AndroidBootstrapper();
+            bootstrapper.Run();
         }
     }
 }
