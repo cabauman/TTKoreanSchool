@@ -27,6 +27,133 @@ namespace TTKoreanSchool.Android
 		public static void UpdateIdValues()
 		{
 			global::Splat.Resource.String.library_name = global::TTKoreanSchool.Android.Resource.String.library_name;
+			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::TTKoreanSchool.Android.Resource.Animation.slide_in_right;
+			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::TTKoreanSchool.Android.Resource.Animation.slide_out_left;
+			global::Xamarin.Auth.Resource.Attribute.font = global::TTKoreanSchool.Android.Resource.Attribute.font;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderAuthority = global::TTKoreanSchool.Android.Resource.Attribute.fontProviderAuthority;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderCerts = global::TTKoreanSchool.Android.Resource.Attribute.fontProviderCerts;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderFetchStrategy = global::TTKoreanSchool.Android.Resource.Attribute.fontProviderFetchStrategy;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderFetchTimeout = global::TTKoreanSchool.Android.Resource.Attribute.fontProviderFetchTimeout;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderPackage = global::TTKoreanSchool.Android.Resource.Attribute.fontProviderPackage;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderQuery = global::TTKoreanSchool.Android.Resource.Attribute.fontProviderQuery;
+			global::Xamarin.Auth.Resource.Attribute.fontStyle = global::TTKoreanSchool.Android.Resource.Attribute.fontStyle;
+			global::Xamarin.Auth.Resource.Attribute.fontWeight = global::TTKoreanSchool.Android.Resource.Attribute.fontWeight;
+			global::Xamarin.Auth.Resource.Boolean.abc_action_bar_embed_tabs = global::TTKoreanSchool.Android.Resource.Boolean.abc_action_bar_embed_tabs;
+			global::Xamarin.Auth.Resource.Color.notification_action_color_filter = global::TTKoreanSchool.Android.Resource.Color.notification_action_color_filter;
+			global::Xamarin.Auth.Resource.Color.notification_icon_bg_color = global::TTKoreanSchool.Android.Resource.Color.notification_icon_bg_color;
+			global::Xamarin.Auth.Resource.Color.notification_material_background_media_default_color = global::TTKoreanSchool.Android.Resource.Color.notification_material_background_media_default_color;
+			global::Xamarin.Auth.Resource.Color.primary_text_default_material_dark = global::TTKoreanSchool.Android.Resource.Color.primary_text_default_material_dark;
+			global::Xamarin.Auth.Resource.Color.ripple_material_light = global::TTKoreanSchool.Android.Resource.Color.ripple_material_light;
+			global::Xamarin.Auth.Resource.Color.secondary_text_default_material_dark = global::TTKoreanSchool.Android.Resource.Color.secondary_text_default_material_dark;
+			global::Xamarin.Auth.Resource.Color.secondary_text_default_material_light = global::TTKoreanSchool.Android.Resource.Color.secondary_text_default_material_light;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_inset_horizontal_material = global::TTKoreanSchool.Android.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_inset_vertical_material = global::TTKoreanSchool.Android.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_padding_horizontal_material = global::TTKoreanSchool.Android.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_padding_vertical_material = global::TTKoreanSchool.Android.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_control_corner_material = global::TTKoreanSchool.Android.Resource.Dimension.compat_control_corner_material;
+			global::Xamarin.Auth.Resource.Dimension.notification_action_icon_size = global::TTKoreanSchool.Android.Resource.Dimension.notification_action_icon_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_action_text_size = global::TTKoreanSchool.Android.Resource.Dimension.notification_action_text_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_big_circle_margin = global::TTKoreanSchool.Android.Resource.Dimension.notification_big_circle_margin;
+			global::Xamarin.Auth.Resource.Dimension.notification_content_margin_start = global::TTKoreanSchool.Android.Resource.Dimension.notification_content_margin_start;
+			global::Xamarin.Auth.Resource.Dimension.notification_large_icon_height = global::TTKoreanSchool.Android.Resource.Dimension.notification_large_icon_height;
+			global::Xamarin.Auth.Resource.Dimension.notification_large_icon_width = global::TTKoreanSchool.Android.Resource.Dimension.notification_large_icon_width;
+			global::Xamarin.Auth.Resource.Dimension.notification_main_column_padding_top = global::TTKoreanSchool.Android.Resource.Dimension.notification_main_column_padding_top;
+			global::Xamarin.Auth.Resource.Dimension.notification_media_narrow_margin = global::TTKoreanSchool.Android.Resource.Dimension.notification_media_narrow_margin;
+			global::Xamarin.Auth.Resource.Dimension.notification_right_icon_size = global::TTKoreanSchool.Android.Resource.Dimension.notification_right_icon_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_right_side_padding_top = global::TTKoreanSchool.Android.Resource.Dimension.notification_right_side_padding_top;
+			global::Xamarin.Auth.Resource.Dimension.notification_small_icon_background_padding = global::TTKoreanSchool.Android.Resource.Dimension.notification_small_icon_background_padding;
+			global::Xamarin.Auth.Resource.Dimension.notification_small_icon_size_as_large = global::TTKoreanSchool.Android.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Xamarin.Auth.Resource.Dimension.notification_subtext_size = global::TTKoreanSchool.Android.Resource.Dimension.notification_subtext_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_top_pad = global::TTKoreanSchool.Android.Resource.Dimension.notification_top_pad;
+			global::Xamarin.Auth.Resource.Dimension.notification_top_pad_large_text = global::TTKoreanSchool.Android.Resource.Dimension.notification_top_pad_large_text;
+			global::Xamarin.Auth.Resource.Drawable.ic_arrow_back = global::TTKoreanSchool.Android.Resource.Drawable.ic_arrow_back;
+			global::Xamarin.Auth.Resource.Drawable.notification_action_background = global::TTKoreanSchool.Android.Resource.Drawable.notification_action_background;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg = global::TTKoreanSchool.Android.Resource.Drawable.notification_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low = global::TTKoreanSchool.Android.Resource.Drawable.notification_bg_low;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low_normal = global::TTKoreanSchool.Android.Resource.Drawable.notification_bg_low_normal;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low_pressed = global::TTKoreanSchool.Android.Resource.Drawable.notification_bg_low_pressed;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_normal = global::TTKoreanSchool.Android.Resource.Drawable.notification_bg_normal;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_normal_pressed = global::TTKoreanSchool.Android.Resource.Drawable.notification_bg_normal_pressed;
+			global::Xamarin.Auth.Resource.Drawable.notification_icon_background = global::TTKoreanSchool.Android.Resource.Drawable.notification_icon_background;
+			global::Xamarin.Auth.Resource.Drawable.notification_template_icon_bg = global::TTKoreanSchool.Android.Resource.Drawable.notification_template_icon_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_template_icon_low_bg = global::TTKoreanSchool.Android.Resource.Drawable.notification_template_icon_low_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_tile_bg = global::TTKoreanSchool.Android.Resource.Drawable.notification_tile_bg;
+			global::Xamarin.Auth.Resource.Drawable.notify_panel_notification_icon_bg = global::TTKoreanSchool.Android.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Xamarin.Auth.Resource.Id.action0 = global::TTKoreanSchool.Android.Resource.Id.action0;
+			global::Xamarin.Auth.Resource.Id.action_container = global::TTKoreanSchool.Android.Resource.Id.action_container;
+			global::Xamarin.Auth.Resource.Id.action_divider = global::TTKoreanSchool.Android.Resource.Id.action_divider;
+			global::Xamarin.Auth.Resource.Id.action_image = global::TTKoreanSchool.Android.Resource.Id.action_image;
+			global::Xamarin.Auth.Resource.Id.action_text = global::TTKoreanSchool.Android.Resource.Id.action_text;
+			global::Xamarin.Auth.Resource.Id.actions = global::TTKoreanSchool.Android.Resource.Id.actions;
+			global::Xamarin.Auth.Resource.Id.async = global::TTKoreanSchool.Android.Resource.Id.async;
+			global::Xamarin.Auth.Resource.Id.blocking = global::TTKoreanSchool.Android.Resource.Id.blocking;
+			global::Xamarin.Auth.Resource.Id.cancel_action = global::TTKoreanSchool.Android.Resource.Id.cancel_action;
+			global::Xamarin.Auth.Resource.Id.chronometer = global::TTKoreanSchool.Android.Resource.Id.chronometer;
+			global::Xamarin.Auth.Resource.Id.end_padder = global::TTKoreanSchool.Android.Resource.Id.end_padder;
+			global::Xamarin.Auth.Resource.Id.forever = global::TTKoreanSchool.Android.Resource.Id.forever;
+			global::Xamarin.Auth.Resource.Id.icon = global::TTKoreanSchool.Android.Resource.Id.icon;
+			global::Xamarin.Auth.Resource.Id.icon_group = global::TTKoreanSchool.Android.Resource.Id.icon_group;
+			global::Xamarin.Auth.Resource.Id.info = global::TTKoreanSchool.Android.Resource.Id.info;
+			global::Xamarin.Auth.Resource.Id.italic = global::TTKoreanSchool.Android.Resource.Id.italic;
+			global::Xamarin.Auth.Resource.Id.line1 = global::TTKoreanSchool.Android.Resource.Id.line1;
+			global::Xamarin.Auth.Resource.Id.line3 = global::TTKoreanSchool.Android.Resource.Id.line3;
+			global::Xamarin.Auth.Resource.Id.media_actions = global::TTKoreanSchool.Android.Resource.Id.media_actions;
+			global::Xamarin.Auth.Resource.Id.normal = global::TTKoreanSchool.Android.Resource.Id.normal;
+			global::Xamarin.Auth.Resource.Id.notification_background = global::TTKoreanSchool.Android.Resource.Id.notification_background;
+			global::Xamarin.Auth.Resource.Id.notification_main_column = global::TTKoreanSchool.Android.Resource.Id.notification_main_column;
+			global::Xamarin.Auth.Resource.Id.notification_main_column_container = global::TTKoreanSchool.Android.Resource.Id.notification_main_column_container;
+			global::Xamarin.Auth.Resource.Id.right_icon = global::TTKoreanSchool.Android.Resource.Id.right_icon;
+			global::Xamarin.Auth.Resource.Id.right_side = global::TTKoreanSchool.Android.Resource.Id.right_side;
+			global::Xamarin.Auth.Resource.Id.status_bar_latest_event_content = global::TTKoreanSchool.Android.Resource.Id.status_bar_latest_event_content;
+			global::Xamarin.Auth.Resource.Id.text = global::TTKoreanSchool.Android.Resource.Id.text;
+			global::Xamarin.Auth.Resource.Id.text2 = global::TTKoreanSchool.Android.Resource.Id.text2;
+			global::Xamarin.Auth.Resource.Id.time = global::TTKoreanSchool.Android.Resource.Id.time;
+			global::Xamarin.Auth.Resource.Id.title = global::TTKoreanSchool.Android.Resource.Id.title;
+			global::Xamarin.Auth.Resource.Id.webview = global::TTKoreanSchool.Android.Resource.Id.webview;
+			global::Xamarin.Auth.Resource.Integer.cancel_button_image_alpha = global::TTKoreanSchool.Android.Resource.Integer.cancel_button_image_alpha;
+			global::Xamarin.Auth.Resource.Integer.status_bar_notification_info_maxnum = global::TTKoreanSchool.Android.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Xamarin.Auth.Resource.Layout.activity_webview = global::TTKoreanSchool.Android.Resource.Layout.activity_webview;
+			global::Xamarin.Auth.Resource.Layout.notification_action = global::TTKoreanSchool.Android.Resource.Layout.notification_action;
+			global::Xamarin.Auth.Resource.Layout.notification_action_tombstone = global::TTKoreanSchool.Android.Resource.Layout.notification_action_tombstone;
+			global::Xamarin.Auth.Resource.Layout.notification_media_action = global::TTKoreanSchool.Android.Resource.Layout.notification_media_action;
+			global::Xamarin.Auth.Resource.Layout.notification_media_cancel_action = global::TTKoreanSchool.Android.Resource.Layout.notification_media_cancel_action;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media = global::TTKoreanSchool.Android.Resource.Layout.notification_template_big_media;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media_custom = global::TTKoreanSchool.Android.Resource.Layout.notification_template_big_media_custom;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media_narrow = global::TTKoreanSchool.Android.Resource.Layout.notification_template_big_media_narrow;
+			global::Xamarin.Auth.Resource.Layout.notification_template_big_media_narrow_custom = global::TTKoreanSchool.Android.Resource.Layout.notification_template_big_media_narrow_custom;
+			global::Xamarin.Auth.Resource.Layout.notification_template_custom_big = global::TTKoreanSchool.Android.Resource.Layout.notification_template_custom_big;
+			global::Xamarin.Auth.Resource.Layout.notification_template_icon_group = global::TTKoreanSchool.Android.Resource.Layout.notification_template_icon_group;
+			global::Xamarin.Auth.Resource.Layout.notification_template_lines_media = global::TTKoreanSchool.Android.Resource.Layout.notification_template_lines_media;
+			global::Xamarin.Auth.Resource.Layout.notification_template_media = global::TTKoreanSchool.Android.Resource.Layout.notification_template_media;
+			global::Xamarin.Auth.Resource.Layout.notification_template_media_custom = global::TTKoreanSchool.Android.Resource.Layout.notification_template_media_custom;
+			global::Xamarin.Auth.Resource.Layout.notification_template_part_chronometer = global::TTKoreanSchool.Android.Resource.Layout.notification_template_part_chronometer;
+			global::Xamarin.Auth.Resource.Layout.notification_template_part_time = global::TTKoreanSchool.Android.Resource.Layout.notification_template_part_time;
+			global::Xamarin.Auth.Resource.String.library_name = global::TTKoreanSchool.Android.Resource.String.library_name;
+			global::Xamarin.Auth.Resource.String.status_bar_notification_info_overflow = global::TTKoreanSchool.Android.Resource.String.status_bar_notification_info_overflow;
+			global::Xamarin.Auth.Resource.String.title_activity_webview = global::TTKoreanSchool.Android.Resource.String.title_activity_webview;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Info = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Info_Media = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Info_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Line2_Media = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Line2_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Media = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Time = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Time_Media = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Time_Media;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Title = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Title_Media = global::TTKoreanSchool.Android.Resource.Style.TextAppearance_Compat_Notification_Title_Media;
+			global::Xamarin.Auth.Resource.Style.Widget_Compat_NotificationActionContainer = global::TTKoreanSchool.Android.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Xamarin.Auth.Resource.Style.Widget_Compat_NotificationActionText = global::TTKoreanSchool.Android.Resource.Style.Widget_Compat_NotificationActionText;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderAuthority = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderCerts = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderPackage = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderQuery = global::TTKoreanSchool.Android.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont = global::TTKoreanSchool.Android.Resource.Styleable.FontFamilyFont;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_font = global::TTKoreanSchool.Android.Resource.Styleable.FontFamilyFont_font;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontStyle = global::TTKoreanSchool.Android.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontWeight = global::TTKoreanSchool.Android.Resource.Styleable.FontFamilyFont_fontWeight;
 		}
 		
 		public partial class Animation
@@ -63,10 +190,16 @@ namespace TTKoreanSchool.Android
 			public const int abc_slide_out_top = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int tooltip_enter = 2130968586;
+			public const int slide_in_right = 2130968586;
 			
 			// aapt resource value: 0x7f04000b
-			public const int tooltip_exit = 2130968587;
+			public const int slide_out_left = 2130968587;
+			
+			// aapt resource value: 0x7f04000c
+			public const int tooltip_enter = 2130968588;
+			
+			// aapt resource value: 0x7f04000d
+			public const int tooltip_exit = 2130968589;
 			
 			static Animation()
 			{
@@ -2360,100 +2493,103 @@ namespace TTKoreanSchool.Android
 			public const int googleg_standard_color_18 = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int Icon = 2130837638;
+			public const int ic_arrow_back = 2130837638;
 			
 			// aapt resource value: 0x7f020087
-			public const int Icon_Conjugator = 2130837639;
+			public const int Icon = 2130837639;
 			
 			// aapt resource value: 0x7f020088
-			public const int Icon_Grammar = 2130837640;
+			public const int Icon_Conjugator = 2130837640;
 			
 			// aapt resource value: 0x7f020089
-			public const int Icon_Hangul = 2130837641;
+			public const int Icon_Grammar = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int Icon_StudentPortal = 2130837642;
+			public const int Icon_Hangul = 2130837642;
 			
 			// aapt resource value: 0x7f02008b
-			public const int Icon_Ttks100x100 = 2130837643;
+			public const int Icon_StudentPortal = 2130837643;
 			
 			// aapt resource value: 0x7f02008c
-			public const int Icon_VideoFeed = 2130837644;
+			public const int Icon_Ttks100x100 = 2130837644;
 			
 			// aapt resource value: 0x7f02008d
-			public const int Icon_Vocab = 2130837645;
+			public const int Icon_VideoFeed = 2130837645;
 			
 			// aapt resource value: 0x7f02008e
-			public const int messenger_bubble_large_blue = 2130837646;
+			public const int Icon_Vocab = 2130837646;
 			
 			// aapt resource value: 0x7f02008f
-			public const int messenger_bubble_large_white = 2130837647;
+			public const int messenger_bubble_large_blue = 2130837647;
 			
 			// aapt resource value: 0x7f020090
-			public const int messenger_bubble_small_blue = 2130837648;
+			public const int messenger_bubble_large_white = 2130837648;
 			
 			// aapt resource value: 0x7f020091
-			public const int messenger_bubble_small_white = 2130837649;
+			public const int messenger_bubble_small_blue = 2130837649;
 			
 			// aapt resource value: 0x7f020092
-			public const int messenger_button_blue_bg_round = 2130837650;
+			public const int messenger_bubble_small_white = 2130837650;
 			
 			// aapt resource value: 0x7f020093
-			public const int messenger_button_blue_bg_selector = 2130837651;
+			public const int messenger_button_blue_bg_round = 2130837651;
 			
 			// aapt resource value: 0x7f020094
-			public const int messenger_button_send_round_shadow = 2130837652;
+			public const int messenger_button_blue_bg_selector = 2130837652;
 			
 			// aapt resource value: 0x7f020095
-			public const int messenger_button_white_bg_round = 2130837653;
+			public const int messenger_button_send_round_shadow = 2130837653;
 			
 			// aapt resource value: 0x7f020096
-			public const int messenger_button_white_bg_selector = 2130837654;
+			public const int messenger_button_white_bg_round = 2130837654;
 			
 			// aapt resource value: 0x7f020097
-			public const int monkey = 2130837655;
+			public const int messenger_button_white_bg_selector = 2130837655;
 			
 			// aapt resource value: 0x7f020098
-			public const int notification_action_background = 2130837656;
+			public const int monkey = 2130837656;
 			
 			// aapt resource value: 0x7f020099
-			public const int notification_bg = 2130837657;
+			public const int notification_action_background = 2130837657;
 			
 			// aapt resource value: 0x7f02009a
-			public const int notification_bg_low = 2130837658;
+			public const int notification_bg = 2130837658;
 			
 			// aapt resource value: 0x7f02009b
-			public const int notification_bg_low_normal = 2130837659;
+			public const int notification_bg_low = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int notification_bg_low_pressed = 2130837660;
+			public const int notification_bg_low_normal = 2130837660;
 			
 			// aapt resource value: 0x7f02009d
-			public const int notification_bg_normal = 2130837661;
+			public const int notification_bg_low_pressed = 2130837661;
 			
 			// aapt resource value: 0x7f02009e
-			public const int notification_bg_normal_pressed = 2130837662;
+			public const int notification_bg_normal = 2130837662;
 			
 			// aapt resource value: 0x7f02009f
-			public const int notification_icon_background = 2130837663;
-			
-			// aapt resource value: 0x7f0200a4
-			public const int notification_template_icon_bg = 2130837668;
-			
-			// aapt resource value: 0x7f0200a5
-			public const int notification_template_icon_low_bg = 2130837669;
+			public const int notification_bg_normal_pressed = 2130837663;
 			
 			// aapt resource value: 0x7f0200a0
-			public const int notification_tile_bg = 2130837664;
+			public const int notification_icon_background = 2130837664;
+			
+			// aapt resource value: 0x7f0200a5
+			public const int notification_template_icon_bg = 2130837669;
+			
+			// aapt resource value: 0x7f0200a6
+			public const int notification_template_icon_low_bg = 2130837670;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int notify_panel_notification_icon_bg = 2130837665;
+			public const int notification_tile_bg = 2130837665;
 			
 			// aapt resource value: 0x7f0200a2
-			public const int tooltip_frame_dark = 2130837666;
+			public const int notify_panel_notification_icon_bg = 2130837666;
 			
 			// aapt resource value: 0x7f0200a3
-			public const int tooltip_frame_light = 2130837667;
+			public const int tooltip_frame_dark = 2130837667;
+			
+			// aapt resource value: 0x7f0200a4
+			public const int tooltip_frame_light = 2130837668;
 			
 			static Drawable()
 			{
@@ -2486,8 +2622,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0042
 			public const int SYM = 2131361858;
 			
-			// aapt resource value: 0x7f0a0096
-			public const int action0 = 2131361942;
+			// aapt resource value: 0x7f0a009a
+			public const int action0 = 2131361946;
 			
 			// aapt resource value: 0x7f0a006e
 			public const int action_bar = 2131361902;
@@ -2510,17 +2646,17 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a004c
 			public const int action_bar_title = 2131361868;
 			
-			// aapt resource value: 0x7f0a0093
-			public const int action_container = 2131361939;
+			// aapt resource value: 0x7f0a0097
+			public const int action_container = 2131361943;
 			
 			// aapt resource value: 0x7f0a006f
 			public const int action_context_bar = 2131361903;
 			
-			// aapt resource value: 0x7f0a009a
-			public const int action_divider = 2131361946;
+			// aapt resource value: 0x7f0a009e
+			public const int action_divider = 2131361950;
 			
-			// aapt resource value: 0x7f0a0094
-			public const int action_image = 2131361940;
+			// aapt resource value: 0x7f0a0098
+			public const int action_image = 2131361944;
 			
 			// aapt resource value: 0x7f0a0003
 			public const int action_menu_divider = 2131361795;
@@ -2537,11 +2673,11 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a004e
 			public const int action_mode_close_button = 2131361870;
 			
-			// aapt resource value: 0x7f0a0095
-			public const int action_text = 2131361941;
+			// aapt resource value: 0x7f0a0099
+			public const int action_text = 2131361945;
 			
-			// aapt resource value: 0x7f0a00a3
-			public const int actions = 2131361955;
+			// aapt resource value: 0x7f0a00a7
+			public const int actions = 2131361959;
 			
 			// aapt resource value: 0x7f0a004f
 			public const int activity_chooser_view_content = 2131361871;
@@ -2588,11 +2724,11 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0055
 			public const int buttonPanel = 2131361877;
 			
-			// aapt resource value: 0x7f0a0097
-			public const int cancel_action = 2131361943;
+			// aapt resource value: 0x7f0a009b
+			public const int cancel_action = 2131361947;
 			
-			// aapt resource value: 0x7f0a0086
-			public const int cancel_button = 2131361926;
+			// aapt resource value: 0x7f0a008a
+			public const int cancel_button = 2131361930;
 			
 			// aapt resource value: 0x7f0a0021
 			public const int center = 2131361825;
@@ -2600,44 +2736,44 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0065
 			public const int checkbox = 2131361893;
 			
-			// aapt resource value: 0x7f0a009f
-			public const int chronometer = 2131361951;
+			// aapt resource value: 0x7f0a00a3
+			public const int chronometer = 2131361955;
 			
 			// aapt resource value: 0x7f0a0044
 			public const int collapseActionView = 2131361860;
 			
-			// aapt resource value: 0x7f0a008a
-			public const int com_facebook_body_frame = 2131361930;
+			// aapt resource value: 0x7f0a008e
+			public const int com_facebook_body_frame = 2131361934;
 			
-			// aapt resource value: 0x7f0a008c
-			public const int com_facebook_button_xout = 2131361932;
-			
-			// aapt resource value: 0x7f0a0085
-			public const int com_facebook_device_auth_instructions = 2131361925;
-			
-			// aapt resource value: 0x7f0a0082
-			public const int com_facebook_fragment_container = 2131361922;
-			
-			// aapt resource value: 0x7f0a0087
-			public const int com_facebook_login_activity_progress_bar = 2131361927;
-			
-			// aapt resource value: 0x7f0a0088
-			public const int com_facebook_smart_instructions_0 = 2131361928;
+			// aapt resource value: 0x7f0a0090
+			public const int com_facebook_button_xout = 2131361936;
 			
 			// aapt resource value: 0x7f0a0089
-			public const int com_facebook_smart_instructions_or = 2131361929;
+			public const int com_facebook_device_auth_instructions = 2131361929;
 			
-			// aapt resource value: 0x7f0a008e
-			public const int com_facebook_tooltip_bubble_view_bottom_pointer = 2131361934;
-			
-			// aapt resource value: 0x7f0a008d
-			public const int com_facebook_tooltip_bubble_view_text_body = 2131361933;
+			// aapt resource value: 0x7f0a0086
+			public const int com_facebook_fragment_container = 2131361926;
 			
 			// aapt resource value: 0x7f0a008b
-			public const int com_facebook_tooltip_bubble_view_top_pointer = 2131361931;
+			public const int com_facebook_login_activity_progress_bar = 2131361931;
 			
-			// aapt resource value: 0x7f0a0083
-			public const int confirmation_code = 2131361923;
+			// aapt resource value: 0x7f0a008c
+			public const int com_facebook_smart_instructions_0 = 2131361932;
+			
+			// aapt resource value: 0x7f0a008d
+			public const int com_facebook_smart_instructions_or = 2131361933;
+			
+			// aapt resource value: 0x7f0a0092
+			public const int com_facebook_tooltip_bubble_view_bottom_pointer = 2131361938;
+			
+			// aapt resource value: 0x7f0a0091
+			public const int com_facebook_tooltip_bubble_view_text_body = 2131361937;
+			
+			// aapt resource value: 0x7f0a008f
+			public const int com_facebook_tooltip_bubble_view_top_pointer = 2131361935;
+			
+			// aapt resource value: 0x7f0a0087
+			public const int confirmation_code = 2131361927;
 			
 			// aapt resource value: 0x7f0a0058
 			public const int contentPanel = 2131361880;
@@ -2669,8 +2805,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a003b
 			public const int end = 2131361851;
 			
-			// aapt resource value: 0x7f0a00a5
-			public const int end_padder = 2131361957;
+			// aapt resource value: 0x7f0a00a9
+			public const int end_padder = 2131361961;
 			
 			// aapt resource value: 0x7f0a0050
 			public const int expand_activities_button = 2131361872;
@@ -2678,11 +2814,20 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0064
 			public const int expanded_menu = 2131361892;
 			
+			// aapt resource value: 0x7f0a0082
+			public const int facebookSignInButton = 2131361922;
+			
 			// aapt resource value: 0x7f0a004a
 			public const int forever = 2131361866;
 			
+			// aapt resource value: 0x7f0a0081
+			public const int googleSignInButton = 2131361921;
+			
 			// aapt resource value: 0x7f0a0080
 			public const int gridView1 = 2131361920;
+			
+			// aapt resource value: 0x7f0a0083
+			public const int guestSignInButton = 2131361923;
 			
 			// aapt resource value: 0x7f0a0005
 			public const int home = 2131361797;
@@ -2693,8 +2838,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0054
 			public const int icon = 2131361876;
 			
-			// aapt resource value: 0x7f0a00a4
-			public const int icon_group = 2131361956;
+			// aapt resource value: 0x7f0a00a8
+			public const int icon_group = 2131361960;
 			
 			// aapt resource value: 0x7f0a0013
 			public const int icon_only = 2131361811;
@@ -2705,11 +2850,11 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0051
 			public const int image = 2131361873;
 			
-			// aapt resource value: 0x7f0a008f
-			public const int img_app_section_image = 2131361935;
+			// aapt resource value: 0x7f0a0093
+			public const int img_app_section_image = 2131361939;
 			
-			// aapt resource value: 0x7f0a00a0
-			public const int info = 2131361952;
+			// aapt resource value: 0x7f0a00a4
+			public const int info = 2131361956;
 			
 			// aapt resource value: 0x7f0a001f
 			public const int inline = 2131361823;
@@ -2747,14 +2892,14 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a007f
 			public const int ll_vocab_section = 2131361919;
 			
-			// aapt resource value: 0x7f0a0099
-			public const int media_actions = 2131361945;
+			// aapt resource value: 0x7f0a009d
+			public const int media_actions = 2131361949;
 			
-			// aapt resource value: 0x7f0a00a6
-			public const int message = 2131361958;
+			// aapt resource value: 0x7f0a00aa
+			public const int message = 2131361962;
 			
-			// aapt resource value: 0x7f0a0092
-			public const int messenger_send_button = 2131361938;
+			// aapt resource value: 0x7f0a0096
+			public const int messenger_send_button = 2131361942;
 			
 			// aapt resource value: 0x7f0a003c
 			public const int middle = 2131361852;
@@ -2762,8 +2907,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0033
 			public const int multiply = 2131361843;
 			
-			// aapt resource value: 0x7f0a0091
-			public const int myButton = 2131361937;
+			// aapt resource value: 0x7f0a0095
+			public const int myButton = 2131361941;
 			
 			// aapt resource value: 0x7f0a0046
 			public const int never = 2131361862;
@@ -2777,14 +2922,14 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0028
 			public const int normal = 2131361832;
 			
-			// aapt resource value: 0x7f0a00a2
-			public const int notification_background = 2131361954;
+			// aapt resource value: 0x7f0a00a6
+			public const int notification_background = 2131361958;
 			
-			// aapt resource value: 0x7f0a009c
-			public const int notification_main_column = 2131361948;
+			// aapt resource value: 0x7f0a00a0
+			public const int notification_main_column = 2131361952;
 			
-			// aapt resource value: 0x7f0a009b
-			public const int notification_main_column_container = 2131361947;
+			// aapt resource value: 0x7f0a009f
+			public const int notification_main_column_container = 2131361951;
 			
 			// aapt resource value: 0x7f0a0019
 			public const int open_graph = 2131361817;
@@ -2798,8 +2943,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a007d
 			public const int progressBar = 2131361917;
 			
-			// aapt resource value: 0x7f0a0084
-			public const int progress_bar = 2131361924;
+			// aapt resource value: 0x7f0a0088
+			public const int progress_bar = 2131361928;
 			
 			// aapt resource value: 0x7f0a0006
 			public const int progress_circular = 2131361798;
@@ -2810,17 +2955,17 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0067
 			public const int radio = 2131361895;
 			
-			// aapt resource value: 0x7f0a0081
-			public const int recyclerView = 2131361921;
+			// aapt resource value: 0x7f0a0084
+			public const int recyclerView = 2131361924;
 			
 			// aapt resource value: 0x7f0a0023
 			public const int right = 2131361827;
 			
-			// aapt resource value: 0x7f0a00a1
-			public const int right_icon = 2131361953;
+			// aapt resource value: 0x7f0a00a5
+			public const int right_icon = 2131361957;
 			
-			// aapt resource value: 0x7f0a009d
-			public const int right_side = 2131361949;
+			// aapt resource value: 0x7f0a00a1
+			public const int right_side = 2131361953;
 			
 			// aapt resource value: 0x7f0a0034
 			public const int screen = 2131361844;
@@ -2900,8 +3045,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0014
 			public const int standard = 2131361812;
 			
-			// aapt resource value: 0x7f0a0098
-			public const int status_bar_latest_event_content = 2131361944;
+			// aapt resource value: 0x7f0a009c
+			public const int status_bar_latest_event_content = 2131361948;
 			
 			// aapt resource value: 0x7f0a0068
 			public const int submenuarrow = 2131361896;
@@ -2927,8 +3072,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a005b
 			public const int textSpacerNoTitle = 2131361883;
 			
-			// aapt resource value: 0x7f0a009e
-			public const int time = 2131361950;
+			// aapt resource value: 0x7f0a00a2
+			public const int time = 2131361954;
 			
 			// aapt resource value: 0x7f0a000f
 			public const int title = 2131361807;
@@ -2945,8 +3090,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f0a0060
 			public const int topPanel = 2131361888;
 			
-			// aapt resource value: 0x7f0a0090
-			public const int tv_app_section_title = 2131361936;
+			// aapt resource value: 0x7f0a0094
+			public const int tv_app_section_title = 2131361940;
 			
 			// aapt resource value: 0x7f0a0038
 			public const int uniform = 2131361848;
@@ -2959,6 +3104,9 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f0a0031
 			public const int useLogo = 2131361841;
+			
+			// aapt resource value: 0x7f0a0085
+			public const int webview = 2131361925;
 			
 			// aapt resource value: 0x7f0a0015
 			public const int wide = 2131361813;
@@ -3098,106 +3246,112 @@ namespace TTKoreanSchool.Android
 			public const int activity_main = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int activity_vocab_zone = 2130903068;
+			public const int activity_sign_in = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int com_facebook_activity_layout = 2130903069;
+			public const int activity_vocab_zone = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int com_facebook_device_auth_dialog_fragment = 2130903070;
+			public const int activity_webview = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int com_facebook_login_fragment = 2130903071;
+			public const int com_facebook_activity_layout = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int com_facebook_smart_device_dialog_fragment = 2130903072;
+			public const int com_facebook_device_auth_dialog_fragment = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int com_facebook_tooltip_bubble = 2130903073;
+			public const int com_facebook_login_fragment = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int item_app_section = 2130903074;
+			public const int com_facebook_smart_device_dialog_fragment = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int Main = 2130903075;
+			public const int com_facebook_tooltip_bubble = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int messenger_button_send_blue_large = 2130903076;
+			public const int item_app_section = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int messenger_button_send_blue_round = 2130903077;
+			public const int Main = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int messenger_button_send_blue_small = 2130903078;
+			public const int messenger_button_send_blue_large = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int messenger_button_send_white_large = 2130903079;
+			public const int messenger_button_send_blue_round = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int messenger_button_send_white_round = 2130903080;
+			public const int messenger_button_send_blue_small = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int messenger_button_send_white_small = 2130903081;
+			public const int messenger_button_send_white_large = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int notification_action = 2130903082;
+			public const int messenger_button_send_white_round = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int notification_action_tombstone = 2130903083;
+			public const int messenger_button_send_white_small = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int notification_media_action = 2130903084;
+			public const int notification_action = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int notification_media_cancel_action = 2130903085;
+			public const int notification_action_tombstone = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int notification_template_big_media = 2130903086;
+			public const int notification_media_action = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int notification_template_big_media_custom = 2130903087;
+			public const int notification_media_cancel_action = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int notification_template_big_media_narrow = 2130903088;
+			public const int notification_template_big_media = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int notification_template_big_media_narrow_custom = 2130903089;
+			public const int notification_template_big_media_custom = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int notification_template_custom_big = 2130903090;
+			public const int notification_template_big_media_narrow = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int notification_template_icon_group = 2130903091;
+			public const int notification_template_big_media_narrow_custom = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int notification_template_lines_media = 2130903092;
+			public const int notification_template_custom_big = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public const int notification_template_media = 2130903093;
+			public const int notification_template_icon_group = 2130903093;
 			
 			// aapt resource value: 0x7f030036
-			public const int notification_template_media_custom = 2130903094;
+			public const int notification_template_lines_media = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int notification_template_part_chronometer = 2130903095;
+			public const int notification_template_media = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int notification_template_part_time = 2130903096;
+			public const int notification_template_media_custom = 2130903096;
 			
 			// aapt resource value: 0x7f030039
-			public const int select_dialog_item_material = 2130903097;
+			public const int notification_template_part_chronometer = 2130903097;
 			
 			// aapt resource value: 0x7f03003a
-			public const int select_dialog_multichoice_material = 2130903098;
+			public const int notification_template_part_time = 2130903098;
 			
 			// aapt resource value: 0x7f03003b
-			public const int select_dialog_singlechoice_material = 2130903099;
+			public const int select_dialog_item_material = 2130903099;
 			
 			// aapt resource value: 0x7f03003c
-			public const int support_simple_spinner_dropdown_item = 2130903100;
+			public const int select_dialog_multichoice_material = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public const int tooltip = 2130903101;
+			public const int select_dialog_singlechoice_material = 2130903101;
+			
+			// aapt resource value: 0x7f03003e
+			public const int support_simple_spinner_dropdown_item = 2130903102;
+			
+			// aapt resource value: 0x7f03003f
+			public const int tooltip = 2130903103;
 			
 			static Layout()
 			{
@@ -3212,95 +3366,95 @@ namespace TTKoreanSchool.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060029
-			public const int abc_action_bar_home_description = 2131099689;
-			
 			// aapt resource value: 0x7f06002a
-			public const int abc_action_bar_up_description = 2131099690;
+			public const int abc_action_bar_home_description = 2131099690;
 			
 			// aapt resource value: 0x7f06002b
-			public const int abc_action_menu_overflow_description = 2131099691;
+			public const int abc_action_bar_up_description = 2131099691;
 			
 			// aapt resource value: 0x7f06002c
-			public const int abc_action_mode_done = 2131099692;
+			public const int abc_action_menu_overflow_description = 2131099692;
 			
 			// aapt resource value: 0x7f06002d
-			public const int abc_activity_chooser_view_see_all = 2131099693;
+			public const int abc_action_mode_done = 2131099693;
 			
 			// aapt resource value: 0x7f06002e
-			public const int abc_activitychooserview_choose_application = 2131099694;
+			public const int abc_activity_chooser_view_see_all = 2131099694;
 			
 			// aapt resource value: 0x7f06002f
-			public const int abc_capital_off = 2131099695;
+			public const int abc_activitychooserview_choose_application = 2131099695;
 			
 			// aapt resource value: 0x7f060030
-			public const int abc_capital_on = 2131099696;
-			
-			// aapt resource value: 0x7f06003b
-			public const int abc_font_family_body_1_material = 2131099707;
-			
-			// aapt resource value: 0x7f06003c
-			public const int abc_font_family_body_2_material = 2131099708;
-			
-			// aapt resource value: 0x7f06003d
-			public const int abc_font_family_button_material = 2131099709;
-			
-			// aapt resource value: 0x7f06003e
-			public const int abc_font_family_caption_material = 2131099710;
-			
-			// aapt resource value: 0x7f06003f
-			public const int abc_font_family_display_1_material = 2131099711;
-			
-			// aapt resource value: 0x7f060040
-			public const int abc_font_family_display_2_material = 2131099712;
-			
-			// aapt resource value: 0x7f060041
-			public const int abc_font_family_display_3_material = 2131099713;
-			
-			// aapt resource value: 0x7f060042
-			public const int abc_font_family_display_4_material = 2131099714;
-			
-			// aapt resource value: 0x7f060043
-			public const int abc_font_family_headline_material = 2131099715;
-			
-			// aapt resource value: 0x7f060044
-			public const int abc_font_family_menu_material = 2131099716;
-			
-			// aapt resource value: 0x7f060045
-			public const int abc_font_family_subhead_material = 2131099717;
-			
-			// aapt resource value: 0x7f060046
-			public const int abc_font_family_title_material = 2131099718;
+			public const int abc_capital_off = 2131099696;
 			
 			// aapt resource value: 0x7f060031
-			public const int abc_search_hint = 2131099697;
+			public const int abc_capital_on = 2131099697;
+			
+			// aapt resource value: 0x7f06003c
+			public const int abc_font_family_body_1_material = 2131099708;
+			
+			// aapt resource value: 0x7f06003d
+			public const int abc_font_family_body_2_material = 2131099709;
+			
+			// aapt resource value: 0x7f06003e
+			public const int abc_font_family_button_material = 2131099710;
+			
+			// aapt resource value: 0x7f06003f
+			public const int abc_font_family_caption_material = 2131099711;
+			
+			// aapt resource value: 0x7f060040
+			public const int abc_font_family_display_1_material = 2131099712;
+			
+			// aapt resource value: 0x7f060041
+			public const int abc_font_family_display_2_material = 2131099713;
+			
+			// aapt resource value: 0x7f060042
+			public const int abc_font_family_display_3_material = 2131099714;
+			
+			// aapt resource value: 0x7f060043
+			public const int abc_font_family_display_4_material = 2131099715;
+			
+			// aapt resource value: 0x7f060044
+			public const int abc_font_family_headline_material = 2131099716;
+			
+			// aapt resource value: 0x7f060045
+			public const int abc_font_family_menu_material = 2131099717;
+			
+			// aapt resource value: 0x7f060046
+			public const int abc_font_family_subhead_material = 2131099718;
+			
+			// aapt resource value: 0x7f060047
+			public const int abc_font_family_title_material = 2131099719;
 			
 			// aapt resource value: 0x7f060032
-			public const int abc_searchview_description_clear = 2131099698;
+			public const int abc_search_hint = 2131099698;
 			
 			// aapt resource value: 0x7f060033
-			public const int abc_searchview_description_query = 2131099699;
+			public const int abc_searchview_description_clear = 2131099699;
 			
 			// aapt resource value: 0x7f060034
-			public const int abc_searchview_description_search = 2131099700;
+			public const int abc_searchview_description_query = 2131099700;
 			
 			// aapt resource value: 0x7f060035
-			public const int abc_searchview_description_submit = 2131099701;
+			public const int abc_searchview_description_search = 2131099701;
 			
 			// aapt resource value: 0x7f060036
-			public const int abc_searchview_description_voice = 2131099702;
+			public const int abc_searchview_description_submit = 2131099702;
 			
 			// aapt resource value: 0x7f060037
-			public const int abc_shareactionprovider_share_with = 2131099703;
+			public const int abc_searchview_description_voice = 2131099703;
 			
 			// aapt resource value: 0x7f060038
-			public const int abc_shareactionprovider_share_with_application = 2131099704;
+			public const int abc_shareactionprovider_share_with = 2131099704;
 			
 			// aapt resource value: 0x7f060039
-			public const int abc_toolbar_collapse_description = 2131099705;
+			public const int abc_shareactionprovider_share_with_application = 2131099705;
 			
-			// aapt resource value: 0x7f06004a
-			public const int app_name = 2131099722;
+			// aapt resource value: 0x7f06003a
+			public const int abc_toolbar_collapse_description = 2131099706;
+			
+			// aapt resource value: 0x7f06004b
+			public const int app_name = 2131099723;
 			
 			// aapt resource value: 0x7f060011
 			public const int com_facebook_device_auth_instructions = 2131099665;
@@ -3422,20 +3576,38 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f060010
 			public const int common_signin_button_text_long = 2131099664;
 			
-			// aapt resource value: 0x7f060049
-			public const int hello = 2131099721;
+			// aapt resource value: 0x7f06004a
+			public const int hello = 2131099722;
 			
-			// aapt resource value: 0x7f060048
-			public const int library_name = 2131099720;
+			// aapt resource value: 0x7f060049
+			public const int library_name = 2131099721;
 			
 			// aapt resource value: 0x7f060028
 			public const int messenger_send_button_text = 2131099688;
 			
-			// aapt resource value: 0x7f06003a
-			public const int search_menu_title = 2131099706;
+			// aapt resource value: 0x7f06003b
+			public const int search_menu_title = 2131099707;
 			
-			// aapt resource value: 0x7f060047
-			public const int status_bar_notification_info_overflow = 2131099719;
+			// aapt resource value: 0x7f06004d
+			public const int signin_facebook = 2131099725;
+			
+			// aapt resource value: 0x7f06004c
+			public const int signin_google = 2131099724;
+			
+			// aapt resource value: 0x7f060050
+			public const int signin_guest = 2131099728;
+			
+			// aapt resource value: 0x7f06004e
+			public const int signin_linkedIn = 2131099726;
+			
+			// aapt resource value: 0x7f06004f
+			public const int signin_twitter = 2131099727;
+			
+			// aapt resource value: 0x7f060048
+			public const int status_bar_notification_info_overflow = 2131099720;
+			
+			// aapt resource value: 0x7f060029
+			public const int title_activity_webview = 2131099689;
 			
 			static String()
 			{
