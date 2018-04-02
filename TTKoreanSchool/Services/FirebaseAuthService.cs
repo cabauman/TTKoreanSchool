@@ -1,56 +1,110 @@
-﻿using System;
+﻿extern alias SplatAlias;
+
+using System;
+using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using Firebase.Auth;
+using Newtonsoft.Json;
+using SplatAlias::Splat;
 using TTKoreanSchool.Config;
+using TTKoreanSchool.Models;
 using TTKoreanSchool.Services.Interfaces;
+using Xamarin.Auth;
 
 namespace TTKoreanSchool.Services
 {
     public class FirebaseAuthService : IFirebaseAuthService
     {
         private readonly FirebaseAuthProvider _authProvider;
+        private readonly IAccountStoreService _accountStoreService;
 
         private FirebaseAuthLink _authLink;
 
-        public FirebaseAuthService()
+        public FirebaseAuthService(IAccountStoreService accountStoreService = null)
         {
+            _accountStoreService = accountStoreService ?? Locator.Current.GetService<IAccountStoreService>();
             _authProvider = new FirebaseAuthProvider(new FirebaseConfig(ApiKeys.FIREBASE));
+
+            FirebaseAuthRefreshed
+                .Select(firebaseAuth => SaveAccount(firebaseAuth))
+                .Subscribe();
         }
 
-        public static event Action<string> AuthChanged;
-
-        private FirebaseAuthLink AuthLink
+        public IObservable<FirebaseAuth> FirebaseAuthRefreshed
         {
             get
             {
-                return _authLink;
+                return Observable
+                    .FromEventPattern<FirebaseAuthEventArgs>(
+                        x => AuthLink.FirebaseAuthRefreshed += x,
+                        x => AuthLink.FirebaseAuthRefreshed -= x)
+                    .Select(x => x.EventArgs.FirebaseAuth);
             }
+        }
 
-            set
+        public bool IsAuthenticated
+        {
+            get
             {
-                _authLink = value;
-                AuthChanged?.Invoke(_authLink.FirebaseToken);
+                Account account = AccountStore.Create().FindAccountsForService("Firebase").FirstOrDefault();
+                return account != null;
             }
         }
 
-        public async Task SignInWithFacebook(string accessToken)
+        private FirebaseAuthLink AuthLink { get; set; }
+
+        public async Task<string> GetFreshFirebaseToken()
         {
-            AuthLink = await _authProvider.SignInWithOAuthAsync(FirebaseAuthType.Facebook, accessToken);
+            return (await AuthLink.GetFreshAuthAsync()).FirebaseToken;
         }
 
-        public async Task SignInWithGoogle(string accessToken)
+        public IObservable<Unit> SignInWithFacebook(TongTongAccount account)
         {
-            AuthLink = await _authProvider.SignInWithOAuthAsync(FirebaseAuthType.Google, accessToken);
+            return SignInWithOAuth(FirebaseAuthType.Facebook, account);
         }
 
-        public async Task SignInAnonymously()
+        public IObservable<Unit> SignInWithGoogle(TongTongAccount account)
         {
-            AuthLink = await _authProvider.SignInAnonymouslyAsync();
+            return SignInWithOAuth(FirebaseAuthType.Google, account);
+        }
+
+        public IObservable<Unit> SignInAnonymously()
+        {
+            return _authProvider
+                .SignInAnonymouslyAsync()
+                .ToObservable()
+                .Do(authLink => SetCurrentAccountAndAuthLink(new TongTongAccount(), authLink))
+                .SelectMany(authLink => SaveAccount(authLink));
         }
 
         public void SignOut()
         {
             AuthLink = null;
+        }
+
+        private IObservable<Unit> SignInWithOAuth(FirebaseAuthType authType, TongTongAccount account)
+        {
+            return _authProvider
+                .SignInWithOAuthAsync(authType, account.AuthToken)
+                .ToObservable()
+                .Do(authLink => SetCurrentAccountAndAuthLink(account, authLink))
+                .SelectMany(authLink => SaveAccount(authLink));
+        }
+
+        private void SetCurrentAccountAndAuthLink(TongTongAccount account, FirebaseAuthLink authLink)
+        {
+            AuthLink = authLink;
+            _accountStoreService.CurrentAccount = account;
+        }
+
+        private IObservable<Unit> SaveAccount(FirebaseAuth firebaseAuth)
+        {
+            string json = JsonConvert.SerializeObject(firebaseAuth);
+            return _accountStoreService
+                .SaveFirebaseAuthJson(json);
         }
     }
 }

@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Reactive;
 using System.Threading.Tasks;
-using Firebase.Auth;
+using TTKoreanSchool.Models;
 
 namespace TTKoreanSchool.Services.Interfaces
 {
     public interface IFirebaseAuthService
     {
-        Task SignInWithFacebook(string accessToken);
+        bool IsAuthenticated { get; }
 
-        Task SignInWithGoogle(string accessToken);
+        Task<string> GetFreshFirebaseToken();
 
-        Task SignInAnonymously();
+        IObservable<Unit> SignInWithFacebook(TongTongAccount account);
+
+        IObservable<Unit> SignInWithGoogle(TongTongAccount account);
+
+        IObservable<Unit> SignInAnonymously();
 
         void SignOut();
     }
