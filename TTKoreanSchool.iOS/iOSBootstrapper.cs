@@ -17,13 +17,6 @@ namespace TTKoreanSchool.iOS
 {
     public class iOSBootstrapper : Bootstrapper
     {
-        private UIViewController _rootViewController;
-
-        public iOSBootstrapper(UIViewController rootViewController)
-        {
-            _rootViewController = rootViewController;
-        }
-
         protected override IViewFor<ISignInPageViewModel> SignInPage => new SignInPageController();
 
         protected override IViewFor<IHomePageViewModel> HomePage => new HomeController();
@@ -63,8 +56,7 @@ namespace TTKoreanSchool.iOS
         {
             base.RegisterServices();
 
-            var navService = new NavigationService(_rootViewController);
-            Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
+            Locator.CurrentMutable.RegisterConstant(new NavigationService(), typeof(INavigationService));
             Locator.CurrentMutable.RegisterConstant(new LoggingService(), typeof(ILogger));
             Locator.CurrentMutable.RegisterConstant(new DialogService(), typeof(IDialogService));
             Locator.CurrentMutable.RegisterLazySingleton(() => new SpeechService(), typeof(ISpeechService));

@@ -81,7 +81,7 @@ namespace TTKoreanSchool.ViewModels
                     imageName: "Icon_Vocab",
                     command: ReactiveCommand.Create(() =>
                     {
-                        NavService.PushPage(new VocabZoneLandingPageViewModel());
+                        NavService.PushPage(new VocabZoneLandingPageViewModel(), true);
                     })),
 
                 new ButtonViewModel(

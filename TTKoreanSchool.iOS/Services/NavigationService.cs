@@ -8,13 +8,10 @@ namespace TTKoreanSchool.iOS.Services
 {
     public class NavigationService : BaseNavigationService
     {
-        public NavigationService(
-            UIViewController rootViewController,
-            bool rootIsNavStack = true,
-            IViewLocator viewlocator = null)
-                : base(rootIsNavStack, viewlocator)
+        public NavigationService(IViewLocator viewlocator = null)
+            : base(viewlocator)
         {
-            RootViewController = rootViewController;
+            RootViewController = new UINavigationController();
         }
 
         public UIViewController RootViewController { get; }
@@ -36,17 +33,18 @@ namespace TTKoreanSchool.iOS.Services
 
         protected override void PushPageNative(IPageViewModel viewModel, bool resetStack, bool animate)
         {
-            var navController = TopMostViewController as UINavigationController;
-            if(navController != null)
+            if(TopMostViewController is UINavigationController navController)
             {
-                var screen = LocatePageFor<UIViewController>(viewModel);
+                var page = LocatePageFor<UIViewController>(viewModel);
 
                 if(resetStack)
                 {
-                    navController.SetViewControllers(null, false);
+                    navController.SetViewControllers(new UIViewController[] { page }, true);
                 }
-
-                navController.PushViewController(screen, animate);
+                else
+                {
+                    navController.PushViewController(page, animate);
+                }
             }
             else
             {
@@ -56,8 +54,7 @@ namespace TTKoreanSchool.iOS.Services
 
         protected override void PopPageNative(bool animate)
         {
-            var navController = TopMostViewController as UINavigationController;
-            if(navController != null)
+            if(TopMostViewController is UINavigationController navController)
             {
                 navController.PopViewController(animate);
             }
@@ -69,16 +66,15 @@ namespace TTKoreanSchool.iOS.Services
 
         protected override void PresentPageNative(IPageViewModel viewModel, bool animate, Action onComplete, bool withNavStack)
         {
-            var screen = LocatePageFor<UIViewController>(viewModel);
+            var page = LocatePageFor<UIViewController>(viewModel);
 
             if(withNavStack)
             {
-                var navController = new UINavigationController();
-                navController.PushViewController(screen, animate);
-                screen = navController;
+                var navController = new UINavigationController(page);
+                page = navController;
             }
 
-            RootViewController.PresentViewController(screen, animate, onComplete);
+            RootViewController.PresentViewController(page, animate, onComplete);
         }
 
         protected override void DismissPageNative(bool animate, Action onComplete)

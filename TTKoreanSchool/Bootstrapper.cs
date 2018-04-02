@@ -13,9 +13,9 @@ namespace TTKoreanSchool
 {
     public abstract class Bootstrapper
     {
-        protected abstract IViewFor<IHomePageViewModel> HomePage { get; }
-
         protected abstract IViewFor<ISignInPageViewModel> SignInPage { get; }
+
+        protected abstract IViewFor<IHomePageViewModel> HomePage { get; }
 
         protected abstract IViewFor<IHangulZoneLandingPageViewModel> HangulZoneLandingPage { get; }
 
@@ -37,11 +37,12 @@ namespace TTKoreanSchool
             RegisterPages();
             RegisterServices();
             RegisterViewModels();
+            NavigateToFirstPage();
         }
 
-        protected abstract void RegisterPages();
-
         protected abstract void RegisterViewModels();
+
+        protected abstract void RegisterPages();
 
         protected void RegisterPages2()
         {
@@ -57,10 +58,35 @@ namespace TTKoreanSchool
 
         protected virtual void RegisterServices()
         {
-            Locator.CurrentMutable.RegisterConstant(new FirebaseAuthService(), typeof(IFirebaseAuthService));
+            RegisterDataServices();
+        }
+
+        protected void NavigateToFirstPage()
+        {
+            var navService = Locator.Current.GetService<INavigationService>();
+            IPageViewModel page = null;
+
+            var authService = Locator.Current.GetService<IFirebaseAuthService>();
+            if(authService.IsAuthenticated)
+            {
+                page = new HomePageViewModel();
+            }
+            else
+            {
+                page = new SignInPageViewModel();
+            }
+
+            navService.PushPage(page);
+        }
+
+        private void RegisterDataServices()
+        {
+            var firebaseAuthService = new FirebaseAuthService();
+            Locator.CurrentMutable.RegisterConstant(firebaseAuthService, typeof(IFirebaseAuthService));
 
             FirebaseOptions firebaseOptions = new FirebaseOptions()
             {
+                AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
                 OfflineDatabaseFactory = (t, s) => new OfflineDatabase(t, s)
             };
 

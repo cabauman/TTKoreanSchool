@@ -18,15 +18,15 @@ namespace TTKoreanSchool.Utils
 
         public async Task Speak(string filenameWithoutExtension, string text)
         {
-            var localPath = await _storageService.GetVocabAudioLocalPath(filenameWithoutExtension);
-            if(localPath != null)
-            {
-                _audioService.Play(localPath);
-            }
-            else
-            {
-                _speechService.Speak(text);
-            }
+            //var localPath = await _storageService.GetVocabAudioLocalPath(filenameWithoutExtension);
+            //if(localPath != null)
+            //{
+            //    _audioService.Play(localPath);
+            //}
+            //else
+            //{
+            //    _speechService.Speak(text);
+            //}
         }
     }
 }

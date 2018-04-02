@@ -3,6 +3,8 @@ using Foundation;
 using Google.SignIn;
 using Splat;
 using System;
+using TTKoreanSchool.iOS.Controllers;
+using TTKoreanSchool.iOS.Services;
 using TTKoreanSchool.Services.Interfaces;
 using TTKoreanSchool.ViewModels;
 using UIKit;
@@ -14,9 +16,6 @@ namespace TTKoreanSchool.iOS
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-        private string _appId = "409378669430587";
-        private string _appName = "TT Korean School";
-        private IAudioService _audioService;
 
         public override UIWindow Window { get; set; }
 
@@ -39,20 +38,19 @@ namespace TTKoreanSchool.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            Firebase.Core.App.Configure();
+            //Firebase.Core.App.Configure();
 
-            InitializeAuthentication();
+            //InitializeAuthentication();
 
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            Window.RootViewController = new UINavigationController();
 
-            //Window.RootViewController = new GoogleSignInViewController(); // new FacebookLoginController();
-
-            var bootstrapper = new iOSBootstrapper(Window.RootViewController);
+            var bootstrapper = new iOSBootstrapper();
             bootstrapper.Run();
-
             var navService = Locator.Current.GetService<INavigationService>();
-            if(navService != null) // signed in
+            var iosNavService = navService as NavigationService;
+            Window.RootViewController = iosNavService.RootViewController;
+
+            if(navService == null) // signed in
             {
                 navService.PushPage(new HomePageViewModel());
             }
@@ -101,9 +99,6 @@ namespace TTKoreanSchool.iOS
         // For iOS 9 or newer
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
         {
-            // Google sign-in instructions say to use this line but Facebook return statement is already used.
-            // return Google.SignIn.SignIn.SharedInstance.HandleUrl(url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
-
             var openUrlOptions = new UIApplicationOpenUrlOptions(options);
             return OpenUrl(app, url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
         }
@@ -112,28 +107,12 @@ namespace TTKoreanSchool.iOS
         public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
         {
             // Google Sign-in
-            var result = SignIn.SharedInstance.HandleUrl(url, sourceApplication, annotation);
-            if(result)
-            {
-                return result;
-            }
+            // Convert iOS NSUrl to C#/netxf/BCL System.Uri - common API
+            var uri_netfx = new Uri(url.AbsoluteString);
 
-            // We need to handle URLs by passing them to their own OpenUrl in order to make the SSO authentication works.
-            return ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, annotation);
-        }
+            //SignInPageController.FacebookAuth?.OnPageLoading(uri_netfx);
 
-        private void InitializeAuthentication()
-        {
-            // Google Sign-in
-            var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
-            SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
-
-            // This is false by default,
-            // If you set true, you can handle the user profile info once is logged into FB with the Profile.Notifications.ObserveDidChange notification,
-            // If you set false, you need to get the user Profile info by hand with a GraphRequest
-            Profile.EnableUpdatesOnAccessTokenChange(true);
-            Settings.AppID = _appId;
-            Settings.DisplayName = _appName;
+            return true;
         }
     }
 }
