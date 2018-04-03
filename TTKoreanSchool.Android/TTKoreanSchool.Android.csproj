@@ -91,6 +91,9 @@
     <Reference Include="ReactiveUI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveUI.8.0.0-alpha0117\lib\monoandroid80\ReactiveUI.dll</HintPath>
     </Reference>
+    <Reference Include="SectionedRecyclerViewBindings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GameCtor.Bindings.Android.SectionedRecyclerView.1.0.1\lib\MonoAndroid80\SectionedRecyclerViewBindings.dll</HintPath>
+    </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.2.0.0\lib\MonoAndroid403\Splat.dll</HintPath>
       <Aliases>global</Aliases>
@@ -224,6 +227,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_sign_in.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_mini_flashcard.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="TTKoreanSchool.Android.ruleset" />
