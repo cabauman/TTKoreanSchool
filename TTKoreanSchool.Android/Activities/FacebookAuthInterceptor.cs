@@ -50,7 +50,7 @@ namespace TTKoreanSchool.Android.Activities
             var uri = new Uri(uri_android.ToString());
 
             // load redirect_url Page
-            //SignInActivity.FacebookAuth?.OnPageLoading(uri_netfx);
+            SignInActivity.Authenticator?.OnPageLoading(uri);
 
             Finish();
         }

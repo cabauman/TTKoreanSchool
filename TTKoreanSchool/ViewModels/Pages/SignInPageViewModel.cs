@@ -19,7 +19,7 @@ namespace TTKoreanSchool.ViewModels
 
         ReactiveCommand<Unit, WebRedirectAuthenticator> TriggerFacebookAuthFlow { get; }
 
-        ReactiveCommand ContinueAsGuest { get; }
+        ReactiveCommand<Unit, Unit> ContinueAsGuest { get; }
 
         IObservable<Unit> SignInSuccessful { get; }
 
@@ -34,7 +34,10 @@ namespace TTKoreanSchool.ViewModels
     {
         private readonly INavigationService _navService;
         private readonly IFirebaseAuthService _firebaseAuthService;
-        private readonly ObservableAsPropertyHelper<WebRedirectAuthenticator> _authenticator;
+        private ObservableAsPropertyHelper<WebRedirectAuthenticator> _authenticator;
+        private IObservable<Unit> _signInSuccessful;
+        private IObservable<Unit> _signInCanceled;
+        private IObservable<AuthenticatorErrorEventArgs> _signInFailed;
 
         private string _provider;
 
@@ -43,30 +46,25 @@ namespace TTKoreanSchool.ViewModels
             _navService = navService ?? Locator.Current.GetService<INavigationService>();
             _firebaseAuthService = authService ?? Locator.Current.GetService<IFirebaseAuthService>();
 
-            var completed = Observable.FromEventPattern<AuthenticatorCompletedEventArgs>(
-                x => Authenticator.Completed += x,
-                x => Authenticator.Completed -= x);
+            ContinueAsGuest = ReactiveCommand.CreateFromObservable(() => SignInAsGuest());
+            ContinueAsGuest
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => _navService.PushPage(new HomePageViewModel(), true));
 
-            SignInSuccessful = completed
-                .Where(x => x.EventArgs.IsAuthenticated)
-                .Select(x => x.EventArgs.Account)
-                .Select(authAccount => ConvertToTongTongAccount(authAccount))
-                .SelectMany(ttAccount => AuthenticateWithFirebase(ttAccount));
+            ContinueAsGuest.ThrownExceptions.Subscribe(
+                ex =>
+                {
+                    Console.WriteLine(ex);
+                });
 
-            SignInCanceled = completed
-                .Where(x => !x.EventArgs.IsAuthenticated)
-                .Select(_ => Unit.Default);
-
-            SignInFailed = Observable.FromEventPattern<AuthenticatorErrorEventArgs>(
-                x => Authenticator.Error += x,
-                x => Authenticator.Error -= x)
-                    .Select(x => x.EventArgs);
-
-            ContinueAsGuest = ReactiveCommand.CreateFromObservable(() => _firebaseAuthService.SignInAnonymously());
-
-            TriggerGoogleAuthFlow = ReactiveCommand.Create<WebRedirectAuthenticator>(
+            TriggerGoogleAuthFlow = ReactiveCommand.Create(
                 () =>
                 {
+                    if(_provider == "Google")
+                    {
+                        return Authenticator;
+                    }
+
                     _provider = "Google";
 
                     string clientId = GoogleAuthConfig.CLIENT_ID_ANDROID;
@@ -77,7 +75,7 @@ namespace TTKoreanSchool.ViewModels
                         redirectUrl = GoogleAuthConfig.REDIRECT_URL_IOS;
                     }
 
-                    var oAuth2 = new OAuth2Authenticator(
+                    var authenticator = new OAuth2Authenticator(
                         clientId,
                         string.Empty,
                         GoogleAuthConfig.SCOPE,
@@ -87,15 +85,31 @@ namespace TTKoreanSchool.ViewModels
                         null,
                         true);
 
-                    return oAuth2;
+                    Observe(authenticator);
+
+                    return authenticator;
                 });
 
-            TriggerFacebookAuthFlow = ReactiveCommand.Create<WebRedirectAuthenticator>(
+            TriggerGoogleAuthFlow.ThrownExceptions.Subscribe(
+                ex =>
+                {
+                    Console.WriteLine(ex);
+                });
+
+            _authenticator = this.WhenAnyObservable(x => x.TriggerGoogleAuthFlow)
+                .ToProperty(this, nameof(Authenticator));
+
+            TriggerFacebookAuthFlow = ReactiveCommand.Create(
                 () =>
                 {
+                    if(_provider == "Facebook")
+                    {
+                        return Authenticator;
+                    }
+
                     _provider = "Facebook";
 
-                    var oAuth2 = new OAuth2Authenticator(
+                    var authenticator = new OAuth2Authenticator(
                         FacebookAuthConfig.CLIENT_ID,
                         FacebookAuthConfig.SCOPE,
                         new Uri(FacebookAuthConfig.AUTHORIZE_URL),
@@ -103,17 +117,26 @@ namespace TTKoreanSchool.ViewModels
                         null,
                         true);
 
-                    return oAuth2;
+                    Observe(authenticator);
+
+                    return authenticator;
                 });
 
-            TriggerGoogleAuthFlow.ToProperty(this, vm => vm.Authenticator, out _authenticator);
-            TriggerFacebookAuthFlow.ToProperty(this, vm => vm.Authenticator, out _authenticator);
+            TriggerFacebookAuthFlow.ThrownExceptions.Subscribe(
+                ex =>
+                {
+                    Console.WriteLine(ex);
+                });
 
-            SignInSuccessful
+            _authenticator = this.WhenAnyObservable(x => x.TriggerFacebookAuthFlow)
+                .ToProperty(this, nameof(Authenticator));
+
+            this.WhenAnyObservable(x => x.SignInSuccessful)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(
                     _ =>
                     {
-                        navService.PushPage(new HomePageViewModel(), true);
+                        _navService.PushPage(new HomePageViewModel(), true);
                     },
                     ex =>
                     {
@@ -129,22 +152,51 @@ namespace TTKoreanSchool.ViewModels
 
         public ReactiveCommand<Unit, WebRedirectAuthenticator> TriggerFacebookAuthFlow { get; }
 
-        public ReactiveCommand ContinueAsGuest { get; }
+        public ReactiveCommand<Unit, Unit> ContinueAsGuest { get; }
 
-        public IObservable<Unit> SignInSuccessful { get; }
+        public IObservable<Unit> SignInSuccessful
+        {
+            get { return _signInSuccessful; }
+            private set { this.RaiseAndSetIfChanged(ref _signInSuccessful, value); }
+        }
 
-        public IObservable<Unit> SignInCanceled { get; }
+        public IObservable<Unit> SignInCanceled
+        {
+            get { return _signInCanceled; }
+            private set { this.RaiseAndSetIfChanged(ref _signInCanceled, value); }
+        }
 
-        public IObservable<AuthenticatorErrorEventArgs> SignInFailed { get; }
+        public IObservable<AuthenticatorErrorEventArgs> SignInFailed
+        {
+            get { return _signInFailed; }
+            private set { this.RaiseAndSetIfChanged(ref _signInFailed, value); }
+        }
 
         public WebRedirectAuthenticator Authenticator
         {
             get { return _authenticator.Value; }
         }
 
-        public void OnPageLoading(Uri uri)
+        private void Observe(WebRedirectAuthenticator auth)
         {
-            Authenticator.OnPageLoading(uri);
+            var authCompleted = Observable.FromEventPattern<AuthenticatorCompletedEventArgs>(
+                x => auth.Completed += x,
+                x => auth.Completed -= x);
+
+            SignInSuccessful = authCompleted
+                .Where(x => x.EventArgs.IsAuthenticated)
+                .Select(x => x.EventArgs.Account)
+                .Select(authAccount => ConvertToTongTongAccount(authAccount))
+                .SelectMany(ttAccount => AuthenticateWithFirebase(ttAccount));
+
+            SignInCanceled = authCompleted
+                .Where(x => !x.EventArgs.IsAuthenticated)
+                .Select(_ => Unit.Default);
+
+            SignInFailed = Observable.FromEventPattern<AuthenticatorErrorEventArgs>(
+                x => auth.Error += x,
+                x => auth.Error -= x)
+                    .Select(x => x.EventArgs);
         }
 
         private TongTongAccount ConvertToTongTongAccount(Xamarin.Auth.Account account)
@@ -176,6 +228,12 @@ namespace TTKoreanSchool.ViewModels
             }
 
             return result;
+        }
+
+        private IObservable<Unit> SignInAsGuest()
+        {
+            return _firebaseAuthService
+                .SignInAnonymously();
         }
     }
 }

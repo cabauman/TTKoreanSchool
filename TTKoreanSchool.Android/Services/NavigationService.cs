@@ -19,8 +19,8 @@ namespace TTKoreanSchool.Android.Services
             var intent = new Intent(CrossCurrentActivity.Current.Activity, screen.GetType());
             if(resetStack)
             {
-                // intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
-                intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
+                intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+                //intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
             }
 
             CrossCurrentActivity.Current.Activity.StartActivity(intent);

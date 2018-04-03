@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reactive.Linq;
 using Android.App;
+using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
 using ReactiveUI;
@@ -46,31 +48,32 @@ namespace TTKoreanSchool.Android.Activities
                 .Where(auth => auth != null)
                 .Subscribe(PresentSignInUI);
 
-            ViewModel.SignInCanceled
+            this.WhenAnyObservable(x => x.ViewModel.SignInCanceled)
                 .Subscribe(_ => OnAuthenticationCanceled());
 
-            ViewModel.SignInFailed
+            this.WhenAnyObservable(x => x.ViewModel.SignInFailed)
                 .Subscribe(args => OnAuthenticationFailed(args.Message, args.Exception));
         }
 
         private void OnAuthenticationCanceled()
         {
             new AlertDialog.Builder(this)
-                           .SetTitle("Authentication canceled")
-                           .SetMessage("You didn't completed the authentication process")
-                           .Show();
+                .SetTitle("Authentication canceled")
+                .SetMessage("You didn't completed the authentication process")
+                .Show();
         }
 
         private void OnAuthenticationFailed(string message, Exception exception)
         {
             new AlertDialog.Builder(this)
-                           .SetTitle(message)
-                           .SetMessage(exception?.ToString())
-                           .Show();
+                .SetTitle(message)
+                .SetMessage(exception?.ToString())
+                .Show();
         }
 
         private void PresentSignInUI(WebRedirectAuthenticator authenticator)
         {
+            Authenticator = authenticator;
             var intent = authenticator.GetUI(this);
             CustomTabsConfiguration.CustomTabsClosingMessage = null;
             StartActivity(intent);

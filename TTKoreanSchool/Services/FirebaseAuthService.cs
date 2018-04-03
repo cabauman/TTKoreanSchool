@@ -45,14 +45,7 @@ namespace TTKoreanSchool.Services
             }
         }
 
-        public bool IsAuthenticated
-        {
-            get
-            {
-                Account account = AccountStore.Create().FindAccountsForService("Firebase").FirstOrDefault();
-                return account != null;
-            }
-        }
+        public bool IsAuthenticated { get; }
 
         private FirebaseAuthLink AuthLink { get; set; }
 

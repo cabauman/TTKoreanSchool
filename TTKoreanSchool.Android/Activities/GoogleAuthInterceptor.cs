@@ -45,7 +45,7 @@ namespace TTKoreanSchool.Android.Activities
             var uri = new Uri(uri_android.ToString());
 
             // Send the URI to the Authenticator for continuation
-            //SignInActivity.GoogleAuth?.OnPageLoading(uri);
+            SignInActivity.Authenticator?.OnPageLoading(uri);
 
             Finish();
         }
