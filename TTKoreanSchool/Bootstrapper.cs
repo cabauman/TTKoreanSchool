@@ -42,9 +42,7 @@ namespace TTKoreanSchool
 
         protected abstract void RegisterViewModels();
 
-        protected abstract void RegisterPages();
-
-        protected void RegisterPages2()
+        protected void RegisterPages()
         {
             Locator.CurrentMutable.Register(() => SignInPage, typeof(IViewFor<ISignInPageViewModel>));
             Locator.CurrentMutable.Register(() => HomePage, typeof(IViewFor<IHomePageViewModel>));
@@ -58,10 +56,11 @@ namespace TTKoreanSchool
 
         protected virtual void RegisterServices()
         {
+            Locator.CurrentMutable.RegisterConstant<IAccountStoreService>(new XamarinAuthAccountStoreService());
             RegisterDataServices();
         }
 
-        protected void NavigateToFirstPage()
+        private void NavigateToFirstPage()
         {
             var navService = Locator.Current.GetService<INavigationService>();
             IPageViewModel page = null;

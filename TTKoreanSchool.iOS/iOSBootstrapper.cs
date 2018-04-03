@@ -33,18 +33,6 @@ namespace TTKoreanSchool.iOS
 
         protected override IViewFor<IVideoFeedViewModel> VideoFeedPage => new VideoFeedController();
 
-        protected override void RegisterPages()
-        {
-            Locator.CurrentMutable.Register(() => new SignInPageController(), typeof(IViewFor<ISignInPageViewModel>));
-            Locator.CurrentMutable.Register(() => new HomeController(), typeof(IViewFor<IHomePageViewModel>));
-            Locator.CurrentMutable.Register(() => new HangulZoneController(), typeof(IViewFor<IHangulZoneLandingPageViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabZoneController(), typeof(IViewFor<IVocabZoneLandingPageViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarZoneController(), typeof(IViewFor<IGrammarZoneLandingPageViewModel>));
-            Locator.CurrentMutable.Register(() => new ConjugatorController(), typeof(IViewFor<IConjugatorViewModel>));
-            Locator.CurrentMutable.Register(() => new StudentPortalController(), typeof(IViewFor<IStudentPortalPageViewModel>));
-            Locator.CurrentMutable.Register(() => new VideoFeedController(), typeof(IViewFor<IVideoFeedViewModel>));
-        }
-
         protected override void RegisterViewModels()
         {
             Locator.CurrentMutable.Register(() => new MiniFlashcardSetController(), typeof(IViewFor<IMiniFlashcardsPageViewModel>));

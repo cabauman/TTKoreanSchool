@@ -9,33 +9,21 @@ namespace TTKoreanSchool.Android
 {
     public class AndroidBootstrapper : Bootstrapper
     {
-        protected override IViewFor<IHomePageViewModel> HomePage => throw new System.NotImplementedException();
+        protected override IViewFor<ISignInPageViewModel> SignInPage => new SignInActivity();
 
-        protected override IViewFor<ISignInPageViewModel> SignInPage => throw new System.NotImplementedException();
+        protected override IViewFor<IHomePageViewModel> HomePage => new MainActivity();
 
-        protected override IViewFor<IHangulZoneLandingPageViewModel> HangulZoneLandingPage => throw new System.NotImplementedException();
+        protected override IViewFor<IHangulZoneLandingPageViewModel> HangulZoneLandingPage => new HangulSectionActivity();
 
-        protected override IViewFor<IVocabZoneLandingPageViewModel> VocabZoneLandingPage => throw new System.NotImplementedException();
+        protected override IViewFor<IVocabZoneLandingPageViewModel> VocabZoneLandingPage => new VocabZoneActivity();
 
-        protected override IViewFor<IGrammarZoneLandingPageViewModel> GrammarZoneLandingPage => throw new System.NotImplementedException();
+        protected override IViewFor<IGrammarZoneLandingPageViewModel> GrammarZoneLandingPage => new GrammarSectionActivity();
 
-        protected override IViewFor<IConjugatorViewModel> ConjugatorPage => throw new System.NotImplementedException();
+        protected override IViewFor<IConjugatorViewModel> ConjugatorPage => new ConjugatorActivity();
 
-        protected override IViewFor<IStudentPortalPageViewModel> StudentPortalPage => throw new System.NotImplementedException();
+        protected override IViewFor<IStudentPortalPageViewModel> StudentPortalPage => new StudentPortalActivity();
 
-        protected override IViewFor<IVideoFeedViewModel> VideoFeedPage => throw new System.NotImplementedException();
-
-        protected override void RegisterPages()
-        {
-            Locator.CurrentMutable.Register(() => new SignInActivity(), typeof(IViewFor<ISignInPageViewModel>));
-            Locator.CurrentMutable.Register(() => new MainActivity(), typeof(IViewFor<IHomePageViewModel>));
-            Locator.CurrentMutable.Register(() => new HangulSectionActivity(), typeof(IViewFor<IHangulZoneLandingPageViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabZoneActivity(), typeof(IViewFor<IVocabZoneLandingPageViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarSectionActivity(), typeof(IViewFor<IGrammarZoneLandingPageViewModel>));
-            Locator.CurrentMutable.Register(() => new ConjugatorActivity(), typeof(IViewFor<IConjugatorViewModel>));
-            Locator.CurrentMutable.Register(() => new StudentPortalActivity(), typeof(IViewFor<IStudentPortalPageViewModel>));
-            Locator.CurrentMutable.Register(() => new VideoFeedActivity(), typeof(IViewFor<IVideoFeedViewModel>));
-        }
+        protected override IViewFor<IVideoFeedViewModel> VideoFeedPage => new VideoFeedActivity();
 
         protected override void RegisterViewModels()
         {
