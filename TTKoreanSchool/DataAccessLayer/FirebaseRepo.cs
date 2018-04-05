@@ -18,7 +18,11 @@ namespace TTKoreanSchool.DataAccessLayer
             var realtimeDb = childQuery
                 .AsRealtimeDatabase<T>(string.Empty, string.Empty, StreamingOptions.LatestOnly, InitialPullStrategy.Everything, true);
 
-            realtimeDb.SyncExceptionThrown += (s, ex) => Console.WriteLine(ex.Exception);
+            realtimeDb.SyncExceptionThrown +=
+                (s, ex) =>
+                {
+                    Console.WriteLine(ex.Exception);
+                };
 
             if(!useCache || realtimeDb.Database?.Count == 0)
             {
@@ -47,16 +51,6 @@ namespace TTKoreanSchool.DataAccessLayer
                 .ToObservable()
                 .Do(MapKeyToId)
                 .Select(x => Unit.Default);
-
-            //return Observable
-            //    .Start(
-            //        () =>
-            //        {
-            //            childQuery
-            //                .PostAsync(obj)
-            //                .ToObservable()
-            //                .Do(MapKeyToId);
-            //        });
         }
 
         protected IObservable<Unit> Update(ChildQuery childQuery, T obj)
