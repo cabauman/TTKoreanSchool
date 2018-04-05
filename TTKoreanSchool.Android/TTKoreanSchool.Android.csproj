@@ -45,6 +45,9 @@
     <CodeAnalysisRuleSet>TTKoreanSchool.Android.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AndroidSwipeLayout, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.AndroidSwipeLayout.1.2.0.2\lib\MonoAndroid403\AndroidSwipeLayout.dll</HintPath>
+    </Reference>
     <Reference Include="Bolts.AppLinks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bolts.1.4.0.1\lib\MonoAndroid403\Bolts.AppLinks.dll</HintPath>
     </Reference>
