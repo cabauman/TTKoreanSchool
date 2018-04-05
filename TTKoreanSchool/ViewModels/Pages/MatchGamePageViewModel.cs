@@ -7,11 +7,11 @@ using TTKoreanSchool.Models;
 
 namespace TTKoreanSchool.ViewModels
 {
-    public interface IMatchGamePageViewModel
+    public interface IMatchGamePageViewModel : IPageViewModel
     {
     }
 
-    public class MatchGamePageViewModel : BasePageViewModel
+    public class MatchGamePageViewModel : BasePageViewModel, IMatchGamePageViewModel
     {
         private const int MAX_PAIRS = 6;
         private const int MAX_CARDS = MAX_PAIRS * 2;
