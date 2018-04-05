@@ -20,9 +20,9 @@ namespace TTKoreanSchool.Models
         public int AudioVersion { get; set; }
 
         [JsonProperty("imageIds")]
-        public string[] ImageIds { get; set; }
+        public string ImageIds { get; set; }
 
         [JsonProperty("sentenceIds")]
-        public string[] SentenceIds { get; set; }
+        public string SentenceIds { get; set; }
     }
 }
