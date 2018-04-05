@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/ll_hangul_section"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center"
+  android:background="#42A5F5">
+  <TextView
+    android:id="@+id/tv_term_ko"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="one"
+    android:textColor="#FFFFFF" />
+  <TextView
+    android:id="@+id/tv_term_romanization"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="one"
+    android:textColor="#FFFFFF" />
+</LinearLayout>
