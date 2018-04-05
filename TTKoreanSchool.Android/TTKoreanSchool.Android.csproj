@@ -182,7 +182,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\SettingsActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Activities\AboutUsActivity.cs" />
+    <Compile Include="Activities\DetailedFlashcardsActivity.cs" />
+    <Compile Include="Activities\MatchGameActivity.cs" />
     <Compile Include="Activities\FacebookAuthInterceptor.cs" />
     <Compile Include="Activities\GoogleAuthInterceptor.cs" />
     <Compile Include="Activities\GrammarSectionActivity.cs" />
@@ -193,6 +197,7 @@
     <Compile Include="Activities\VideoFeedActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\HangulSectionActivity.cs" />
+    <Compile Include="Activities\MiniFlashcardsActivity.cs" />
     <Compile Include="Adapters\AppSectionAdapter.cs" />
     <Compile Include="Adapters\MiniFlashcardAdapter.cs" />
     <Compile Include="AndroidBootstrapper.cs" />
@@ -203,6 +208,10 @@
     <Compile Include="Services\AndroidLoggingService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewHolders\MiniFlashcardViewHolder.cs" />
+    <Compile Include="ViewHolders\VocabSectionHeaderViewHolder.cs" />
+    <Compile Include="ViewHolders\VocabSectionItemViewHolder.cs" />
+    <Compile Include="Views\SquareCardView.cs" />
+    <Compile Include="VocabSectionView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -230,6 +239,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\item_mini_flashcard.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\header_vocab_section.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_vocab_section.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="TTKoreanSchool.Android.ruleset" />

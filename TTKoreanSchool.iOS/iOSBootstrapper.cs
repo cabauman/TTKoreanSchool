@@ -33,11 +33,14 @@ namespace TTKoreanSchool.iOS
 
         protected override IViewFor<IVideoFeedViewModel> VideoFeedPage => new VideoFeedController();
 
+        protected override IViewFor<IMiniFlashcardsPageViewModel> MiniFlashcardsPage => new MiniFlashcardSetController();
+
+        protected override IViewFor<IDetailedFlashcardsPageViewModel> DetailedFlashcardsPage => new DetailedFlashcardSetController();
+
+        protected override IViewFor<IMatchGamePageViewModel> MatchGamePage => null;
+
         protected override void RegisterViewModels()
         {
-            Locator.CurrentMutable.Register(() => new MiniFlashcardSetController(), typeof(IViewFor<IMiniFlashcardsPageViewModel>));
-            Locator.CurrentMutable.Register(() => new DetailedFlashcardSetController(), typeof(IViewFor<IDetailedFlashcardsPageViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabSubsectionController(), typeof(IViewFor<IVocabSubsectionViewModel>));
         }
 
         protected override void RegisterServices()

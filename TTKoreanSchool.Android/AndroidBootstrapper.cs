@@ -25,6 +25,12 @@ namespace TTKoreanSchool.Android
 
         protected override IViewFor<IVideoFeedViewModel> VideoFeedPage => new VideoFeedActivity();
 
+        protected override IViewFor<IMiniFlashcardsPageViewModel> MiniFlashcardsPage => new MiniFlashcardsActivity();
+
+        protected override IViewFor<IDetailedFlashcardsPageViewModel> DetailedFlashcardsPage => throw new System.NotImplementedException();
+
+        protected override IViewFor<IMatchGamePageViewModel> MatchGamePage => throw new System.NotImplementedException();
+
         protected override void RegisterViewModels()
         {
         }

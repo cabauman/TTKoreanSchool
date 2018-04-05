@@ -29,6 +29,12 @@ namespace TTKoreanSchool
 
         protected abstract IViewFor<IVideoFeedViewModel> VideoFeedPage { get; }
 
+        protected abstract IViewFor<IMiniFlashcardsPageViewModel> MiniFlashcardsPage { get; }
+
+        protected abstract IViewFor<IDetailedFlashcardsPageViewModel> DetailedFlashcardsPage { get; }
+
+        protected abstract IViewFor<IMatchGamePageViewModel> MatchGamePage { get; }
+
         public void Run()
         {
             Locator.CurrentMutable.InitializeSplat();
@@ -52,6 +58,9 @@ namespace TTKoreanSchool
             Locator.CurrentMutable.Register(() => ConjugatorPage, typeof(IViewFor<IConjugatorViewModel>));
             Locator.CurrentMutable.Register(() => StudentPortalPage, typeof(IViewFor<IStudentPortalPageViewModel>));
             Locator.CurrentMutable.Register(() => VideoFeedPage, typeof(IViewFor<IVideoFeedViewModel>));
+            Locator.CurrentMutable.Register(() => MiniFlashcardsPage, typeof(IViewFor<IMiniFlashcardsPageViewModel>));
+            Locator.CurrentMutable.Register(() => DetailedFlashcardsPage, typeof(IViewFor<IDetailedFlashcardsPageViewModel>));
+            Locator.CurrentMutable.Register(() => MatchGamePage, typeof(IViewFor<IMatchGamePageViewModel>));
         }
 
         protected virtual void RegisterServices()
@@ -66,7 +75,7 @@ namespace TTKoreanSchool
             IPageViewModel page = null;
 
             var authService = Locator.Current.GetService<IFirebaseAuthService>();
-            if(authService.IsAuthenticated)
+            if(!authService.IsAuthenticated)
             {
                 page = new HomePageViewModel();
             }
@@ -85,7 +94,7 @@ namespace TTKoreanSchool
 
             FirebaseOptions firebaseOptions = new FirebaseOptions()
             {
-                AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
+                //AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
                 OfflineDatabaseFactory = (t, s) => new OfflineDatabase(t, s)
             };
 
