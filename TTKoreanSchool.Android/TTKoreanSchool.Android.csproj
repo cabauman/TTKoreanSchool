@@ -66,12 +66,21 @@
     <Reference Include="Google.ZXing.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Google.ZXing.Core.3.3.0\lib\MonoAndroid\Google.ZXing.Core.dll</HintPath>
     </Reference>
+    <Reference Include="I18NPortable, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\I18NPortable.0.6.0\lib\netstandard1.1\I18NPortable.dll</HintPath>
+    </Reference>
     <Reference Include="Java.Interop" />
     <Reference Include="Lex.Db, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lex.Db.1.2.6\lib\MonoAndroid\Lex.Db.dll</HintPath>
     </Reference>
     <Reference Include="LiteDB, Version=4.1.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.4.1.1\lib\netstandard2.0\LiteDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Microcharts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microcharts.0.7.1\lib\MonoAndroid10\Microcharts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microcharts.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microcharts.0.7.1\lib\MonoAndroid10\Microcharts.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
@@ -96,6 +105,12 @@
     </Reference>
     <Reference Include="SectionedRecyclerViewBindings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GameCtor.Bindings.Android.SectionedRecyclerView.1.0.1\lib\MonoAndroid80\SectionedRecyclerViewBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.59.1\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Android, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.1.59.1.1\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
     </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.2.0.0\lib\MonoAndroid403\Splat.dll</HintPath>
