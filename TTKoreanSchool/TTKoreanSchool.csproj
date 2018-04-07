@@ -18,11 +18,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Locales\en.txt" />
+    <None Remove="Locales\es.txt" />
+    <None Remove="Locales\fr.txt" />
+    <None Remove="Locales\ja.txt" />
+    <None Remove="Locales\ko.txt" />
+    <None Remove="Locales\zh.txt" />
     <None Remove="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Locales\en.txt" />
+    <EmbeddedResource Include="Locales\zh.txt" />
+    <EmbeddedResource Include="Locales\ja.txt" />
+    <EmbeddedResource Include="Locales\ko.txt" />
+    <EmbeddedResource Include="Locales\fr.txt" />
+    <EmbeddedResource Include="Locales\es.txt" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,8 +2,11 @@
 
 using Firebase.Database;
 using Firebase.Database.Offline;
+using I18NPortable;
 using ReactiveUI;
 using SplatAlias::Splat;
+using System.Diagnostics;
+using System.Reflection;
 using TTKoreanSchool.DataAccessLayer;
 using TTKoreanSchool.Services;
 using TTKoreanSchool.Services.Interfaces;
@@ -43,6 +46,7 @@ namespace TTKoreanSchool
             RegisterPages();
             RegisterServices();
             RegisterViewModels();
+            InitLocalization();
             NavigateToFirstPage();
         }
 
@@ -67,6 +71,20 @@ namespace TTKoreanSchool
         {
             Locator.CurrentMutable.RegisterConstant<IAccountStoreService>(new XamarinAuthAccountStoreService());
             RegisterDataServices();
+        }
+
+        private void InitLocalization()
+        {
+            var hostAssembly = Assembly.GetAssembly(typeof(Bootstrapper));
+
+            I18N.Current
+                .SetNotFoundSymbol("$") // Optional: when a key is not found, it will appear as $key$ (defaults to "$")
+                .SetFallbackLocale("en") // Optional but recommended: locale to load in case the system locale is not supported
+                .SetThrowWhenKeyNotFound(true) // Optional: Throw an exception when keys are not found (recommended only for debugging)
+                .SetLogger(text => Debug.WriteLine(text)) // action to output traces
+                .Init(hostAssembly); // assembly where locales live
+
+            //I18N.Current.Locale = "es";
         }
 
         private void NavigateToFirstPage()
@@ -94,7 +112,7 @@ namespace TTKoreanSchool
 
             FirebaseOptions firebaseOptions = new FirebaseOptions()
             {
-                //AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
+                AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
                 OfflineDatabaseFactory = (t, s) => new OfflineDatabase(t, s)
             };
 

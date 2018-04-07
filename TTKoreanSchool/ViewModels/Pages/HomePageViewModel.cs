@@ -1,5 +1,6 @@
 ﻿extern alias SplatAlias;
 
+using I18NPortable;
 using ReactiveUI;
 using SplatAlias::Splat;
 using System;
@@ -69,7 +70,7 @@ namespace TTKoreanSchool.ViewModels
             return new IButtonViewModel[]
             {
                 new ButtonViewModel(
-                    title: "Hangul",
+                    title: "Greeting.Title".Translate(), // "Hangul",
                     imageName: "Icon_Hangul",
                     command: ReactiveCommand.Create(() =>
                     {

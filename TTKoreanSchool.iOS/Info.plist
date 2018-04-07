@@ -37,17 +37,17 @@
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-    <dict>
-      <key>CFBundleURLName</key>
-      <string>Google Auth</string>
-      <key>CFBundleURLTypes</key>
-      <string>Viewer</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>com.gamector.ttkoreanschool</string>
-      </array>
-    </dict>
-    <dict>
+        <dict>
+          <key>CFBundleURLName</key>
+          <string>Google Auth</string>
+          <key>CFBundleURLTypes</key>
+          <string>Viewer</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>com.gamector.ttkoreanschool</string>
+          </array>
+        </dict>
+        <dict>
 			<key>CFBundleURLName</key>
 			<string>Facebook</string>
 			<key>CFBundleURLSchemes</key>
@@ -56,5 +56,12 @@
 			</array>
 		</dict>
 	</array>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>es</string>
+    </array>
 </dict>
 </plist>
