@@ -27,8 +27,8 @@ namespace TTKoreanSchool.Android
 
         public VocabSectionView(string title, IReadOnlyList<IVocabSectionChildViewModel> children, Context context)
             : base(SectionParameters.InvokeBuilder()
-                .ItemResourceId(Resource.Layout.item_vocab_section)
-                .HeaderResourceId(Resource.Layout.header_vocab_section)
+                .ItemResourceId(Resource.Layout.Item_VocabSection)
+                .HeaderResourceId(Resource.Layout.Header_VocabSection)
                 .Build())
         {
             _title = title;

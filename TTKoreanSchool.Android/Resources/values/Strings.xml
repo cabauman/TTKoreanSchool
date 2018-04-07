@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Click Me!</string>
+	<string name="app_name">TTKoreanSchool.Android</string>
+  <string name="signin_google">Sign in with Google</string>
+  <string name="signin_facebook">Sign in with Facebook</string>
+  <string name="signin_linkedIn">Sign in with LinkedIn</string>
+  <string name="signin_twitter">Sign in with Twitter</string>
+  <string name="signin_guest">Continue as guest</string>
+</resources>

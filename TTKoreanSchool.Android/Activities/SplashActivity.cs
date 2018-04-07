@@ -3,8 +3,8 @@ using Android.OS;
 
 namespace TTKoreanSchool.Android.Activities
 {
-    [Activity(Label = "LaunchActivity", MainLauncher = true, NoHistory = true, Theme = "@style/SplashTheme")]
-    public class LaunchActivity : Activity
+    [Activity(Label = "SplashActivity", MainLauncher = true, NoHistory = true, Theme = "@style/SplashTheme")]
+    public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

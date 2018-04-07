@@ -53,7 +53,7 @@ namespace TTKoreanSchool.Android.Adapters
             {
                 holder = new AppSectionAdapterViewHolder();
                 var inflater = _context.GetSystemService(Context.LayoutInflaterService).JavaCast<LayoutInflater>();
-                view = inflater.Inflate(Resource.Layout.item_app_section, parent, false);
+                view = inflater.Inflate(Resource.Layout.Item_AppSection, parent, false);
                 holder.Title = view.FindViewById<TextView>(Resource.Id.tv_app_section_title);
                 holder.Image = view.FindViewById<ImageView>(Resource.Id.img_app_section_image);
                 view.Tag = holder;

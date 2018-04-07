@@ -10,8 +10,8 @@ namespace TTKoreanSchool.Android.ViewHolders
         public MiniFlashcardViewHolder(View itemView, Action<int> listener)
             : base(itemView)
         {
-            Ko = itemView.FindViewById<TextView>(Resource.Id.tv_term_ko);
-            Romanization = itemView.FindViewById<TextView>(Resource.Id.tv_term_romanization);
+            Ko = itemView.FindViewById<TextView>(-1); // Resource.Id.tv_term_ko
+            Romanization = itemView.FindViewById<TextView>(-1); // Resource.Id.tv_term_romanization
 
             itemView.Click += (sender, e) => listener(LayoutPosition);
         }

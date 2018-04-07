@@ -24,7 +24,7 @@ namespace TTKoreanSchool.Android.Activities
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.activity_sign_in);
+            SetContentView(Resource.Layout.Activity_SignIn);
 
             _googleSignInBtn = FindViewById<Button>(Resource.Id.googleSignInButton);
             this.BindCommand(

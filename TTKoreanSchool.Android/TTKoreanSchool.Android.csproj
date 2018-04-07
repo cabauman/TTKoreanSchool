@@ -195,7 +195,7 @@
     <Compile Include="Activities\GrammarSectionActivity.cs" />
     <Compile Include="Activities\ConjugatorActivity.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
-    <Compile Include="Activities\LaunchActivity.cs" />
+    <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Activities\StudentPortalActivity.cs" />
     <Compile Include="Activities\VideoFeedActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
@@ -222,38 +222,35 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\activity_home.axml">
+    <AndroidResource Include="Resources\layout\Activity_Home.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\circular_progress_bar.axml">
+    <AndroidResource Include="Resources\drawable\ProgressBar_Circular.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_main.axml">
+    <AndroidResource Include="Resources\layout\Activity_Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\item_app_section.axml">
+    <AndroidResource Include="Resources\layout\Item_AppSection.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AdditionalFiles Include="stylecop.json" />
-    <AndroidResource Include="Resources\layout\activity_vocab_zone.axml">
+    <AndroidResource Include="Resources\layout\Activity_VocabZone.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_sign_in.axml">
+    <AndroidResource Include="Resources\layout\Activity_SignIn.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\item_mini_flashcard.axml">
+    <AndroidResource Include="Resources\layout\Header_VocabSection.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\header_vocab_section.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\item_vocab_section.axml">
+    <AndroidResource Include="Resources\layout\Item_VocabSection.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="TTKoreanSchool.Android.ruleset" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
@@ -294,17 +291,24 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Icon_Ttks100x100.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\Colors.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background_splash.xml" />
+    <AndroidResource Include="Resources\drawable\Background_Splash.xml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Dimens.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

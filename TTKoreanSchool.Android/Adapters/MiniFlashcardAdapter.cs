@@ -25,8 +25,9 @@ namespace TTKoreanSchool.Android.Adapters
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
+            // Resource.Layout.Item_MiniFlashcardSlider
             View itemView = LayoutInflater.From(parent.Context)
-                .Inflate(Resource.Layout.item_mini_flashcard, parent, false);
+                .Inflate(-1, parent, false);
 
             MiniFlashcardViewHolder vh = new MiniFlashcardViewHolder(itemView, OnClick);
             return vh;

@@ -29,7 +29,7 @@ namespace TTKoreanSchool.Android.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.activity_vocab_zone);
+            SetContentView(Resource.Layout.Activity_VocabZone);
 
             ViewModel.WhenAnyValue(vm => vm.LoadVocabTerms)
                 .SelectMany(x => x.Execute())

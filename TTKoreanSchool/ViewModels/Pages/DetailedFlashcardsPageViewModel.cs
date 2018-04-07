@@ -75,10 +75,10 @@ namespace TTKoreanSchool.ViewModels
         {
             var term = Terms[index];
             var sentencesUsingTerm = new List<ExampleSentence>();
-            foreach(var id in term.SentenceIds)
-            {
-                sentencesUsingTerm.Add(Sentences[int.Parse(id)]);
-            }
+            //foreach(var id in term.SentenceIds)
+            //{
+            //    sentencesUsingTerm.Add(Sentences[int.Parse(id)]);
+            //}
 
             var flashcard = new DetailedFlashcardViewModel(term, sentencesUsingTerm.AsReadOnly());
 

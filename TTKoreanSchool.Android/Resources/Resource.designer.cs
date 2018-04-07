@@ -382,6 +382,9 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f010083
 			public const int borderlessButtonStyle = 2130772099;
 			
+			// aapt resource value: 0x7f01011d
+			public const int bottomEdgeSwipeOffset = 2130772253;
+			
 			// aapt resource value: 0x7f010080
 			public const int buttonBarButtonStyle = 2130772096;
 			
@@ -444,6 +447,9 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f010002
 			public const int circleCrop = 2130771970;
+			
+			// aapt resource value: 0x7f01011f
+			public const int clickToClose = 2130772255;
 			
 			// aapt resource value: 0x7f0100e6
 			public const int closeIcon = 2130772198;
@@ -561,6 +567,9 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f010084
 			public const int dividerVertical = 2130772100;
+			
+			// aapt resource value: 0x7f010119
+			public const int drag_edge = 2130772249;
 			
 			// aapt resource value: 0x7f0100c9
 			public const int drawableSize = 2130772169;
@@ -691,6 +700,9 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f010006
 			public const int layoutManager = 2130771974;
 			
+			// aapt resource value: 0x7f01011a
+			public const int leftEdgeSwipeOffset = 2130772250;
+			
 			// aapt resource value: 0x7f01009f
 			public const int listChoiceBackgroundIndicator = 2130772127;
 			
@@ -814,6 +826,9 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f010008
 			public const int reverseLayout = 2130771976;
 			
+			// aapt resource value: 0x7f01011b
+			public const int rightEdgeSwipeOffset = 2130772251;
+			
 			// aapt resource value: 0x7f010005
 			public const int scopeUris = 2130771973;
 			
@@ -846,6 +861,9 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f010040
 			public const int showTitle = 2130772032;
+			
+			// aapt resource value: 0x7f01011e
+			public const int show_mode = 2130772254;
 			
 			// aapt resource value: 0x7f01003e
 			public const int singleChoiceItemLayout = 2130772030;
@@ -1014,6 +1032,9 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f0100d9
 			public const int tooltipText = 2130772185;
+			
+			// aapt resource value: 0x7f01011c
+			public const int topEdgeSwipeOffset = 2130772252;
 			
 			// aapt resource value: 0x7f0100f1
 			public const int track = 2130772209;
@@ -1768,6 +1789,15 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f08000d
 			public const int abc_text_size_title_material_toolbar = 2131230733;
 			
+			// aapt resource value: 0x7f080082
+			public const int button_height_normal = 2131230850;
+			
+			// aapt resource value: 0x7f080083
+			public const int button_height_short = 2131230851;
+			
+			// aapt resource value: 0x7f080081
+			public const int button_height_tall = 2131230849;
+			
 			// aapt resource value: 0x7f080006
 			public const int cardview_compat_inset_shadow = 2131230726;
 			
@@ -1806,6 +1836,18 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f080002
 			public const int fastscroll_minimum_range = 2131230722;
+			
+			// aapt resource value: 0x7f080079
+			public const int font_large = 2131230841;
+			
+			// aapt resource value: 0x7f080078
+			public const int font_larger = 2131230840;
+			
+			// aapt resource value: 0x7f08007a
+			public const int font_normal = 2131230842;
+			
+			// aapt resource value: 0x7f08007b
+			public const int font_small = 2131230843;
 			
 			// aapt resource value: 0x7f080055
 			public const int highlight_alpha_material_colored = 2131230805;
@@ -1881,6 +1923,21 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 0x7f080077
 			public const int notification_top_pad_large_text = 2131230839;
+			
+			// aapt resource value: 0x7f08007c
+			public const int spacing_huge = 2131230844;
+			
+			// aapt resource value: 0x7f08007d
+			public const int spacing_large = 2131230845;
+			
+			// aapt resource value: 0x7f08007e
+			public const int spacing_normal = 2131230846;
+			
+			// aapt resource value: 0x7f08007f
+			public const int spacing_small = 2131230847;
+			
+			// aapt resource value: 0x7f080080
+			public const int spacing_tiny = 2131230848;
 			
 			// aapt resource value: 0x7f08005c
 			public const int tooltip_corner_radius = 2131230812;
@@ -2169,127 +2226,124 @@ namespace TTKoreanSchool.Android
 			public const int abc_vector_test = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int background_splash = 2130837587;
+			public const int Background_Splash = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int circular_progress_bar = 2130837588;
+			public const int common_full_open_on_phone = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int common_full_open_on_phone = 2130837589;
+			public const int common_google_signin_btn_icon_dark = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int common_google_signin_btn_icon_dark = 2130837590;
+			public const int common_google_signin_btn_icon_dark_focused = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int common_google_signin_btn_icon_dark_focused = 2130837591;
+			public const int common_google_signin_btn_icon_dark_normal = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int common_google_signin_btn_icon_dark_normal = 2130837592;
+			public const int common_google_signin_btn_icon_dark_normal_background = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int common_google_signin_btn_icon_dark_normal_background = 2130837593;
+			public const int common_google_signin_btn_icon_disabled = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int common_google_signin_btn_icon_disabled = 2130837594;
+			public const int common_google_signin_btn_icon_light = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int common_google_signin_btn_icon_light = 2130837595;
+			public const int common_google_signin_btn_icon_light_focused = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int common_google_signin_btn_icon_light_focused = 2130837596;
+			public const int common_google_signin_btn_icon_light_normal = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int common_google_signin_btn_icon_light_normal = 2130837597;
+			public const int common_google_signin_btn_icon_light_normal_background = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int common_google_signin_btn_icon_light_normal_background = 2130837598;
+			public const int common_google_signin_btn_text_dark = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int common_google_signin_btn_text_dark = 2130837599;
+			public const int common_google_signin_btn_text_dark_focused = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int common_google_signin_btn_text_dark_focused = 2130837600;
+			public const int common_google_signin_btn_text_dark_normal = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int common_google_signin_btn_text_dark_normal = 2130837601;
+			public const int common_google_signin_btn_text_dark_normal_background = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int common_google_signin_btn_text_dark_normal_background = 2130837602;
+			public const int common_google_signin_btn_text_disabled = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int common_google_signin_btn_text_disabled = 2130837603;
+			public const int common_google_signin_btn_text_light = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int common_google_signin_btn_text_light = 2130837604;
+			public const int common_google_signin_btn_text_light_focused = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int common_google_signin_btn_text_light_focused = 2130837605;
+			public const int common_google_signin_btn_text_light_normal = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int common_google_signin_btn_text_light_normal = 2130837606;
+			public const int common_google_signin_btn_text_light_normal_background = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int common_google_signin_btn_text_light_normal_background = 2130837607;
+			public const int googleg_disabled_color_18 = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int googleg_disabled_color_18 = 2130837608;
+			public const int googleg_standard_color_18 = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int googleg_standard_color_18 = 2130837609;
+			public const int ic_arrow_back = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int ic_arrow_back = 2130837610;
+			public const int Icon = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int Icon = 2130837611;
+			public const int Icon_Conjugator = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int Icon_Conjugator = 2130837612;
+			public const int Icon_Grammar = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int Icon_Grammar = 2130837613;
+			public const int Icon_Hangul = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int Icon_Hangul = 2130837614;
+			public const int Icon_StudentPortal = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int Icon_StudentPortal = 2130837615;
+			public const int Icon_Ttks100x100 = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int Icon_Ttks100x100 = 2130837616;
+			public const int Icon_VideoFeed = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int Icon_VideoFeed = 2130837617;
+			public const int Icon_Vocab = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int Icon_Vocab = 2130837618;
+			public const int monkey = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int monkey = 2130837619;
+			public const int notification_action_background = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int notification_action_background = 2130837620;
+			public const int notification_bg = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int notification_bg = 2130837621;
+			public const int notification_bg_low = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int notification_bg_low = 2130837622;
+			public const int notification_bg_low_normal = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int notification_bg_low_normal = 2130837623;
+			public const int notification_bg_low_pressed = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int notification_bg_low_pressed = 2130837624;
+			public const int notification_bg_normal = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int notification_bg_normal = 2130837625;
+			public const int notification_bg_normal_pressed = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int notification_bg_normal_pressed = 2130837626;
-			
-			// aapt resource value: 0x7f02007b
-			public const int notification_icon_background = 2130837627;
+			public const int notification_icon_background = 2130837626;
 			
 			// aapt resource value: 0x7f020080
 			public const int notification_template_icon_bg = 2130837632;
@@ -2297,11 +2351,14 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f020081
 			public const int notification_template_icon_low_bg = 2130837633;
 			
+			// aapt resource value: 0x7f02007b
+			public const int notification_tile_bg = 2130837627;
+			
 			// aapt resource value: 0x7f02007c
-			public const int notification_tile_bg = 2130837628;
+			public const int notify_panel_notification_icon_bg = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int notify_panel_notification_icon_bg = 2130837629;
+			public const int ProgressBar_Circular = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
 			public const int tooltip_frame_dark = 2130837630;
@@ -2340,41 +2397,41 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090032
 			public const int SYM = 2131296306;
 			
-			// aapt resource value: 0x7f090081
-			public const int action0 = 2131296385;
+			// aapt resource value: 0x7f090083
+			public const int action0 = 2131296387;
 			
-			// aapt resource value: 0x7f090060
-			public const int action_bar = 2131296352;
+			// aapt resource value: 0x7f090064
+			public const int action_bar = 2131296356;
 			
 			// aapt resource value: 0x7f090001
 			public const int action_bar_activity_content = 2131296257;
 			
-			// aapt resource value: 0x7f09005f
-			public const int action_bar_container = 2131296351;
+			// aapt resource value: 0x7f090063
+			public const int action_bar_container = 2131296355;
 			
-			// aapt resource value: 0x7f09005b
-			public const int action_bar_root = 2131296347;
+			// aapt resource value: 0x7f09005f
+			public const int action_bar_root = 2131296351;
 			
 			// aapt resource value: 0x7f090002
 			public const int action_bar_spinner = 2131296258;
 			
-			// aapt resource value: 0x7f09003f
-			public const int action_bar_subtitle = 2131296319;
+			// aapt resource value: 0x7f090043
+			public const int action_bar_subtitle = 2131296323;
 			
-			// aapt resource value: 0x7f09003e
-			public const int action_bar_title = 2131296318;
+			// aapt resource value: 0x7f090042
+			public const int action_bar_title = 2131296322;
 			
-			// aapt resource value: 0x7f09007e
-			public const int action_container = 2131296382;
+			// aapt resource value: 0x7f090080
+			public const int action_container = 2131296384;
 			
-			// aapt resource value: 0x7f090061
-			public const int action_context_bar = 2131296353;
+			// aapt resource value: 0x7f090065
+			public const int action_context_bar = 2131296357;
 			
-			// aapt resource value: 0x7f090085
-			public const int action_divider = 2131296389;
+			// aapt resource value: 0x7f090087
+			public const int action_divider = 2131296391;
 			
-			// aapt resource value: 0x7f09007f
-			public const int action_image = 2131296383;
+			// aapt resource value: 0x7f090081
+			public const int action_image = 2131296385;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -2382,23 +2439,23 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090004
 			public const int action_menu_presenter = 2131296260;
 			
-			// aapt resource value: 0x7f09005d
-			public const int action_mode_bar = 2131296349;
+			// aapt resource value: 0x7f090061
+			public const int action_mode_bar = 2131296353;
 			
-			// aapt resource value: 0x7f09005c
-			public const int action_mode_bar_stub = 2131296348;
+			// aapt resource value: 0x7f090060
+			public const int action_mode_bar_stub = 2131296352;
 			
-			// aapt resource value: 0x7f090040
-			public const int action_mode_close_button = 2131296320;
+			// aapt resource value: 0x7f090044
+			public const int action_mode_close_button = 2131296324;
 			
-			// aapt resource value: 0x7f090080
-			public const int action_text = 2131296384;
+			// aapt resource value: 0x7f090082
+			public const int action_text = 2131296386;
 			
-			// aapt resource value: 0x7f09008e
-			public const int actions = 2131296398;
+			// aapt resource value: 0x7f090090
+			public const int actions = 2131296400;
 			
-			// aapt resource value: 0x7f090041
-			public const int activity_chooser_view_content = 2131296321;
+			// aapt resource value: 0x7f090045
+			public const int activity_chooser_view_content = 2131296325;
 			
 			// aapt resource value: 0x7f090022
 			public const int add = 2131296290;
@@ -2409,8 +2466,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090011
 			public const int adjust_width = 2131296273;
 			
-			// aapt resource value: 0x7f090054
-			public const int alertTitle = 2131296340;
+			// aapt resource value: 0x7f090058
+			public const int alertTitle = 2131296344;
 			
 			// aapt resource value: 0x7f090033
 			public const int always = 2131296307;
@@ -2430,71 +2487,71 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090038
 			public const int bottom = 2131296312;
 			
-			// aapt resource value: 0x7f090047
-			public const int buttonPanel = 2131296327;
+			// aapt resource value: 0x7f09004b
+			public const int buttonPanel = 2131296331;
 			
-			// aapt resource value: 0x7f090082
-			public const int cancel_action = 2131296386;
+			// aapt resource value: 0x7f090084
+			public const int cancel_action = 2131296388;
 			
-			// aapt resource value: 0x7f090057
-			public const int checkbox = 2131296343;
+			// aapt resource value: 0x7f09005b
+			public const int checkbox = 2131296347;
 			
-			// aapt resource value: 0x7f09008a
-			public const int chronometer = 2131296394;
+			// aapt resource value: 0x7f09008c
+			public const int chronometer = 2131296396;
 			
 			// aapt resource value: 0x7f090034
 			public const int collapseActionView = 2131296308;
 			
-			// aapt resource value: 0x7f09004a
-			public const int contentPanel = 2131296330;
+			// aapt resource value: 0x7f09004e
+			public const int contentPanel = 2131296334;
 			
-			// aapt resource value: 0x7f090051
-			public const int custom = 2131296337;
+			// aapt resource value: 0x7f090055
+			public const int custom = 2131296341;
 			
-			// aapt resource value: 0x7f090050
-			public const int customPanel = 2131296336;
+			// aapt resource value: 0x7f090054
+			public const int customPanel = 2131296340;
 			
 			// aapt resource value: 0x7f090017
 			public const int dark = 2131296279;
 			
-			// aapt resource value: 0x7f09005e
-			public const int decor_content_parent = 2131296350;
+			// aapt resource value: 0x7f090062
+			public const int decor_content_parent = 2131296354;
 			
-			// aapt resource value: 0x7f090044
-			public const int default_activity_button = 2131296324;
+			// aapt resource value: 0x7f090048
+			public const int default_activity_button = 2131296328;
 			
 			// aapt resource value: 0x7f09001c
 			public const int disableHome = 2131296284;
 			
-			// aapt resource value: 0x7f090062
-			public const int edit_query = 2131296354;
+			// aapt resource value: 0x7f090066
+			public const int edit_query = 2131296358;
 			
 			// aapt resource value: 0x7f09002b
 			public const int end = 2131296299;
 			
-			// aapt resource value: 0x7f090090
-			public const int end_padder = 2131296400;
+			// aapt resource value: 0x7f090092
+			public const int end_padder = 2131296402;
 			
-			// aapt resource value: 0x7f090042
-			public const int expand_activities_button = 2131296322;
+			// aapt resource value: 0x7f090046
+			public const int expand_activities_button = 2131296326;
 			
-			// aapt resource value: 0x7f090056
-			public const int expanded_menu = 2131296342;
+			// aapt resource value: 0x7f09005a
+			public const int expanded_menu = 2131296346;
 			
-			// aapt resource value: 0x7f090074
-			public const int facebookSignInButton = 2131296372;
+			// aapt resource value: 0x7f090078
+			public const int facebookSignInButton = 2131296376;
 			
 			// aapt resource value: 0x7f09003c
 			public const int forever = 2131296316;
 			
-			// aapt resource value: 0x7f090073
-			public const int googleSignInButton = 2131296371;
+			// aapt resource value: 0x7f090077
+			public const int googleSignInButton = 2131296375;
 			
-			// aapt resource value: 0x7f090072
-			public const int gridView1 = 2131296370;
+			// aapt resource value: 0x7f090076
+			public const int gridView1 = 2131296374;
 			
-			// aapt resource value: 0x7f090075
-			public const int guestSignInButton = 2131296373;
+			// aapt resource value: 0x7f090079
+			public const int guestSignInButton = 2131296377;
 			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
@@ -2502,11 +2559,11 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f09001d
 			public const int homeAsUp = 2131296285;
 			
-			// aapt resource value: 0x7f090046
-			public const int icon = 2131296326;
+			// aapt resource value: 0x7f09004a
+			public const int icon = 2131296330;
 			
-			// aapt resource value: 0x7f09008f
-			public const int icon_group = 2131296399;
+			// aapt resource value: 0x7f090091
+			public const int icon_group = 2131296401;
 			
 			// aapt resource value: 0x7f090013
 			public const int icon_only = 2131296275;
@@ -2514,23 +2571,29 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090035
 			public const int ifRoom = 2131296309;
 			
-			// aapt resource value: 0x7f090043
-			public const int image = 2131296323;
-			
-			// aapt resource value: 0x7f090079
-			public const int img_app_section_image = 2131296377;
+			// aapt resource value: 0x7f090047
+			public const int image = 2131296327;
 			
 			// aapt resource value: 0x7f09007d
-			public const int img_icon = 2131296381;
+			public const int img_app_section_image = 2131296381;
 			
-			// aapt resource value: 0x7f09008b
-			public const int info = 2131296395;
+			// aapt resource value: 0x7f09007f
+			public const int img_icon = 2131296383;
+			
+			// aapt resource value: 0x7f09008d
+			public const int info = 2131296397;
 			
 			// aapt resource value: 0x7f09003d
 			public const int italic = 2131296317;
 			
 			// aapt resource value: 0x7f090000
 			public const int item_touch_helper_previous_elevation = 2131296256;
+			
+			// aapt resource value: 0x7f090040
+			public const int lay_down = 2131296320;
+			
+			// aapt resource value: 0x7f09003e
+			public const int left = 2131296318;
 			
 			// aapt resource value: 0x7f090018
 			public const int light = 2131296280;
@@ -2544,20 +2607,20 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090019
 			public const int listMode = 2131296281;
 			
-			// aapt resource value: 0x7f090045
-			public const int list_item = 2131296325;
+			// aapt resource value: 0x7f090049
+			public const int list_item = 2131296329;
 			
-			// aapt resource value: 0x7f090070
-			public const int ll_hangul_section = 2131296368;
+			// aapt resource value: 0x7f090074
+			public const int ll_hangul_section = 2131296372;
 			
-			// aapt resource value: 0x7f090071
-			public const int ll_vocab_section = 2131296369;
+			// aapt resource value: 0x7f090075
+			public const int ll_vocab_section = 2131296373;
 			
-			// aapt resource value: 0x7f090084
-			public const int media_actions = 2131296388;
+			// aapt resource value: 0x7f090086
+			public const int media_actions = 2131296390;
 			
-			// aapt resource value: 0x7f090091
-			public const int message = 2131296401;
+			// aapt resource value: 0x7f090093
+			public const int message = 2131296403;
 			
 			// aapt resource value: 0x7f09002c
 			public const int middle = 2131296300;
@@ -2574,20 +2637,20 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f09001a
 			public const int normal = 2131296282;
 			
-			// aapt resource value: 0x7f09008d
-			public const int notification_background = 2131296397;
+			// aapt resource value: 0x7f09008f
+			public const int notification_background = 2131296399;
 			
-			// aapt resource value: 0x7f090087
-			public const int notification_main_column = 2131296391;
+			// aapt resource value: 0x7f090089
+			public const int notification_main_column = 2131296393;
 			
-			// aapt resource value: 0x7f090086
-			public const int notification_main_column_container = 2131296390;
+			// aapt resource value: 0x7f090088
+			public const int notification_main_column_container = 2131296392;
 			
-			// aapt resource value: 0x7f090049
-			public const int parentPanel = 2131296329;
+			// aapt resource value: 0x7f09004d
+			public const int parentPanel = 2131296333;
 			
-			// aapt resource value: 0x7f09006f
-			public const int progressBar = 2131296367;
+			// aapt resource value: 0x7f090073
+			public const int progressBar = 2131296371;
 			
 			// aapt resource value: 0x7f090006
 			public const int progress_circular = 2131296262;
@@ -2595,65 +2658,71 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090007
 			public const int progress_horizontal = 2131296263;
 			
-			// aapt resource value: 0x7f090059
-			public const int radio = 2131296345;
+			// aapt resource value: 0x7f090041
+			public const int pull_out = 2131296321;
 			
-			// aapt resource value: 0x7f090076
-			public const int recyclerView = 2131296374;
+			// aapt resource value: 0x7f09005d
+			public const int radio = 2131296349;
 			
-			// aapt resource value: 0x7f09008c
-			public const int right_icon = 2131296396;
+			// aapt resource value: 0x7f09007a
+			public const int recyclerView = 2131296378;
 			
-			// aapt resource value: 0x7f090088
-			public const int right_side = 2131296392;
+			// aapt resource value: 0x7f09003f
+			public const int right = 2131296319;
+			
+			// aapt resource value: 0x7f09008e
+			public const int right_icon = 2131296398;
+			
+			// aapt resource value: 0x7f09008a
+			public const int right_side = 2131296394;
 			
 			// aapt resource value: 0x7f090024
 			public const int screen = 2131296292;
 			
+			// aapt resource value: 0x7f090053
+			public const int scrollIndicatorDown = 2131296339;
+			
 			// aapt resource value: 0x7f09004f
-			public const int scrollIndicatorDown = 2131296335;
+			public const int scrollIndicatorUp = 2131296335;
 			
-			// aapt resource value: 0x7f09004b
-			public const int scrollIndicatorUp = 2131296331;
-			
-			// aapt resource value: 0x7f09004c
-			public const int scrollView = 2131296332;
-			
-			// aapt resource value: 0x7f090064
-			public const int search_badge = 2131296356;
-			
-			// aapt resource value: 0x7f090063
-			public const int search_bar = 2131296355;
-			
-			// aapt resource value: 0x7f090065
-			public const int search_button = 2131296357;
-			
-			// aapt resource value: 0x7f09006a
-			public const int search_close_btn = 2131296362;
-			
-			// aapt resource value: 0x7f090066
-			public const int search_edit_frame = 2131296358;
-			
-			// aapt resource value: 0x7f09006c
-			public const int search_go_btn = 2131296364;
-			
-			// aapt resource value: 0x7f090067
-			public const int search_mag_icon = 2131296359;
+			// aapt resource value: 0x7f090050
+			public const int scrollView = 2131296336;
 			
 			// aapt resource value: 0x7f090068
-			public const int search_plate = 2131296360;
+			public const int search_badge = 2131296360;
+			
+			// aapt resource value: 0x7f090067
+			public const int search_bar = 2131296359;
 			
 			// aapt resource value: 0x7f090069
-			public const int search_src_text = 2131296361;
-			
-			// aapt resource value: 0x7f09006d
-			public const int search_voice_btn = 2131296365;
+			public const int search_button = 2131296361;
 			
 			// aapt resource value: 0x7f09006e
-			public const int select_dialog_listview = 2131296366;
+			public const int search_close_btn = 2131296366;
 			
-			// aapt resource value: 0x7f090058
-			public const int shortcut = 2131296344;
+			// aapt resource value: 0x7f09006a
+			public const int search_edit_frame = 2131296362;
+			
+			// aapt resource value: 0x7f090070
+			public const int search_go_btn = 2131296368;
+			
+			// aapt resource value: 0x7f09006b
+			public const int search_mag_icon = 2131296363;
+			
+			// aapt resource value: 0x7f09006c
+			public const int search_plate = 2131296364;
+			
+			// aapt resource value: 0x7f09006d
+			public const int search_src_text = 2131296365;
+			
+			// aapt resource value: 0x7f090071
+			public const int search_voice_btn = 2131296369;
+			
+			// aapt resource value: 0x7f090072
+			public const int select_dialog_listview = 2131296370;
+			
+			// aapt resource value: 0x7f09005c
+			public const int shortcut = 2131296348;
 			
 			// aapt resource value: 0x7f09001e
 			public const int showCustom = 2131296286;
@@ -2664,8 +2733,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090020
 			public const int showTitle = 2131296288;
 			
-			// aapt resource value: 0x7f090048
-			public const int spacer = 2131296328;
+			// aapt resource value: 0x7f09004c
+			public const int spacer = 2131296332;
 			
 			// aapt resource value: 0x7f090008
 			public const int split_action_bar = 2131296264;
@@ -2682,14 +2751,14 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090014
 			public const int standard = 2131296276;
 			
-			// aapt resource value: 0x7f090083
-			public const int status_bar_latest_event_content = 2131296387;
+			// aapt resource value: 0x7f090085
+			public const int status_bar_latest_event_content = 2131296389;
 			
-			// aapt resource value: 0x7f09005a
-			public const int submenuarrow = 2131296346;
+			// aapt resource value: 0x7f09005e
+			public const int submenuarrow = 2131296350;
 			
-			// aapt resource value: 0x7f09006b
-			public const int submit_area = 2131296363;
+			// aapt resource value: 0x7f09006f
+			public const int submit_area = 2131296367;
 			
 			// aapt resource value: 0x7f09001b
 			public const int tabMode = 2131296283;
@@ -2703,41 +2772,35 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f09000e
 			public const int text2 = 2131296270;
 			
-			// aapt resource value: 0x7f09004e
-			public const int textSpacerNoButtons = 2131296334;
+			// aapt resource value: 0x7f090052
+			public const int textSpacerNoButtons = 2131296338;
 			
-			// aapt resource value: 0x7f09004d
-			public const int textSpacerNoTitle = 2131296333;
+			// aapt resource value: 0x7f090051
+			public const int textSpacerNoTitle = 2131296337;
 			
-			// aapt resource value: 0x7f090089
-			public const int time = 2131296393;
+			// aapt resource value: 0x7f09008b
+			public const int time = 2131296395;
 			
 			// aapt resource value: 0x7f09000f
 			public const int title = 2131296271;
 			
-			// aapt resource value: 0x7f090055
-			public const int titleDividerNoCustom = 2131296341;
+			// aapt resource value: 0x7f090059
+			public const int titleDividerNoCustom = 2131296345;
 			
-			// aapt resource value: 0x7f090053
-			public const int title_template = 2131296339;
+			// aapt resource value: 0x7f090057
+			public const int title_template = 2131296343;
 			
 			// aapt resource value: 0x7f090039
 			public const int top = 2131296313;
 			
-			// aapt resource value: 0x7f090052
-			public const int topPanel = 2131296338;
+			// aapt resource value: 0x7f090056
+			public const int topPanel = 2131296342;
 			
-			// aapt resource value: 0x7f09007a
-			public const int tv_app_section_title = 2131296378;
-			
-			// aapt resource value: 0x7f09007b
-			public const int tv_term_ko = 2131296379;
+			// aapt resource value: 0x7f09007e
+			public const int tv_app_section_title = 2131296382;
 			
 			// aapt resource value: 0x7f09007c
-			public const int tv_term_romanization = 2131296380;
-			
-			// aapt resource value: 0x7f090078
-			public const int tv_title = 2131296376;
+			public const int tv_title = 2131296380;
 			
 			// aapt resource value: 0x7f090028
 			public const int uniform = 2131296296;
@@ -2748,8 +2811,8 @@ namespace TTKoreanSchool.Android
 			// aapt resource value: 0x7f090021
 			public const int useLogo = 2131296289;
 			
-			// aapt resource value: 0x7f090077
-			public const int webview = 2131296375;
+			// aapt resource value: 0x7f09007b
+			public const int webview = 2131296379;
 			
 			// aapt resource value: 0x7f090015
 			public const int wide = 2131296277;
@@ -2883,91 +2946,88 @@ namespace TTKoreanSchool.Android
 			public const int abc_select_dialog_material = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int activity_home = 2130903066;
+			public const int Activity_Home = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int activity_main = 2130903067;
+			public const int Activity_Main = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int activity_sign_in = 2130903068;
+			public const int Activity_SignIn = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int activity_vocab_zone = 2130903069;
+			public const int Activity_VocabZone = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
 			public const int activity_webview = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int header_vocab_section = 2130903071;
+			public const int Header_VocabSection = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int item_app_section = 2130903072;
+			public const int Item_AppSection = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int item_mini_flashcard = 2130903073;
+			public const int Item_VocabSection = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int item_vocab_section = 2130903074;
+			public const int notification_action = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int notification_action = 2130903075;
+			public const int notification_action_tombstone = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int notification_action_tombstone = 2130903076;
+			public const int notification_media_action = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int notification_media_action = 2130903077;
+			public const int notification_media_cancel_action = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int notification_media_cancel_action = 2130903078;
+			public const int notification_template_big_media = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int notification_template_big_media = 2130903079;
+			public const int notification_template_big_media_custom = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int notification_template_big_media_custom = 2130903080;
+			public const int notification_template_big_media_narrow = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int notification_template_big_media_narrow = 2130903081;
+			public const int notification_template_big_media_narrow_custom = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int notification_template_big_media_narrow_custom = 2130903082;
+			public const int notification_template_custom_big = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int notification_template_custom_big = 2130903083;
+			public const int notification_template_icon_group = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int notification_template_icon_group = 2130903084;
+			public const int notification_template_lines_media = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int notification_template_lines_media = 2130903085;
+			public const int notification_template_media = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int notification_template_media = 2130903086;
+			public const int notification_template_media_custom = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int notification_template_media_custom = 2130903087;
+			public const int notification_template_part_chronometer = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int notification_template_part_chronometer = 2130903088;
+			public const int notification_template_part_time = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int notification_template_part_time = 2130903089;
+			public const int select_dialog_item_material = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int select_dialog_item_material = 2130903090;
+			public const int select_dialog_multichoice_material = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int select_dialog_multichoice_material = 2130903091;
+			public const int select_dialog_singlechoice_material = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int select_dialog_singlechoice_material = 2130903092;
+			public const int support_simple_spinner_dropdown_item = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public const int support_simple_spinner_dropdown_item = 2130903093;
-			
-			// aapt resource value: 0x7f030036
-			public const int tooltip = 2130903094;
+			public const int tooltip = 2130903093;
 			
 			static Layout()
 			{
@@ -5625,6 +5685,36 @@ namespace TTKoreanSchool.Android
 			
 			// aapt resource value: 4
 			public const int Spinner_popupTheme = 4;
+			
+			public static int[] SwipeLayout = new int[] {
+					2130772249,
+					2130772250,
+					2130772251,
+					2130772252,
+					2130772253,
+					2130772254,
+					2130772255};
+			
+			// aapt resource value: 4
+			public const int SwipeLayout_bottomEdgeSwipeOffset = 4;
+			
+			// aapt resource value: 6
+			public const int SwipeLayout_clickToClose = 6;
+			
+			// aapt resource value: 0
+			public const int SwipeLayout_drag_edge = 0;
+			
+			// aapt resource value: 1
+			public const int SwipeLayout_leftEdgeSwipeOffset = 1;
+			
+			// aapt resource value: 2
+			public const int SwipeLayout_rightEdgeSwipeOffset = 2;
+			
+			// aapt resource value: 5
+			public const int SwipeLayout_show_mode = 5;
+			
+			// aapt resource value: 3
+			public const int SwipeLayout_topEdgeSwipeOffset = 3;
 			
 			public static int[] SwitchCompat = new int[] {
 					16843044,

@@ -24,7 +24,7 @@ namespace TTKoreanSchool.Android.Activities
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.activity_home);
+            SetContentView(Resource.Layout.Activity_Home);
 
             var navService = Locator.Current.GetService<INavigationService>();
             var llVocabSection = FindViewById<LinearLayout>(Resource.Id.ll_vocab_section);

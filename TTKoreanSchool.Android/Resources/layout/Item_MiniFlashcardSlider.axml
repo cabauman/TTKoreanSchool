@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.daimajia.swipe.SwipeLayout
+        xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/relativeLayout_miniFlashcardSlider_front"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/item_miniFlashcardSide" />
+        <include
+            android:id="@+id/relativeLayout_miniFlashcardSlider_front"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/item_miniFlashcardSide" />
+    </com.daimajia.swipe.SwipeLayout>
+</LinearLayout>
