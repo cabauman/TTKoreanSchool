@@ -27,8 +27,8 @@ namespace TTKoreanSchool.Android.Activities
             SetContentView(Resource.Layout.Activity_Home);
 
             var navService = Locator.Current.GetService<INavigationService>();
-            var llVocabSection = FindViewById<LinearLayout>(Resource.Id.ll_vocab_section);
-            llVocabSection.Click += (s, e) => navService.PushPage(new VocabZoneLandingPageViewModel());
+            //var llVocabSection = FindViewById<LinearLayout>(Resource.Drawable.);
+            //llVocabSection.Click += (s, e) => navService.PushPage(new VocabZoneLandingPageViewModel());
 
             //_gridView = FindViewById<GridView>(Resource.Id.gridView1);
             //_gridView.Adapter = new AppSectionAdapter(this, ViewModel.AppSections);
@@ -42,7 +42,7 @@ namespace TTKoreanSchool.Android.Activities
 
         private void PlayProgressAnimation()
         {
-            _progressBar = this.FindViewById<ProgressBar>(Resource.Id.progressBar);
+            //_progressBar = this.FindViewById<ProgressBar>(Resource.Id.progressBar);
             ObjectAnimator animation = ObjectAnimator.OfInt(_progressBar, "secondaryProgress", 100, 400);
             animation.SetDuration(2000);
             animation.SetInterpolator(new DecelerateInterpolator());

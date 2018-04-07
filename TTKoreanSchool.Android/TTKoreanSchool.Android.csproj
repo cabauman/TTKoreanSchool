@@ -240,9 +240,6 @@
     <AndroidResource Include="Resources\layout\Activity_Home.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ProgressBar_Circular.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\Activity_Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -260,6 +257,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Item_VocabSection.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\Selector_BackgroundBorder.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\ProgressBar_Circular.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="TTKoreanSchool.Android.ruleset" />
