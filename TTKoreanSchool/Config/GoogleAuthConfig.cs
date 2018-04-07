@@ -10,6 +10,7 @@
         public const string REDIRECT_URL_IOS = "<BUNDLE ID>:/oauth2redirect";
 
         public const string CLIENT_ID_ANDROID = "<ANDROID CLIENT ID>.apps.googleusercontent.com";
-        public const string REDIRECT_URL_ANDROID = "com.googleusercontent.apps.<ANDROID CLIENT ID>:/oauth2redirect";
+        public const string DATA_SCHEME_ANDROID = "com.googleusercontent.apps.<ANDROID CLIENT ID>";
+        public const string REDIRECT_URL_ANDROID = DATA_SCHEME_ANDROID + ":/oauth2redirect";
     }
 }
