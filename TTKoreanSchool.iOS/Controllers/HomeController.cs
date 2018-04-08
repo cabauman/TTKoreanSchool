@@ -19,6 +19,8 @@ namespace TTKoreanSchool.iOS.Controllers
     [Register("HomeController")]
     public class HomeController : BaseCollectionViewController<IHomePageViewModel>
     {
+        private UIBarButtonItem _btn;
+
         public HomeController()
             : base(GetLayout())
         {
@@ -28,8 +30,6 @@ namespace TTKoreanSchool.iOS.Controllers
             : base(layout)
         {
         }
-
-        private UIBarButtonItem _btn;
 
         public static UICollectionViewLayout GetLayout()
         {
@@ -83,8 +83,6 @@ namespace TTKoreanSchool.iOS.Controllers
 
             _btn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
             NavigationItem.SetRightBarButtonItem(_btn, true);
-            _btn.Enabled = false;
-            this.BindCommand(ViewModel, x => x.Command, x => x._btn);
         }
 
         public override nint NumberOfSections(UICollectionView collectionView)

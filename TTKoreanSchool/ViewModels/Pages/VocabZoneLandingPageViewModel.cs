@@ -26,7 +26,11 @@ namespace TTKoreanSchool.ViewModels
         {
             LoadSections = ReactiveCommand.CreateFromObservable(() => GetSections());
             LoadSections.ToProperty(this, x => x.Sections, out _sections);
-            LoadSections.ThrownExceptions.Subscribe(ex => throw new Exception(ex.ToString()));
+            LoadSections.ThrownExceptions.Subscribe(
+                ex =>
+                {
+                    throw new Exception(ex.ToString());
+                });
         }
 
         public ReactiveCommand<Unit, IList<IVocabSectionViewModel>> LoadSections { get; set; }

@@ -45,16 +45,11 @@ namespace TTKoreanSchool.iOS.Controllers
                     x =>
                     {
                         TableView.ReloadData();
+                    },
+                    error =>
+                    {
+                        this.Log().Error(error.Message);
                     });
-
-            //var abc = new ReactiveList<VocabSectionChild>();
-            //this.WhenActivated(disposable =>
-            //{
-            //    var source = new ReactiveTableViewSource<VocabSectionChild>(
-            //        TableView, abc, new NSString(""), 50f, x => x.AccessibilityIncrement());
-            //    source.ElementSelected.Subscribe(x => Console.WriteLine((x as VocabSection).Id));
-            //    TableView.Source = source;
-            //});
         }
 
         public override nint RowsInSection(UITableView tableView, nint section)

@@ -1,11 +1,11 @@
 ﻿extern alias SplatAlias;
 
-using I18NPortable;
-using ReactiveUI;
-using SplatAlias::Splat;
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
+using I18NPortable;
+using ReactiveUI;
+using SplatAlias::Splat;
 using TTKoreanSchool.Services.Interfaces;
 
 namespace TTKoreanSchool.ViewModels
@@ -13,53 +13,15 @@ namespace TTKoreanSchool.ViewModels
     public interface IHomePageViewModel : IPageViewModel
     {
         IButtonViewModel[] AppSections { get; }
-
-        ReactiveCommand Command { get; }
     }
 
     public class HomePageViewModel : BasePageViewModel, IHomePageViewModel
     {
-        public HomePageViewModel()
+        public HomePageViewModel(INavigationService navService)
         {
             AppSections = InitAppSections();
-            NavService = Locator.Current.GetService<INavigationService>();
-
-            var c = ReactiveCommand.CreateFromObservable(() =>
-            {
-                return Observable.Timer(TimeSpan.FromSeconds(15)).Select(x => x == 0);
-            });
-
-            c.ToProperty(this, x => x.CanExecute, out _canExecute);
-
-            Command = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return Observable.Return(Unit.Default);
-                },
-                Observable.Return(false));
-
-            //c.Execute().Subscribe();
-
-            //var database = Locator.Current.GetService<IDataService>();
-            //database.LoadSentences()
-            //    .Subscribe(
-            //        sentences =>
-            //        {
-            //            Console.WriteLine(sentences.Count);
-            //        },
-            //        error =>
-            //        {
-            //            this.Log().Error(error.Message);
-            //        });
+            NavService = navService ?? Locator.Current.GetService<INavigationService>();
         }
-
-        private ObservableAsPropertyHelper<bool> _canExecute;
-        public bool CanExecute
-        {
-            get { return _canExecute.Value; }
-        }
-
-        public ReactiveCommand Command { get; }
 
         public INavigationService NavService { get; }
 
@@ -82,7 +44,7 @@ namespace TTKoreanSchool.ViewModels
                     imageName: "Icon_Vocab",
                     command: ReactiveCommand.Create(() =>
                     {
-                        NavService.PushPage(new VocabZoneLandingPageViewModel(), true);
+                        NavService.PushPage(new VocabZoneLandingPageViewModel());
                     })),
 
                 new ButtonViewModel(
