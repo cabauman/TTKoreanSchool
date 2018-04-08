@@ -44,15 +44,6 @@ namespace TTKoreanSchool.iOS
             var iosNavService = navService as NavigationService;
             Window.RootViewController = iosNavService.RootViewController;
 
-            if(navService == null) // signed in
-            {
-                navService.PushPage(new HomePageViewModel());
-            }
-            else
-            {
-                navService.PushPage(new SignInPageViewModel());
-            }
-
             Window.MakeKeyAndVisible();
 
             return true;
