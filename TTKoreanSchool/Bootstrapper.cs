@@ -112,7 +112,7 @@ namespace TTKoreanSchool
 
             FirebaseOptions firebaseOptions = new FirebaseOptions()
             {
-                AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
+                //AuthTokenAsyncFactory = async () => await firebaseAuthService.GetFreshFirebaseToken(),
                 OfflineDatabaseFactory = (t, s) => new OfflineDatabase(t, s)
             };
 
