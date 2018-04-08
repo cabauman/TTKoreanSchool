@@ -10,5 +10,22 @@
     android:verticalSpacing="0dp"
     android:horizontalSpacing="0dp"
     android:stretchMode="columnWidth">
-
+    <include
+        android:id="@+id/linearLayout_appSection_vocab"
+        layout="@layout/Item_AppSection" />
+    <include
+        android:id="@+id/linearLayout_appSection_vocab"
+        layout="@layout/Item_AppSection" />
+    <include
+        android:id="@+id/linearLayout_appSection_vocab"
+        layout="@layout/Item_AppSection" />
+    <include
+        android:id="@+id/linearLayout_appSection_vocab"
+        layout="@layout/Item_AppSection" />
+    <include
+        android:id="@+id/linearLayout_appSection_vocab"
+        layout="@layout/Item_AppSection" />
+    <include
+        android:id="@+id/linearLayout_appSection_vocab"
+        layout="@layout/Item_AppSection" />
 </android.support.v7.widget.GridLayout>
