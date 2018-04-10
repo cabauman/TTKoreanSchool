@@ -169,11 +169,15 @@ namespace TTKoreanSchool.ViewModels
             card1.State = MatchGameCardState.Match;
             card2.State = MatchGameCardState.Match;
 
-            Task.Delay(200).ContinueWith(t =>
-            {
-                card1.State = MatchGameCardState.Inactive;
-                card2.State = MatchGameCardState.Inactive;
-            });
+            Observable
+                .Timer(TimeSpan.FromMilliseconds(200))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(
+                    _ =>
+                    {
+                        card1.State = MatchGameCardState.Inactive;
+                        card2.State = MatchGameCardState.Inactive;
+                    });
 
             ++StudyPoints;
             ++NumMatches;
@@ -186,11 +190,15 @@ namespace TTKoreanSchool.ViewModels
             card1.State = MatchGameCardState.Mismatch;
             card2.State = MatchGameCardState.Mismatch;
 
-            Task.Delay(200).ContinueWith(t =>
-            {
-                card1.State = MatchGameCardState.Normal;
-                card2.State = MatchGameCardState.Normal;
-            });
+            Observable
+                .Timer(TimeSpan.FromMilliseconds(200))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(
+                    _ =>
+                    {
+                        card1.State = MatchGameCardState.Normal;
+                        card2.State = MatchGameCardState.Normal;
+                    });
 
             StudyPoints = Math.Max(0, --StudyPoints);
         }
