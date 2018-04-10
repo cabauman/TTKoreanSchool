@@ -27,11 +27,7 @@ namespace TTKoreanSchool.DataAccessLayer
                 .Child(studySetId)
                 .Child(langCode);
 
-            var translations = translationsQuery
-                .OnceAsync<string>()
-                .ToObservable()
-                .SelectMany(x => x)
-                .Select(x => x.Object);
+            var translations = ReadAllBasicType<string>(translationsQuery);
 
             ChildQuery termsQuery = _studySetsRef
                 .Child(studySetId);
