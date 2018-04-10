@@ -17,7 +17,7 @@ namespace TTKoreanSchool.ViewModels
 
     public class HomePageViewModel : BasePageViewModel, IHomePageViewModel
     {
-        public HomePageViewModel(INavigationService navService)
+        public HomePageViewModel(INavigationService navService = null)
         {
             AppSections = InitAppSections();
             NavService = navService ?? Locator.Current.GetService<INavigationService>();

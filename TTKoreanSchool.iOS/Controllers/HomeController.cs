@@ -75,11 +75,11 @@ namespace TTKoreanSchool.iOS.Controllers
             View.BackgroundColor = UIColor.White;
             CollectionView.BackgroundColor = ColorPalette.Amber.ToNative();
 
-            CollectionView.RegisterNibForCell(AppSectionCell.Nib, AppSectionCell.Key);
+            CollectionView.RegisterNibForCell(AppSectionCell.Nib, AppSectionCell.ReuseId);
             CollectionView.RegisterClassForSupplementaryView(
                 typeof(LearningProgressHeader),
                 UICollectionElementKindSection.Header,
-                LearningProgressHeader.Key);
+                LearningProgressHeader.ReuseId);
 
             _btn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
             NavigationItem.SetRightBarButtonItem(_btn, true);
@@ -97,7 +97,7 @@ namespace TTKoreanSchool.iOS.Controllers
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var cell = collectionView.DequeueReusableCell(AppSectionCell.Key, indexPath) as AppSectionCell;
+            var cell = collectionView.DequeueReusableCell(AppSectionCell.ReuseId, indexPath) as AppSectionCell;
 
             var section = ViewModel.AppSections[indexPath.Row];
             cell.Image = UIImage.FromBundle(section.ImageName);
@@ -108,7 +108,7 @@ namespace TTKoreanSchool.iOS.Controllers
 
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
         {
-            var header = collectionView.DequeueReusableSupplementaryView(elementKind, LearningProgressHeader.Key, indexPath) as LearningProgressHeader;
+            var header = collectionView.DequeueReusableSupplementaryView(elementKind, LearningProgressHeader.ReuseId, indexPath) as LearningProgressHeader;
 
             return header;
         }

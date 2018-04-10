@@ -12,7 +12,7 @@ namespace TTKoreanSchool.iOS.Views.Headers
 {
     public class LearningProgressHeader : UICollectionReusableView
     {
-        public static readonly NSString Key = new NSString("LearningProgressHeader");
+        public static readonly NSString ReuseId = new NSString("LearningProgressHeader");
 
         private UILabel _label;
 

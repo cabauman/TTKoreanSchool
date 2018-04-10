@@ -8,14 +8,14 @@ namespace TTKoreanSchool.iOS.Views.Cells
 {
     public partial class AppSectionCell : ReactiveCollectionViewCell<IButtonViewModel>
     {
-        public static readonly NSString Key = new NSString("AppSectionCell");
+        public static readonly NSString ReuseId = new NSString("AppSectionCell");
         public static readonly UINib Nib;
 
         private UIImageView _imageView;
 
         static AppSectionCell()
         {
-            Nib = UINib.FromName(Key, NSBundle.MainBundle);
+            Nib = UINib.FromName(ReuseId, NSBundle.MainBundle);
         }
 
         protected AppSectionCell(IntPtr handle)

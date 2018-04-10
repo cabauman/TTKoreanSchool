@@ -72,7 +72,7 @@ namespace TTKoreanSchool.iOS.Controllers
             // Perform any additional setup after loading the view
             CollectionView.BackgroundColor = UIColor.White;
 
-            CollectionView.RegisterClassForCell(typeof(MatchGameCardCell), MatchGameCardCell.Id);
+            CollectionView.RegisterClassForCell(typeof(MatchGameCardCell), MatchGameCardCell.ReuseId);
 
             _btn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
             NavigationItem.SetRightBarButtonItem(_btn, true);
@@ -93,7 +93,7 @@ namespace TTKoreanSchool.iOS.Controllers
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var cell = collectionView.DequeueReusableCell(MatchGameCardCell.Id, indexPath) as MatchGameCardCell;
+            var cell = collectionView.DequeueReusableCell(MatchGameCardCell.ReuseId, indexPath) as MatchGameCardCell;
 
             var card = ViewModel.Cards[indexPath.Row];
             cell.InitViewModel(card);

@@ -247,7 +247,6 @@
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -260,6 +259,7 @@
     <InterfaceDefinition Include="Views\DetailedFlashcardTranslationSide.xib" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\MatchGameController.cs" />
     <Compile Include="Controllers\MapPageController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\DetailedFlashcardSetController.cs" />
@@ -279,8 +279,11 @@
     <Compile Include="Controllers\BaseViewController.cs" />
     <Compile Include="Controllers\VocabZoneController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\UILabelExtensions.cs" />
+    <Compile Include="Extensions\UIViewExtensions.cs" />
     <Compile Include="iOSBootstrapper.cs" />
     <Compile Include="Services\StudyContentStorageService.cs" />
+    <Compile Include="Views\Cells\MatchGameCardCell.cs" />
     <Compile Include="Views\DetailedFlashcardTranslationSide.cs" />
     <Compile Include="Views\DetailedFlashcardTranslationSide.designer.cs">
       <DependentUpon>DetailedFlashcardTranslationSide.cs</DependentUpon>
@@ -315,9 +318,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

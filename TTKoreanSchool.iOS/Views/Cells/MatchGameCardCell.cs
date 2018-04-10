@@ -13,7 +13,7 @@ namespace TTKoreanSchool.iOS.Views.Cells
 {
     public class MatchGameCardCell : ReactiveCollectionViewCell<IMatchGameCardViewModel>
     {
-        public static readonly NSString Id = new NSString("MatchGameCardCell");
+        public static readonly NSString ReuseId = new NSString("MatchGameCardCell");
 
         private const float LABEL_PADDING = 5f;
 
