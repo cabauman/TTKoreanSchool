@@ -1,6 +1,7 @@
 ﻿extern alias SplatAlias;
 
 using SplatAlias::System.Drawing;
+using System;
 using System.Globalization;
 
 namespace TTKoreanSchool.Utils
@@ -9,9 +10,13 @@ namespace TTKoreanSchool.Utils
     {
         public static Color FromHex(string hexString)
         {
-            int argb = int.Parse(hexString.Replace("#", string.Empty), NumberStyles.HexNumber);
+            hexString = hexString.Replace("#", "");
 
-            return Color.FromArgb(argb);
+            int red = int.Parse(hexString.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+            int green = int.Parse(hexString.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+            int blue = int.Parse(hexString.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+
+            return Color.FromArgb(red, green, blue);
         }
     }
 }
