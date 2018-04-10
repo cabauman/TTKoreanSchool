@@ -48,6 +48,7 @@ namespace TTKoreanSchool.iOS.Controllers
 
             ViewModel.WhenAnyValue(vm => vm.LoadVocabTerms)
                 .SelectMany(x => x.Execute())
+                .SubscribeOn(RxApp.TaskpoolScheduler)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(
                     x =>
