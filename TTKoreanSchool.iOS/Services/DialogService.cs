@@ -10,10 +10,23 @@ namespace TTKoreanSchool.iOS.Services
 {
     public class DialogService : IDialogService
     {
-        public void DisplayAlert(string title, string message, string accept, string cancel)
+        public void DisplayAlert(string title, string message, IEnumerable<IButtonViewModel> options)
         {
             var alert = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
-            alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, action => { }));
+            foreach(var option in options)
+            {
+                alert.AddAction(
+                    UIAlertAction.Create(
+                        option.Title,
+                        UIAlertActionStyle.Default,
+                        action => { option.Command.Execute().Subscribe(); }));
+            }
+
+            alert.AddAction(
+                UIAlertAction.Create(
+                    "Cancel",
+                    UIAlertActionStyle.Cancel,
+                    null));
 
             Present(alert);
         }
@@ -28,7 +41,6 @@ namespace TTKoreanSchool.iOS.Services
                         option.Title,
                         UIAlertActionStyle.Default,
                         action => { option.Command.Execute().Subscribe(); }));
-                        //action => { option.ActionToTake?.Invoke(); }));
             }
 
             alert.AddAction(
