@@ -46,10 +46,10 @@ namespace TTKoreanSchool.ViewModels
                 x => x._dataService,
                 (t, n) => t != null && n != null);
 
-            DisplayStudyActivities = ReactiveCommand.CreateFromObservable(
+            DisplayStudyActivities = ReactiveCommand.Create(
                 () =>
                 {
-                    return _dialogService
+                    _dialogService
                         .DisplayActionSheet("Study Activities", "Select an activity.", studyActivityBtns);
                 },
                 canExecute);
@@ -73,7 +73,7 @@ namespace TTKoreanSchool.ViewModels
                     imageName: null,
                     command: ReactiveCommand.Create(() =>
                     {
-                        _navService.PushPage(new HangulZoneLandingPageViewModel());
+                        _navService.PushPage(new DetailedFlashcardsPageViewModel());
                     })),
 
                 new ButtonViewModel(
@@ -81,7 +81,7 @@ namespace TTKoreanSchool.ViewModels
                     imageName: null,
                     command: ReactiveCommand.Create(() =>
                     {
-                        _navService.PushPage(new VocabZoneLandingPageViewModel());
+                        _navService.PushPage(new MatchGamePageViewModel());
                     }))
             };
         }

@@ -37,7 +37,7 @@ namespace TTKoreanSchool.iOS
 
         protected override IViewFor<IDetailedFlashcardsPageViewModel> DetailedFlashcardsPage => new DetailedFlashcardSetController();
 
-        protected override IViewFor<IMatchGamePageViewModel> MatchGamePage => null;
+        protected override IViewFor<IMatchGamePageViewModel> MatchGamePage => new MatchGameController();
 
         protected override void RegisterViewModels()
         {
