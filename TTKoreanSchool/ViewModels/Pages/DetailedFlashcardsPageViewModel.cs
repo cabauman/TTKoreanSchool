@@ -22,49 +22,9 @@ namespace TTKoreanSchool.ViewModels
 
     public class DetailedFlashcardsPageViewModel : BasePageViewModel, IDetailedFlashcardsPageViewModel
     {
-        public DetailedFlashcardsPageViewModel(string vocabSetId)
+        public DetailedFlashcardsPageViewModel()
         {
             var database = Locator.Current.GetService<IStudyContentDataService>();
-
-            //database.LoadTerms(vocabSetId)
-            //    .Do(terms => Terms = terms)
-            //    .SelectMany(terms => terms.AsEnumerable())
-            //    .Select(
-            //        term =>
-            //        {
-            //            if(term.AudioVersion > 0)
-            //            {
-            //                var storage = Locator.Current.GetService<IStorageService>();
-            //                return storage.DownloadVocabAudio(term.Romanization + ".mp3");
-            //            }
-            //            else
-            //            {
-            //                return Observable.Empty<string>();
-            //            }
-            //        })
-            //    .Merge()
-            //    .Subscribe(
-            //        _ =>
-            //        {
-            //            Console.WriteLine(_);
-            //        },
-            //        error =>
-            //        {
-            //            this.Log().Error(error.Message);
-            //        });
-
-            this.Log().Debug("All done!");
-
-            //database.LoadSentences()
-            //    .Subscribe(
-            //        sentences =>
-            //        {
-            //            Sentences = sentences;
-            //        },
-            //        error =>
-            //        {
-            //            this.Log().Error(error.Message);
-            //        });
         }
 
         public IReadOnlyList<Term> Terms { get; private set; }
