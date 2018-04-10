@@ -19,5 +19,7 @@ namespace TTKoreanSchool.Services.Interfaces
         IObservable<Unit> SaveVocabImageUrl(string imageId, string url);
 
         IObservable<IList<IExampleSentenceViewModel>> GetSentences();
+
+        IList<Term> GetTerms();
     }
 }

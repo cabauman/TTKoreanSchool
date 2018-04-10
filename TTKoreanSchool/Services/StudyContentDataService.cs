@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using TTKoreanSchool.DataAccessLayer.Interfaces;
@@ -17,6 +18,8 @@ namespace TTKoreanSchool.Services
         private readonly IVocabSubsectionRepo _vocabSubsectionRepo;
         private readonly IExampleSentenceRepo _exampleSentenceRepo;
         private readonly IVocabTermRepo _vocabTermRepo;
+
+        private IList<Term> _terms = new List<Term>();
 
         public StudyContentDataService(
             IVocabSectionRepo vocabSectionRepo,
@@ -56,6 +59,23 @@ namespace TTKoreanSchool.Services
                 .ToList();
         }
 
+        public IList<IMatchGameCardViewModel> GetMatchGameCards(string studySetId)
+        {
+            return _terms
+                .Select(
+                    model =>
+                    {
+                        IMatchGameCardViewModel vm = new MatchGameCardViewModel(model);
+                        return vm;
+                    })
+                .ToList();
+        }
+
+        public IList<Term> GetTerms()
+        {
+            return _terms;
+        }
+
         public IObservable<IList<IMiniFlashcardViewModel>> GetMiniFlashcards(string studySetId)
         {
             return _vocabTermRepo
@@ -63,6 +83,7 @@ namespace TTKoreanSchool.Services
                 .Select(
                     model =>
                     {
+                        _terms.Add(model);
                         IMiniFlashcardViewModel vm = new MiniFlashcardViewModel(model);
                         return vm;
                     })
