@@ -76,9 +76,9 @@ namespace TTKoreanSchool.iOS.Controllers
 
             _btn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
             NavigationItem.SetRightBarButtonItem(_btn, true);
+            this.BindCommand(ViewModel, vm => vm.StartGame, v => v._btn);
 
             this.OneWayBind(ViewModel, vm => vm.StudyPoints, v => v.NavigationItem.Title);
-            ViewModel.SetUpNewGame();
         }
 
         public override nint NumberOfSections(UICollectionView collectionView)

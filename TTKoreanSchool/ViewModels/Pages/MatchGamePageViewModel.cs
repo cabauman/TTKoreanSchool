@@ -21,7 +21,9 @@ namespace TTKoreanSchool.ViewModels
 
         bool GameComplete { get; }
 
-        List<IMatchGameCardViewModel> Cards { get; set; }
+        List<IMatchGameCardViewModel> Cards { get; }
+
+        ReactiveCommand StartGame { get; }
 
         void HandleCardSelection(IMatchGameCardViewModel viewModel);
 
@@ -60,6 +62,12 @@ namespace TTKoreanSchool.ViewModels
             int numGameCards = NumPairs * 2;
             Cards = new List<IMatchGameCardViewModel>(numGameCards);
 
+            StartGame = ReactiveCommand.Create(
+                () =>
+                {
+                    SetUpNewGame();
+                });
+
             _gameComplete = this.WhenAnyValue(vm => vm.NumMatches, numMatches => numMatches == NumPairs)
                 .ToProperty(this, nameof(GameComplete));
             _gameComplete.ThrownExceptions.Subscribe(
@@ -77,6 +85,8 @@ namespace TTKoreanSchool.ViewModels
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => _dialogService.DisplayAlert("Complete!", null, options));
 
+            // Only create enough cards to fill the playing field, and then reuse them.
+            // No need to create a view model for every vocab term.
             for(int i = 0; i < MAX_CARDS; ++i)
             {
                 var card = new MatchGameCardViewModel();
@@ -107,7 +117,9 @@ namespace TTKoreanSchool.ViewModels
 
         public List<Term> TermPool { get; set; }
 
-        public List<IMatchGameCardViewModel> Cards { get; set; }
+        public List<IMatchGameCardViewModel> Cards { get; }
+
+        public ReactiveCommand StartGame { get; }
 
         public void SetUpNewGame()
         {
@@ -132,6 +144,11 @@ namespace TTKoreanSchool.ViewModels
 
         public void HandleCardSelection(IMatchGameCardViewModel card)
         {
+            if(card.State == MatchGameCardState.Match)
+            {
+                return;
+            }
+
             if(card.State == MatchGameCardState.Selected)
             {
                 card.State = MatchGameCardState.Normal;
@@ -164,6 +181,9 @@ namespace TTKoreanSchool.ViewModels
 
         private void HandleMatch(IMatchGameCardViewModel card2)
         {
+            ++StudyPoints;
+            ++NumMatches;
+
             var card1 = FirstSelectedCard;
             FirstSelectedCard = null;
             card1.State = MatchGameCardState.Match;
@@ -175,16 +195,22 @@ namespace TTKoreanSchool.ViewModels
                 .Subscribe(
                     _ =>
                     {
-                        card1.State = MatchGameCardState.Inactive;
-                        card2.State = MatchGameCardState.Inactive;
-                    });
+                        if(card1.State == MatchGameCardState.Match)
+                        {
+                            card1.State = MatchGameCardState.Inactive;
+                        }
 
-            ++StudyPoints;
-            ++NumMatches;
+                        if(card2.State == MatchGameCardState.Match)
+                        {
+                            card2.State = MatchGameCardState.Inactive;
+                        }
+                    });
         }
 
         private void HandleMismatch(IMatchGameCardViewModel card2)
         {
+            StudyPoints = Math.Max(0, --StudyPoints);
+
             var card1 = FirstSelectedCard;
             FirstSelectedCard = null;
             card1.State = MatchGameCardState.Mismatch;
@@ -196,11 +222,16 @@ namespace TTKoreanSchool.ViewModels
                 .Subscribe(
                     _ =>
                     {
-                        card1.State = MatchGameCardState.Normal;
-                        card2.State = MatchGameCardState.Normal;
-                    });
+                        if(card1.State == MatchGameCardState.Mismatch)
+                        {
+                            card1.State = MatchGameCardState.Normal;
+                        }
 
-            StudyPoints = Math.Max(0, --StudyPoints);
+                        if(card2.State == MatchGameCardState.Mismatch)
+                        {
+                            card2.State = MatchGameCardState.Normal;
+                        }
+                    });
         }
     }
 }
