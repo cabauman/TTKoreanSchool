@@ -40,10 +40,11 @@ namespace TTKoreanSchool.ViewModels
         private readonly IDialogService _dialogService;
         private readonly IAnalyticsService _analyticsService;
 
+        private readonly int _numGameCards;
+
         private int _studyPoints;
         private int _numMatches;
         private ObservableAsPropertyHelper<bool> _gameComplete;
-
 
         public MatchGamePageViewModel(
             IStudyContentDataService dataService = null,
@@ -59,8 +60,8 @@ namespace TTKoreanSchool.ViewModels
             var termPool = _dataService.GetTerms();
             TermPool = new List<Term>(termPool);
             NumPairs = Math.Min(MAX_PAIRS, TermPool.Count);
-            int numGameCards = NumPairs * 2;
-            Cards = new List<IMatchGameCardViewModel>(numGameCards);
+            _numGameCards = NumPairs * 2;
+            Cards = new List<IMatchGameCardViewModel>(MAX_CARDS);
 
             StartGame = ReactiveCommand.Create(
                 () =>
@@ -115,7 +116,7 @@ namespace TTKoreanSchool.ViewModels
 
         public IMatchGameCardViewModel FirstSelectedCard { get; private set; }
 
-        public List<Term> TermPool { get; set; }
+        public List<Term> TermPool { get; }
 
         public List<IMatchGameCardViewModel> Cards { get; }
 
@@ -138,7 +139,14 @@ namespace TTKoreanSchool.ViewModels
                     card.Id = term.Id;
                     card.Text = text;
                     card.State = MatchGameCardState.Normal;
+                    card.Hidden = false;
                 }
+            }
+
+            // Hide the remaining card slots if there aren't enough terms to fill the playing field.
+            for(int i = _numGameCards; i < MAX_CARDS; ++i)
+            {
+                Cards[i].Hidden = true;
             }
         }
 
