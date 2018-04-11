@@ -8,6 +8,11 @@ namespace TTKoreanSchool.iOS.Extensions
     {
         public static void AdjustFontSizeToHeight(this UILabel label)
         {
+            if(label.Text == null)
+            {
+                return;
+            }
+
             var words = label.Text.Split(' ');
             string longestWord = words[0];
             for(int i = 1; i < words.Length; ++i)
