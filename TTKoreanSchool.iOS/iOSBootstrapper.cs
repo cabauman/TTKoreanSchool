@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using CrashlyticsKit;
+using FabricSdk;
 using Foundation;
 using ReactiveUI;
 using Splat;
@@ -52,6 +53,10 @@ namespace TTKoreanSchool.iOS
             Locator.CurrentMutable.RegisterConstant(new DialogService(), typeof(IDialogService));
             Locator.CurrentMutable.RegisterLazySingleton(() => new SpeechService(), typeof(ISpeechService));
             Locator.CurrentMutable.RegisterLazySingleton(() => new AudioService(), typeof(IAudioService));
+
+            Crashlytics.Instance.Initialize();
+            Fabric.Instance.Debug = true;
+            Fabric.Instance.Initialize();
         }
     }
 }

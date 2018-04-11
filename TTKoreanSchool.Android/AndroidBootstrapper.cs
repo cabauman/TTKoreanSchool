@@ -1,4 +1,7 @@
-﻿using ReactiveUI;
+﻿using Android.Content;
+using CrashlyticsKit;
+using FabricSdk;
+using ReactiveUI;
 using Splat;
 using TTKoreanSchool.Android.Activities;
 using TTKoreanSchool.Android.Services;
@@ -9,6 +12,13 @@ namespace TTKoreanSchool.Android
 {
     public class AndroidBootstrapper : Bootstrapper
     {
+        private readonly Context _context;
+
+        public AndroidBootstrapper(Context context)
+        {
+            _context = context;
+        }
+
         protected override IViewFor<ISignInPageViewModel> SignInPage => new SignInActivity();
 
         protected override IViewFor<IHomePageViewModel> HomePage => new MainActivity();
@@ -42,6 +52,10 @@ namespace TTKoreanSchool.Android
             var navService = new NavigationService();
             Locator.CurrentMutable.RegisterConstant(navService, typeof(INavigationService));
             Locator.CurrentMutable.RegisterConstant(new AndroidLoggingService(), typeof(ILogger));
+
+            Crashlytics.Instance.Initialize();
+            Fabric.Instance.Debug = true;
+            Fabric.Instance.Initialize(_context);
         }
     }
 }

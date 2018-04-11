@@ -10,7 +10,7 @@ namespace TTKoreanSchool.Android.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            var bootstrapper = new AndroidBootstrapper();
+            var bootstrapper = new AndroidBootstrapper(ApplicationContext);
             bootstrapper.Run();
         }
     }

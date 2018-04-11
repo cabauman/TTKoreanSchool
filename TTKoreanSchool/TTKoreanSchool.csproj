@@ -41,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Crashlytics" Version="1.4.0" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.0.6" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.0-alpha3" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.0" />
