@@ -301,6 +301,7 @@
     <Compile Include="Extensions\UILabelExtensions.cs" />
     <Compile Include="Extensions\UIViewExtensions.cs" />
     <Compile Include="iOSBootstrapper.cs" />
+    <Compile Include="Services\AnalyticsService.cs" />
     <Compile Include="Services\StudyContentStorageService.cs" />
     <Compile Include="Views\Cells\MatchGameCardCell.cs" />
     <Compile Include="Views\DetailedFlashcardTranslationSide.cs" />
