@@ -12,7 +12,7 @@ using UIKit;
 namespace TTKoreanSchool.iOS
 {
     [Register ("DetailedFlashcardKoSide")]
-    partial class DetailedFlashcardKoSide
+    partial class DetailedFlashcardKoreanSide
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

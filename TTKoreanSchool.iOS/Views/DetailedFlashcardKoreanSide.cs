@@ -5,20 +5,22 @@ using UIKit;
 
 namespace TTKoreanSchool.iOS
 {
-    public partial class DetailedFlashcardKoSide : UIView
+    public partial class DetailedFlashcardKoreanSide : UIView
     {
-        public DetailedFlashcardKoSide(IntPtr handle)
+        private const string NIB_NAME = "DetailedFlashcardKoreanSide";
+
+        public DetailedFlashcardKoreanSide(IntPtr handle)
             : base(handle)
         {
             // Note: this .ctor should not contain any initialization logic.
         }
 
-        public static DetailedFlashcardKoSide Create()
+        public static DetailedFlashcardKoreanSide Create()
         {
-            var arr = NSBundle.MainBundle.LoadNib("DetailedFlashcardKoSide", null, null);
-            var v = Runtime.GetNSObject<DetailedFlashcardKoSide>(arr.ValueAt(0));
+            var topLevelObjects = NSBundle.MainBundle.LoadNib(NIB_NAME, null, null);
+            var view = Runtime.GetNSObject<DetailedFlashcardKoreanSide>(topLevelObjects.ValueAt(0));
 
-            return v;
+            return view;
         }
 
         public override void AwakeFromNib()
