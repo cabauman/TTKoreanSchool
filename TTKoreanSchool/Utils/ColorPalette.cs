@@ -4,7 +4,7 @@ using SplatAlias::System.Drawing;
 
 namespace TTKoreanSchool.Utils
 {
-    public class ColorPalette
+    public static class ColorPalette
     {
         public static Color BlueGrey100
         {
