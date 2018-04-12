@@ -122,12 +122,14 @@ namespace TTKoreanSchool
             var vocabSubsectionRepo = new FirebaseVocabSubsectionRepo(firebaseClient);
             var vocabTermRepo = new FirebaseVocabTermRepo(firebaseClient);
             var exampleSentenceRepo = new FirebaseExampleSentenceRepo(firebaseClient);
+            var starredTermsRepo = new FirebaseStarredTermsRepo(firebaseClient);
 
             var studyContentDataService = new StudyContentDataService(
                 vocabSectionRepo,
                 vocabSubsectionRepo,
                 vocabTermRepo,
-                exampleSentenceRepo);
+                exampleSentenceRepo,
+                starredTermsRepo);
 
             Locator.CurrentMutable.RegisterConstant(studyContentDataService, typeof(IStudyContentDataService));
         }

@@ -18,19 +18,23 @@ namespace TTKoreanSchool.Services
         private readonly IVocabSubsectionRepo _vocabSubsectionRepo;
         private readonly IExampleSentenceRepo _exampleSentenceRepo;
         private readonly IVocabTermRepo _vocabTermRepo;
+        private readonly IStarredTermsRepo _starredTermsRepo;
 
         private IList<Term> _terms = new List<Term>();
+        private IList<ExampleSentence> _sentences = new List<ExampleSentence>();
 
         public StudyContentDataService(
             IVocabSectionRepo vocabSectionRepo,
             IVocabSubsectionRepo vocabSubsectionRepo,
             IVocabTermRepo vocabTermRepo,
-            IExampleSentenceRepo exampleSentenceRepo)
+            IExampleSentenceRepo exampleSentenceRepo,
+            IStarredTermsRepo starredTermsRepo)
         {
             _vocabSectionRepo = vocabSectionRepo;
             _vocabSubsectionRepo = vocabSubsectionRepo;
             _vocabTermRepo = vocabTermRepo;
             _exampleSentenceRepo = exampleSentenceRepo;
+            _starredTermsRepo = starredTermsRepo;
         }
 
         public IObservable<IList<IExampleSentenceViewModel>> GetSentences()
@@ -50,13 +54,13 @@ namespace TTKoreanSchool.Services
         {
             return _vocabTermRepo
                 .ReadStudySet(LANG_CODE, studySetId)
-                .Select(
-                    model =>
-                    {
-                        IDetailedFlashcardViewModel vm = new DetailedFlashcardViewModel(model);
-                        return vm;
-                    })
-                .ToList();
+                            .Select(
+                                model =>
+                                {
+                                    IDetailedFlashcardViewModel vm = new DetailedFlashcardViewModel(model);
+                                    return vm;
+                                })
+                            .ToList();
         }
 
         public IList<IMatchGameCardViewModel> GetMatchGameCards(string studySetId)
