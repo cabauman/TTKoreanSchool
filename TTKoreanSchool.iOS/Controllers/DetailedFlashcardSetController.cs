@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using CoreFoundation;
 using Foundation;
 using ReactiveUI;
+using Splat;
 using TTKoreanSchool.Models;
 using TTKoreanSchool.ViewModels;
 using UIKit;
@@ -18,9 +20,6 @@ namespace TTKoreanSchool.iOS.Controllers
 
         public DetailedFlashcardSetController()
         {
-            //ViewModel.WhenAnyValue(vm => vm.Terms)
-            //    .Subscribe()
-
             _pageController = new UIPageViewController(
                 UIPageViewControllerTransitionStyle.PageCurl,
                 UIPageViewControllerNavigationOrientation.Horizontal,
@@ -52,6 +51,21 @@ namespace TTKoreanSchool.iOS.Controllers
             AddChildViewController(_pageController);
             View.AddSubview(_pageController.View);
             _pageController.DidMoveToParentViewController(this);
+
+            ViewModel.WhenAnyValue(vm => vm.LoadSentences)
+                .SelectMany(x => x.Execute())
+                .SubscribeOn(RxApp.TaskpoolScheduler)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(
+                    sentences =>
+                    {
+                        this.Log().Debug("{0} sentences loaded.", sentences.Count);
+                    },
+                    ex =>
+                    {
+                        this.Log().Debug(ex);
+                    })
+                .DisposeWith(SubscriptionDisposables);
         }
 
         public override void ViewDidLayoutSubviews()

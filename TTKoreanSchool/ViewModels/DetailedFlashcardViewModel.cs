@@ -19,7 +19,9 @@ namespace TTKoreanSchool.ViewModels
 
         string Translation { get; }
 
-        IReadOnlyList<ExampleSentence> Sentences { get; }
+        bool IsStarred { get; set; }
+
+        IReadOnlyList<IExampleSentenceViewModel> Sentences { get; }
     }
 
     public class DetailedFlashcardViewModel : BaseViewModel, IDetailedFlashcardViewModel
@@ -28,11 +30,7 @@ namespace TTKoreanSchool.ViewModels
         {
         }
 
-        public DetailedFlashcardViewModel(Term term, string translation)
-        {
-        }
-
-        public DetailedFlashcardViewModel(Term term, IReadOnlyList<ExampleSentence> sentences)
+        public DetailedFlashcardViewModel(Term term, IList<IExampleSentenceViewModel> sentences, IList<string> imageUrls = null, bool isStarred = false)
         {
             Ko = term.Ko;
             Romanization = term.Romanization;
@@ -62,6 +60,8 @@ namespace TTKoreanSchool.ViewModels
 
         public string Translation { get; }
 
-        public IReadOnlyList<ExampleSentence> Sentences { get; }
+        public bool IsStarred { get; set; }
+
+        public IReadOnlyList<IExampleSentenceViewModel> Sentences { get; }
     }
 }

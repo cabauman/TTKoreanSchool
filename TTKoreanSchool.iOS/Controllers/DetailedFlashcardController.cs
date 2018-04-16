@@ -13,17 +13,12 @@ namespace TTKoreanSchool.iOS.Controllers
     [Register("DetailedFlashcardController")]
     public class DetailedFlashcardController : ReactiveViewController<IDetailedFlashcardViewModel>
     {
-        private readonly UILabel _lblKo = new UILabel();
-        private readonly UILabel _lblRomanization = new UILabel();
-        private readonly UILabel _lblTranslation = new UILabel();
+        private DetailedFlashcardKoreanSide _koreanSide;
+        private DetailedFlashcardTranslationSide _translationSide;
 
         public DetailedFlashcardController(int index, IDetailedFlashcardViewModel flashcard)
         {
             Index = index;
-
-            _lblKo.Text = flashcard.Ko;
-            _lblRomanization.Text = flashcard.Romanization;
-            _lblTranslation.Text = flashcard.Translation;
         }
 
         public int Index { get; }
@@ -42,13 +37,19 @@ namespace TTKoreanSchool.iOS.Controllers
 
             View.BackgroundColor = UIColor.White;
 
-            var koSide = DetailedFlashcardKoSide.Create();
-            koSide.Frame = View.Frame;
-            View.AddSubview(koSide);
+            _koreanSide = DetailedFlashcardKoreanSide.Create();
+            _translationSide = DetailedFlashcardTranslationSide.Create();
 
-            var translationSide = DetailedFlashcardTranslationSide.Create();
-            translationSide.Frame = View.Frame;
-            View.AddSubview(translationSide);
+            View.AddSubview(_koreanSide);
+            View.AddSubview(_translationSide);
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+
+            _koreanSide.Frame = View.Bounds;
+            _translationSide.Frame = View.Bounds;
         }
     }
 }
