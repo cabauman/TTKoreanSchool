@@ -274,7 +274,7 @@
     <InterfaceDefinition Include="Views\Cells\AppSectionCell.xib" />
     <AdditionalFiles Include="stylecop.json" />
     <None Include="TTKoreanSchool.iOS.ruleset" />
-    <InterfaceDefinition Include="Views\DetailedFlashcardKoSide.xib" />
+    <InterfaceDefinition Include="Views\DetailedFlashcardKoreanSide.xib" />
     <InterfaceDefinition Include="Views\DetailedFlashcardTranslationSide.xib" />
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +308,9 @@
     <Compile Include="Views\DetailedFlashcardTranslationSide.designer.cs">
       <DependentUpon>DetailedFlashcardTranslationSide.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\DetailedFlashcardKoSide.cs" />
-    <Compile Include="Views\DetailedFlashcardKoSide.designer.cs">
-      <DependentUpon>DetailedFlashcardKoSide.cs</DependentUpon>
+    <Compile Include="Views\DetailedFlashcardKoreanSide.cs" />
+    <Compile Include="Views\DetailedFlashcardKoreanSide.designer.cs">
+      <DependentUpon>DetailedFlashcardKoreanSide.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
