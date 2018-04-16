@@ -4,6 +4,13 @@ namespace TTKoreanSchool.ViewModels
 {
     public interface IExampleSentenceViewModel
     {
+        string Id { get; }
+
+        string Ko { get; set; }
+
+        string Romanization { get; set; }
+
+        string Translation { get; set; }
     }
 
     public class ExampleSentenceViewModel : IExampleSentenceViewModel
