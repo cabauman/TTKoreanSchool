@@ -20,11 +20,14 @@ namespace TTKoreanSchool.ViewModels
 
     public class VocabZoneLandingPageViewModel : BasePageViewModel, IVocabZoneLandingPageViewModel
     {
-        private ObservableAsPropertyHelper<IList<IVocabSectionViewModel>> _sections;
+        private readonly IStudyContentDataService _dataService;
+        private readonly ObservableAsPropertyHelper<IList<IVocabSectionViewModel>> _sections;
 
-        public VocabZoneLandingPageViewModel()
+        public VocabZoneLandingPageViewModel(IStudyContentDataService dataService = null)
         {
-            LoadSections = ReactiveCommand.CreateFromObservable(() => GetSections());
+            _dataService = dataService ?? Locator.Current.GetService<IStudyContentDataService>();
+
+            LoadSections = ReactiveCommand.CreateFromObservable(() => _dataService.GetVocabSections());
             LoadSections.ToProperty(this, x => x.Sections, out _sections);
             LoadSections.ThrownExceptions.Subscribe(
                 ex =>
@@ -38,12 +41,6 @@ namespace TTKoreanSchool.ViewModels
         public IList<IVocabSectionViewModel> Sections
         {
             get { return _sections.Value; }
-        }
-
-        public IObservable<IList<IVocabSectionViewModel>> GetSections()
-        {
-            var studyContentDataService = Locator.Current.GetService<IStudyContentDataService>();
-            return studyContentDataService.GetVocabSections();
         }
     }
 }
