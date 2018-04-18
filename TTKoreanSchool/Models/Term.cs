@@ -10,9 +10,6 @@ namespace TTKoreanSchool.Models
         [JsonProperty("romanization")]
         public string Romanization { get; set; }
 
-        [JsonProperty("translation")]
-        public string Translation { get; set; }
-
         [JsonProperty("extraInfoId")]
         public string ExtraInfoId { get; set; }
 
@@ -24,5 +21,11 @@ namespace TTKoreanSchool.Models
 
         [JsonProperty("sentenceIds")]
         public string SentenceIds { get; set; }
+
+        [JsonIgnore]
+        public string Translation { get; set; }
+
+        [JsonIgnore]
+        public string IsStarred { get; set; }
     }
 }
