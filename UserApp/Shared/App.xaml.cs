@@ -11,8 +11,9 @@ namespace TTKoreanSchool
 
         public App()
         {
-            InitializeComponent();
+            LiveReload.Init();
 
+            InitializeComponent();
 
             MainPage = new MainPage();
         }
