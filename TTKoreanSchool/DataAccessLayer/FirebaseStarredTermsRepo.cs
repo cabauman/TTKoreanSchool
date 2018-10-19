@@ -16,21 +16,12 @@ namespace TTKoreanSchool.DataAccessLayer
             _starredTermsRef = client.Child("starred-terms");
         }
 
-        public IObservable<IDictionary<string, bool>> ReadAll(string uid)
+        public IObservable<IDictionary<string, bool>> Read(string uid)
         {
             ChildQuery childQuery = _starredTermsRef
                 .Child(uid);
 
             return ReadAll(childQuery);
-        }
-
-        public IObservable<IDictionary<string, bool>> Read(string uid, string studySetId)
-        {
-            ChildQuery childQuery = _starredTermsRef
-                .Child(uid)
-                .Child(studySetId);
-
-            return Read(childQuery, studySetId);
         }
     }
 }

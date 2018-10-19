@@ -13,6 +13,8 @@ namespace TTKoreanSchool.ViewModels
     public interface IHomePageViewModel : IPageViewModel
     {
         IButtonViewModel[] AppSections { get; }
+
+        IReadOnlyReactiveList<IButtonViewModel> AppSections2 { get; }
     }
 
     public class HomePageViewModel : BasePageViewModel, IHomePageViewModel

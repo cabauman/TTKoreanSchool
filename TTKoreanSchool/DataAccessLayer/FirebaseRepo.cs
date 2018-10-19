@@ -1,4 +1,6 @@
-﻿using System;
+﻿extern alias SplatAlias;
+
+using System;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
@@ -8,33 +10,31 @@ using Firebase.Database;
 using Firebase.Database.Offline;
 using Firebase.Database.Query;
 using ReactiveUI;
+using SplatAlias::Splat;
 using TTKoreanSchool.Models;
 
 namespace TTKoreanSchool.DataAccessLayer
 {
-    public class FirebaseRepo<T>
+    public class FirebaseRepo<T> : IEnableLogger
         where T : class
     {
-        protected IObservable<T> ReadAll(ChildQuery childQuery, bool useCache = true)
-        {
-            var realtimeDb = childQuery
-                .AsRealtimeDatabase<T>(string.Empty, string.Empty, StreamingOptions.LatestOnly, InitialPullStrategy.Everything, true);
+        protected RealtimeDatabase<T> RealtimeDb { get; set; }
 
-            realtimeDb.SyncExceptionThrown +=
+        protected IObservable<T> ReadAll(ChildQuery childQuery, string filenameModifier = "")
+        {
+            RealtimeDb = childQuery
+                .AsRealtimeDatabase<T>(filenameModifier, string.Empty, StreamingOptions.LatestOnly, InitialPullStrategy.Everything, true);
+
+            RealtimeDb.SyncExceptionThrown +=
                 (s, ex) =>
                 {
-                    Console.WriteLine(ex.Exception);
+                    this.Log().Error(ex.Exception);
                 };
 
-            if(!useCache || realtimeDb.Database?.Count == 0)
-            {
-                return realtimeDb
-                    .PullAsync()
-                    .ToObservable()
-                    .SelectMany(_ => ReadAll(realtimeDb));
-            }
-
-            return ReadAll(realtimeDb);
+            return RealtimeDb
+                .PullAsync()
+                .ToObservable()
+                .SelectMany(_ => ReadAll(RealtimeDb));
         }
 
         protected IObservable<T> Read(ChildQuery childQuery, string key)
@@ -111,9 +111,9 @@ namespace TTKoreanSchool.DataAccessLayer
                 .ToObservable();
         }
 
-        private IObservable<T> ReadAll(RealtimeDatabase<T> realtimeDb)
+        protected IObservable<T> ReadAll(RealtimeDatabase<T> realtimeDb)
         {
-            return realtimeDb
+            return realtimeDb.Database
                 .Once()
                 .ToObservable()
                 .Do(MapKeyToId)

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reactive;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
 using TTKoreanSchool.DataAccessLayer.Interfaces;
@@ -15,6 +13,9 @@ namespace TTKoreanSchool.DataAccessLayer
         private readonly ChildQuery _studySetsRef;
         private readonly ChildQuery _translationsRef;
 
+        private string _currentStudySetId;
+        private IEnumerable<Term> _currentStudySet;
+
         public FirebaseVocabTermRepo(FirebaseClient client)
         {
             _studySetsRef = client.Child("tt-study-sets");
@@ -23,23 +24,36 @@ namespace TTKoreanSchool.DataAccessLayer
 
         public IObservable<Term> ReadStudySet(string langCode, string studySetId)
         {
-            ChildQuery translationsQuery = _translationsRef
-                .Child(studySetId)
-                .Child(langCode);
+            if(_currentStudySetId == studySetId && _currentStudySet != null)
+            {
+                return _currentStudySet.ToObservable();
+            }
 
-            var translations = ReadAllBasicType<string>(translationsQuery);
+            _currentStudySetId = studySetId;
 
             ChildQuery termsQuery = _studySetsRef
                 .Child(studySetId);
 
-            return ReadAll(termsQuery)
+            ChildQuery translationsQuery = _translationsRef
+                .Child(studySetId)
+                .Child(langCode);
+
+            var terms = ReadAll(termsQuery, studySetId);
+            var translations = ReadAllBasicType<string>(translationsQuery);
+
+            var termsObservable = Observable
                 .Zip(
+                    terms,
                     translations,
                     (term, translation) =>
                     {
                         term.Translation = translation;
                         return term;
                     });
+
+            _currentStudySet = termsObservable.ToEnumerable();
+
+            return termsObservable;
         }
     }
 }

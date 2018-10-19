@@ -83,6 +83,9 @@ namespace TTKoreanSchool.iOS.Controllers
 
             _btn = new UIBarButtonItem(UIBarButtonSystemItem.Action);
             NavigationItem.SetRightBarButtonItem(_btn, true);
+
+            ViewModel.WhenAnyValue(vm => vm.AppSections2)
+                .BindTo<IButtonViewModel, ReactiveCollectionViewCell<IButtonViewModel>>(CollectionView, new NSString("cellKey"), cell => { }, source => Disposable.Empty);
         }
 
         public override nint NumberOfSections(UICollectionView collectionView)

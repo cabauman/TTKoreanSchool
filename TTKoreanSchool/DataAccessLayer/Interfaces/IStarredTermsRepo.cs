@@ -5,8 +5,7 @@ namespace TTKoreanSchool.DataAccessLayer.Interfaces
 {
     public interface IStarredTermsRepo
     {
-        IObservable<IDictionary<string, bool>> ReadAll(string uid);
-
-        IObservable<IDictionary<string, bool>> Read(string uid, string studySetId);
+        // A collection of dictionaries. One for each study set with starred terms.
+        IObservable<IDictionary<string, bool>> Read(string uid);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive;
 using Firebase.Database;
+using Firebase.Database.Offline;
 using Firebase.Database.Query;
 using TTKoreanSchool.DataAccessLayer.Interfaces;
 using TTKoreanSchool.Models;
@@ -10,8 +11,13 @@ namespace TTKoreanSchool.DataAccessLayer
 {
     public class FirebaseStudyContentDownloadUrlRepo : FirebaseRepo<string>, IStudyContentDownloadUrlRepo
     {
+        public const string VOCAB_IMAGE_URL_DIRECTORY = "term-images";
+
         private readonly ChildQuery _downloadUrlsRef;
-        private readonly string _vocabImageUrlDirectory = "term-images";
+
+        private RealtimeDatabase<string> _vocabImageUrlDb;
+        private RealtimeDatabase<string> _vocabAudioUrlDb;
+        private RealtimeDatabase<string> _sentenceAudioUrlDb;
 
         public FirebaseStudyContentDownloadUrlRepo(FirebaseClient client)
         {
@@ -26,10 +32,31 @@ namespace TTKoreanSchool.DataAccessLayer
             return ReadAll(childQuery);
         }
 
+        public IObservable<string> Read(string directory, string filename)
+        {
+            RealtimeDatabase<string> db = null;
+            switch(directory)
+            {
+                case VOCAB_IMAGE_URL_DIRECTORY:
+                    db = _vocabImageUrlDb;
+                    break;
+            }
+            
+            if(db == null)
+            {
+                ChildQuery childQuery = _downloadUrlsRef
+                    .Child(directory);
+
+                db = ReadAll(childQuery);
+            }
+
+            return ReadAll(childQuery);
+        }
+
         public IObservable<string> ReadVocabImageUrl(string fileId)
         {
             ChildQuery childQuery = _downloadUrlsRef
-                .Child(_vocabImageUrlDirectory)
+                .Child(VocabImageUrlDirectory)
                 .Child(fileId);
 
             return Read(childQuery, fileId);
@@ -38,7 +65,7 @@ namespace TTKoreanSchool.DataAccessLayer
         public IObservable<Unit> SaveVocabImageUrl(string fileId, string url)
         {
             ChildQuery childQuery = _downloadUrlsRef
-                .Child(_vocabImageUrlDirectory)
+                .Child(VocabImageUrlDirectory)
                 .Child(fileId);
 
             return Update(childQuery, url);

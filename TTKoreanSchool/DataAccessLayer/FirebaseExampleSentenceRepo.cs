@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using Firebase.Database;
@@ -19,7 +20,7 @@ namespace TTKoreanSchool.DataAccessLayer
             _translationsRef = client.Child("sentences/translations");
         }
 
-        public IObservable<ExampleSentence> ReadAll(string langCode)
+        public IObservable<IDictionary<string, ExampleSentence>> ReadAll(string langCode)
         {
             ChildQuery translationsQuery = _translationsRef
                 .Child(langCode);
@@ -33,7 +34,8 @@ namespace TTKoreanSchool.DataAccessLayer
                     {
                         sentence.Translation = translation;
                         return sentence;
-                    });
+                    })
+                .ToDictionary(sentence => sentence.Id, sentence => sentence);
         }
 
         public IObservable<ExampleSentence> Read(string sentenceId)

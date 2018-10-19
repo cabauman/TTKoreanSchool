@@ -44,7 +44,7 @@ namespace TTKoreanSchool.Services
             return GetDownloadUrls(directoryRef, filenames);
         }
 
-        public IObservable<IDictionary<string, string>> GetSentenceAudioDownloadUrls(params string[] filenames)
+        public IObservable<KeyValuePair<string, string>> GetSentenceAudioDownloadUrls(params string[] filenames)
         {
             FirebaseStorageReference directoryRef = _storageClient
                 .Child(FIREBASE_PATH_SENTENCE_AUDIO);

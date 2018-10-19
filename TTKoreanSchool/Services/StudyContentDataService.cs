@@ -1,4 +1,7 @@
-﻿using System;
+﻿extern alias SplatAlias;
+
+using SplatAlias::Splat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
@@ -11,7 +14,7 @@ using TTKoreanSchool.ViewModels;
 
 namespace TTKoreanSchool.Services
 {
-    public class StudyContentDataService : IStudyContentDataService
+    public class StudyContentDataService : IStudyContentDataService, IEnableLogger
     {
         private const string LANG_CODE = "en";
 
@@ -25,9 +28,10 @@ namespace TTKoreanSchool.Services
         private readonly IStudyContentStorageService _storageService;
 
         private IList<Term> _latestStudySetTerms = new List<Term>();
-        private IList<ExampleSentence> _sentences;
+        private IDictionary<string, ExampleSentence> _sentenceIdToSentenceDict;
         private IDictionary<string, string> _vocabImageFilenameToUrlDict;
         private IDictionary<string, string> _vocabAudioFilenameToUrlDict;
+        private IDictionary<string, string> _sentenceAudioFilenameToUrlDict;
 
         public StudyContentDataService(
             IVocabSectionRepo vocabSectionRepo,
@@ -41,6 +45,15 @@ namespace TTKoreanSchool.Services
             _vocabTermRepo = vocabTermRepo;
             _exampleSentenceRepo = exampleSentenceRepo;
             _starredTermsRepo = starredTermsRepo;
+        }
+
+        public IObservable<string> GetVocabAudioUrls()
+        {
+
+
+            _studyContentDownloadUrlRepo
+                .ReadAll("");
+
         }
 
         public IObservable<IList<ExampleSentence>> GetSentences()
@@ -109,21 +122,168 @@ namespace TTKoreanSchool.Services
 
         private IExampleSentenceViewModel GetSentence(string sentenceId)
         {
-            var sentence = _sentences[int.Parse(sentenceId)];
-            IExampleSentenceViewModel sentenceVm = new ExampleSentenceViewModel(sentence);
+            _sentenceIdToSentenceDict.TryGetValue(sentenceId, out ExampleSentence sentence);
+
+            IExampleSentenceViewModel sentenceVm = null;
+            if(sentence == null)
+            {
+                this.Log().Error("Sentence {0} couldn't be found.", sentenceId);
+            }
+            else
+            {
+                sentenceVm = new ExampleSentenceViewModel(sentence);
+            }
 
             return sentenceVm;
         }
 
         public IObservable<IList<IDetailedFlashcardViewModel>> GetDetailedFlashcards(string uid, string studySetId, IList<Term> terms)
         {
+            var vocabImageUrls = FetchVocabImageUrls();
+            var sentenceAudioUrls = FetchSentenceAudioUrls();
+            var sentences = FetchSentences(LANG_CODE);
+            var urls = Observable.Merge(vocabImageUrls, sentenceAudioUrls, sentences);
 
-            var starredTermsForStudySet = GetUserStarredTermsForStudySet(uid, studySetId)
-                .SelectMany(x => x);
-            return terms
-                .ToObservable()
-                .SelectMany(term => GetDetailedFlashcard(term, uid, studySetId))
+            var result = urls
+                .SelectMany(
+                    _ =>
+                    {
+                        IEnumerable<string> missingImageFilenames = terms
+                            .SelectMany(term => term.ImageIds.Split(','))
+                            .Where(imageId => !_vocabImageFilenameToUrlDict.ContainsKey(imageId))
+                            .Distinct();
+
+                        IEnumerable<string> missingSentenceAudioFilenames = terms
+                            .SelectMany(term => term.SentenceIds.Split(','))
+                            .Where(sentenceId => !_sentenceAudioFilenameToUrlDict.ContainsKey(sentenceId))
+                            .Distinct();
+
+                        var missingVocabImageUrls = _storageService
+                            .GetVocabImageDownloadUrls(missingImageFilenames.ToArray())
+                            .Do(
+                                entry =>
+                                {
+                                    _vocabImageFilenameToUrlDict[entry.Key] = entry.Value;
+                                })
+                            .Select(x => Unit.Default);
+
+                        var missingSentenceAudioUrls = _storageService
+                            .GetSentenceAudioDownloadUrls(missingSentenceAudioFilenames.ToArray())
+                            .Catch<KeyValuePair<string, string>, Exception>(
+                                ex2 =>
+                                {
+                                    return Observable.Return(new KeyValuePair<string, string>("", ""));
+                                })
+                            .Do(
+                                entry =>
+                                {
+                                    _sentenceAudioFilenameToUrlDict[entry.Key] = entry.Value;
+                                    _studyContentDownloadUrlRepo.SaveVocabImageUrl(entry.Key, entry.Value);
+                                })
+                            .Select(x => Unit.Default);
+
+                        return Observable.Merge(missingVocabImageUrls, missingSentenceAudioUrls);
+                    })
+                .SelectMany(_ => terms.ToObservable())
+                .SelectMany(term => GetDetailedFlashcard2(term))
                 .ToList();
+
+            return result;
+        }
+
+        public IObservable<Unit> FetchSentences(string langCode)
+        {
+            if(_sentenceIdToSentenceDict == null)
+            {
+                return _exampleSentenceRepo
+                    .ReadAll(langCode)
+                    .Select(
+                        dict =>
+                        {
+                            _sentenceIdToSentenceDict = dict;
+                            return Unit.Default;
+                        });
+            }
+
+            return Observable.Return(Unit.Default);
+        }
+
+        public IObservable<Unit> FetchVocabImageUrls()
+        {
+            if(_vocabImageFilenameToUrlDict == null)
+            {
+                return _studyContentDownloadUrlRepo
+                    .ReadVocabImageUrls()
+                    .Select(
+                        dict =>
+                        {
+                            _vocabImageFilenameToUrlDict = dict;
+                            return Unit.Default;
+                        });
+            }
+
+            return Observable.Return(Unit.Default);
+        }
+
+        public IObservable<Unit> FetchSentenceAudioUrls()
+        {
+            if(_sentenceAudioFilenameToUrlDict == null)
+            {
+                return _studyContentDownloadUrlRepo
+                    .ReadSentenceAudioUrls()
+                    .Select(
+                        dict =>
+                        {
+                            _sentenceAudioFilenameToUrlDict = dict;
+                            return Unit.Default;
+                        });
+            }
+
+            return Observable.Return(Unit.Default);
+        }
+
+        public IObservable<IDetailedFlashcardViewModel> GetDetailedFlashcard2(Term term)
+        {
+            var imageUrlsObservable = GetVocabImageUrls2(term);
+            var sentenceAudioUrlsObservable = GetSentenceAudioUrls();
+            var sentenceVmsObservable = GetSentences(term);
+
+            var flashcard = Observable
+                .Return(term)
+                .Zip(
+                    imageUrlsObservable,
+                    sentenceVmsObservable,
+                    (theTerm, imageUrls, sentenceVms) =>
+                    {
+                        return new DetailedFlashcardViewModel(theTerm, sentenceVms, imageUrls);
+                    });
+
+            return flashcard;
+        }
+
+        public IObservable<IList<string>> GetVocabImageUrls2(Term term)
+        {
+            IList<string> imageUrls = new List<string>();
+            string[] imageIds = term.ImageIds.Split(',');
+            var vocabImageDownloadUrls = imageIds
+                .ToObservable()
+                .SelectMany(imageId => GetVocabImageUrl2(imageId))
+                .ToList();
+
+            return vocabImageDownloadUrls;
+        }
+
+        public IObservable<string> GetVocabImageUrl2(string imageId)
+        {
+            _vocabImageFilenameToUrlDict.TryGetValue(imageId, out string url);
+            if(url != null)
+            {
+                return Observable.Return(url);
+            }
+            else
+            {
+                return FetchVocabImageUrlFromStorage(null, imageId);
+            }
         }
 
         public IList<IMatchGameCardViewModel> GetMatchGameCards(string studySetId)
@@ -166,6 +326,18 @@ namespace TTKoreanSchool.Services
                     model =>
                     {
                         _latestStudySetTerms.Add(model);
+
+                        var audioFilesThatNeedToBeDownloaded = new List<string>();
+                        if(model.AudioVersion > 0)
+                        {
+                            var audioFileExistsLocally = _storageService.AudioFileExistsLocally(model);
+                            if(!audioFileExistsLocally)
+                            {
+                                audioFilesThatNeedToBeDownloaded.Add(model);
+                            }
+                        }
+                        _storageService.GetVocabAudioDownloadUrls(audioFilesThatNeedToBeDownloaded.ToArray());
+
                         IMiniFlashcardViewModel vm = new MiniFlashcardViewModel(model);
                         return vm;
                     })
@@ -223,7 +395,7 @@ namespace TTKoreanSchool.Services
         {
             return _studyContentDownloadUrlRepo
                 .ReadVocabImageUrl(imageId)
-                .Catch<string, Exception>(ex => DatabaseExceptionHandler(ex, imageId));
+                .Catch<string, Exception>(ex => FetchVocabImageUrlFromStorage(ex, imageId));
         }
 
         public IObservable<IList<string>> GetVocabImageUrls(Term term)
@@ -238,7 +410,7 @@ namespace TTKoreanSchool.Services
             return vocabImageDownloadUrls;
         }
 
-        private IObservable<string> DatabaseExceptionHandler(Exception ex, string filename)
+        private IObservable<string> FetchVocabImageUrlFromStorage(Exception ex, string filename)
         {
             return _storageService
                 .GetVocabImageDownloadUrls(filename)
