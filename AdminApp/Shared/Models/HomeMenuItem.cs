@@ -7,7 +7,8 @@ namespace TongTongAdmin.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        DataGrid,
     }
     public class HomeMenuItem
     {

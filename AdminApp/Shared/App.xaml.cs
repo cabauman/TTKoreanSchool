@@ -11,8 +11,9 @@ namespace TongTongAdmin
 
         public App()
         {
-            InitializeComponent();
+            LiveReload.Init();
 
+            InitializeComponent();
 
             MainPage = new MainPage();
         }

@@ -148,12 +148,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5"/>
+    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid">
+      <Version>16.3.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TongTongAdmin\TongTongAdmin.csproj">
-      <Project>{6B960840-9EF0-4EBB-85DF-09CEC3F4660B}</Project>
+    <ProjectReference Include="..\Shared\TongTongAdmin.csproj">
+      <Project>{b2ca10c2-b9b1-4021-92de-463dfd228ab4}</Project>
       <Name>TongTongAdmin</Name>
     </ProjectReference>
   </ItemGroup>
