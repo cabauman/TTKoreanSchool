@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,9 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
     <PackageReference Include="ReactiveUI" Version="9.1.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="9.1.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="16.3.0.21" />
+    <PackageReference Include="System.Reactive" Version="4.1.2" />
+    <PackageReference Include="Xamarin.Auth" Version="1.6.0.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />  
   </ItemGroup>
@@ -22,27 +26,53 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Modules\Home\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
+    <Reference Include="GameCtor.FirebaseAnalytics">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAnalytics\bin\Release\monoandroid80\MonoAndroid80\GameCtor.FirebaseAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseAuth">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseAuth.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseDatabase.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseDatabase.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.LocalStorage">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth.DotNet\bin\Release\netstandard2.0\GameCtor.LocalStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.LocalStorage.XamarinEssentials">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\LocalStorage.XamarinEssentials\bin\Release\netstandard2.0\GameCtor.LocalStorage.XamarinEssentials.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.Repository">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\Repository\bin\Release\netstandard2.0\GameCtor.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.XamarinAuth">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\XamarinAuth\bin\Release\netstandard2.0\GameCtor.XamarinAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Modules\AudioBookList\AudioBookItemCell.xaml.cs">
+      <DependentUpon>AudioBookItemCell.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Modules\Home\HomePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Modules\Multimedia\" />
-    <Folder Include="Modules\Grammar\" />
-    <Folder Include="Modules\Conjugator\" />
-    <Folder Include="Modules\Hangul\" />
-    <Folder Include="Modules\AboutUs\" />
-    <Folder Include="Modules\MasterDetail\" />
-    <Folder Include="Modules\MatchGame\" />
-    <Folder Include="Modules\Flashcards\" />
-    <Folder Include="Modules\Vocab\" />
-    <Folder Include="Modules\SignIn\" />
+    <Compile Update="Modules\AudioBookList\AudioBookPage.xaml.cs">
+      <DependentUpon>AudioBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\ConjugatorSettings\ConjugatorSettingsPage.xaml.cs">
+      <DependentUpon>ConjugatorSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\GrammarList\GrammarPrincipleItemCell.xaml.cs">
+      <DependentUpon>GrammarPrincipleItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\HangulList\HangulLetterPage.xaml.cs">
+      <DependentUpon>HangulLetterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\VocabSetList\VocabSetItemCell.xaml.cs">
+      <DependentUpon>VocabSetItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\VocabTermList\VocabTermItemCell.xaml.cs">
+      <DependentUpon>VocabTermItemCell.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

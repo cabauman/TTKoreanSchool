@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
     <PackageReference Include="ReactiveUI" Version="9.1.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="9.1.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="16.3.0.21" />

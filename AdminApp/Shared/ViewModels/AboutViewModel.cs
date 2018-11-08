@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Windows.Input;
-
+using ReactiveUI;
+using Splat;
 using Xamarin.Forms;
 
 namespace TongTongAdmin.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutViewModel : BaseViewModel, IEnableLogger
     {
         public AboutViewModel()
         {
