@@ -30,8 +30,8 @@
                         <StackLayout Padding="10">
                             <Label Text="{Binding Text}" 
                                 LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
+                                Style="{DynamicResource ListItemTextStyle}"
+                                FontSize ="16" />
                             <Label Text="{Binding Description}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"

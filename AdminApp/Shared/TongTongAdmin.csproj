@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseAuthentication.net" Version="3.1.0" />
     <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
     <PackageReference Include="ReactiveUI" Version="9.1.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="9.1.1" />
@@ -19,16 +20,93 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\ImageList\" />
     <Folder Include="Modules\AudioList\" />
-    <Folder Include="Modules\GrammarList\" />
     <Folder Include="Modules\HomonymList\" />
-    <Folder Include="Modules\AudioBookList\" />
-    <Folder Include="Modules\WordClassList\" />
-    <Folder Include="Modules\SentenceList\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TTKSCore\TTKSCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GameCtor.FirebaseAuth">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseAuth.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseDatabase.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseDatabase.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseStorage.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseStorage.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseStorage.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.LocalStorage">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth.DotNet\bin\Release\netstandard2.0\GameCtor.LocalStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.LocalStorage.XamarinEssentials">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\LocalStorage.XamarinEssentials\bin\Release\netstandard2.0\GameCtor.LocalStorage.XamarinEssentials.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.Repository">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.XamarinAuth">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\XamarinAuth\bin\Release\netstandard2.0\GameCtor.XamarinAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Modules\AudioBookList\AudioBookItemCell.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\AudioBookList\AudioBookListPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\AudioBookList\AudioBookPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\GrammarList\GrammarItemCell.xaml.cs">
+      <DependentUpon>GrammarItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\GrammarList\GrammarListPage.xaml.cs">
+      <DependentUpon>GrammarListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\GrammarList\GrammarPrinciplePage.xaml.cs">
+      <DependentUpon>GrammarPrinciplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\ImageList\VocabImageItemCell.xaml.cs">
+      <DependentUpon>VocabImageItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\ImageList\VocabImageListPage.xaml.cs">
+      <DependentUpon>VocabImageListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\MasterDetail\MasterCell.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\MasterDetail\MasterDetailPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\SentenceList\SentenceItemCell.xaml.cs">
+      <DependentUpon>SentenceItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\SentenceList\SentenceListPage.xaml.cs">
+      <DependentUpon>SentenceListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\SentenceList\SentencePage.xaml.cs">
+      <DependentUpon>SentencePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\SignIn\SignInPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\VocabList\VocabItemCell.xaml.cs">
+      <DependentUpon>VocabItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\VocabList\VocabListPage.xaml.cs">
+      <DependentUpon>VocabListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\VocabList\VocabTermPage.xaml.cs">
+      <DependentUpon>VocabTermPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
     </Compile>

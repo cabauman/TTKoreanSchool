@@ -155,7 +155,7 @@
       <Version>4.1.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Auth">
-      <Version>1.6.0.2</Version>
+      <Version>1.6.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>0.11.0-preview</Version>
@@ -164,6 +164,10 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TTKSCore\TTKSCore.csproj">
+      <Project>{0e27802d-af68-49a6-a900-fa3305a36925}</Project>
+      <Name>TTKSCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\TTKoreanSchool.csproj">
       <Project>{37fdcf57-928d-4259-b889-93c646ebf1ac}</Project>
       <Name>TTKoreanSchool</Name>

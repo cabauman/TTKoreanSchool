@@ -11,7 +11,6 @@ using ReactiveUI;
 using Splat;
 using TTKoreanSchool.Modules;
 using TTKSCore.Config;
-using Xamarin.Forms;
 
 namespace TTKoreanSchool
 {
@@ -67,7 +66,7 @@ namespace TTKoreanSchool
 
         private void RegisterViews()
         {
-            Locator.CurrentMutable.Register(() => new Modules.MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
+            Locator.CurrentMutable.Register(() => new MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
             Locator.CurrentMutable.Register(() => new AboutUsPage(), typeof(IViewFor<IAboutUsViewModel>));
             Locator.CurrentMutable.Register(() => new AudioBookListPage(), typeof(IViewFor<IAudioBookListViewModel>));
             Locator.CurrentMutable.Register(() => new AudioBookItemCell(), typeof(IViewFor<IAudioBookItemViewModel>));

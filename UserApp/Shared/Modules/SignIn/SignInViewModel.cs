@@ -5,7 +5,7 @@ using GameCtor.FirebaseAuth;
 using GameCtor.XamarinAuth;
 using ReactiveUI;
 using Splat;
-using TTKoreanSchool.Common;
+using TTKSCore.Common;
 
 namespace TTKoreanSchool.Modules
 {

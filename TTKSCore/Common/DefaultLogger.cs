@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Splat;
 
-namespace TTKoreanSchool.Common
+namespace TTKSCore.Common
 {
     public class DefaultLogger : ILogger
     {

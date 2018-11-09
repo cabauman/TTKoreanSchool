@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GameCtor.RxNavigation;
 using ReactiveUI;
-using TTKoreanSchool.Common;
+using TTKSCore.Common;
 
 namespace TTKoreanSchool.Modules
 {

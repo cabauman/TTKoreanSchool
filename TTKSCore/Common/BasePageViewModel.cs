@@ -2,7 +2,7 @@
 using ReactiveUI;
 using Splat;
 
-namespace TTKoreanSchool.Common
+namespace TTKSCore.Common
 {
     public abstract class BasePageViewModel : ReactiveObject, IPageViewModel
     {

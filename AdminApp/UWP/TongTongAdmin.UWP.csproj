@@ -155,6 +155,10 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TTKSCore\TTKSCore.csproj">
+      <Project>{0e27802d-af68-49a6-a900-fa3305a36925}</Project>
+      <Name>TTKSCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\TongTongAdmin.csproj">
       <Project>{b2ca10c2-b9b1-4021-92de-463dfd228ab4}</Project>
       <Name>TongTongAdmin</Name>

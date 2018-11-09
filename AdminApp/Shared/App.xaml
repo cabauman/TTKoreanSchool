@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
+<common:ReactiveApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TongTongAdmin"
+             xmlns:common="clr-namespace:TongTongAdmin.Common"
+             x:TypeArguments="local:AppBootstrapper"
              x:Class="TongTongAdmin.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,4 +15,4 @@
             </Style>
         </ResourceDictionary>
     </Application.Resources>
-</Application>
+</common:ReactiveApplication>

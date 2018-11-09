@@ -1,15 +1,15 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Threading.Tasks;
 using ReactiveUI;
+using System.Threading.Tasks;
+using TTKoreanSchool.Common;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TTKoreanSchool
 {
     public partial class App : ReactiveApplication<AppBootstrapper>
     {
-
         public App()
         {
             LiveReload.Init();
