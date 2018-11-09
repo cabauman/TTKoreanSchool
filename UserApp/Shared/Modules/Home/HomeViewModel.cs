@@ -13,8 +13,17 @@ namespace TTKoreanSchool.Modules
             IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
-            //NavigateToHangulSection = ReactiveCommand.CreateFromObservable(
-            //    () => ViewStackService.PushPage(new StoreInfoViewModel());
+            NavigateToHangulSection = ReactiveCommand.CreateFromObservable(
+                () => ViewStackService.PushPage(new HangulHomeViewModel()));
+
+            NavigateToVocabSection = ReactiveCommand.CreateFromObservable(
+                () => ViewStackService.PushPage(new VocabSetListViewModel()));
+
+            NavigateToGrammarSection = ReactiveCommand.CreateFromObservable(
+                () => ViewStackService.PushPage(new GrammarListViewModel()));
+
+            NavigateToConjugatorSection = ReactiveCommand.CreateFromObservable(
+                () => ViewStackService.PushPage(new ConjugatorViewModel()));
         }
 
         public override string Title => "Home";

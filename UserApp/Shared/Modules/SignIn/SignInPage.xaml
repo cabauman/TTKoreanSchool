@@ -6,10 +6,25 @@
              x:TypeArguments="modules:ISignInViewModel"
              x:Class="TTKoreanSchool.Modules.SignInPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            Spacing="10"
+            Padding="10">
+            <Label
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Welcome to Xamarin.Forms!!!!" />
+            <Button
+                x:Name="GoogleSignInButton"
+                VerticalOptions="Center"
+                Text="Sign In with Google" />
+            <Button
+                x:Name="FacebookSignInButton"
+                VerticalOptions="Center"
+                Text="Sign In with Facebook" />
+            <Button
+                x:Name="AnonymousSignInButton"
+                VerticalOptions="Center"
+                Text="Continue anonymously" />
         </StackLayout>
     </ContentPage.Content>
 </rxui:ReactiveContentPage>

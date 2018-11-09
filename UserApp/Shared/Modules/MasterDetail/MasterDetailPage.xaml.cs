@@ -19,6 +19,10 @@ namespace TTKoreanSchool.Modules
         public MasterDetailPage(IViewShell detailView)
         {
             Detail = (Xamarin.Forms.Page)detailView;
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                MasterBehavior = MasterBehavior.Popover;
+            }
 
             InitializeComponent();
 

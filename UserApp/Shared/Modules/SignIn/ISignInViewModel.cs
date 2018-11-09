@@ -1,11 +1,14 @@
-﻿using ReactiveUI;
+﻿using System.Reactive;
+using ReactiveUI;
 
 namespace TTKoreanSchool.Modules
 {
     public interface ISignInViewModel
     {
-        ReactiveCommand TriggerGoogleAuthFlow { get; }
+        ReactiveCommand<Unit, Unit> TriggerGoogleAuthFlow { get; }
 
-        ReactiveCommand TriggerFacebookAuthFlow { get; }
+        ReactiveCommand<Unit, Unit> TriggerFacebookAuthFlow { get; }
+
+        ReactiveCommand<Unit, Unit> ContinueAnonymously { get; }
     }
 }

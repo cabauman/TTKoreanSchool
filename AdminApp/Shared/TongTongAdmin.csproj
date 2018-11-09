@@ -23,6 +23,7 @@
     <Folder Include="Modules\AudioList\" />
     <Folder Include="Modules\GrammarList\" />
     <Folder Include="Modules\HomonymList\" />
+    <Folder Include="Modules\AudioBookList\" />
     <Folder Include="Modules\WordClassList\" />
     <Folder Include="Modules\SentenceList\" />
   </ItemGroup>

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace TTKoreanSchool.Modules
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AudioBookCell : ReactiveContentPage<IAudioBookItemViewModel>
+	public partial class AudioBookItemCell : ReactiveContentPage<IAudioBookItemViewModel>
     {
-		public AudioBookCell()
+		public AudioBookItemCell()
 		{
 			InitializeComponent();
 		}

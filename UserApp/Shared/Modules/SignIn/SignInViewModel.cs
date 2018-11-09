@@ -68,11 +68,13 @@ namespace TTKoreanSchool.Modules
                 .Subscribe(_ => appBootstrapper.MainView = new HomeViewModel(appBootstrapper));
         }
 
-        public ReactiveCommand TriggerGoogleAuthFlow { get; }
-
-        public ReactiveCommand TriggerFacebookAuthFlow { get; }
-
         public override string Title => "Sign In";
+
+        public ReactiveCommand<Unit, Unit> TriggerGoogleAuthFlow { get; }
+
+        public ReactiveCommand<Unit, Unit> TriggerFacebookAuthFlow { get; }
+
+        public ReactiveCommand<Unit, Unit> ContinueAnonymously { get; }
 
         private IObservable<Unit> AuthenticateWithFirebase(string authToken)
         {

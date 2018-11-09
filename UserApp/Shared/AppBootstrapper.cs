@@ -10,6 +10,7 @@ using LocalStorage.XamarinEssentials;
 using ReactiveUI;
 using Splat;
 using TTKoreanSchool.Modules;
+using TTKSCore.Config;
 using Xamarin.Forms;
 
 namespace TTKoreanSchool
@@ -22,6 +23,7 @@ namespace TTKoreanSchool
         {
             RegisterServices();
             RegisterViews();
+            RegisterViewModels();
         }
 
         public IViewShell NavigationShell { get; private set; }
@@ -36,10 +38,12 @@ namespace TTKoreanSchool
 
         public async Task NavigateToFirstPage()
         {
+            MainView = new MasterDetailViewModel(this);
+            return;
             bool isAuthenticated = await FirebaseAuthService.IsAuthenticated;
             if (isAuthenticated)
             {
-                MainView = new HomeViewModel(this);
+                MainView = new MasterDetailViewModel(this);
             }
             else
             {
@@ -57,12 +61,13 @@ namespace TTKoreanSchool
             var viewStackService = new ViewStackService(NavigationShell);
             Locator.CurrentMutable.RegisterConstant(viewStackService, typeof(IViewStackService));
             Locator.CurrentMutable.Register(() => new AuthService(), typeof(IAuthService));
-            IFirebaseAuthService firebaseAuthService = new FirebaseAuthService("", new LocalStorageService());
-            Locator.CurrentMutable.RegisterConstant(firebaseAuthService, typeof(IFirebaseAuthService));
+            FirebaseAuthService = new FirebaseAuthService(ApiKeys.FIREBASE, new LocalStorageService());
+            Locator.CurrentMutable.RegisterConstant(FirebaseAuthService, typeof(IFirebaseAuthService));
         }
 
         private void RegisterViews()
         {
+            Locator.CurrentMutable.Register(() => new Modules.MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
             Locator.CurrentMutable.Register(() => new AboutUsPage(), typeof(IViewFor<IAboutUsViewModel>));
             Locator.CurrentMutable.Register(() => new AudioBookListPage(), typeof(IViewFor<IAudioBookListViewModel>));
             Locator.CurrentMutable.Register(() => new AudioBookItemCell(), typeof(IViewFor<IAudioBookItemViewModel>));
@@ -77,6 +82,13 @@ namespace TTKoreanSchool
             Locator.CurrentMutable.Register(() => new SignInPage(), typeof(IViewFor<ISignInViewModel>));
             Locator.CurrentMutable.Register(() => new VocabSetListPage(), typeof(IViewFor<IVocabSetListViewModel>));
             Locator.CurrentMutable.Register(() => new VocabTermListPage(), typeof(IViewFor<IVocabTermListViewModel>));
+        }
+
+        private void RegisterViewModels()
+        {
+            // Here, we use contracts to distinguish which IPageViewModel we want to instantiate.
+            Locator.CurrentMutable.Register(() => new HomeViewModel(this), typeof(IPageViewModel), typeof(HomeViewModel).FullName);
+            Locator.CurrentMutable.Register(() => new HangulHomeViewModel(), typeof(IPageViewModel), typeof(HangulHomeViewModel).FullName);
         }
     }
 }
