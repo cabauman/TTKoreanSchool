@@ -5,15 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.0-beta4" />
     <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
     <PackageReference Include="ReactiveUI" Version="9.1.1" />
     <PackageReference Include="System.Reactive" Version="4.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GameCtor.FirebaseAuth">
+      <HintPath>..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseDatabase.DotNet">
+      <HintPath>..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseDatabase.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.Repository">
+      <HintPath>..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\Repository\bin\Release\netstandard2.0\GameCtor.Repository.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
