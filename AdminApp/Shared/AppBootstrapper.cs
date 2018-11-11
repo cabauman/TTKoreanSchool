@@ -67,9 +67,9 @@ namespace TongTongAdmin
         private void RegisterViews()
         {
             Locator.CurrentMutable.Register(() => new MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
-            Locator.CurrentMutable.Register(() => new AudioBookListPage(), typeof(IViewFor<IAudioBookListViewModel>));
-            Locator.CurrentMutable.Register(() => new AudioBookItemCell(), typeof(IViewFor<IAudioBookItemViewModel>));
-            Locator.CurrentMutable.Register(() => new AudioBookPage(), typeof(IViewFor<IAudioBookViewModel>));
+            Locator.CurrentMutable.Register(() => new AudiobookListPage(), typeof(IViewFor<IAudiobookListViewModel>));
+            Locator.CurrentMutable.Register(() => new AudiobookItemCell(), typeof(IViewFor<IAudiobookItemViewModel>));
+            Locator.CurrentMutable.Register(() => new AudiobookPage(), typeof(IViewFor<IAudiobookViewModel>));
             Locator.CurrentMutable.Register(() => new VocabListPage(), typeof(IViewFor<IVocabListViewModel>));
             Locator.CurrentMutable.Register(() => new VocabItemCell(), typeof(IViewFor<IVocabItemViewModel>));
             Locator.CurrentMutable.Register(() => new VocabTermPage(), typeof(IViewFor<IVocabTermViewModel>));
@@ -84,7 +84,7 @@ namespace TongTongAdmin
         private void RegisterViewModels()
         {
             // Here, we use contracts to distinguish which IPageViewModel we want to instantiate.
-            Locator.CurrentMutable.Register(() => new AudioBookListViewModel(), typeof(IPageViewModel), typeof(AudioBookListViewModel).FullName);
+            Locator.CurrentMutable.Register(() => new AudiobookListViewModel(), typeof(IPageViewModel), typeof(AudiobookListViewModel).FullName);
             Locator.CurrentMutable.Register(() => new VocabListViewModel(), typeof(IPageViewModel), typeof(VocabListViewModel).FullName);
             Locator.CurrentMutable.Register(() => new GrammarListViewModel(), typeof(IPageViewModel), typeof(GrammarListViewModel).FullName);
             Locator.CurrentMutable.Register(() => new SentenceListViewModel(), typeof(IPageViewModel), typeof(SentenceListViewModel).FullName);

@@ -11,12 +11,18 @@
 
   <ItemGroup>
     <PackageReference Include="FirebaseAuthentication.net" Version="3.1.0" />
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.0-beta4" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.2" />
     <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
+    <PackageReference Include="Plugin.MediaManager.Reactive" Version="1.0.0" />
     <PackageReference Include="ReactiveUI" Version="9.1.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="9.1.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="16.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.29" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
-    <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />  
+    <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.0.121" />  
   </ItemGroup>
 
   <ItemGroup>
@@ -56,14 +62,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Modules\AudioBookList\AudioBookItemCell.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Update="Modules\AudiobookList\AudiobookItemCell.xaml.cs">
+      <DependentUpon>AudiobookItemCell.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\AudioBookList\AudioBookListPage.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Update="Modules\AudiobookList\AudiobookListPage.xaml.cs">
+      <DependentUpon>AudiobookListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\AudioBookList\AudioBookPage.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Update="Modules\AudiobookList\AudiobookPage.xaml.cs">
+      <DependentUpon>AudiobookPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\GrammarList\GrammarItemCell.xaml.cs">
       <DependentUpon>GrammarItemCell.xaml</DependentUpon>
