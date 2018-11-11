@@ -6,14 +6,14 @@ using TTKSCore.Common;
 
 namespace TongTongAdmin.Modules
 {
-    public class AudioBookViewModel : BasePageViewModel, IAudioBookViewModel
+    public class AudiobookViewModel : BasePageViewModel, IAudiobookViewModel
     {
-        public AudioBookViewModel(
+        public AudiobookViewModel(
             IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
         }
 
-        public override string Title => "Reading Program";
+        public override string Title => "Audiobook";
     }
 }

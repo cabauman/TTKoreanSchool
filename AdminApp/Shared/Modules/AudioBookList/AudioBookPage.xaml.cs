@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace TongTongAdmin.Modules
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AudioBookPage : ReactiveContentPage<IAudioBookViewModel>
+	public partial class AudiobookPage : ReactiveContentPage<IAudiobookViewModel>
     {
-		public AudioBookPage()
+		public AudiobookPage()
 		{
 			InitializeComponent();
 		}

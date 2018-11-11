@@ -1,41 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reactive.Linq;
+using ReactiveUI;
 using ReactiveUI.XamForms;
-using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace TongTongAdmin.Modules
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AudioBookListPage : ReactiveContentPage<IAudioBookListViewModel>
+	public partial class AudiobookListPage : ReactiveContentPage<IAudiobookListViewModel>
     {
-		public AudioBookListPage()
+		public AudiobookListPage()
 		{
 			InitializeComponent();
 
-            Device.BeginInvokeOnMainThread(
-                () =>
-                {
-                    var sfGrid = new SfDataGrid();
-                    sfGrid.ColumnSizer = ColumnSizer.Star;
-                    sfGrid.VerticalOptions = LayoutOptions.FillAndExpand;
-                    sfGrid.NavigationMode = NavigationMode.Cell;
-                    sfGrid.SelectionMode = SelectionMode.Single;
-                    sfGrid.AllowEditing = true;
-                    sfGrid.EditTapAction = TapAction.OnDoubleTap;
-                    sfGrid.EditorSelectionBehavior = EditorSelectionBehavior.MoveLast;
-                    sfGrid.ItemsSource = new Services.OrderInfoRepository().OrderInfoCollection;
-
-                    Content = new StackLayout
-                    {
-                        VerticalOptions = LayoutOptions.FillAndExpand,
-                        Children = { sfGrid },
-                    };
-                });
+            this
+                .WhenAnyValue(x => x.ViewModel)
+                .Where(x => x != null)
+                .Take(1)
+                .Subscribe(x => AudiobookListView.ItemsSource = x.AudiobookItems);
+            //this
+            //    .Bind(ViewModel, vm => vm.AudiobookItems, v => v.AudiobookListView.ItemsSource);
+            this
+                .BindCommand(ViewModel, vm => vm.CreateItem, v => v.AddButton);
+            this
+                .BindCommand(ViewModel, vm => vm.UpsertItem, v => v.SaveButton);
+            this
+                .BindCommand(ViewModel, vm => vm.DeleteItem, v => v.DeleteButton);
         }
 	}
 }

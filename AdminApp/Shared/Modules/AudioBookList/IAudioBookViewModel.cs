@@ -2,7 +2,7 @@
 
 namespace TongTongAdmin.Modules
 {
-    public interface IAudioBookViewModel
+    public interface IAudiobookViewModel
     {
     }
 }
