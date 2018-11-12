@@ -35,6 +35,20 @@
             Grid.ColumnSpan="2"
             Text="Welcome to Xamarin.Forms!" />
         <Button
+            x:Name="EditImageButton"
+            Grid.Row="1"
+            Grid.Column="1"
+            Image="ic_edit.png"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button
+            x:Name="DeleteImageButton"
+            Grid.Row="1"
+            Grid.Column="1"
+            Image="ic_delete.png"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button
             x:Name="UploadAudioButton"
             Grid.Row="1"
             Grid.Column="1"

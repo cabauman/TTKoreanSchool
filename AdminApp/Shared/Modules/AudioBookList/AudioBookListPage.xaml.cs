@@ -26,9 +26,19 @@ namespace TongTongAdmin.Modules
             this
                 .BindCommand(ViewModel, vm => vm.CreateItem, v => v.AddButton);
             this
-                .BindCommand(ViewModel, vm => vm.UpsertItem, v => v.SaveButton);
+                .BindCommand(ViewModel, vm => vm.SaveItem, v => v.SaveButton);
             this
                 .BindCommand(ViewModel, vm => vm.DeleteItem, v => v.DeleteButton);
+
+            this
+                .ViewModel
+                .ConfirmDelete
+                .RegisterHandler(
+                    async context =>
+                    {
+                        bool result = await DisplayAlert("Delete Image", $"Are you sure you want to delete '{context.Input}'?", "Yes", "No");
+                        context.SetOutput(result);
+                    });
         }
 	}
 }

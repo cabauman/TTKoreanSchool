@@ -14,7 +14,9 @@ namespace TongTongAdmin.Modules
 
         ReactiveCommand<Unit, Unit> DeleteItem { get; }
 
-        ReactiveCommand<Unit, Unit> UpsertItem { get; }
+        ReactiveCommand<Unit, Unit> SaveItem { get; }
+
+        Interaction<string, bool> ConfirmDelete { get; }
 
         IRepository<Audiobook> AudiobookRepository { get; }
 

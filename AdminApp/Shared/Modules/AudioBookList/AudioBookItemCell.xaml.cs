@@ -33,6 +33,9 @@ namespace TongTongAdmin.Modules
                 .OneWayBind(ViewModel, vm => vm.UploadImage, v => v.ImageTapGesture.Command)
                 .DisposeWith(disposables);
             this
+                .BindCommand(ViewModel, vm => vm.DeleteImage, v => v.DeleteImageButton)
+                .DisposeWith(disposables);
+            this
                 .OneWayBind(ViewModel, vm => vm.ImageUrl, v => v.Image.Source, x => new ImageSourceConverter().ConvertFromInvariantString(x))
                 .DisposeWith(disposables);
         }
