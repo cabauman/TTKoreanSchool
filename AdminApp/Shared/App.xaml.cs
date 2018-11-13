@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using ReactiveUI;
 using System.Threading.Tasks;
 using TongTongAdmin.Common;
+using TTKSCore.Config;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TongTongAdmin
@@ -13,6 +14,7 @@ namespace TongTongAdmin
         public App()
         {
             LiveReload.Init();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Constants.SYNC_FUSION_LICENSE);
 
             InitializeComponent();
 
