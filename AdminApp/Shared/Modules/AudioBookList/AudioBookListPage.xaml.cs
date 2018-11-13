@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.XamForms;
@@ -20,16 +20,31 @@ namespace TongTongAdmin.Modules
                 .WhenAnyValue(x => x.ViewModel)
                 .Where(x => x != null)
                 .Take(1)
-                .Subscribe(x => AudiobookListView.ItemsSource = x.AudiobookItems);
-            //this
-            //    .Bind(ViewModel, vm => vm.AudiobookItems, v => v.AudiobookListView.ItemsSource);
-            this
-                .BindCommand(ViewModel, vm => vm.CreateItem, v => v.AddButton);
-            this
-                .BindCommand(ViewModel, vm => vm.SaveItem, v => v.SaveButton);
-            this
-                .BindCommand(ViewModel, vm => vm.DeleteItem, v => v.DeleteButton);
+                .Subscribe(PopulateFromViewModel);
 
+            this.WhenActivated(Init);
+        }
+
+        private void PopulateFromViewModel(IAudiobookListViewModel vm)
+        {
+            ViewModel.LoadItems.Execute().Subscribe();
+            AudiobookListView.ItemsSource = vm.AudiobookItems;
+        }
+
+        private void Init(CompositeDisposable disposables)
+        {
+            this
+                .Bind(ViewModel, vm => vm.SelectedItem, v => v.AudiobookListView.SelectedItem)
+                .DisposeWith(disposables);
+            this
+                .BindCommand(ViewModel, vm => vm.CreateItem, v => v.AddButton)
+                .DisposeWith(disposables);
+            this
+                .BindCommand(ViewModel, vm => vm.SaveItem, v => v.SaveButton)
+                .DisposeWith(disposables);
+            this
+                .BindCommand(ViewModel, vm => vm.DeleteItem, v => v.DeleteButton)
+                .DisposeWith(disposables);
             this
                 .ViewModel
                 .ConfirmDelete
@@ -38,7 +53,8 @@ namespace TongTongAdmin.Modules
                     {
                         bool result = await DisplayAlert("Delete Image", $"Are you sure you want to delete '{context.Input}'?", "Yes", "No");
                         context.SetOutput(result);
-                    });
+                    })
+                .DisposeWith(disposables);
         }
 	}
 }

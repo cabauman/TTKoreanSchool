@@ -18,8 +18,10 @@ namespace TongTongAdmin.Modules
 
         Interaction<string, bool> ConfirmDelete { get; }
 
-        IRepository<Audiobook> AudiobookRepository { get; }
+        IAudiobookItemViewModel SelectedItem { get; set; }
 
-        ObservableCollection<IAudiobookItemViewModel> AudiobookItems { get; }
+        IRepository<Audiobook> AudiobookRepo { get; }
+
+        ReadOnlyObservableCollection<IAudiobookItemViewModel> AudiobookItems { get; }
     }
 }

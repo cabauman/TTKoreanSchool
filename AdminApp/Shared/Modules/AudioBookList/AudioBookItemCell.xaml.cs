@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Text;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.XamForms;
@@ -30,13 +30,16 @@ namespace TongTongAdmin.Modules
                 .BindCommand(ViewModel, vm => vm.UploadAudio, v => v.UploadAudioButton)
                 .DisposeWith(disposables);
             this
-                .OneWayBind(ViewModel, vm => vm.UploadImage, v => v.ImageTapGesture.Command)
+                .BindCommand(ViewModel, vm => vm.UploadImage2, v => v.EditImageButton)
                 .DisposeWith(disposables);
             this
                 .BindCommand(ViewModel, vm => vm.DeleteImage, v => v.DeleteImageButton)
                 .DisposeWith(disposables);
+            //this
+            //    .OneWayBind(ViewModel, vm => vm.ImageUrl, v => v.Image.Source, x => new ImageSourceConverter().ConvertFromInvariantString(x))
+            //    .DisposeWith(disposables);
             this
-                .OneWayBind(ViewModel, vm => vm.ImageUrl, v => v.Image.Source, x => new ImageSourceConverter().ConvertFromInvariantString(x))
+                .Bind(ViewModel, vm => vm.Title, v => v.TitleEntry.Text)
                 .DisposeWith(disposables);
         }
 	}

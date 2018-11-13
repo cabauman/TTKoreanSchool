@@ -19,24 +19,43 @@ namespace TongTongAdmin.Modules
 {
     public class AudiobookListViewModel : BasePageViewModel, IAudiobookListViewModel
     {
+        private readonly ObservableCollection<IAudiobookItemViewModel> _audiobookItems;
+        private readonly ReadOnlyObservableCollection<IAudiobookItemViewModel> _audiobookVms;
+        private readonly ISourceList<Audiobook> _audiobooks;
         private readonly ObservableAsPropertyHelper<int> _uploadProgress;
 
         private IAudiobookItemViewModel _selectedItem;
 
         public AudiobookListViewModel(
             IViewStackService viewStackService = null,
-            IRepository<Audiobook> audioBookRepository = null)
+            IRepository<Audiobook> audioBookRepo = null)
                 : base(viewStackService)
         {
-            AudiobookRepository = Locator.Current.GetService<IRepository<Audiobook>>();
-            AudiobookItems = new ObservableCollection<IAudiobookItemViewModel>();
+            AudiobookRepo = audioBookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
             ConfirmDelete = new Interaction<string, bool>();
+            
+            _audiobooks = new SourceList<Audiobook>();
+            LoadItems = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return AudiobookRepo
+                        .GetItems(true)
+                        .Do(x => _audiobooks.AddRange(x))
+                        .Select(_ => Unit.Default);
+                });
+
+            _audiobooks
+                .Connect()
+                .Transform(x => new AudiobookItemViewModel(x) as IAudiobookItemViewModel)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Bind(out _audiobookVms)
+                .Subscribe();
 
             CreateItem = ReactiveCommand.Create(
-                () => AudiobookItems.Add(new AudiobookItemViewModel()));
+                () => _audiobooks.Add(new Audiobook()));
 
             SaveItem = ReactiveCommand.CreateFromObservable(
-                () => AudiobookRepository.Upsert(SelectedItem.Model));
+                () => AudiobookRepo.Upsert(SelectedItem.Model));
 
             DeleteItem = ReactiveCommand.CreateFromObservable(
                 () =>
@@ -44,25 +63,11 @@ namespace TongTongAdmin.Modules
                     return ConfirmDelete
                         .Handle(SelectedItem.ImageUrl)
                         .Where(result => result)
-                        .SelectMany(_ => AudiobookRepository.Delete(SelectedItem.Model.Id))
-                        .Do(_ => AudiobookItems.Remove(SelectedItem));
+                        //.SelectMany(_ => AudiobookRepository.Delete(SelectedItem.Model.Id))
+                        //.ObserveOn(RxApp.MainThreadScheduler)
+                        .Do(_ => _audiobooks.Remove(SelectedItem.Model))
+                        .Select(_ => Unit.Default);
                 });
-
-            _uploadProgress = Observable
-                .Merge(UploadImage, UploadAudio)
-                .Where(x => x.IsLeft)
-                .Select(x => x.Left)
-                .ToProperty(this, x => x.UploadProgress);
-
-            AudiobookItems
-                .ToObservable()
-                .SelectMany(x => x.UploadImage)
-                .Subscribe(x => { });
-
-            AudiobookItems
-                .ToObservable()
-                .SelectMany(x => x.PlayAudio2)
-                .Subscribe(x => MediaManager.Play(new MediaFile(x)));
         }
 
         public override string Title => "Audiobooks";
@@ -79,7 +84,7 @@ namespace TongTongAdmin.Modules
 
         public IObservable<long> ModifiedItemPulse { get; }
 
-        public IRepository<Audiobook> AudiobookRepository { get; }
+        public IRepository<Audiobook> AudiobookRepo { get; }
 
         public IFirebaseStorageService FirebaseStorageService { get; }
 
@@ -89,7 +94,7 @@ namespace TongTongAdmin.Modules
             set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
         }
 
-        public ObservableCollection<IAudiobookItemViewModel> AudiobookItems { get; }
+        public ReadOnlyObservableCollection<IAudiobookItemViewModel> AudiobookItems => _audiobookVms;
 
 
 

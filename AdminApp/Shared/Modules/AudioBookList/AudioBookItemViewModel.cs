@@ -11,6 +11,7 @@ using Plugin.MediaManager.Abstractions;
 using Plugin.MediaManager.Abstractions.Implementations;
 using Plugin.MediaManager.Reactive;
 using ReactiveUI;
+using Splat;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
@@ -18,53 +19,48 @@ namespace TongTongAdmin.Modules
     public class AudiobookItemViewModel : ReactiveObject, IAudiobookItemViewModel
     {
         private readonly ObservableAsPropertyHelper<int> _uploadProgress;
-        private readonly ObservableAsPropertyHelper<string> _title;
         private readonly ObservableAsPropertyHelper<string> _imageUrl;
         private readonly ObservableAsPropertyHelper<string> _audioUrl;
 
+        private string _title;
         private bool _wasModified;
+        private string _imageUrl2;
 
         public AudiobookItemViewModel(
             Audiobook model = null,
+            IRepository<Audiobook> audiobookRepo = null,
+            IFirebaseStorageService firebaseStorageService = null,
             ReactiveMediaManager mediaManager = null)
         {
             Model = model ?? new Audiobook();
+            AudiobookRepo = audiobookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
+            FirebaseStorageService = firebaseStorageService ?? Locator.Current.GetService<IFirebaseStorageService>();
             MediaManager = mediaManager ?? new ReactiveMediaManager();
-            ConfirmDelete = new Interaction<string, bool>();
-            DeleteImage = ReactiveCommand.CreateFromObservable(
+
+            Title = Model.Title;
+
+            CancelUpload = ReactiveCommand.Create(() => Unit.Default);
+
+            UploadImage2 = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
-                    return ConfirmDelete
-                        .Handle("")
-                        .Where(result => result)
-                        .Select(_ => default(string));
+                    return Observable
+                        .Return(Unit.Default)
+                        .Do(url => ImageUrl = "ic_delete.png");
                 });
-
-            var canPlayAudio = this.WhenAnyValue(x => x.AudioUrl).Select(x => !string.IsNullOrWhiteSpace(x));
-            PlayAudio = ReactiveCommand.CreateFromObservable(
-                () => MediaManager.Play(new MediaFile(AudioUrl)).ToObservable(), canPlayAudio);
-
-            StopAudio = ReactiveCommand.CreateFromObservable(
-                () => MediaManager.Stop().ToObservable(), canPlayAudio);
-
-            DeleteImage = ReactiveCommand.Create(() => default(string));
             UploadImage = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
                     return CrossFilePicker.Current.PickFile(new string[] { ".jpg", ".png" })
                         .ToObservable()
                         .Where(x => x != null)
-                        .SelectMany(file => UploadFile(file, $"audiobookImages/{file.FileName}"));
+                        .SelectMany(file => UploadFile(file, $"audiobook-images/{file.FileName}"));
                 });
 
-            _imageUrl = DeleteImage
-                .Merge(UploadImage.Where(x => x.IsRight).Select(x => x.Right))
-                .ToProperty(this, x => x.ImageUrl, model.ImageUrl);
-
-            DeleteAudio = ReactiveCommand.CreateFromObservable(
-                () => DeleteFile($"audiobookAudio/{0}")
-                        .SelectMany(x => AudiobookRepo.Upsert(Model))
-                        .Select(_ => default(string)));
+            UploadImage
+                .Where(x => x.IsRight)
+                .Select(x => x.Right)
+                .Subscribe(url => ImageUrl = url);
 
             UploadAudio = ReactiveCommand.CreateFromObservable(
                 () =>
@@ -72,15 +68,13 @@ namespace TongTongAdmin.Modules
                     return CrossFilePicker.Current.PickFile(new string[] { ".mp3" })
                         .ToObservable()
                         .Where(x => x != null)
-                        .SelectMany(file => UploadFile(file, $"audiobookAudio/{file.FileName}"));
+                        .SelectMany(file => UploadFile(file, $"audiobook-audio/{file.FileName}"));
                 });
 
-            _audioUrl = DeleteImage
-                .Merge(
-                    UploadAudio
-                        .Where(x => x.IsRight)
-                        .SelectMany(x => AudiobookRepo.Upsert(Model).Select(_ => x.Right)))
-                .ToProperty(this, x => x.AudioUrl, model.AudioUrl);
+            _audioUrl = UploadAudio
+                .Where(x => x.IsRight)
+                .Select(x => x.Right)
+                .ToProperty(this, x => x.AudioUrl, Model.AudioUrl);
 
             _uploadProgress = Observable
                 .Merge(UploadImage, UploadAudio)
@@ -88,9 +82,19 @@ namespace TongTongAdmin.Modules
                 .Select(x => x.Left)
                 .ToProperty(this, x => x.UploadProgress);
 
+            //this
+            //    .WhenAnyValue(x => x.ImageUrl)
+            //    .Skip(1)
+            //    .Do(x => Model.ImageUrl = x)
+            //    .SelectMany(_ => Model.Id != null ? AudiobookRepo.Upsert(Model) : AudiobookRepo.Add(Model))
+            //    .Subscribe();
+
             this
-                .WhenAnyValue(x => x.ImageUrl, x => x.AudioUrl, x => x.Title)
-                .Subscribe(_ => WasModified = true);
+                .WhenAnyValue(x => x.AudioUrl)
+                .Skip(1)
+                .Do(x => Model.AudioUrl = x)
+                .SelectMany(_ => Model.Id != null ? AudiobookRepo.Upsert(Model) : AudiobookRepo.Add(Model))
+                .Subscribe();
         }
 
         public Audiobook Model { get; set; }
@@ -99,6 +103,7 @@ namespace TongTongAdmin.Modules
 
         public ReactiveCommand<Unit, Unit> StopAudio { get; }
 
+        public ReactiveCommand<Unit, Unit> UploadImage2 { get; }
         public ReactiveCommand<Unit, Either<int, string>> UploadImage { get; }
 
         public ReactiveCommand<Unit, string> DeleteImage { get; }
@@ -115,15 +120,24 @@ namespace TongTongAdmin.Modules
 
         public ReactiveMediaManager MediaManager { get; }
 
-        public string Title => _title.Value;
-
-        public string ImageUrl => _imageUrl.Value;
+        //public string ImageUrl => _imageUrl.Value;
+        public string ImageUrl
+        {
+            get => _imageUrl2;
+            set => this.RaiseAndSetIfChanged(ref _imageUrl2, value);
+        }
 
         public string AudioUrl => _audioUrl.Value;
 
         public int UploadProgress => _uploadProgress.Value;
 
         public IFirebaseStorageService FirebaseStorageService { get; }
+
+        public string Title
+        {
+            get => _title;
+            set => this.RaiseAndSetIfChanged(ref _title, value);
+        }
 
         public bool WasModified
         {
@@ -135,7 +149,8 @@ namespace TongTongAdmin.Modules
         {
             return FirebaseStorageService
                 .Upload(path, fileData.GetStream())
-                .TakeUntil(CancelUpload);
+                .TakeUntil(CancelUpload)
+                .Finally(() => fileData.Dispose());
         }
 
         private IObservable<Unit> DeleteFile(string path)

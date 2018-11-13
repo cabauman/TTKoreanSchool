@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Firebase.Storage;
 using GameCtor.FirebaseAuth;
 using GameCtor.FirebaseAuth.DotNet;
+using GameCtor.FirebaseStorage.DotNet;
 using GameCtor.RxNavigation;
 using GameCtor.RxNavigation.XamForms;
 using GameCtor.XamarinAuth;
@@ -10,6 +12,7 @@ using LocalStorage.XamarinEssentials;
 using ReactiveUI;
 using Splat;
 using TongTongAdmin.Modules;
+using TTKSCore;
 using TTKSCore.Config;
 
 namespace TongTongAdmin
@@ -62,6 +65,8 @@ namespace TongTongAdmin
             Locator.CurrentMutable.Register(() => new AuthService(), typeof(IAuthService));
             FirebaseAuthService = new FirebaseAuthService(ApiKeys.FIREBASE, new LocalStorageService());
             Locator.CurrentMutable.RegisterConstant(FirebaseAuthService, typeof(IFirebaseAuthService));
+            Locator.CurrentMutable.RegisterConstant(new FirebaseStorageService(new FirebaseStorage("tt-korean-academy.appspot.com")), typeof(IFirebaseStorageService));
+            new RepoRegistrar(FirebaseAuthService, Locator.CurrentMutable);
         }
 
         private void RegisterViews()

@@ -15,7 +15,7 @@
         <syncfusion:SfListView
             x:Name="AudiobookListView"
             SelectionMode="Single"
-            ItemSize="120"
+            ItemSize="260"
             ItemSpacing="10"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="FillAndExpand">
@@ -25,7 +25,7 @@
                 </DataTemplate>
             </syncfusion:SfListView.ItemTemplate>
             <syncfusion:SfListView.LayoutManager>
-                <syncfusion:GridLayout SpanCount="3" />
+                <syncfusion:GridLayout SpanCount="5" />
             </syncfusion:SfListView.LayoutManager>
         </syncfusion:SfListView>
     </ContentPage.Content>

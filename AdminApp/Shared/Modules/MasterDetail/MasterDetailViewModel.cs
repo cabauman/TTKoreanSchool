@@ -56,10 +56,10 @@ namespace TongTongAdmin.Modules
         {
             return new[]
             {
+                new MasterCellViewModel { Title = "Audio Books", IconSource = "reminders.png", TargetType = typeof(AudiobookListViewModel) },
                 new MasterCellViewModel { Title = "Vocab", IconSource = "contacts.png", TargetType = typeof(VocabListViewModel) },
                 new MasterCellViewModel { Title = "Grammar", IconSource = "contacts.png", TargetType = typeof(GrammarListViewModel) },
                 new MasterCellViewModel { Title = "Sentences", IconSource = "contacts.png", TargetType = typeof(SentenceListViewModel) },
-                new MasterCellViewModel { Title = "Audio Books", IconSource = "reminders.png", TargetType = typeof(AudiobookListViewModel) },
             };
         }
     }
