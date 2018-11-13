@@ -104,8 +104,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ic_delete.png" />
+    <Content Include="ic_edit.png" />
     <Content Include="ic_play.png" />
     <Content Include="ic_stop.png" />
+    <Content Include="ic_upload.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
@@ -153,7 +156,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid">
       <Version>16.3.0.21</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Plugin.FilePicker">
       <Version>2.0.121</Version>
