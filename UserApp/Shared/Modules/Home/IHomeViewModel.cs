@@ -1,15 +1,16 @@
-﻿using ReactiveUI;
+﻿using System.Reactive;
+using ReactiveUI;
 
 namespace TTKoreanSchool.Modules
 {
     public interface IHomeViewModel
     {
-        ReactiveCommand NavigateToHangulSection { get; }
+        ReactiveCommand<Unit, Unit> NavigateToHangulSection { get; }
 
-        ReactiveCommand NavigateToVocabSection { get; }
+        ReactiveCommand<Unit, Unit> NavigateToVocabSection { get; }
 
-        ReactiveCommand NavigateToGrammarSection { get; }
+        ReactiveCommand<Unit, Unit> NavigateToGrammarSection { get; }
 
-        ReactiveCommand NavigateToConjugatorSection { get; }
+        ReactiveCommand<Unit, Unit> NavigateToConjugatorSection { get; }
     }
 }

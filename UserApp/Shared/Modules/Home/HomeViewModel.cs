@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive;
 using GameCtor.RxNavigation;
 using ReactiveUI;
 using TTKSCore.Common;
@@ -28,12 +29,12 @@ namespace TTKoreanSchool.Modules
 
         public override string Title => "Home";
 
-        public ReactiveCommand NavigateToHangulSection { get; }
+        public ReactiveCommand<Unit, Unit> NavigateToHangulSection { get; }
 
-        public ReactiveCommand NavigateToVocabSection { get; }
+        public ReactiveCommand<Unit, Unit> NavigateToVocabSection { get; }
 
-        public ReactiveCommand NavigateToGrammarSection { get; }
+        public ReactiveCommand<Unit, Unit> NavigateToGrammarSection { get; }
 
-        public ReactiveCommand NavigateToConjugatorSection { get; }
+        public ReactiveCommand<Unit, Unit> NavigateToConjugatorSection { get; }
     }
 }
