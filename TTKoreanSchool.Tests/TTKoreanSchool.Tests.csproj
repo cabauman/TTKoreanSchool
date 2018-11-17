@@ -38,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GameCtor.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.IO.Compression" />
@@ -55,8 +56,13 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="AdminApp\AudiobookListViewModelTest.cs" />
+    <Compile Include="Helpers\ISchedulerProvider.cs" />
+    <Compile Include="Helpers\RxUiSchedulers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\ImmediateSchedulers.cs" />
+    <Compile Include="Helpers\TestSchedulers.cs" />
+    <Compile Include="Helpers\SchedulerProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentAssertions">
@@ -94,6 +100,23 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserApp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdminApp\Shared\TongTongAdmin.csproj">
+      <Project>{b2ca10c2-b9b1-4021-92de-463dfd228ab4}</Project>
+      <Name>TongTongAdmin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TTKSCore\TTKSCore.csproj">
+      <Project>{0e27802d-af68-49a6-a900-fa3305a36925}</Project>
+      <Name>TTKSCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserApp\Shared\TTKoreanSchool.csproj">
+      <Project>{37fdcf57-928d-4259-b889-93c646ebf1ac}</Project>
+      <Name>TTKoreanSchool</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
