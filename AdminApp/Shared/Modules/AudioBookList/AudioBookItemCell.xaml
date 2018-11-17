@@ -20,7 +20,7 @@
             Aspect="AspectFit"
             BackgroundColor="AliceBlue">
         </Image>
-        <Label Text="{Binding UploadProgress}" />
+        <Label Text="" />
         <Entry
             x:Name="TitleEntry"
             Grid.Row="1"
@@ -59,6 +59,11 @@
             <Button
                 x:Name="PlayAudioButton"
                 Image="ic_play.png"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="StopAudioButton"
+                Image="ic_stop.png"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
             <Image

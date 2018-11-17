@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using DynamicData;
 using DynamicData.Binding;
 using GameCtor.FirebaseStorage.DotNet;
@@ -28,26 +30,29 @@ namespace TongTongAdmin.Modules
 
         public AudiobookListViewModel(
             IViewStackService viewStackService = null,
-            IRepository<Audiobook> audioBookRepo = null)
+            IRepository<Audiobook> audioBookRepo = null, 
+            IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
             AudiobookRepo = audioBookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
+            mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
             ConfirmDelete = new Interaction<string, bool>();
-            
+            MediaManager = new ReactiveMediaManager();
             _audiobooks = new SourceList<Audiobook>();
+
             LoadItems = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
                     return AudiobookRepo
-                        .GetItems(true)
+                        .GetItems(false)
                         .Do(x => _audiobooks.AddRange(x))
                         .Select(_ => Unit.Default);
                 });
 
             _audiobooks
                 .Connect()
-                .Transform(x => new AudiobookItemViewModel(x) as IAudiobookItemViewModel)
-                .ObserveOn(RxApp.MainThreadScheduler)
+                .Transform(x => new AudiobookItemViewModel(x, mediaManager: MediaManager) as IAudiobookItemViewModel)
+                .ObserveOn(mainScheduler)
                 .Bind(out _audiobookVms)
                 .Subscribe();
 
@@ -99,10 +104,6 @@ namespace TongTongAdmin.Modules
 
 
         public int UploadProgress => _uploadProgress.Value;
-
-        public ReactiveCommand<Unit, Unit> PlayAudio { get; }
-
-        public ReactiveCommand<Unit, Unit> StopAudio { get; }
 
         public ReactiveMediaManager MediaManager { get; }
     }

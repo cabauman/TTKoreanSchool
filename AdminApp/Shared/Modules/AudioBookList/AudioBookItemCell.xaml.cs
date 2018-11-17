@@ -27,17 +27,23 @@ namespace TongTongAdmin.Modules
                 .BindCommand(ViewModel, vm => vm.PlayAudio, v => v.PlayAudioButton)
                 .DisposeWith(disposables);
             this
+                .BindCommand(ViewModel, vm => vm.StopAudio, v => v.StopAudioButton)
+                .DisposeWith(disposables);
+            this
                 .BindCommand(ViewModel, vm => vm.UploadAudio, v => v.UploadAudioButton)
                 .DisposeWith(disposables);
             this
-                .BindCommand(ViewModel, vm => vm.UploadImage2, v => v.EditImageButton)
+                .BindCommand(ViewModel, vm => vm.UploadImage, v => v.EditImageButton)
                 .DisposeWith(disposables);
             this
                 .BindCommand(ViewModel, vm => vm.DeleteImage, v => v.DeleteImageButton)
                 .DisposeWith(disposables);
-            //this
-            //    .OneWayBind(ViewModel, vm => vm.ImageUrl, v => v.Image.Source, x => new ImageSourceConverter().ConvertFromInvariantString(x))
-            //    .DisposeWith(disposables);
+            this
+                .OneWayBind(ViewModel, vm => vm.IsPlaying, v => v.PlayAudioButton.IsVisible, playing => !playing)
+                .DisposeWith(disposables);
+            this
+                .OneWayBind(ViewModel, vm => vm.IsPlaying, v => v.StopAudioButton.IsVisible)
+                .DisposeWith(disposables);
             this
                 .Bind(ViewModel, vm => vm.Title, v => v.TitleEntry.Text)
                 .DisposeWith(disposables);
