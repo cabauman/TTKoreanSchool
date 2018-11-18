@@ -38,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GameCtor.FirebaseStorage.DotNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="GameCtor.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -57,12 +58,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AdminApp\AudiobookListViewModelTest.cs" />
-    <Compile Include="Helpers\ISchedulerProvider.cs" />
-    <Compile Include="Helpers\RxUiSchedulers.cs" />
+    <Compile Include="Helpers\BuilderExtensions.cs" />
+    <Compile Include="Helpers\LeakMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\ImmediateSchedulers.cs" />
     <Compile Include="Helpers\TestSchedulers.cs" />
-    <Compile Include="Helpers\SchedulerProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentAssertions">
@@ -82,6 +81,9 @@
     </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Mocks">
+      <Version>3.0.0.2</Version>
     </PackageReference>
     <PackageReference Include="xunit">
       <Version>2.4.1</Version>
