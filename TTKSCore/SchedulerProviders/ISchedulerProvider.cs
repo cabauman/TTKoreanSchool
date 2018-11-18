@@ -1,6 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 
-namespace TTKoreanSchool.Tests
+namespace TTKSCore
 {
     public interface ISchedulerProvider
     {

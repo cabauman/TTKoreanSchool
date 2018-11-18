@@ -1,7 +1,7 @@
 ﻿using System.Reactive.Concurrency;
 using ReactiveUI;
 
-namespace TTKoreanSchool.Tests
+namespace TTKSCore
 {
     public sealed class RxUiSchedulers : ISchedulerProvider
     {
