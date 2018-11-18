@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -15,11 +16,13 @@ using Plugin.MediaManager.Reactive;
 using ReactiveUI;
 using Splat;
 using TTKSCore.Common;
+using TTKSCore.Config;
+using TTKSCore.Extensions;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
 {
-    public class AudiobookListViewModel : BasePageViewModel, IAudiobookListViewModel
+    public class AudiobookListViewModel : BasePageViewModel, IAudiobookListViewModel, ISupportsActivation
     {
         private readonly ObservableCollection<IAudiobookItemViewModel> _audiobookItems;
         private readonly ReadOnlyObservableCollection<IAudiobookItemViewModel> _audiobookVms;
@@ -30,7 +33,8 @@ namespace TongTongAdmin.Modules
 
         public AudiobookListViewModel(
             IViewStackService viewStackService = null,
-            IRepository<Audiobook> audioBookRepo = null, 
+            IRepository<Audiobook> audioBookRepo = null,
+            IFirebaseStorageService firebaseStorageService = null,
             IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
@@ -51,28 +55,39 @@ namespace TongTongAdmin.Modules
 
             _audiobooks
                 .Connect()
-                .Transform(x => new AudiobookItemViewModel(x, mediaManager: MediaManager) as IAudiobookItemViewModel)
+                .Transform(x => new AudiobookItemViewModel(x, mediaManager: MediaManager, confirmDelete: ConfirmDelete) as IAudiobookItemViewModel)
                 .ObserveOn(mainScheduler)
                 .Bind(out _audiobookVms)
-                .Subscribe();
+                .Subscribe(_ => MakeSureItemIsSelected());
 
             CreateItem = ReactiveCommand.Create(
                 () => _audiobooks.Add(new Audiobook()));
 
+            var canDeleteOrSaveItem = this
+                .WhenAnyValue(x => x.SelectedItem)
+                .Select(x => x != null);
+
             SaveItem = ReactiveCommand.CreateFromObservable(
-                () => AudiobookRepo.Upsert(SelectedItem.Model));
+                () => AudiobookRepo.Upsert(SelectedItem.Model), canDeleteOrSaveItem);
 
             DeleteItem = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
                     return ConfirmDelete
-                        .Handle(SelectedItem.ImageUrl)
+                        .Handle(SelectedItem.Title)
                         .Where(result => result)
-                        //.SelectMany(_ => AudiobookRepository.Delete(SelectedItem.Model.Id))
+                        //.SelectMany(_ => DeleteFilesAndDbEntry())
                         //.ObserveOn(RxApp.MainThreadScheduler)
                         .Do(_ => _audiobooks.Remove(SelectedItem.Model))
                         .Select(_ => Unit.Default);
-                });
+                },
+                canDeleteOrSaveItem);
+
+            this
+                .GetIsActivated()
+                .Where(isActivated => !isActivated)
+                .SelectMany(_ => MediaManager.Stop().ToObservable())
+                .Subscribe(_ => MediaManager.Dispose());
         }
 
         public override string Title => "Audiobooks";
@@ -106,5 +121,23 @@ namespace TongTongAdmin.Modules
         public int UploadProgress => _uploadProgress.Value;
 
         public ReactiveMediaManager MediaManager { get; }
+
+        public ViewModelActivator Activator { get; } = new ViewModelActivator();
+
+        private void MakeSureItemIsSelected()
+        {
+            if (SelectedItem == null && AudiobookItems.Count > 0)
+            {
+                SelectedItem = AudiobookItems[0];
+            }
+        }
+
+        private IObservable<Unit> DeleteFilesAndDbEntry()
+        {
+            return Observable.Merge(
+                AudiobookRepo.Delete(SelectedItem.Model.Id),
+                FirebaseStorageService.Delete(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_IMAGES, SelectedItem.Model.ImageName)),
+                FirebaseStorageService.Delete(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_AUDIO, SelectedItem.Model.AudioName)));
+        }
     }
 }

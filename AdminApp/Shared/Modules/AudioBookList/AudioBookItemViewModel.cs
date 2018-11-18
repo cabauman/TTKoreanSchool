@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
@@ -13,6 +14,7 @@ using Plugin.MediaManager.Abstractions.Implementations;
 using Plugin.MediaManager.Reactive;
 using ReactiveUI;
 using Splat;
+using TTKSCore.Config;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
@@ -32,6 +34,7 @@ namespace TongTongAdmin.Modules
             IRepository<Audiobook> audiobookRepo = null,
             IFirebaseStorageService firebaseStorageService = null,
             ReactiveMediaManager mediaManager = null,
+            Interaction<string, bool> confirmDelete = null,
             IScheduler mainScheduler = null)
         {
             Model = model ?? new Audiobook();
@@ -50,12 +53,26 @@ namespace TongTongAdmin.Modules
                     return CrossFilePicker.Current.PickFile(new string[] { ".jpg", ".png" })
                         .ToObservable()
                         .Where(x => x != null)
-                        .SelectMany(file => UploadFile(file, $"audiobook-images/{file.FileName}"));
+                        .SelectMany(file => UploadFile(file, Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_IMAGES, file.FileName)));
                 });
 
-            _imageUrl = UploadImage
-                .Where(x => x.IsRight)
-                .Select(x => x.Right)
+            var canDeleteImage = this
+                .WhenAnyValue(x => x.ImageUrl)
+                .Select(url => !string.IsNullOrWhiteSpace(url));
+
+            DeleteImage = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return confirmDelete
+                        .Handle(ImageUrl)
+                        .Where(result => result)
+                        .SelectMany(_ => DeleteFile(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_IMAGES, Model.ImageName)))
+                        .Select(_ => string.Empty);
+                },
+                canDeleteImage);
+
+            _imageUrl = DeleteImage
+                .Merge(UploadImage.Where(x => x.IsRight).Select(x => x.Right))
                 .ToProperty(this, x => x.ImageUrl, Model.ImageUrl);
 
             UploadAudio = ReactiveCommand.CreateFromObservable(
@@ -64,12 +81,26 @@ namespace TongTongAdmin.Modules
                     return CrossFilePicker.Current.PickFile(new string[] { ".mp3" })
                         .ToObservable()
                         .Where(x => x != null)
-                        .SelectMany(file => UploadFile(file, $"audiobook-audio/{file.FileName}"));
+                        .SelectMany(file => UploadFile(file, Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_AUDIO, file.FileName)));
                 });
 
-            _audioUrl = UploadAudio
-                .Where(x => x.IsRight)
-                .Select(x => x.Right)
+            var canDeleteAudio = this
+                .WhenAnyValue(x => x.AudioUrl)
+                .Select(url => !string.IsNullOrWhiteSpace(url));
+
+            DeleteAudio = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return confirmDelete
+                        .Handle(AudioUrl)
+                        .Where(result => result)
+                        .SelectMany(_ => DeleteFile(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_AUDIO, Model.ImageName)))
+                        .Select(_ => string.Empty);
+                },
+                canDeleteAudio);
+
+            _audioUrl = DeleteAudio
+                .Merge(UploadAudio.Where(x => x.IsRight).Select(x => x.Right))
                 .ToProperty(this, x => x.AudioUrl, Model.AudioUrl);
 
             _uploadProgress = Observable
@@ -95,11 +126,11 @@ namespace TongTongAdmin.Modules
             this.WhenActivated(
                 disposables =>
                 {
-                _isPlaying = MediaManager
-                    .IsPlaying
-                    .Select(isPlaying => isPlaying && CrossMediaManager.Current.MediaQueue.Current.Url == AudioUrl)
-                    .ToProperty(this, x => x.IsPlaying, scheduler: mainScheduler)
-                    .DisposeWith(disposables);
+                    _isPlaying = MediaManager
+                        .IsPlaying
+                        .Select(isPlaying => isPlaying && CrossMediaManager.Current.MediaQueue.Current.Url == AudioUrl)
+                        .ToProperty(this, x => x.IsPlaying, scheduler: mainScheduler)
+                        .DisposeWith(disposables);
 
                     var canPlayAudio = this.WhenAnyValue(
                         x => x.AudioUrl,
@@ -124,7 +155,7 @@ namespace TongTongAdmin.Modules
 
         public ReactiveCommand<Unit, Unit> StopAudio { get; }
 
-        public bool IsPlaying => _isPlaying.Value;
+        public bool IsPlaying => _isPlaying != null ? _isPlaying.Value : false;
 
         public ReactiveCommand<Unit, Either<int, string>> UploadImage { get; }
 
@@ -142,9 +173,9 @@ namespace TongTongAdmin.Modules
 
         public ReactiveMediaManager MediaManager { get; }
 
-        public string ImageUrl => _imageUrl.Value;
+        public string ImageUrl => _imageUrl?.Value;
 
-        public string AudioUrl => _audioUrl.Value;
+        public string AudioUrl => _audioUrl?.Value;
 
         public int UploadProgress => _uploadProgress.Value;
 
