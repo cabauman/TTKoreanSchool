@@ -66,16 +66,12 @@
                 Image="ic_stop.png"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
-            <Image
+            <Button
                 x:Name="DeleteAudioButton"
-                Aspect="AspectFit"
-                Source="ic_delete.png"
+                Image="ic_delete.png"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="ImageTapGesture" />
-                </Image.GestureRecognizers>
-            </Image>
+            </Button>
         </StackLayout>
     </Grid>
 </rxui:ReactiveContentView>

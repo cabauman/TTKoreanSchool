@@ -33,6 +33,9 @@ namespace TongTongAdmin.Modules
                 .BindCommand(ViewModel, vm => vm.UploadAudio, v => v.UploadAudioButton)
                 .DisposeWith(disposables);
             this
+                .BindCommand(ViewModel, vm => vm.DeleteAudio, v => v.DeleteAudioButton)
+                .DisposeWith(disposables);
+            this
                 .BindCommand(ViewModel, vm => vm.UploadImage, v => v.EditImageButton)
                 .DisposeWith(disposables);
             this
