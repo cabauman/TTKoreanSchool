@@ -21,7 +21,6 @@ namespace TongTongAdmin.Modules
 {
     public class AudiobookItemViewModel : ReactiveObject, IAudiobookItemViewModel, ISupportsActivation
     {
-        private readonly ObservableAsPropertyHelper<int> _uploadProgress;
         private readonly ObservableAsPropertyHelper<string> _imageUrl;
         private readonly ObservableAsPropertyHelper<string> _audioUrl;
         private ObservableAsPropertyHelper<bool> _isPlaying;
@@ -30,22 +29,22 @@ namespace TongTongAdmin.Modules
         private bool _wasModified;
 
         public AudiobookItemViewModel(
-            Audiobook model = null,
+            Audiobook model,
+            ReactiveMediaManager mediaManager,
+            Interaction<string, bool> confirmDelete,
+            ReactiveCommand<Unit, Unit> cancelUpload,
             IRepository<Audiobook> audiobookRepo = null,
             IFirebaseStorageService firebaseStorageService = null,
-            ReactiveMediaManager mediaManager = null,
-            Interaction<string, bool> confirmDelete = null,
             IScheduler mainScheduler = null)
         {
-            Model = model ?? new Audiobook();
+            Model = model;
+            MediaManager = mediaManager;
+            CancelUpload = cancelUpload;
             AudiobookRepo = audiobookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
             FirebaseStorageService = firebaseStorageService ?? Locator.Current.GetService<IFirebaseStorageService>();
-            MediaManager = mediaManager ?? new ReactiveMediaManager();
             mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
 
             Title = Model.Title;
-
-            CancelUpload = ReactiveCommand.Create(() => Unit.Default);
 
             UploadImage = ReactiveCommand.CreateFromObservable(
                 () =>
@@ -53,7 +52,8 @@ namespace TongTongAdmin.Modules
                     return CrossFilePicker.Current.PickFile(new string[] { ".jpg", ".png" })
                         .ToObservable()
                         .Where(x => x != null)
-                        .SelectMany(file => UploadFile(file, Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_IMAGES, file.FileName)));
+                        .Do(file => Model.ImageName = file.FileName)
+                        .SelectMany(file => UploadFile(file, $"{FirebaseStorageDirectories.AUDIOBOOK_IMAGES}/{file.FileName}"));
                 });
 
             var canDeleteImage = this
@@ -64,15 +64,18 @@ namespace TongTongAdmin.Modules
                 () =>
                 {
                     return confirmDelete
-                        .Handle(ImageUrl)
+                        .Handle(Model.ImageName)
                         .Where(result => result)
-                        .SelectMany(_ => DeleteFile(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_IMAGES, Model.ImageName)))
-                        .Select(_ => string.Empty);
+                        .SelectMany(_ => DeleteFile($"{FirebaseStorageDirectories.AUDIOBOOK_IMAGES}/{Model.ImageName}"))
+                        .Do(file => Model.ImageName = default(string))
+                        .Select(_ => default(string));
                 },
                 canDeleteImage);
 
-            _imageUrl = DeleteImage
-                .Merge(UploadImage.Where(x => x.IsRight).Select(x => x.Right))
+            _imageUrl = UploadImage
+                .Where(x => x.IsRight)
+                .Select(x => x.Right)
+                .Merge(DeleteImage)
                 .ToProperty(this, x => x.ImageUrl, Model.ImageUrl);
 
             UploadAudio = ReactiveCommand.CreateFromObservable(
@@ -81,7 +84,8 @@ namespace TongTongAdmin.Modules
                     return CrossFilePicker.Current.PickFile(new string[] { ".mp3" })
                         .ToObservable()
                         .Where(x => x != null)
-                        .SelectMany(file => UploadFile(file, Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_AUDIO, file.FileName)));
+                        .Do(file => Model.AudioName = file.FileName)
+                        .SelectMany(file => UploadFile(file, $"{FirebaseStorageDirectories.AUDIOBOOK_AUDIO}/{file.FileName}"));
                 });
 
             var canDeleteAudio = this
@@ -92,22 +96,19 @@ namespace TongTongAdmin.Modules
                 () =>
                 {
                     return confirmDelete
-                        .Handle(AudioUrl)
+                        .Handle(Model.AudioName)
                         .Where(result => result)
-                        .SelectMany(_ => DeleteFile(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_AUDIO, Model.ImageName)))
-                        .Select(_ => string.Empty);
+                        .SelectMany(_ => DeleteFile($"{FirebaseStorageDirectories.AUDIOBOOK_AUDIO}/{Model.AudioName}"))
+                        .Do(file => Model.AudioName = default(string))
+                        .Select(_ => default(string));
                 },
                 canDeleteAudio);
 
-            _audioUrl = DeleteAudio
-                .Merge(UploadAudio.Where(x => x.IsRight).Select(x => x.Right))
+            _audioUrl = UploadAudio
+                .Where(x => x.IsRight)
+                .Select(x => x.Right)
+                .Merge(DeleteAudio)
                 .ToProperty(this, x => x.AudioUrl, Model.AudioUrl);
-
-            _uploadProgress = Observable
-                .Merge(UploadImage, UploadAudio)
-                .Where(x => x.IsLeft)
-                .Select(x => x.Left)
-                .ToProperty(this, x => x.UploadProgress);
 
             this
                 .WhenAnyValue(x => x.ImageUrl)
@@ -155,8 +156,6 @@ namespace TongTongAdmin.Modules
 
         public ReactiveCommand<Unit, Unit> StopAudio { get; }
 
-        public bool IsPlaying => _isPlaying != null ? _isPlaying.Value : false;
-
         public ReactiveCommand<Unit, Either<int, string>> UploadImage { get; }
 
         public ReactiveCommand<Unit, string> DeleteImage { get; }
@@ -173,11 +172,11 @@ namespace TongTongAdmin.Modules
 
         public ReactiveMediaManager MediaManager { get; }
 
+        public bool IsPlaying => _isPlaying != null ? _isPlaying.Value : false;
+
         public string ImageUrl => _imageUrl?.Value;
 
         public string AudioUrl => _audioUrl?.Value;
-
-        public int UploadProgress => _uploadProgress.Value;
 
         public IFirebaseStorageService FirebaseStorageService { get; }
 
