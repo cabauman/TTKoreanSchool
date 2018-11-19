@@ -25,6 +25,8 @@ namespace TongTongAdmin.Modules
 
         ReactiveCommand<Unit, Either<int, string>> UploadAudio { get; }
 
+        ReactiveCommand<Unit, string> DeleteAudio { get; }
+
         Interaction<string, bool> ConfirmDelete { get; }
 
         string Title { get; set; }

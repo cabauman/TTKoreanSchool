@@ -22,6 +22,15 @@ namespace TongTongAdmin.Modules
                 .Take(1)
                 .Subscribe(PopulateFromViewModel);
 
+            // Dummy for test
+            //this
+            //    .WhenAnyValue(x => x.ViewModel.SelectedItem)
+            //    .Where(x => x != null)
+            //    .Subscribe();
+
+            //this
+            //    .Bind(ViewModel, vm => vm.SelectedItem, v => v.AudiobookListView.SelectedItem);
+
             this.WhenActivated(Init);
         }
 
