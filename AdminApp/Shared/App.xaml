@@ -13,6 +13,28 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+            <Style x:Key="BaseButton" TargetType="Button">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="BorderWidth" Value="0.5" />
+                <Setter Property="FontSize" Value="17.5" />
+                <Style.Triggers>
+                    <Trigger TargetType="Button"
+                             Property="IsEnabled"
+                             Value="True">
+                        <Setter Property="TextColor" Value="Yellow" />
+                        <Setter Property="BackgroundColor" Value="Green" />
+                        <Setter Property="BorderColor" Value="LightGreen" />
+                    </Trigger>
+                    <Trigger TargetType="Button"
+                             Property="IsEnabled"
+                             Value="False">
+                        <Setter Property="TextColor" Value="#5019171c" />
+                        <Setter Property="BackgroundColor" Value="#80ffffff" />
+                        <Setter Property="BorderColor" Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </common:ReactiveApplication>

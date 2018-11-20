@@ -7,9 +7,9 @@
              x:TypeArguments="modules:IAudiobookListViewModel"
              x:Class="TongTongAdmin.Modules.AudiobookListPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="AddButton" Text="Add" Icon="add.png" />
-        <ToolbarItem x:Name="SaveButton" Text="Save" Icon="add.png" />
-        <ToolbarItem x:Name="DeleteButton" Text="Delete" Icon="add.png" />
+        <ToolbarItem x:Name="AddButton" Text="Add" Icon="ic_add.png" />
+        <ToolbarItem x:Name="SaveButton" Text="Save" Icon="ic_save.png" />
+        <ToolbarItem x:Name="DeleteButton" Text="Delete" Icon="ic_delete.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <syncfusion:SfListView

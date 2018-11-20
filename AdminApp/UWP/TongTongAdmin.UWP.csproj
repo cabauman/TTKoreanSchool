@@ -104,6 +104,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ic_add.png" />
+    <Content Include="ic_save.png" />
     <Content Include="ic_delete.png" />
     <Content Include="ic_edit.png" />
     <Content Include="ic_play.png" />
