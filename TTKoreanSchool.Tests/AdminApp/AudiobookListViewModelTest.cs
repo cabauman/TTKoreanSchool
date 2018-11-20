@@ -94,5 +94,61 @@ namespace TTKoreanSchool.Tests.AdminApp
                 root.Navigation.NavigationStack.Last().Should().Be(page);
             }
         }
+
+        [Fact]
+        public void Should_AddAudiobookToCollection_When_CommandInvoked()
+        {
+            // Arrange
+            var expected = 1;
+
+            var sut = new AudiobookListViewModelBuilder()
+                .Build();
+
+            // Act
+            sut.CreateItem.Execute().Subscribe();
+
+            // Assert
+            sut.AudiobookItems.Should().HaveCount(expected);
+        }
+
+        [Fact]
+        public void Should_DeleteItem_IfUserConfirms()
+        {
+            // Arrange
+            var expected = 0;
+
+            var sut = new AudiobookListViewModelBuilder()
+                .WithItemCount(1)
+                .WithConfirmDeleteInteraction(true)
+                .Build();
+
+            sut.AudiobookItems.Should().HaveCount(1);
+
+            // Act
+            sut.DeleteItem.Execute().Subscribe();
+
+            // Assert
+            sut.AudiobookItems.Should().HaveCount(expected);
+        }
+
+        [Fact]
+        public void Should_NotDeleteItem_IfUserCancels()
+        {
+            // Arrange
+            var expected = 1;
+
+            var sut = new AudiobookListViewModelBuilder()
+                .WithItemCount(1)
+                .WithConfirmDeleteInteraction(false)
+                .Build();
+
+            sut.AudiobookItems.Should().HaveCount(1);
+
+            // Act
+            sut.DeleteItem.Execute().Subscribe();
+
+            // Assert
+            sut.AudiobookItems.Should().HaveCount(expected);
+        }
     }
 }
