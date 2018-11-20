@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 using Microsoft.Reactive.Testing;
+using TTKSCore;
 
 namespace TTKoreanSchool.Tests
 {

@@ -17,8 +17,9 @@ using GameCtor.FirebaseStorage.DotNet;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Splat;
+using Acr.UserDialogs;
 
-namespace TTKoreanSchool.Tests
+namespace TTKoreanSchool.Tests.AdminApp
 {
     public class AudiobookListViewModelTest
     {
@@ -35,14 +36,15 @@ namespace TTKoreanSchool.Tests
             // Arrange
             IEnumerable<Audiobook> audiobooks = new[] { new Audiobook(), new Audiobook(), new Audiobook() };
             var expected = audiobooks.Count();
-            var viewStackService = Substitute.For<IViewStackService>();
-            var repo = Substitute.For<IRepository<Audiobook>>();
-            var storageService = Substitute.For<IFirebaseStorageService>();
-            var sut = new AudiobookListViewModel(viewStackService, repo, storageService, _schedulerProvider.Dispatcher);
+
+            var sut = new AudiobookListViewModelBuilder()
+                .WithAudiobookRepoMock(out var audiobookRepo)
+                .WithMainScheduler(_schedulerProvider.Dispatcher)
+                .Build();
 
             var onNext = Notification.CreateOnNext(audiobooks);
             var obs = _schedulerProvider.Dispatcher.CreateColdObservable(new Recorded<Notification<IEnumerable<Audiobook>>>(0, onNext));
-            repo.GetItems(true).Returns(obs);
+            audiobookRepo.GetItems(true).Returns(obs);
 
             // Act
             sut.LoadItems.Execute().Subscribe();

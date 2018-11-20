@@ -57,6 +57,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AdminApp\AudiobookListViewModelBuilder.cs" />
     <Compile Include="AdminApp\AudiobookListViewModelTest.cs" />
     <Compile Include="Helpers\BuilderExtensions.cs" />
     <Compile Include="Helpers\LeakMonitor.cs" />

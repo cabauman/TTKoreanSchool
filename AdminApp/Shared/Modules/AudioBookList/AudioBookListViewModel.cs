@@ -32,13 +32,13 @@ namespace TongTongAdmin.Modules
 
         public AudiobookListViewModel(
             IViewStackService viewStackService = null,
-            IRepository<Audiobook> audioBookRepo = null,
+            IRepository<Audiobook> audiobookRepo = null,
             IFirebaseStorageService firebaseStorageService = null,
             IUserDialogs dialogs = null,
             IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
-            AudiobookRepo = audioBookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
+            AudiobookRepo = audiobookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
             FirebaseStorageService = firebaseStorageService ?? Locator.Current.GetService<IFirebaseStorageService>();
             Dialogs = dialogs ?? UserDialogs.Instance;
             mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
