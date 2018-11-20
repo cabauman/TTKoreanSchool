@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Reactive;
 using System.Reactive.Concurrency;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using GameCtor.FirebaseStorage.DotNet;
@@ -53,7 +51,7 @@ namespace TongTongAdmin.Modules
                         .ToObservable()
                         .Where(x => x != null)
                         .Do(file => Model.ImageName = file.FileName)
-                        .SelectMany(file => UploadFile(file, $"{FirebaseStorageDirectories.AUDIOBOOK_IMAGES}/{file.FileName}"));
+                        .SelectMany(file => UploadFile(file, $"{FirebaseStorageHelper.AUDIOBOOK_IMAGES}/{file.FileName}"));
                 });
 
             var canDeleteImage = this
@@ -66,8 +64,8 @@ namespace TongTongAdmin.Modules
                     return confirmDelete
                         .Handle(Model.ImageName)
                         .Where(result => result)
-                        .SelectMany(_ => DeleteFile($"{FirebaseStorageDirectories.AUDIOBOOK_IMAGES}/{Model.ImageName}"))
-                        .Do(file => Model.ImageName = default(string))
+                        .SelectMany(_ => DeleteFile($"{FirebaseStorageHelper.AUDIOBOOK_IMAGES}/{Model.ImageName}"))
+                        .Do(_ => Model.ImageName = default(string))
                         .Select(_ => default(string));
                 },
                 canDeleteImage);
@@ -85,7 +83,7 @@ namespace TongTongAdmin.Modules
                         .ToObservable()
                         .Where(x => x != null)
                         .Do(file => Model.AudioName = file.FileName)
-                        .SelectMany(file => UploadFile(file, $"{FirebaseStorageDirectories.AUDIOBOOK_AUDIO}/{file.FileName}"));
+                        .SelectMany(file => UploadFile(file, $"{FirebaseStorageHelper.AUDIOBOOK_AUDIO}/{file.FileName}"));
                 });
 
             var canDeleteAudio = this
@@ -98,7 +96,7 @@ namespace TongTongAdmin.Modules
                     return confirmDelete
                         .Handle(Model.AudioName)
                         .Where(result => result)
-                        .SelectMany(_ => DeleteFile($"{FirebaseStorageDirectories.AUDIOBOOK_AUDIO}/{Model.AudioName}"))
+                        .SelectMany(_ => DeleteFile($"{FirebaseStorageHelper.AUDIOBOOK_AUDIO}/{Model.AudioName}"))
                         .Do(file => Model.AudioName = default(string))
                         .Select(_ => default(string));
                 },
@@ -124,27 +122,17 @@ namespace TongTongAdmin.Modules
                 .SelectMany(_ => Model.Id != null ? AudiobookRepo.Upsert(Model) : AudiobookRepo.Add(Model))
                 .Subscribe();
 
-            this.WhenActivated(
-                disposables =>
-                {
-                    _isPlaying = MediaManager
-                        .IsPlaying
-                        .Select(isPlaying => isPlaying && CrossMediaManager.Current.MediaQueue.Current.Url == AudioUrl)
-                        .ToProperty(this, x => x.IsPlaying, scheduler: mainScheduler)
-                        .DisposeWith(disposables);
+            _isPlaying = MediaManager
+                .IsPlaying
+                .Select(isPlaying => isPlaying && CrossMediaManager.Current.MediaQueue.Current.Url == AudioUrl)
+                .ToProperty(this, x => x.IsPlaying, deferSubscription: true, scheduler: mainScheduler);
 
-                    var canPlayAudio = this.WhenAnyValue(
-                        x => x.AudioUrl,
-                        url => !string.IsNullOrEmpty(url));
-                    //var canPlayAudio = Observable
-                    //    .CombineLatest(
-                    //        this.WhenAnyValue(x => x.AudioUrl).Select(x => x != null),
-                    //        MediaManager.IsPlaying.StartWith(false),
-                    //        (urlValid, audioPlaying) => urlValid && !audioPlaying);
+            var canPlayAudio = this.WhenAnyValue(
+                x => x.AudioUrl,
+                url => !string.IsNullOrEmpty(url));
 
-                    PlayAudio = ReactiveCommand.CreateFromObservable(
-                        () => MediaManager.Play(new MediaFile(AudioUrl)).ToObservable(), canPlayAudio);
-                });
+            PlayAudio = ReactiveCommand.CreateFromObservable(
+                () => MediaManager.Play(new MediaFile(AudioUrl)).ToObservable(), canPlayAudio);
 
             StopAudio = ReactiveCommand.CreateFromObservable(
                 () => MediaManager.Stop().ToObservable());

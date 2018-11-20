@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
+using Acr.UserDialogs;
 using DynamicData;
 using DynamicData.Binding;
 using GameCtor.FirebaseStorage.DotNet;
@@ -35,15 +34,17 @@ namespace TongTongAdmin.Modules
             IViewStackService viewStackService = null,
             IRepository<Audiobook> audioBookRepo = null,
             IFirebaseStorageService firebaseStorageService = null,
+            IUserDialogs dialogs = null,
             IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
             AudiobookRepo = audioBookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
             FirebaseStorageService = firebaseStorageService ?? Locator.Current.GetService<IFirebaseStorageService>();
+            Dialogs = dialogs ?? UserDialogs.Instance;
             mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
             MediaManager = new ReactiveMediaManager();
             ConfirmDelete = new Interaction<string, bool>();
-            CancelUpload = ReactiveCommand.Create(() => { });
+            CancelUpload = ReactiveCommand.Create(() => ResetAndHideProgressDialog());
             _audiobooks = new SourceList<Audiobook>();
 
             LoadItems = ReactiveCommand.CreateFromObservable(
@@ -54,7 +55,6 @@ namespace TongTongAdmin.Modules
                         .Do(x => _audiobooks.AddRange(x))
                         .Select(_ => Unit.Default);
                 });
-
 
             var changeSet = _audiobooks
                 .Connect()
@@ -98,7 +98,29 @@ namespace TongTongAdmin.Modules
                 .GetIsActivated()
                 .Where(isActivated => !isActivated)
                 .SelectMany(_ => MediaManager.Stop().ToObservable())
-                .Subscribe(_ => MediaManager.Dispose());
+                .Subscribe(_ => CleanUp());
+
+            ProgressDialog = UserDialogs.Instance.Progress(
+                "Uploading...",
+                () => CancelUpload.Execute().Subscribe(),
+                "Cancel",
+                false,
+                MaskType.Black);
+
+            this
+                .WhenAnyValue(x => x.UploadProgress)
+                .Where(progress => progress > 0)
+                .Do(UpdateProgressDialog)
+                .Where(x => x >= 100)
+                .Subscribe(_ => ResetAndHideProgressDialog());
+
+            Observable
+                .Merge(
+                    LoadItems.ThrownExceptions,
+                    DeleteItem.ThrownExceptions,
+                    changeSet.MergeMany(ListenToItemExceptions))
+                .SelectMany(ex => Dialogs.AlertAsync(ex.Message, "Error", "OK").ToObservable())
+                .Subscribe();
         }
 
         public override string Title => "Audiobooks";
@@ -131,9 +153,19 @@ namespace TongTongAdmin.Modules
 
         public int UploadProgress => _uploadProgress.Value;
 
+        public IProgressDialog ProgressDialog { get; }
+
+        public IUserDialogs Dialogs { get; }
+
         public ReactiveMediaManager MediaManager { get; }
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
+
+        public void CleanUp()
+        {
+            MediaManager.Dispose();
+            ProgressDialog.Dispose();
+        }
 
         private void MakeSureItemIsSelected()
         {
@@ -141,6 +173,17 @@ namespace TongTongAdmin.Modules
             {
                 SelectedItem = AudiobookItems[0];
             }
+        }
+
+        private IObservable<Exception> ListenToItemExceptions(IAudiobookItemViewModel item)
+        {
+            return Observable
+                .Merge(
+                    item.UploadImage.ThrownExceptions,
+                    item.UploadAudio.ThrownExceptions,
+                    item.DeleteImage.ThrownExceptions,
+                    item.DeleteAudio.ThrownExceptions,
+                    item.PlayAudio.ThrownExceptions);
         }
 
         private IObservable<int> GetItemUploadProgress(IAudiobookItemViewModel item)
@@ -151,6 +194,22 @@ namespace TongTongAdmin.Modules
                 .Select(x => x.Left);
         }
 
+        private void UpdateProgressDialog(int progress)
+        {
+            if (!ProgressDialog.IsShowing)
+            {
+                ProgressDialog.Show();
+            }
+
+            ProgressDialog.PercentComplete = progress;
+        }
+
+        private void ResetAndHideProgressDialog()
+        {
+            ProgressDialog.Hide();
+            ProgressDialog.PercentComplete = 0;
+        }
+
         private IObservable<Unit> DeleteFilesAndDbEntry()
         {
             return Observable.Merge(
@@ -158,10 +217,10 @@ namespace TongTongAdmin.Modules
                     AudiobookRepo.Delete(SelectedItem.Model.Id) :
                     Observable.Empty<Unit>(),
                 !string.IsNullOrWhiteSpace(SelectedItem.Model.ImageUrl) ?
-                    FirebaseStorageService.Delete(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_IMAGES, SelectedItem.Model.ImageName)) :
+                    FirebaseStorageService.Delete(FirebaseStorageHelper.AudiobookImagePath(SelectedItem.Model.ImageName)) :
                     Observable.Empty<Unit>(),
                 !string.IsNullOrWhiteSpace(SelectedItem.Model.AudioUrl) ?
-                    FirebaseStorageService.Delete(Path.Combine(FirebaseStorageDirectories.AUDIOBOOK_AUDIO, SelectedItem.Model.AudioName)) :
+                    FirebaseStorageService.Delete(FirebaseStorageHelper.AudiobookAudioPath(SelectedItem.Model.AudioName)) :
                     Observable.Empty<Unit>());
         }
     }
