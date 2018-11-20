@@ -34,13 +34,13 @@ namespace TongTongAdmin.Modules
             IViewStackService viewStackService = null,
             IRepository<Audiobook> audiobookRepo = null,
             IFirebaseStorageService firebaseStorageService = null,
-            IUserDialogs dialogs = null,
+            IUserDialogs dialogService = null,
             IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
             AudiobookRepo = audiobookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();
             FirebaseStorageService = firebaseStorageService ?? Locator.Current.GetService<IFirebaseStorageService>();
-            Dialogs = dialogs ?? UserDialogs.Instance;
+            DialogService = dialogService ?? UserDialogs.Instance;
             mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
             MediaManager = new ReactiveMediaManager();
             ConfirmDelete = new Interaction<string, bool>();
@@ -100,7 +100,7 @@ namespace TongTongAdmin.Modules
                 .SelectMany(_ => MediaManager.Stop().ToObservable())
                 .Subscribe(_ => CleanUp());
 
-            ProgressDialog = UserDialogs.Instance.Progress(
+            ProgressDialog = DialogService.Progress(
                 "Uploading...",
                 () => CancelUpload.Execute().Subscribe(),
                 "Cancel",
@@ -119,7 +119,7 @@ namespace TongTongAdmin.Modules
                     LoadItems.ThrownExceptions,
                     DeleteItem.ThrownExceptions,
                     changeSet.MergeMany(ListenToItemExceptions))
-                .SelectMany(ex => Dialogs.AlertAsync(ex.Message, "Error", "OK").ToObservable())
+                .SelectMany(ex => DialogService.AlertAsync(ex.Message, "Error", "OK").ToObservable())
                 .Subscribe();
         }
 
@@ -155,7 +155,7 @@ namespace TongTongAdmin.Modules
 
         public IProgressDialog ProgressDialog { get; }
 
-        public IUserDialogs Dialogs { get; }
+        public IUserDialogs DialogService { get; }
 
         public ReactiveMediaManager MediaManager { get; }
 
