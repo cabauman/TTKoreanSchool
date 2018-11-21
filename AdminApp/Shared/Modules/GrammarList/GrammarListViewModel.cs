@@ -13,24 +13,36 @@ namespace TongTongAdmin.Modules
 {
     public class GrammarListViewModel : BasePageViewModel, IGrammarListViewModel
     {
+        private IGrammarItemViewModel _selectedItem;
+
         public GrammarListViewModel(
             IViewStackService viewStackService = null,
-            IRepository<GrammarPrinciple> grammarPrincipleRepository = null)
+            IRepository<GrammarPrinciple> grammarRepo = null)
                 : base(viewStackService)
         {
-            GrammarPrincipleRepository = Locator.Current.GetService<IRepository<GrammarPrinciple>>();
+            GrammarRepo = grammarRepo ?? Locator.Current.GetService<IRepository<GrammarPrinciple>>();
         }
 
         public override string Title => "Grammar";
 
-        public ReactiveCommand<Unit, Unit> AddItem { get; }
+        public ReactiveCommand<Unit, Unit> LoadItems { get; }
+
+        public ReactiveCommand<Unit, Unit> CreateItem { get; }
 
         public ReactiveCommand<Unit, Unit> DeleteItem { get; }
 
-        public ReactiveCommand<Unit, Unit> UpdateItem { get; }
+        public ReactiveCommand<Unit, Unit> SaveItem { get; }
 
-        public IRepository<GrammarPrinciple> GrammarPrincipleRepository { get; }
+        public Interaction<string, bool> ConfirmDelete { get; }
 
-        public ObservableCollection<IGrammarItemViewModel> GrammarItems { get; }
+        public IRepository<GrammarPrinciple> GrammarRepo { get; }
+
+        public ObservableCollection<IGrammarItemViewModel> Items { get; }
+
+        public IGrammarItemViewModel SelectedItem
+        {
+            get => _selectedItem;
+            set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
+        }
     }
 }

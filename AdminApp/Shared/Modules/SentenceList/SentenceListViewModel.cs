@@ -13,24 +13,36 @@ namespace TongTongAdmin.Modules
 {
     public class SentenceListViewModel : BasePageViewModel, ISentenceListViewModel
     {
+        private ISentenceItemViewModel _selectedItem;
+
         public SentenceListViewModel(
             IViewStackService viewStackService = null,
-            IRepository<ExampleSentence> sentenceRepository = null)
+            IRepository<ExampleSentence> sentenceRepo = null)
                 : base(viewStackService)
         {
-            SentenceRepository = Locator.Current.GetService<IRepository<ExampleSentence>>();
+            SentenceRepo = sentenceRepo ?? Locator.Current.GetService<IRepository<ExampleSentence>>();
         }
 
         public override string Title => "Sentences";
 
-        public ReactiveCommand<Unit, Unit> AddItem { get; }
+        public ReactiveCommand<Unit, Unit> LoadItems { get; }
+
+        public ReactiveCommand<Unit, Unit> CreateItem { get; }
 
         public ReactiveCommand<Unit, Unit> DeleteItem { get; }
 
-        public ReactiveCommand<Unit, Unit> UpdateItem { get; }
+        public ReactiveCommand<Unit, Unit> SaveItem { get; }
 
-        public IRepository<ExampleSentence> SentenceRepository { get; }
+        public Interaction<string, bool> ConfirmDelete { get; }
 
-        public ObservableCollection<ISentenceItemViewModel> SentenceItems { get; }
+        public IRepository<ExampleSentence> SentenceRepo { get; }
+
+        public ObservableCollection<ISentenceItemViewModel> Items { get; }
+
+        public ISentenceItemViewModel SelectedItem
+        {
+            get => _selectedItem;
+            set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
+        }
     }
 }

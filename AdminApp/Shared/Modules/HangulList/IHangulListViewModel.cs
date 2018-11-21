@@ -6,7 +6,7 @@ using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
 {
-    public interface IVocabImageListViewModel
+    public interface IHangulListViewModel
     {
         ReactiveCommand<Unit, Unit> LoadItems { get; }
 
@@ -18,10 +18,10 @@ namespace TongTongAdmin.Modules
 
         Interaction<string, bool> ConfirmDelete { get; }
 
-        IVocabImageItemViewModel SelectedItem { get; set; }
+        IHangulItemViewModel SelectedItem { get; set; }
 
-        IRepository<VocabImage> VocabImageRepo { get; }
+        IRepository<HangulLetter> HangulLetterRepo { get; }
 
-        ObservableCollection<IVocabImageItemViewModel> Items { get; }
+        ObservableCollection<IHangulItemViewModel> Items { get; }
     }
 }

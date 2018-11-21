@@ -91,6 +91,12 @@
     <Compile Update="Modules\GrammarList\GrammarPrinciplePage.xaml.cs">
       <DependentUpon>GrammarPrinciplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Modules\HangulList\HangulItemCell.xaml.cs">
+      <DependentUpon>HangulItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\HangulList\HangulListPage.xaml.cs">
+      <DependentUpon>HangulListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Modules\ImageList\VocabImageItemCell.xaml.cs">
       <DependentUpon>VocabImageItemCell.xaml</DependentUpon>
     </Compile>

@@ -10,17 +10,15 @@ using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
 {
-    public class VocabImageListViewModel : BasePageViewModel, IVocabImageListViewModel
+    public class HangulListViewModel : BasePageViewModel, IHangulListViewModel
     {
-        private IVocabImageItemViewModel _selectedItem;
-
-        public VocabImageListViewModel(
+        public HangulListViewModel(
             IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
         }
 
-        public override string Title => "Vocab Images";
+        public override string Title => "Hangul Letters";
 
         public ReactiveCommand<Unit, Unit> LoadItems { get; }
 
@@ -32,14 +30,10 @@ namespace TongTongAdmin.Modules
 
         public Interaction<string, bool> ConfirmDelete { get; }
 
-        public IRepository<VocabImage> VocabImageRepo { get; }
+        public IHangulItemViewModel SelectedItem { get; set; }
 
-        public ObservableCollection<IVocabImageItemViewModel> Items { get; }
+        public IRepository<HangulLetter> HangulLetterRepo { get; }
 
-        public IVocabImageItemViewModel SelectedItem
-        {
-            get => _selectedItem;
-            set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
-        }
+        public ObservableCollection<IHangulItemViewModel> Items { get; }
     }
 }

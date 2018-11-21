@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameCtor.RxNavigation;
 using ReactiveUI;
 using TTKSCore.Common;
+using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
 {
@@ -14,6 +15,18 @@ namespace TongTongAdmin.Modules
         {
         }
 
-        public override string Title => "Reading Program";
+        public override string Title => "Vocab Term";
+
+        public VocabTerm Model { get; }
+
+        public string Ko { get; }
+
+        public string Romanization { get; }
+
+        public string Translation { get; }
+
+        public string ImageUrl { get; }
+
+        public string SentenceIds { get; }
     }
 }
