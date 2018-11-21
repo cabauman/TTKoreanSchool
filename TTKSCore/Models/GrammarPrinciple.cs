@@ -10,8 +10,14 @@ namespace TTKSCore.Models
         [JsonProperty("translation")]
         public string Translation { get; set; }
 
-        [JsonProperty("extraInfoId")]
-        public string ExtraInfoId { get; set; }
+        [JsonProperty("difficulty")]
+        public string Difficulty { get; set; }
+
+        [JsonProperty("validConjugations")]
+        public string ValidConjugations { get; set; }
+
+        [JsonProperty("validLastWordConjugations")]
+        public string ValidLastWordConjugations { get; set; }
 
         [JsonProperty("sentenceIds")]
         public string[] SentenceIds { get; set; }
