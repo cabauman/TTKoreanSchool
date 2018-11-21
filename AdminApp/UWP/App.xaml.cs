@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Syncfusion.ListView.XForms.UWP;
+using Syncfusion.SfDataGrid.XForms.UWP;
+using Syncfusion.SfNumericTextBox.XForms.UWP;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -55,8 +58,9 @@ namespace TongTongAdmin.UWP
 
                 List<Assembly> assembliesToInclude = new List<Assembly>();
                 //Now, add all the assemblies your app uses
-                assembliesToInclude.Add(typeof(Syncfusion.SfDataGrid.XForms.UWP.SfDataGridRenderer).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(Syncfusion.SfNumericTextBox.XForms.UWP.SfNumericTextBoxRenderer).GetTypeInfo().Assembly);
+                assembliesToInclude.Add(typeof(SfListViewRenderer).GetTypeInfo().Assembly);
+                assembliesToInclude.Add(typeof(SfDataGridRenderer).GetTypeInfo().Assembly);
+                assembliesToInclude.Add(typeof(SfNumericTextBoxRenderer).GetTypeInfo().Assembly);
 
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
