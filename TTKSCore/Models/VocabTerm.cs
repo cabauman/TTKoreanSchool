@@ -7,9 +7,6 @@ namespace TTKSCore.Models
         [JsonProperty("ko")]
         public string Ko { get; set; }
 
-        [JsonProperty("romanization")]
-        public string Romanization { get; set; }
-
         [JsonProperty("wordClass")]
         public string WordClass { get; set; }
 
