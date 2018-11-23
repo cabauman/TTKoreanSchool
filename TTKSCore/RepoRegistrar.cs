@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Firebase.Database;
 using Firebase.Database.Offline;
 using GameCtor.FirebaseAuth;
 using GameCtor.FirebaseDatabase.DotNet;
 using GameCtor.Repository;
 using Splat;
+using TTKSCore.Common;
 using TTKSCore.Models;
 
 namespace TTKSCore
 {
     public class RepoRegistrar
     {
-        public static readonly string KEY_VOCAB_TRANSLATIONS_EN = Path.Combine(NODE_VOCAB, "-", NODE_EN);
-        public static readonly string KEY_SENTENCE_TRANSLATIONS_EN = Path.Combine(NODE_SENTENCES, "-", NODE_EN);
-        public static readonly string KEY_GRAMMAR_TRANSLATIONS_EN = Path.Combine(NODE_GRAMMAR, "-", NODE_EN);
+        private static readonly HashSet<string> SUPPORTED_LANG_CODES = new HashSet<string>{ "en" };
 
         private const string NODE_V2 = "v2";
         private const string NODE_ADMIN = "admin";
@@ -41,9 +42,7 @@ namespace TTKSCore
         private static readonly string PATH_GRAMMAR = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_GRAMMAR);
         private static readonly string PATH_VOCAB = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_VOCAB);
         private static readonly string PATH_VOCAB_IMAGES = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_VOCAB_IMAGES);
-        private static readonly string PATH_VOCAB_TRANSLATIONS_EN = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_TRANSLATIONS, NODE_VOCAB, NODE_EN);
-        private static readonly string PATH_SENTENCE_TRANSLATIONS_EN = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_TRANSLATIONS, NODE_SENTENCES, NODE_EN);
-        private static readonly string PATH_GRAMMAR_TRANSLATIONS_EN = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_TRANSLATIONS, NODE_GRAMMAR, NODE_EN);
+        private static readonly string PATH_TRANSLATIONS = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_TRANSLATIONS);
         //private static readonly string PATH_VOCAB_AUDIO_URLS = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_VOCAB_AUDIO);
 
         private FirebaseClient _firebaseClient;
@@ -57,9 +56,34 @@ namespace TTKSCore
             dependencyResolver.Register(() => GrammarRepo, typeof(IRepository<GrammarPrinciple>));
             dependencyResolver.Register(() => VocabTermRepo, typeof(IRepository<VocabTerm>));
             dependencyResolver.Register(() => VocabImageRepo, typeof(IRepository<VocabImage>));
-            dependencyResolver.Register(() => VocabTranslationEnRepo, typeof(IRepository<Translation>), KEY_VOCAB_TRANSLATIONS_EN);
-            dependencyResolver.Register(() => SentenceTranslationEnRepo, typeof(IRepository<Translation>), KEY_SENTENCE_TRANSLATIONS_EN);
-            dependencyResolver.Register(() => GrammarTranslationEnRepo, typeof(IRepository<Translation>), KEY_GRAMMAR_TRANSLATIONS_EN);
+            dependencyResolver.Register(() => new TranslationRepoFactory(this), typeof(TranslationRepoFactory));
+        }
+
+        public IRepository<Translation> GetTranslationRepo(TranslationType translationType, string langCode)
+        {
+            string translationNode = null;
+            switch (translationType)
+            {
+                case TranslationType.Grammar:
+                    translationNode = NODE_GRAMMAR;
+                    break;
+                case TranslationType.Sentence:
+                    translationNode = NODE_SENTENCES;
+                    break;
+                case TranslationType.Vocab:
+                    translationNode = NODE_VOCAB;
+                    break;
+            }
+
+            if (!SUPPORTED_LANG_CODES.Contains(langCode))
+            {
+                langCode = NODE_EN;
+            }
+
+            string key = string.Concat(translationNode, "-", langCode);
+            string path = Path.Combine(PATH_TRANSLATIONS, translationNode, langCode);
+
+            return new FirebaseOfflineRepo<Translation>(_firebaseClient, path, key);
         }
 
         private IRepository<Audiobook> AudiobookRepo
@@ -85,30 +109,6 @@ namespace TTKSCore
         private IRepository<VocabImage> VocabImageRepo
         {
             get => new FirebaseOfflineRepo<VocabImage>(_firebaseClient, PATH_VOCAB_IMAGES);
-        }
-
-        private IRepository<Translation> VocabTranslationEnRepo
-        {
-            get => new FirebaseOfflineRepo<Translation>(
-                _firebaseClient,
-                PATH_VOCAB_TRANSLATIONS_EN,
-                KEY_VOCAB_TRANSLATIONS_EN);
-        }
-
-        private IRepository<Translation> SentenceTranslationEnRepo
-        {
-            get => new FirebaseOfflineRepo<Translation>(
-                _firebaseClient,
-                PATH_SENTENCE_TRANSLATIONS_EN,
-                KEY_SENTENCE_TRANSLATIONS_EN);
-        }
-
-        private IRepository<Translation> GrammarTranslationEnRepo
-        {
-            get => new FirebaseOfflineRepo<Translation>(
-                _firebaseClient,
-                PATH_GRAMMAR_TRANSLATIONS_EN,
-                KEY_GRAMMAR_TRANSLATIONS_EN);
         }
 
         private FirebaseClient CreateFirebaseClient(IFirebaseAuthService firebaseAuthService)
