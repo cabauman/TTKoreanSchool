@@ -132,6 +132,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MediaManager.Unofficial">
+      <Version>1.0.2</Version>
+    </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.2</Version>
     </PackageReference>

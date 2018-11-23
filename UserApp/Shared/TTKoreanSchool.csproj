@@ -13,8 +13,10 @@
     <PackageReference Include="FirebaseAuthentication.net" Version="3.1.0" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.0-beta4" />
     <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
-    <PackageReference Include="ReactiveUI" Version="9.2.2" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="9.2.2" />
+    <PackageReference Include="MediaManager.Unofficial" Version="1.0.2" />
+    <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.0.2" />
+    <PackageReference Include="ReactiveUI" Version="9.3.5" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="9.3.5" />
     <PackageReference Include="System.Reactive" Version="4.1.2" />
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />

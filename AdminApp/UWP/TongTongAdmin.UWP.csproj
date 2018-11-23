@@ -158,8 +158,8 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Plugin.MediaManager.Reactive">
-      <Version>0.4.5</Version>
+    <PackageReference Include="MediaManager.Unofficial">
+      <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid">
       <Version>16.3.0.21</Version>

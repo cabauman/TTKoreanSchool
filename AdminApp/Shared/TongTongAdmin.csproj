@@ -23,9 +23,10 @@
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.0-beta4" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.2" />
     <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
-    <PackageReference Include="Plugin.MediaManager.Reactive" Version="0.4.5" />
-    <PackageReference Include="ReactiveUI" Version="9.2.2" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="9.2.2" />
+    <PackageReference Include="MediaManager.Unofficial" Version="1.0.2" />
+    <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.0.2" />
+    <PackageReference Include="ReactiveUI" Version="9.3.5" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="9.3.5" />
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="16.3.0.21" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.29" />
     <PackageReference Include="System.Reactive" Version="4.1.2" />

@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MediaManager.Unofficial">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="MediaManager.Unofficial.ExoPlayer">
+      <Version>1.0.2</Version>
+    </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.2</Version>
     </PackageReference>
@@ -73,12 +79,12 @@
       <Version>27.0.2.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Auth">
-      <Version>1.6.0.3</Version>
+      <Version>1.6.0.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>0.11.0-preview</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
