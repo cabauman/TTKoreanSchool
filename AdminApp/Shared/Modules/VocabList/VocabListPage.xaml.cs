@@ -57,7 +57,7 @@ namespace TongTongAdmin.Modules
 
         private void PopulateFromViewModel(IVocabListViewModel vm)
         {
-            //ViewModel.LoadItems.Execute().Subscribe();
+            ViewModel.LoadItems.Execute().Subscribe();
             _sfGrid.ItemsSource = vm.Items;
         }
 

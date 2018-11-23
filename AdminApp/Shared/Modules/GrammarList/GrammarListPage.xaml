@@ -5,6 +5,11 @@
              xmlns:modules="clr-namespace:TongTongAdmin.Modules"
              x:TypeArguments="modules:IGrammarListViewModel"
              x:Class="TongTongAdmin.Modules.GrammarListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddButton" Text="Add" Icon="ic_add.png" />
+        <ToolbarItem x:Name="SaveButton" Text="Save" Icon="ic_save.png" />
+        <ToolbarItem x:Name="DeleteButton" Text="Delete" Icon="ic_delete.png" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"

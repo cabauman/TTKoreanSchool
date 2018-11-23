@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ReactiveUI;
 using TTKSCore.Models;
 
@@ -6,9 +7,9 @@ namespace TongTongAdmin.Modules
 {
     public class VocabItemViewModel : ReactiveObject, IVocabItemViewModel
     {
-        private string _ko;
+        //private string _ko;
         private string _romanization;
-        private string _translation;
+        //private string _translation;
 
         public VocabItemViewModel(VocabTerm model)
         {
@@ -19,24 +20,24 @@ namespace TongTongAdmin.Modules
 
         public string Ko
         {
-            get => _ko;
-            set => this.RaiseAndSetIfChanged(ref _ko, value);
+            get => Model.Ko;
+            set => Model.Ko = value;
         }
 
         public string Romanization
         {
             get => _romanization;
-            set => this.RaiseAndSetIfChanged(ref _romanization, value);
+            set => _romanization = value;
         }
 
-        public string Translation
+        public string En
         {
-            get => _translation;
-            set => this.RaiseAndSetIfChanged(ref _translation, value);
+            get => Model.Translation;
+            set => Model.Translation = value;
         }
 
-        public string ImageIds { get; set; }
+        public IList<string> ImageIds { get; set; }
 
-        public string SentenceIds { get; set; }
+        public IList<string> SentenceIds { get; set; }
     }
 }

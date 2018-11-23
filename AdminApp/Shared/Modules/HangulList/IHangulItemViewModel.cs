@@ -2,7 +2,7 @@
 
 namespace TongTongAdmin.Modules
 {
-    interface IHangulItemViewModel
+    public interface IHangulItemViewModel
     {
         string Ko { get; set; }
 

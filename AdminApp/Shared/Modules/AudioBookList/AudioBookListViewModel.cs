@@ -79,7 +79,13 @@ namespace TongTongAdmin.Modules
                 .Select(x => x != null);
 
             SaveItem = ReactiveCommand.CreateFromObservable(
-                () => AudiobookRepo.Upsert(SelectedItem.Model), canDeleteOrSaveItem);
+                () =>
+                {
+                    return SelectedItem.Model.Id != null ?
+                        AudiobookRepo.Upsert(SelectedItem.Model) :
+                        AudiobookRepo.Add(SelectedItem.Model);
+                },
+                canDeleteOrSaveItem);
 
             DeleteItem = ReactiveCommand.CreateFromObservable(
                 () =>

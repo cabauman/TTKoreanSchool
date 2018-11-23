@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ReactiveUI;
 
 namespace TongTongAdmin.Modules
@@ -8,5 +9,11 @@ namespace TongTongAdmin.Modules
         public GrammarItemViewModel()
         {
         }
+
+        public string Ko { get; set; }
+
+        public string En { get; set; }
+
+        public IList<string> SentenceIds { get; set; }
     }
 }

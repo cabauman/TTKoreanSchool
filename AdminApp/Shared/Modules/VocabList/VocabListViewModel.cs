@@ -25,6 +25,16 @@ namespace TongTongAdmin.Modules
             Items = new ObservableCollection<IVocabItemViewModel>();
             ConfirmDelete = new Interaction<string, bool>();
 
+            LoadItems = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return VocabTermRepo
+                        .GetItems(false)
+                        .SelectMany(x => x)
+                        .Do(x => Items.Add(new VocabItemViewModel(x)))
+                        .Select(_ => Unit.Default);
+                });
+
             CreateItem = ReactiveCommand.Create(
                 () => Items.Add(new VocabItemViewModel(new VocabTerm())));
 
@@ -33,7 +43,13 @@ namespace TongTongAdmin.Modules
                 .Select(x => x != null);
 
             SaveItem = ReactiveCommand.CreateFromObservable(
-                () => VocabTermRepo.Upsert(SelectedItem.Model), canDeleteOrSaveItem);
+                () =>
+                {
+                    return SelectedItem.Model.Id != null ?
+                        VocabTermRepo.Upsert(SelectedItem.Model) :
+                        VocabTermRepo.Add(SelectedItem.Model);
+                },
+                canDeleteOrSaveItem);
 
             DeleteItem = ReactiveCommand.CreateFromObservable(
                 () =>

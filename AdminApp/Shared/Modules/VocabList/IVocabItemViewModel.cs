@@ -1,4 +1,4 @@
-﻿using ReactiveUI;
+﻿using System.Collections.Generic;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
@@ -11,10 +11,10 @@ namespace TongTongAdmin.Modules
 
         string Romanization { get; set; }
 
-        string Translation { get; set; }
+        string En { get; set; }
 
-        string ImageIds { get; set; }
+        IList<string> ImageIds { get; set; }
 
-        string SentenceIds { get; set; }
+        IList<string> SentenceIds { get; set; }
     }
 }

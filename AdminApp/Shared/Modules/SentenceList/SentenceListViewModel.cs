@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Reactive.Linq;
 using GameCtor.Repository;
 using GameCtor.RxNavigation;
 using ReactiveUI;
@@ -21,6 +22,47 @@ namespace TongTongAdmin.Modules
                 : base(viewStackService)
         {
             SentenceRepo = sentenceRepo ?? Locator.Current.GetService<IRepository<ExampleSentence>>();
+            Items = new ObservableCollection<ISentenceItemViewModel>();
+            ConfirmDelete = new Interaction<string, bool>();
+
+            LoadItems = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return SentenceRepo
+                        .GetItems(false)
+                        .SelectMany(x => x)
+                        .Do(x => Items.Add(new SentenceItemViewModel(x)))
+                        .Select(_ => Unit.Default);
+                });
+
+            CreateItem = ReactiveCommand.Create(
+                () => Items.Add(new SentenceItemViewModel(new ExampleSentence())));
+
+            var canDeleteOrSaveItem = this
+                .WhenAnyValue(x => x.SelectedItem)
+                .Select(x => x != null);
+
+            SaveItem = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return SelectedItem.Model.Id != null ?
+                        SentenceRepo.Upsert(SelectedItem.Model) :
+                        SentenceRepo.Add(SelectedItem.Model);
+                },
+                canDeleteOrSaveItem);
+
+            DeleteItem = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return ConfirmDelete
+                        .Handle(SelectedItem.Ko)
+                        .Where(result => result)
+                        //.SelectMany(_ => DeleteFilesAndDbEntry())
+                        .ObserveOn(RxApp.MainThreadScheduler)
+                        .Do(_ => Items.Remove(SelectedItem))
+                        .Select(_ => Unit.Default);
+                },
+                canDeleteOrSaveItem);
         }
 
         public override string Title => "Sentences";

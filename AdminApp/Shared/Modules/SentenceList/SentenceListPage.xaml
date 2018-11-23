@@ -5,11 +5,9 @@
              xmlns:modules="clr-namespace:TongTongAdmin.Modules"
              x:TypeArguments="modules:ISentenceListViewModel"
              x:Class="TongTongAdmin.Modules.SentenceListPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddButton" Text="Add" Icon="ic_add.png" />
+        <ToolbarItem x:Name="SaveButton" Text="Save" Icon="ic_save.png" />
+        <ToolbarItem x:Name="DeleteButton" Text="Delete" Icon="ic_delete.png" />
+    </ContentPage.ToolbarItems>
 </rxui:ReactiveContentPage>

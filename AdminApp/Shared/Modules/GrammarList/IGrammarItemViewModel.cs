@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using System.Collections.Generic;
+using ReactiveUI;
 
 namespace TongTongAdmin.Modules
 {
@@ -8,6 +9,6 @@ namespace TongTongAdmin.Modules
 
         string En { get; set; }
 
-        string[] SentenceIds { get; set; }
+        IList<string> SentenceIds { get; set; }
     }
 }
