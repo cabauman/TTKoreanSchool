@@ -6,7 +6,6 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using Acr.UserDialogs;
 using DynamicData;
-using DynamicData.Binding;
 using GameCtor.FirebaseStorage.DotNet;
 using GameCtor.Repository;
 using GameCtor.RxNavigation;
@@ -31,11 +30,11 @@ namespace TongTongAdmin.Modules
         private IAudiobookItemViewModel _selectedItem;
 
         public AudiobookListViewModel(
-            IViewStackService viewStackService = null,
             IRepository<Audiobook> audiobookRepo = null,
             IFirebaseStorageService firebaseStorageService = null,
             IUserDialogs dialogService = null,
-            IScheduler mainScheduler = null)
+            IScheduler mainScheduler = null,
+            IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
             AudiobookRepo = audiobookRepo ?? Locator.Current.GetService<IRepository<Audiobook>>();

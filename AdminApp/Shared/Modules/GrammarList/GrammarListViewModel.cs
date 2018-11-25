@@ -16,8 +16,8 @@ namespace TongTongAdmin.Modules
         private IGrammarItemViewModel _selectedItem;
 
         public GrammarListViewModel(
-            IViewStackService viewStackService = null,
-            IRepository<GrammarPrinciple> grammarRepo = null)
+            IRepository<GrammarPrinciple> grammarRepo = null,
+            IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
             GrammarRepo = grammarRepo ?? Locator.Current.GetService<IRepository<GrammarPrinciple>>();

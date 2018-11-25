@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using GameCtor.Repository;
@@ -17,17 +18,30 @@ namespace TongTongAdmin.Modules
         private IVocabItemViewModel _selectedItem;
 
         public VocabListViewModel(
-            IViewStackService viewStackService = null,
-            IRepository<VocabTerm> vocabTermRepo = null)
+            IRepository<VocabTerm> vocabTermRepo = null,
+            TranslationRepoFactory translationRepoFactory = null,
+            IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
             VocabTermRepo = vocabTermRepo ?? Locator.Current.GetService<IRepository<VocabTerm>>();
+            translationRepoFactory = translationRepoFactory ?? Locator.Current.GetService<TranslationRepoFactory>();
+            TranslationRepo = translationRepoFactory.Create(TranslationType.Vocab, "en");
             Items = new ObservableCollection<IVocabItemViewModel>();
             ConfirmDelete = new Interaction<string, bool>();
 
             LoadItems = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
+                    //var e = Enumerable.Range(0, 10).Select(x => new VocabTerm());
+                    //var translations = TranslationRepo
+                    //    .GetItems()
+                    //    .SelectMany(x => x.Join(e, t => t.Id, other => other.Id,
+                    //        (a, b) =>
+                    //        {
+                    //            b.Translation = a.Value;
+                    //            return b;
+                    //        }));
+
                     return VocabTermRepo
                         .GetItems(false)
                         .SelectMany(x => x)
@@ -78,6 +92,8 @@ namespace TongTongAdmin.Modules
         public Interaction<string, bool> ConfirmDelete { get; }
 
         public IRepository<VocabTerm> VocabTermRepo { get; }
+
+        public IRepository<Translation> TranslationRepo { get; }
 
         public ObservableCollection<IVocabItemViewModel> Items { get; }
 

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rxui:ReactiveContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+             xmlns:modules="clr-namespace:TongTongAdmin.Modules"
+             x:TypeArguments="modules:IHomonymItemViewModel"
+             x:Class="TongTongAdmin.Modules.HomonymItemCell">
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image
+            x:Name="Image"
+            Source="{Binding ImageUrl}"
+            Aspect="AspectFit"
+            BackgroundColor="AliceBlue">
+        </Image>
+        <Label Text="" />
+        <Entry
+            x:Name="TitleEntry"
+            Grid.Row="1"
+            Text="Welcome to Xamarin.Forms!" />
+        <BoxView
+            HeightRequest="40"
+            VerticalOptions="End" 
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="White"
+            Opacity="0.25"/>
+        <Button
+            x:Name="EditImageButton"
+            Image="ic_edit.png"
+            VerticalOptions="End" 
+            HorizontalOptions="Start" />
+        <Button
+            x:Name="DeleteImageButton"
+            Image="ic_delete.png"
+            VerticalOptions="End" 
+            HorizontalOptions="End" />
+        <StackLayout
+            Grid.Row="2"
+            Orientation="Horizontal"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Spacing="10">
+            <Button
+                x:Name="UploadAudioButton"
+                Image="ic_edit.png"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="PlayAudioButton"
+                Image="ic_play.png"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="StopAudioButton"
+                Image="ic_stop.png"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="DeleteAudioButton"
+                Image="ic_delete.png"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center">
+            </Button>
+        </StackLayout>
+    </Grid>
+</rxui:ReactiveContentView>

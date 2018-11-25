@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using Syncfusion.SfDataGrid.XForms;
+using TTKSCore.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -97,6 +98,16 @@ namespace TongTongAdmin.Modules
                 eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.SentenceIds))
             {
                 eventArgs.Column.AllowEditing = false;
+            }
+            else if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.WordClass))
+            {
+                eventArgs.Cancel = true;
+
+                GridPickerColumn pickerColumn = new GridPickerColumn();
+                pickerColumn.MappingName = "WordClass";
+                pickerColumn.HeaderText = "Word Class";
+                pickerColumn.ItemsSource = ContentConstants.WordClasses;
+                _sfGrid.Columns.Add(pickerColumn);
             }
         }
     }

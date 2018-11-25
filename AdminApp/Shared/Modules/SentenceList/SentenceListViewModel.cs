@@ -17,8 +17,8 @@ namespace TongTongAdmin.Modules
         private ISentenceItemViewModel _selectedItem;
 
         public SentenceListViewModel(
-            IViewStackService viewStackService = null,
-            IRepository<ExampleSentence> sentenceRepo = null)
+            IRepository<ExampleSentence> sentenceRepo = null,
+            IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
             SentenceRepo = sentenceRepo ?? Locator.Current.GetService<IRepository<ExampleSentence>>();
