@@ -39,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="Modules\AudioList\" />
-    <Folder Include="Modules\HomonymList\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,31 +73,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Modules\AudiobookList\AudiobookItemCell.xaml.cs">
+    <Compile Update="Modules\AudiobookList\Item\AudiobookItemCell.xaml.cs">
       <DependentUpon>AudiobookItemCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\AudiobookList\AudiobookListPage.xaml.cs">
       <DependentUpon>AudiobookListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\AudiobookList\AudiobookPage.xaml.cs">
+    <Compile Update="Modules\AudiobookList\Detail\AudiobookPage.xaml.cs">
       <DependentUpon>AudiobookPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\GrammarList\GrammarItemCell.xaml.cs">
+    <Compile Update="Modules\GrammarList\Item\GrammarItemCell.xaml.cs">
       <DependentUpon>GrammarItemCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\GrammarList\GrammarListPage.xaml.cs">
       <DependentUpon>GrammarListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\GrammarList\GrammarPrinciplePage.xaml.cs">
+    <Compile Update="Modules\GrammarList\Detail\GrammarPrinciplePage.xaml.cs">
       <DependentUpon>GrammarPrinciplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\HangulList\HangulItemCell.xaml.cs">
+    <Compile Update="Modules\HangulList\Item\HangulItemCell.xaml.cs">
       <DependentUpon>HangulItemCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\HangulList\HangulListPage.xaml.cs">
       <DependentUpon>HangulListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\ImageList\VocabImageItemCell.xaml.cs">
+    <Compile Update="Modules\HomonymList\Item\HomonymItemCell.xaml.cs">
+      <DependentUpon>HomonymItemCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\HomonymList\HomonymListPage.xaml.cs">
+      <DependentUpon>HomonymListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\ImageList\Item\VocabImageItemCell.xaml.cs">
       <DependentUpon>VocabImageItemCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\ImageList\VocabImageListPage.xaml.cs">
@@ -110,25 +115,25 @@
     <Compile Update="Modules\MasterDetail\MasterDetailPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Modules\SentenceList\SentenceItemCell.xaml.cs">
+    <Compile Update="Modules\SentenceList\Item\SentenceItemCell.xaml.cs">
       <DependentUpon>SentenceItemCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\SentenceList\SentenceListPage.xaml.cs">
       <DependentUpon>SentenceListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\SentenceList\SentencePage.xaml.cs">
+    <Compile Update="Modules\SentenceList\Detail\SentencePage.xaml.cs">
       <DependentUpon>SentencePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\SignIn\SignInPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Modules\VocabList\VocabItemCell.xaml.cs">
+    <Compile Update="Modules\VocabList\Item\VocabItemCell.xaml.cs">
       <DependentUpon>VocabItemCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Modules\VocabList\VocabListPage.xaml.cs">
       <DependentUpon>VocabListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Modules\VocabList\VocabTermPage.xaml.cs">
+    <Compile Update="Modules\VocabList\Detail\VocabTermPage.xaml.cs">
       <DependentUpon>VocabTermPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\DataGridPage.xaml.cs">
