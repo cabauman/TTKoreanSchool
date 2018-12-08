@@ -28,7 +28,7 @@ namespace TongTongAdmin.Modules
         private void PopulateFromViewModel(IHomonymListViewModel vm)
         {
             //ViewModel.LoadItems.Execute().Subscribe();
-            AudiobookListView.ItemsSource = vm.AudiobookItems;
+            //AudiobookListView.ItemsSource = vm.AudiobookItems;
         }
 
         private void Init(CompositeDisposable disposables)
