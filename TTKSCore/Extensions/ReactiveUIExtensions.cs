@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using Splat;
 
-namespace TTKSCore.Extensions
+namespace TTKSCore
 {
     public static class ReactiveUIExtensions
     {
