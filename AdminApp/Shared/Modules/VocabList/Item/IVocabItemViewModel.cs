@@ -25,9 +25,5 @@ namespace TongTongAdmin.Modules
         string AdverbForm { get; set; }
 
         string Notes { get; set; }
-
-        IList<string> ImageIds { get; set; }
-
-        IList<string> SentenceIds { get; set; }
     }
 }

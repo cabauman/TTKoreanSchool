@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -94,11 +93,6 @@ namespace TongTongAdmin.Modules
             {
                 eventArgs.Cancel = true;
             }
-            else if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.ImageIds) ||
-                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.SentenceIds))
-            {
-                eventArgs.Column.AllowEditing = false;
-            }
             else if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.WordClass))
             {
                 eventArgs.Cancel = true;
@@ -106,7 +100,7 @@ namespace TongTongAdmin.Modules
                 GridPickerColumn pickerColumn = new GridPickerColumn();
                 pickerColumn.MappingName = "WordClass";
                 pickerColumn.HeaderText = "Word Class";
-                pickerColumn.ItemsSource = ContentConstants.WordClasses;
+                pickerColumn.ItemsSource = StudyContentConfig.WordClasses;
                 _sfGrid.Columns.Add(pickerColumn);
             }
         }
