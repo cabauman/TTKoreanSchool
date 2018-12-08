@@ -68,11 +68,11 @@ namespace TTKoreanSchool.Tests.AdminApp
         public IAudiobookListViewModel Build()
         {
             var result = new AudiobookListViewModel(
-                _viewStackService,
                 _audiobookRepo,
                 _firebaseStorageService,
                 _dialogService,
-                _mainScheduler);
+                _mainScheduler,
+                _viewStackService);
 
             if (_activate)
             {

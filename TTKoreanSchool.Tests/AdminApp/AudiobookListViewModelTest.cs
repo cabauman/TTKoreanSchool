@@ -44,35 +44,27 @@ namespace TTKoreanSchool.Tests.AdminApp
 
             var onNext = Notification.CreateOnNext(audiobooks);
             var obs = _schedulerProvider.Dispatcher.CreateColdObservable(new Recorded<Notification<IEnumerable<Audiobook>>>(0, onNext));
-            audiobookRepo.GetItems(true).Returns(obs);
+            audiobookRepo.GetItems(Arg.Any<bool>()).Returns(obs);
 
             // Act
             sut.LoadItems.Execute().Subscribe();
-            //_schedulerProvider.Dispatcher.Start();
-            _schedulerProvider.Dispatcher.AdvanceBy(2);
+            _schedulerProvider.Dispatcher.Start();
+            //_schedulerProvider.Dispatcher.AdvanceBy(2);
 
             // Assert
             sut.AudiobookItems.Should().HaveCount(expected);
         }
 
         [Fact]
-        public void Should_LeakMemory_WhenNotDisposed()
-        {
-            Xamarin.Forms.Mocks.MockForms.Init();
-            var vm = new AudiobookListViewModel(Substitute.For<IViewStackService>(), Substitute.For<IRepository<Audiobook>>());
-            var leakMonitor = new LeakMonitor<AudiobookListPage>(new AudiobookListPage() { ViewModel = vm });
-
-            leakMonitor.IsItemAlive().Should().BeTrue();
-        }
-
-        [Fact]
         public void Should_NotLeakMemory_WhenDisposed()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
-            var vm = new AudiobookListViewModel(Substitute.For<IViewStackService>(), Substitute.For<IRepository<Audiobook>>());
+
+            var vm = new AudiobookListViewModelBuilder()
+                .Build();
             var leakMonitor = new LeakMonitor<AudiobookListPage>(new AudiobookListPage() { ViewModel = vm });
             //(_weakReference.Target as GrammarListPage).Sub.Dispose();
-            vm = null;
+            //vm = null;
 
             leakMonitor.IsItemAlive().Should().BeFalse();
         }
