@@ -19,14 +19,28 @@ namespace TongTongAdmin.Modules
 
         public VocabTerm Model { get; }
 
-        public string Ko { get; }
+        public string Ko { get; set; }
+
+        public string En { get; set; }
 
         public string Romanization { get; }
 
-        public string Translation { get; }
+        public string HomonymSpecifier { get; set; }
 
-        public string ImageUrl { get; }
+        public string WordClass { get; set; }
 
-        public string SentenceIds { get; }
+        public string Transitivity { get; set; }
+
+        public string HonorificForm { get; set; }
+
+        public string PassiveForm { get; set; }
+
+        public string AdverbForm { get; set; }
+
+        public string Notes { get; set; }
+
+        public IList<string> ImageUrls { get; set; }
+
+        public IList<string> Sentences { get; set; }
     }
 }
