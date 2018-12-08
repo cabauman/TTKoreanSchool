@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Syncfusion.ListView.XForms.UWP;
+using Syncfusion.SfAutoComplete.XForms.UWP;
 using Syncfusion.SfDataGrid.XForms.UWP;
 using Syncfusion.SfNumericTextBox.XForms.UWP;
 using Windows.ApplicationModel;
@@ -58,6 +59,7 @@ namespace TongTongAdmin.UWP
 
                 List<Assembly> assembliesToInclude = new List<Assembly>();
                 //Now, add all the assemblies your app uses
+                assembliesToInclude.Add(typeof(SfAutoCompleteRenderer).GetTypeInfo().Assembly);
                 assembliesToInclude.Add(typeof(SfListViewRenderer).GetTypeInfo().Assembly);
                 assembliesToInclude.Add(typeof(SfDataGridRenderer).GetTypeInfo().Assembly);
                 assembliesToInclude.Add(typeof(SfNumericTextBoxRenderer).GetTypeInfo().Assembly);
