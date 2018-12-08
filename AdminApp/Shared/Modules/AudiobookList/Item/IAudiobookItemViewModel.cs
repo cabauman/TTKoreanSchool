@@ -1,6 +1,5 @@
 ﻿using System.Reactive;
 using GameCtor.FirebaseStorage.DotNet;
-using Plugin.MediaManager.Abstractions;
 using Plugin.MediaManager.Reactive;
 using ReactiveUI;
 using TTKSCore.Models;
@@ -11,7 +10,7 @@ namespace TongTongAdmin.Modules
     {
         Audiobook Model { get; set; }
 
-        ReactiveMediaManager MediaManager { get; }
+        IReactiveMediaManager MediaManager { get; }
 
         ReactiveCommand<Unit, Unit> PlayAudio { get; }
 

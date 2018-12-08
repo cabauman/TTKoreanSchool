@@ -28,7 +28,7 @@ namespace TongTongAdmin.Modules
 
         public AudiobookItemViewModel(
             Audiobook model,
-            ReactiveMediaManager mediaManager,
+            IReactiveMediaManager mediaManager,
             Interaction<string, bool> confirmDelete,
             ReactiveCommand<Unit, Unit> cancelUpload,
             IRepository<Audiobook> audiobookRepo = null,
@@ -158,7 +158,7 @@ namespace TongTongAdmin.Modules
 
         public IRepository<Audiobook> AudiobookRepo { get; }
 
-        public ReactiveMediaManager MediaManager { get; }
+        public IReactiveMediaManager MediaManager { get; }
 
         public bool IsPlaying => _isPlaying != null ? _isPlaying.Value : false;
 

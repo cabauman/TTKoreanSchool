@@ -162,13 +162,12 @@ namespace TongTongAdmin.Modules
 
         public IUserDialogs DialogService { get; }
 
-        public ReactiveMediaManager MediaManager { get; }
+        public IReactiveMediaManager MediaManager { get; }
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
         public void CleanUp()
         {
-            MediaManager.Dispose();
             ProgressDialog.Dispose();
         }
 
