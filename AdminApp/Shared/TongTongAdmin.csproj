@@ -19,22 +19,24 @@
 
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
-    <PackageReference Include="FirebaseAuthentication.net" Version="3.1.0" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="3.2.0" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.0-beta4" />
-    <PackageReference Include="FirebaseStorage.net" Version="1.0.2" />
-    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.0" />
-    <PackageReference Include="MediaManager.Unofficial" Version="1.0.2" />
-    <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.0.2" />
-    <PackageReference Include="ReactiveUI" Version="9.3.5" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="9.3.5" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.1" />
+    <PackageReference Include="MediaManager.Unofficial" Version="1.1.0" />
+    <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.1.0" />
+    <PackageReference Include="ReactiveUI" Version="9.4.1" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="9.4.1" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="16.3.0.29" />
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="16.3.0.21" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.29" />
     <PackageReference Include="System.Reactive" Version="4.1.2" />
     <PackageReference Include="System.Reactive.Compatibility" Version="4.1.2" />
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
-    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.0.121" />  
+    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.0.135" />  
   </ItemGroup>
 
   <ItemGroup>
