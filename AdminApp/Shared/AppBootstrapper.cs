@@ -12,6 +12,7 @@ using LocalStorage.XamarinEssentials;
 using ReactiveUI;
 using Splat;
 using TongTongAdmin.Modules;
+using TongTongAdmin.Services;
 using TTKSCore;
 using TTKSCore.Config;
 
@@ -66,6 +67,7 @@ namespace TongTongAdmin
             FirebaseAuthService = new FirebaseAuthService(ApiKeys.FIREBASE, new LocalStorageService());
             Locator.CurrentMutable.RegisterConstant(FirebaseAuthService, typeof(IFirebaseAuthService));
             Locator.CurrentMutable.RegisterConstant(new FirebaseStorageService(new FirebaseStorage("tt-korean-academy.appspot.com")), typeof(IFirebaseStorageService));
+            Locator.CurrentMutable.RegisterConstant(new StudyContentService(), typeof(StudyContentService));
             new RepoRegistrar(FirebaseAuthService, Locator.CurrentMutable);
         }
 
