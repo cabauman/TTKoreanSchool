@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using ReactiveUI;
+using TTKSCore.Common;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
@@ -11,8 +12,8 @@ namespace TongTongAdmin.Modules
         private string _ko;
         private string _homonymSpecifier;
         private string _en;
-        private string _wordClass;
-        private string _transitivity;
+        private WordClass _wordClass;
+        private Transitivity _transitivity;
         private string _honorificForm;
         private string _passiveForm;
         private string _adverbForm;
@@ -26,8 +27,8 @@ namespace TongTongAdmin.Modules
             _ko = model.Ko;
             _homonymSpecifier = model.HomonymSpecifier;
             _en = model.Translation;
-            _wordClass = model.WordClass;
-            _transitivity = model.Transitivity;
+            Enum.TryParse(model.WordClass, out _wordClass);
+            Enum.TryParse(model.Transitivity, out _transitivity);
             _honorificForm = model.HonorificForm;
             _passiveForm = model.PassiveForm;
             _adverbForm = model.AdverbForm;
@@ -70,13 +71,13 @@ namespace TongTongAdmin.Modules
             set => this.RaiseAndSetIfChanged(ref _en, value);
         }
 
-        public string WordClass
+        public WordClass WordClass
         {
             get => _wordClass;
             set => this.RaiseAndSetIfChanged(ref _wordClass, value);
         }
 
-        public string Transitivity
+        public Transitivity Transitivity
         {
             get => _transitivity;
             set => this.RaiseAndSetIfChanged(ref _transitivity, value);
@@ -107,5 +108,18 @@ namespace TongTongAdmin.Modules
         }
 
         public bool Modified => _modified.Value;
+
+        public void UpdateModel()
+        {
+            Model.Ko = Ko;
+            Model.HomonymSpecifier = HomonymSpecifier;
+            Model.Translation = En;
+            Model.WordClass = WordClass.ToString();
+            Model.Transitivity = Transitivity.ToString();
+            Model.HonorificForm = HonorificForm;
+            Model.PassiveForm = PassiveForm;
+            Model.AdverbForm = AdverbForm;
+            Model.Notes = Notes;
+        }
     }
 }

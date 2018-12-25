@@ -14,9 +14,9 @@ namespace TongTongAdmin.Modules
 
         string HomonymSpecifier { get; set; }
 
-        string WordClass { get; set; }
+        WordClass WordClass { get; set; }
 
-        string Transitivity { get; set; }
+        Transitivity Transitivity { get; set; }
 
         string HonorificForm { get; set; }
 
@@ -25,5 +25,9 @@ namespace TongTongAdmin.Modules
         string AdverbForm { get; set; }
 
         string Notes { get; set; }
+
+        bool Modified { get; }
+
+        void UpdateModel();
     }
 }
