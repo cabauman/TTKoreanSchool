@@ -4,10 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using DynamicData;
 using GameCtor.Repository;
 using GameCtor.RxNavigation;
 using ReactiveUI;
 using Splat;
+using TongTongAdmin.Services;
+using TTKSCore;
 using TTKSCore.Common;
 using TTKSCore.Models;
 
@@ -20,14 +23,17 @@ namespace TongTongAdmin.Modules
         public VocabListViewModel(
             IRepository<VocabTerm> vocabTermRepo = null,
             TranslationRepoFactory translationRepoFactory = null,
+            StudyContentService studyContentService = null,
             IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
             VocabTermRepo = vocabTermRepo ?? Locator.Current.GetService<IRepository<VocabTerm>>();
             translationRepoFactory = translationRepoFactory ?? Locator.Current.GetService<TranslationRepoFactory>();
             TranslationRepo = translationRepoFactory.Create(TranslationType.Vocab, "en");
+            studyContentService = studyContentService ?? Locator.Current.GetService<StudyContentService>();
             Items = new ObservableCollection<IVocabItemViewModel>();
             ConfirmDelete = new Interaction<string, bool>();
+            Homonyms = studyContentService.Homonyms;
 
             LoadItems = ReactiveCommand.CreateFromObservable(
                 () =>
@@ -59,11 +65,23 @@ namespace TongTongAdmin.Modules
             SaveItem = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
+                    SelectedItem.UpdateModel();
                     return SelectedItem.Model.Id != null ?
                         VocabTermRepo.Upsert(SelectedItem.Model) :
                         VocabTermRepo.Add(SelectedItem.Model);
                 },
                 canDeleteOrSaveItem);
+
+            SaveAllModifiedItems = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    var modifiedItems = Items
+                        .Where(x => x.Modified)
+                        .Do(x => x.UpdateModel())
+                        .Select(x => x.Model);
+
+                    return VocabTermRepo.Upsert(modifiedItems);
+                });
 
             DeleteItem = ReactiveCommand.CreateFromObservable(
                 () =>
@@ -89,6 +107,8 @@ namespace TongTongAdmin.Modules
 
         public ReactiveCommand<Unit, Unit> SaveItem { get; }
 
+        public ReactiveCommand<Unit, Unit> SaveAllModifiedItems { get; }
+
         public Interaction<string, bool> ConfirmDelete { get; }
 
         public IRepository<VocabTerm> VocabTermRepo { get; }
@@ -96,6 +116,8 @@ namespace TongTongAdmin.Modules
         public IRepository<Translation> TranslationRepo { get; }
 
         public ObservableCollection<IVocabItemViewModel> Items { get; }
+
+        public List<StringEntity> Homonyms { get; }
 
         public IVocabItemViewModel SelectedItem
         {

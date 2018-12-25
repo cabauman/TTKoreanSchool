@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reactive;
 using GameCtor.Repository;
 using ReactiveUI;
@@ -16,6 +17,8 @@ namespace TongTongAdmin.Modules
 
         ReactiveCommand<Unit, Unit> SaveItem { get; }
 
+        ReactiveCommand<Unit, Unit> SaveAllModifiedItems { get; }
+
         Interaction<string, bool> ConfirmDelete { get; }
 
         IVocabItemViewModel SelectedItem { get; set; }
@@ -23,5 +26,7 @@ namespace TongTongAdmin.Modules
         IRepository<VocabTerm> VocabTermRepo { get; }
 
         ObservableCollection<IVocabItemViewModel> Items { get; }
+
+        List<StringEntity> Homonyms { get; }
     }
 }
