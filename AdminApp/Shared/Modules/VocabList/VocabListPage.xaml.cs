@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using Syncfusion.SfDataGrid.XForms;
+using TongTongAdmin.Services;
 using TTKSCore.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,7 +30,7 @@ namespace TongTongAdmin.Modules
                     _sfGrid.NavigationMode = NavigationMode.Cell;
                     _sfGrid.SelectionMode = SelectionMode.Single;
                     _sfGrid.AllowEditing = true;
-                    _sfGrid.EditTapAction = TapAction.OnDoubleTap;
+                    _sfGrid.EditTapAction = TapAction.OnTap;
                     _sfGrid.EditorSelectionBehavior = EditorSelectionBehavior.MoveLast;
                     _sfGrid.ItemsSource = new Services.OrderInfoRepository().OrderInfoCollection;
 
@@ -93,14 +94,16 @@ namespace TongTongAdmin.Modules
             {
                 eventArgs.Cancel = true;
             }
-            else if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.WordClass))
+            else if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.HomonymSpecifier))
             {
                 eventArgs.Cancel = true;
 
                 GridPickerColumn pickerColumn = new GridPickerColumn();
-                pickerColumn.MappingName = "WordClass";
-                pickerColumn.HeaderText = "Word Class";
-                pickerColumn.ItemsSource = StudyContentConfig.WordClasses;
+                pickerColumn.MappingName = "HomonymSpecifier";
+                pickerColumn.HeaderText = "Homonym Specifier";
+                pickerColumn.ItemsSource = ViewModel.Homonyms;
+                pickerColumn.DisplayMemberPath = "Value";
+                pickerColumn.ValueMemberPath = "Value";
                 _sfGrid.Columns.Add(pickerColumn);
             }
         }
