@@ -13,9 +13,9 @@ using Plugin.MediaManager.Abstractions.Implementations;
 using Plugin.MediaManager.Reactive;
 using ReactiveUI;
 using Splat;
+using TTKSCore;
 using TTKSCore.Common;
 using TTKSCore.Config;
-using TTKSCore.Extensions;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
