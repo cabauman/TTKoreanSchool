@@ -5,6 +5,8 @@ using ReactiveUI;
 using System.Threading.Tasks;
 using TongTongAdmin.Common;
 using TTKSCore.Config;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Distribute;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TongTongAdmin
@@ -26,6 +28,9 @@ namespace TongTongAdmin
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start(
+                "ios={Your App Secret};android={Your App Secret};uwp={Your App Secret}",
+                typeof(Distribute));
         }
 
         protected override void OnSleep()

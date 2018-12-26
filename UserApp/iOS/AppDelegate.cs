@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter.Distribute;
 using UIKit;
 
 namespace TTKoreanSchool.iOS
@@ -24,6 +25,7 @@ namespace TTKoreanSchool.iOS
         {
             new Syncfusion.SfNavigationDrawer.XForms.iOS.SfNavigationDrawerRenderer();
             global::Xamarin.Forms.Forms.Init();
+            Distribute.DontCheckForUpdatesInDebug();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

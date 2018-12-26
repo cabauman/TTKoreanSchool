@@ -1,9 +1,11 @@
 ﻿using System;
+using Microsoft.AppCenter;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ReactiveUI;
 using System.Threading.Tasks;
 using TTKoreanSchool.Common;
+using Microsoft.AppCenter.Distribute;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TTKoreanSchool
@@ -24,6 +26,9 @@ namespace TTKoreanSchool
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start(
+                "ios={Your App Secret};android={Your App Secret};uwp={Your App Secret}",
+                typeof(Distribute));
         }
 
         protected override void OnSleep()
