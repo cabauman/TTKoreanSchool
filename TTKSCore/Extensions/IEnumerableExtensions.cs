@@ -48,5 +48,33 @@ namespace TTKSCore
             trueSequence = ts ?? Enumerable.Empty<T>();
             falseSequence = fs ?? Enumerable.Empty<T>();
         }
+
+        public static IEnumerable<TResult> ZipAll<TSource, TSecond, TResult>(
+            this IEnumerable<TSource> source,
+            IEnumerable<TSecond> other,
+            Func<TSource, TSecond, TResult> projection)
+        {
+            using (var firstIterator = source.GetEnumerator())
+            using (var secondIterator = other.GetEnumerator())
+            {
+                while (true)
+                {
+                    bool hasFirst = firstIterator.MoveNext();
+                    bool hasSecond = secondIterator.MoveNext();
+
+                    TSource first = hasFirst ? firstIterator.Current : default(TSource);
+                    TSecond second = hasSecond ? secondIterator.Current : default(TSecond);
+
+                    if (hasFirst || hasSecond)
+                    {
+                        yield return projection(first, second);
+                    }
+                    else
+                    {
+                        yield break;
+                    }
+                }
+            }
+        }
     }
 }
