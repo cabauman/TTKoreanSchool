@@ -71,7 +71,7 @@ namespace TongTongAdmin.Modules
                 .BindCommand(ViewModel, vm => vm.CreateItem, v => v.AddButton)
                 .DisposeWith(disposables);
             this
-                .BindCommand(ViewModel, vm => vm.SaveItem, v => v.SaveButton)
+                .BindCommand(ViewModel, vm => vm.SaveAllModifiedItems, v => v.SaveButton)
                 .DisposeWith(disposables);
             this
                 .BindCommand(ViewModel, vm => vm.DeleteItem, v => v.DeleteButton)
@@ -90,7 +90,9 @@ namespace TongTongAdmin.Modules
 
         private void AdjustColumnSettings(AutoGeneratingColumnEventArgs eventArgs)
         {
-            if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.Model))
+            if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.Model) ||
+                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.Modified) ||
+                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.EnTranslation))
             {
                 eventArgs.Cancel = true;
             }

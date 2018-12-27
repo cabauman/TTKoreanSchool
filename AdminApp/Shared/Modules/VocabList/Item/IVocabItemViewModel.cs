@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TTKSCore.Common;
 using TTKSCore.Models;
 
@@ -7,6 +8,12 @@ namespace TongTongAdmin.Modules
     public interface IVocabItemViewModel
     {
         VocabTerm Model { get; }
+
+        Translation EnTranslation { get; }
+
+        //IObservable<bool> ModifiedStream { get; }
+
+        //IObservable<bool> ModifiedEnStream { get; }
 
         string Ko { get; set; }
 
@@ -29,5 +36,7 @@ namespace TongTongAdmin.Modules
         bool Modified { get; }
 
         void UpdateModel();
+
+        void UpdateEnTranslation();
     }
 }
