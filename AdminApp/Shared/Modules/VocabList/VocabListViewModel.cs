@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using DynamicData;
+using DynamicData.Binding;
+using Firebase.Database;
 using GameCtor.Repository;
 using GameCtor.RxNavigation;
 using ReactiveUI;
@@ -19,9 +21,8 @@ namespace TongTongAdmin.Modules
     public class VocabListViewModel : BasePageViewModel, IVocabListViewModel
     {
         private IVocabItemViewModel _selectedItem;
-        private List<IVocabItemViewModel> _newItems;
-        private List<IVocabItemViewModel> _modifiedTerms;
-        private List<IVocabItemViewModel> _modifiedEnTranslations;
+        private IDictionary<string, IVocabItemViewModel> _modifiedTermMap = new Dictionary<string, IVocabItemViewModel>();
+        private IDictionary<string, IVocabItemViewModel> _modifiedEnTranslationMap = new Dictionary<string, IVocabItemViewModel>();
 
         public VocabListViewModel(
             IRepository<VocabTerm> vocabTermRepo = null,
@@ -38,110 +39,21 @@ namespace TongTongAdmin.Modules
             ConfirmDelete = new Interaction<string, bool>();
             Homonyms = studyContentService.Homonyms;
 
-            //var o = Items
-            //    .ToObservable()
-            //    .SelectMany(x => x.ModifiedStream.Where(modified => modified).Select(_ => x))
-            //    .Do(x => _modifiedTerms.Add(x));
+            SubscribeToItemModifications();
 
-            //var o2 = Items
-            //    .ToObservable()
-            //    .SelectMany(x => x.ModifiedEnStream.Where(modified => modified).Select(_ => x))
-            //    .Do(x => _modifiedEnTranslations.Add(x));
+            LoadItems = ReactiveCommand.CreateFromObservable(DoLoadItems);
 
-            LoadItems = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    IDictionary<string, Translation> enTranslationMap = null;
-                    var enTranslationStream = TranslationRepo
-                        .GetItems()
-                        .Do(
-                            x =>
-                            {
-                                enTranslationMap = x.ToDictionary(translation => translation.Id);
-                            })
-                        .Select(_ => Unit.Default);
-
-                    var termStream = VocabTermRepo
-                        .GetItems(false)
-                        .SelectMany(x => x)
-                        .ObserveOn(RxApp.MainThreadScheduler)
-                        .Do(
-                            term =>
-                            {
-                                Translation en = null;
-                                enTranslationMap?.TryGetValue(term.Id, out en);
-                                Items.Add(new VocabItemViewModel(term, en ?? new Translation()));
-                            })
-                        .Select(_ => Unit.Default);
-
-                    return enTranslationStream.Concat(termStream);
-                });
-
-            CreateItem = ReactiveCommand.Create(
-                () => Items.Add(new VocabItemViewModel(new VocabTerm(), new Translation())));
+            CreateItem = ReactiveCommand.Create(DoCreateItem);
 
             var canDeleteOrSaveItem = this
                 .WhenAnyValue(x => x.SelectedItem)
                 .Select(x => x != null);
 
-            SaveItem = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    SelectedItem.UpdateModel();
-                    return SelectedItem.Model.Id != null ?
-                        VocabTermRepo.Upsert(SelectedItem.Model) :
-                        VocabTermRepo.Add(SelectedItem.Model);
-                },
-                canDeleteOrSaveItem);
+            SaveItem = ReactiveCommand.CreateFromObservable(DoSaveItem, canDeleteOrSaveItem);
 
-            SaveAllModifiedItems = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    Items.Partition(x => x.Model.Id == null, out var newItems, out var existingItems);
+            SaveAllModifiedItems = ReactiveCommand.CreateFromObservable(DoSaveAllModifiedItems);
 
-                    newItems.Do(x => x.UpdateModel());
-                    var newIitemStream = VocabTermRepo
-                        .Add(newItems.Select(x => x.Model))
-                        .SelectMany(_ => newItems)
-                        .Do(x => x.UpdateEnTranslation())
-                        .Select(x => x.EnTranslation)
-                        .ToList()
-                        .SelectMany(x => TranslationRepo.Upsert(x));
-
-                    var termsQuery = existingItems
-                        .Where(x => x.Modified)
-                        .ToList();
-                    var terms = termsQuery
-                        .Do(x => x.UpdateModel())
-                        .Select(x => x.Model);
-
-                    var enTranslationsQuery = existingItems
-                        .Where(x => x.En != x.EnTranslation.Value)
-                        .ToList();
-                    var enTranslations = enTranslationsQuery
-                        .Do(x => x.UpdateEnTranslation())
-                        .Select(x => x.EnTranslation);
-
-                    //_modifiedTerms.ForEach(x => x.UpdateModel());
-                    //_modifiedEnTranslations.ForEach(x => x.UpdateEnTranslation());
-
-                    return Observable
-                        .Merge(newIitemStream, VocabTermRepo.Upsert(terms), TranslationRepo.Upsert(enTranslations));
-                        //.Do(_ => _modifiedTerms.Clear());
-                });
-
-            DeleteItem = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return ConfirmDelete
-                        .Handle(SelectedItem.Ko)
-                        .Where(result => result)
-                        //.SelectMany(_ => DeleteFilesAndDbEntry())
-                        .ObserveOn(RxApp.MainThreadScheduler)
-                        .Do(_ => Items.Remove(SelectedItem))
-                        .Select(_ => Unit.Default);
-                },
-                canDeleteOrSaveItem);
+            DeleteItem = ReactiveCommand.CreateFromObservable(DoDeleteItem, canDeleteOrSaveItem);
         }
 
         public override string Title => "Vocab";
@@ -170,6 +82,101 @@ namespace TongTongAdmin.Modules
         {
             get => _selectedItem;
             set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
+        }
+
+        private IObservable<Unit> DoLoadItems()
+        {
+            return Observable
+                .CombineLatest(
+                    VocabTermRepo.GetItems(true),
+                    TranslationRepo.GetItems(true),
+                    (x, y) => x.Zip(y, (term, translation) => new VocabItemViewModel(term, translation)))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Do(x => Items.AddRange(x))
+                .Select(_ => Unit.Default);
+        }
+
+        private void DoCreateItem()
+        {
+            Items.Add(new VocabItemViewModel(new VocabTerm() { Id = FirebaseKeyGenerator.Next() }, new Translation()));
+        }
+
+        private IObservable<Unit> DoSaveItem()
+        {
+            SelectedItem.ApplyModification();
+            return SelectedItem.Model.Id != null ?
+                VocabTermRepo.Upsert(SelectedItem.Model) :
+                VocabTermRepo.Add(SelectedItem.Model);
+        }
+
+        private IObservable<Unit> DoSaveAllModifiedItems()
+        {
+            var terms = _modifiedTermMap.Values
+                .Do(x => x.ApplyModification())
+                .Select(x => x.Model);
+
+            var enTranslations = _modifiedEnTranslationMap.Values
+                .Do(x => x.ApplyEnTranslationModification())
+                .Select(x => x.EnTranslation);
+
+            return Observable
+                .Merge(VocabTermRepo.Upsert(terms), TranslationRepo.Upsert(enTranslations))
+                .Do(
+                    _ =>
+                    {
+                        _modifiedTermMap.Clear();
+                        _modifiedEnTranslationMap.Clear();
+                    });
+        }
+
+        IObservable<Unit> DoDeleteItem()
+        {
+            return ConfirmDelete
+                .Handle(SelectedItem.Ko)
+                .Where(result => result)
+                //.SelectMany(_ => DeleteFilesAndDbEntry())
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Do(_ => Items.Remove(SelectedItem))
+                .Select(_ => Unit.Default);
+        }
+
+        private void SubscribeToItemModifications()
+        {
+            Items.ToObservableChangeSet()
+                .SubscribeMany(
+                    x =>
+                    {
+                        return x.ModifiedStream
+                            .Where(modified => modified)
+                            .Subscribe(_ => _modifiedTermMap.Add(x.Model.Id, x));
+                    })
+                .OnItemRemoved(
+                    x =>
+                    {
+                        if (_modifiedTermMap.ContainsKey(x.Model.Id))
+                        {
+                            _modifiedTermMap.Remove(x.Model.Id);
+                        }
+                    })
+                .Subscribe();
+
+            Items.ToObservableChangeSet()
+                .SubscribeMany(
+                    x =>
+                    {
+                        return x.EnModifiedStream
+                            .Where(modified => modified)
+                            .Subscribe(_ => _modifiedEnTranslationMap.Add(x.Model.Id, x));
+                    })
+                .OnItemRemoved(
+                    x =>
+                    {
+                        if (_modifiedEnTranslationMap.ContainsKey(x.Model.Id))
+                        {
+                            _modifiedEnTranslationMap.Remove(x.Model.Id);
+                        }
+                    })
+                .Subscribe();
         }
     }
 }

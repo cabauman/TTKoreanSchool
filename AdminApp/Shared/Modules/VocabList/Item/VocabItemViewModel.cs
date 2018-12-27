@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using ReactiveUI;
@@ -10,6 +9,10 @@ namespace TongTongAdmin.Modules
 {
     public class VocabItemViewModel : ReactiveObject, IVocabItemViewModel
     {
+        private readonly Subject<bool> _isModifiedStream = new Subject<bool>();
+        private readonly ObservableAsPropertyHelper<bool> _modified;
+        private readonly ObservableAsPropertyHelper<bool> _enModified;
+
         private string _ko;
         private string _homonymSpecifier;
         private string _en;
@@ -19,24 +22,20 @@ namespace TongTongAdmin.Modules
         private string _passiveForm;
         private string _adverbForm;
         private string _notes;
-        private Subject<bool> _isModifiedStream = new Subject<bool>();
-
-        private ObservableAsPropertyHelper<bool> _modified;
-        private ObservableAsPropertyHelper<bool> _enModified;
 
         public VocabItemViewModel(VocabTerm model, Translation enTranslation)
         {
             Model = model;
             _ko = model.Ko;
             _homonymSpecifier = model.HomonymSpecifier;
-            EnTranslation = enTranslation;
             _en = enTranslation.Value;
-            Enum.TryParse(model.WordClass, out _wordClass);
-            Enum.TryParse(model.Transitivity, out _transitivity);
             _honorificForm = model.HonorificForm;
             _passiveForm = model.PassiveForm;
             _adverbForm = model.AdverbForm;
             _notes = model.Notes;
+            EnTranslation = enTranslation;
+            Enum.TryParse(model.WordClass, out _wordClass);
+            Enum.TryParse(model.Transitivity, out _transitivity);
 
             _modified = this
                 .WhenAnyValue(
@@ -58,13 +57,22 @@ namespace TongTongAdmin.Modules
                 .Skip(1)
                 .Merge(_isModifiedStream)
                 .ToProperty(this, x => x.EnModified);
+
+            ModifiedStream = this.WhenAnyValue(x => x.Modified);
+            EnModifiedStream = this.WhenAnyValue(x => x.EnModified);
         }
 
         public VocabTerm Model { get; }
 
         public Translation EnTranslation { get; }
 
+        public bool Modified => _modified.Value;
+
         public bool EnModified => _enModified.Value;
+
+        public IObservable<bool> ModifiedStream { get; }
+
+        public IObservable<bool> EnModifiedStream { get; }
 
         public string Ko
         {
@@ -120,9 +128,7 @@ namespace TongTongAdmin.Modules
             set => this.RaiseAndSetIfChanged(ref _notes, value);
         }
 
-        public bool Modified => _modified.Value;
-
-        public void UpdateModel()
+        public void ApplyModification()
         {
             Model.Ko = Ko;
             Model.HomonymSpecifier = HomonymSpecifier;
@@ -135,7 +141,7 @@ namespace TongTongAdmin.Modules
             _isModifiedStream.OnNext(false);
         }
 
-        public void UpdateEnTranslation()
+        public void ApplyEnTranslationModification()
         {
             EnTranslation.Id = Model.Id;
             EnTranslation.Value = En;

@@ -11,9 +11,9 @@ namespace TongTongAdmin.Modules
 
         Translation EnTranslation { get; }
 
-        //IObservable<bool> ModifiedStream { get; }
+        IObservable<bool> ModifiedStream { get; }
 
-        //IObservable<bool> ModifiedEnStream { get; }
+        IObservable<bool> EnModifiedStream { get; }
 
         string Ko { get; set; }
 
@@ -35,8 +35,8 @@ namespace TongTongAdmin.Modules
 
         bool Modified { get; }
 
-        void UpdateModel();
+        void ApplyModification();
 
-        void UpdateEnTranslation();
+        void ApplyEnTranslationModification();
     }
 }

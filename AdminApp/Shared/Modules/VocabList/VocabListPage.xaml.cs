@@ -92,7 +92,9 @@ namespace TongTongAdmin.Modules
         {
             if (eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.Model) ||
                 eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.Modified) ||
-                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.EnTranslation))
+                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.ModifiedStream) ||
+                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.EnTranslation) ||
+                eventArgs.Column.MappingName == nameof(ViewModel.SelectedItem.EnModifiedStream))
             {
                 eventArgs.Cancel = true;
             }
