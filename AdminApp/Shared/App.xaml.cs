@@ -15,7 +15,6 @@ namespace TongTongAdmin
     {
         public App()
         {
-            LiveReload.Init();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Constants.SYNC_FUSION_LICENSE);
 
             InitializeComponent();
@@ -28,9 +27,9 @@ namespace TongTongAdmin
         protected override void OnStart()
         {
             // Handle when your app starts
-            AppCenter.Start(
-                "ios={Your App Secret};android={Your App Secret};uwp={Your App Secret}",
-                typeof(Distribute));
+            //AppCenter.Start(
+            //    "ios={Your App Secret};android={Your App Secret};uwp={Your App Secret}",
+            //    typeof(Distribute));
         }
 
         protected override void OnSleep()
