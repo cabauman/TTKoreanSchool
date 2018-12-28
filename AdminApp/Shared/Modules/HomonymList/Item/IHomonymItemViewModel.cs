@@ -1,4 +1,5 @@
-﻿using TTKSCore.Models;
+﻿using System;
+using TTKSCore.Models;
 
 namespace TongTongAdmin.Modules
 {
@@ -6,6 +7,10 @@ namespace TongTongAdmin.Modules
     {
         StringEntity Model { get; }
 
-        string Value { get; set; }
+        string Text { get; set; }
+
+        bool ReceivedFocus { get; set; }
+
+        IObservable<bool> ReceivedFocusStream { get; }
     }
 }

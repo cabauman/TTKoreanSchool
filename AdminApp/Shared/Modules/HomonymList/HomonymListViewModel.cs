@@ -31,18 +31,12 @@ namespace TongTongAdmin.Modules
             ConfirmDelete = new Interaction<string, bool>();
             _homonyms = new SourceList<StringEntity>();
 
-            LoadItems = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return HomonymRepo
-                        .GetItems(false)
-                        .Do(x => _homonyms.AddRange(x))
-                        .Select(_ => Unit.Default);
-                });
+            LoadItems = ReactiveCommand.CreateFromObservable(DoLoadItems);
 
             var changeSet = _homonyms
                 .Connect()
                 .Transform(model => new HomonymItemViewModel(model) as IHomonymItemViewModel)
+                .SubscribeMany(item => item.ReceivedFocusStream.Where(flag => flag).Subscribe(flag => SelectedItem = item))
                 .Publish()
                 .RefCount();
 
@@ -58,27 +52,9 @@ namespace TongTongAdmin.Modules
                 .WhenAnyValue(x => x.SelectedItem)
                 .Select(x => x != null);
 
-            SaveItem = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return SelectedItem.Model.Id != null ?
-                        HomonymRepo.Upsert(SelectedItem.Model) :
-                        HomonymRepo.Add(SelectedItem.Model);
-                },
-                canDeleteOrSaveItem);
+            SaveItem = ReactiveCommand.CreateFromObservable(DoSaveItem, canDeleteOrSaveItem);
 
-            DeleteItem = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return ConfirmDelete
-                        .Handle(SelectedItem.Value)
-                        .Where(result => result)
-                        //.SelectMany(_ => DeleteFilesAndDbEntry())
-                        //.ObserveOn(RxApp.MainThreadScheduler)
-                        .Do(_ => _homonyms.Remove(SelectedItem.Model))
-                        .Select(_ => Unit.Default);
-                },
-                canDeleteOrSaveItem);
+            DeleteItem = ReactiveCommand.CreateFromObservable(DoDeleteItem, canDeleteOrSaveItem);
         }
 
         public override string Title => "Homonyms";
@@ -104,6 +80,32 @@ namespace TongTongAdmin.Modules
         public ReadOnlyObservableCollection<IHomonymItemViewModel> Items => _homonymItems;
 
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
+
+        private IObservable<Unit> DoLoadItems()
+        {
+            return HomonymRepo
+                .GetItems(false)
+                .Do(x => _homonyms.AddRange(x))
+                .Select(_ => Unit.Default);
+        }
+
+        private IObservable<Unit> DoSaveItem()
+        {
+            return SelectedItem.Model.Id != null ?
+                HomonymRepo.Upsert(SelectedItem.Model) :
+                HomonymRepo.Add(SelectedItem.Model);
+        }
+
+        private IObservable<Unit> DoDeleteItem()
+        {
+            return ConfirmDelete
+                .Handle(SelectedItem.Text)
+                .Where(result => result)
+                //.SelectMany(_ => DeleteFilesAndDbEntry())
+                //.ObserveOn(RxApp.MainThreadScheduler)
+                .Do(_ => _homonyms.Remove(SelectedItem.Model))
+                .Select(_ => Unit.Default);
+        }
 
         private void MakeSureItemIsSelected()
         {

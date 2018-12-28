@@ -13,19 +13,19 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <syncfusion:SfListView
-            x:Name="AudiobookListView"
+            x:Name="HomonymListView"
             SelectionMode="Single"
-            ItemSize="260"
+            ItemSize="60"
             ItemSpacing="10"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="FillAndExpand">
             <syncfusion:SfListView.ItemTemplate>
                 <DataTemplate>
-                    <modules:AudiobookItemCell />
+                    <modules:HomonymItemCell />
                 </DataTemplate>
             </syncfusion:SfListView.ItemTemplate>
             <syncfusion:SfListView.LayoutManager>
-                <syncfusion:GridLayout SpanCount="5" />
+                <syncfusion:GridLayout SpanCount="4" />
             </syncfusion:SfListView.LayoutManager>
         </syncfusion:SfListView>
     </ContentPage.Content>

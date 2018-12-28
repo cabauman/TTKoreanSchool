@@ -4,7 +4,6 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.XamForms;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace TongTongAdmin.Modules
@@ -27,14 +26,14 @@ namespace TongTongAdmin.Modules
 
         private void PopulateFromViewModel(IHomonymListViewModel vm)
         {
-            //ViewModel.LoadItems.Execute().Subscribe();
-            //AudiobookListView.ItemsSource = vm.AudiobookItems;
+            ViewModel.LoadItems.Execute().Subscribe();
+            HomonymListView.ItemsSource = vm.Items;
         }
 
         private void Init(CompositeDisposable disposables)
         {
             this
-                .Bind(ViewModel, vm => vm.SelectedItem, v => v.AudiobookListView.SelectedItem)
+                .Bind(ViewModel, vm => vm.SelectedItem, v => v.HomonymListView.SelectedItem)
                 .DisposeWith(disposables);
             this
                 .BindCommand(ViewModel, vm => vm.CreateItem, v => v.AddButton)

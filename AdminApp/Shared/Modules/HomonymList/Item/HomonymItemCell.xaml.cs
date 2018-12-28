@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.XamForms;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace TongTongAdmin.Modules
@@ -23,6 +19,15 @@ namespace TongTongAdmin.Modules
 
         private void Init(CompositeDisposable disposables)
         {
+            Observable.FromEventPattern<Xamarin.Forms.FocusEventArgs>(
+                h => TextEntry.Focused += h,
+                h => TextEntry.Focused -= h)
+                    .SelectMany(_ => Observable.Return(false).StartWith(true))
+                    .BindTo(this, x => x.ViewModel.ReceivedFocus);
+
+            this
+                .Bind(ViewModel, vm => vm.Text, v => v.TextEntry.Text)
+                .DisposeWith(disposables);
         }
 	}
 }

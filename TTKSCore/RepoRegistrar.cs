@@ -28,6 +28,7 @@ namespace TTKSCore
         private const string NODE_AUDIOBOOKS = "audiobooks";
         private const string NODE_SENTENCES = "sentences";
         private const string NODE_GRAMMAR = "grammar";
+        private const string NODE_HOMONYMS = "homonyms";
         private const string NODE_VOCAB = "vocab";
         private const string NODE_VOCAB_IMAGES = "vocabImages";
         private const string NODE_VOCAB_AUDIO = "vocabAudio";
@@ -40,6 +41,7 @@ namespace TTKSCore
         private static readonly string PATH_AUDIOBOOKS = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_AUDIOBOOKS);
         private static readonly string PATH_SENTENCES = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_SENTENCES);
         private static readonly string PATH_GRAMMAR = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_GRAMMAR);
+        private static readonly string PATH_HOMONYMS = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_HOMONYMS);
         private static readonly string PATH_VOCAB = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_VOCAB);
         private static readonly string PATH_VOCAB_IMAGES = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_VOCAB_IMAGES);
         private static readonly string PATH_TRANSLATIONS = Path.Combine(NODE_V2, NODE_AUTH_READABLE, NODE_TRANSLATIONS);
@@ -54,6 +56,7 @@ namespace TTKSCore
             dependencyResolver.Register(() => AudiobookRepo, typeof(IRepository<Audiobook>));
             dependencyResolver.Register(() => SentenceRepo, typeof(IRepository<ExampleSentence>));
             dependencyResolver.Register(() => GrammarRepo, typeof(IRepository<GrammarPrinciple>));
+            dependencyResolver.Register(() => HomonymRepo, typeof(IRepository<StringEntity>));
             dependencyResolver.Register(() => VocabTermRepo, typeof(IRepository<VocabTerm>));
             dependencyResolver.Register(() => VocabImageRepo, typeof(IRepository<VocabImage>));
             dependencyResolver.Register(() => new TranslationRepoFactory(this), typeof(TranslationRepoFactory));
@@ -99,6 +102,11 @@ namespace TTKSCore
         private IRepository<GrammarPrinciple> GrammarRepo
         {
             get => new FirebaseOfflineRepo<GrammarPrinciple>(_firebaseClient, PATH_GRAMMAR);
+        }
+
+        private IRepository<StringEntity> HomonymRepo
+        {
+            get => new FirebaseOfflineRepo<StringEntity>(_firebaseClient, PATH_HOMONYMS, NODE_HOMONYMS);
         }
 
         private IRepository<VocabTerm> VocabTermRepo

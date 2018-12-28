@@ -80,6 +80,8 @@ namespace TongTongAdmin
             Locator.CurrentMutable.Register(() => new VocabListPage(), typeof(IViewFor<IVocabListViewModel>));
             Locator.CurrentMutable.Register(() => new VocabItemCell(), typeof(IViewFor<IVocabItemViewModel>));
             Locator.CurrentMutable.Register(() => new VocabTermPage(), typeof(IViewFor<IVocabTermViewModel>));
+            Locator.CurrentMutable.Register(() => new HomonymListPage(), typeof(IViewFor<IHomonymListViewModel>));
+            Locator.CurrentMutable.Register(() => new HomonymItemCell(), typeof(IViewFor<IHomonymItemViewModel>));
             Locator.CurrentMutable.Register(() => new GrammarListPage(), typeof(IViewFor<IGrammarListViewModel>));
             Locator.CurrentMutable.Register(() => new GrammarItemCell(), typeof(IViewFor<IGrammarItemViewModel>));
             Locator.CurrentMutable.Register(() => new GrammarPrinciplePage(), typeof(IViewFor<IGrammarPrincipleViewModel>));
@@ -95,6 +97,7 @@ namespace TongTongAdmin
             Locator.CurrentMutable.Register(() => new VocabListViewModel(), typeof(IPageViewModel), typeof(VocabListViewModel).FullName);
             Locator.CurrentMutable.Register(() => new GrammarListViewModel(), typeof(IPageViewModel), typeof(GrammarListViewModel).FullName);
             Locator.CurrentMutable.Register(() => new SentenceListViewModel(), typeof(IPageViewModel), typeof(SentenceListViewModel).FullName);
+            Locator.CurrentMutable.Register(() => new HomonymListViewModel(), typeof(IPageViewModel), typeof(HomonymListViewModel).FullName);
         }
     }
 }
