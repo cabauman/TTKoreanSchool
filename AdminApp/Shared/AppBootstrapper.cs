@@ -66,8 +66,8 @@ namespace TongTongAdmin
             Locator.CurrentMutable.Register(() => new AuthService(), typeof(IAuthService));
             FirebaseAuthService = new FirebaseAuthService(ApiKeys.FIREBASE, new LocalStorageService());
             Locator.CurrentMutable.RegisterConstant(FirebaseAuthService, typeof(IFirebaseAuthService));
-            Locator.CurrentMutable.RegisterConstant(new FirebaseStorageService(new FirebaseStorage("tt-korean-academy.appspot.com")), typeof(IFirebaseStorageService));
-            Locator.CurrentMutable.RegisterConstant(new StudyContentService(), typeof(StudyContentService));
+            Locator.CurrentMutable.RegisterLazySingleton(() => new FirebaseStorageService(new FirebaseStorage("tt-korean-academy.appspot.com")), typeof(IFirebaseStorageService));
+            Locator.CurrentMutable.RegisterLazySingleton(() => new StudyContentService(), typeof(StudyContentService));
             new RepoRegistrar(FirebaseAuthService, Locator.CurrentMutable);
         }
 

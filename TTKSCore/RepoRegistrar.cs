@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Firebase.Database;
 using Firebase.Database.Offline;
 using GameCtor.FirebaseAuth;
@@ -54,12 +53,13 @@ namespace TTKSCore
             _firebaseClient = CreateFirebaseClient(firebaseAuthService);
 
             dependencyResolver.Register(() => AudiobookRepo, typeof(IRepository<Audiobook>));
-            dependencyResolver.Register(() => SentenceRepo, typeof(IRepository<ExampleSentence>));
-            dependencyResolver.Register(() => GrammarRepo, typeof(IRepository<GrammarPrinciple>));
-            dependencyResolver.Register(() => HomonymRepo, typeof(IRepository<StringEntity>));
-            dependencyResolver.Register(() => VocabTermRepo, typeof(IRepository<VocabTerm>));
             dependencyResolver.Register(() => VocabImageRepo, typeof(IRepository<VocabImage>));
             dependencyResolver.Register(() => new TranslationRepoFactory(this), typeof(TranslationRepoFactory));
+
+            dependencyResolver.RegisterLazySingleton(() => SentenceRepo, typeof(SentenceRepo));
+            dependencyResolver.RegisterLazySingleton(() => GrammarRepo, typeof(GrammarRepo));
+            dependencyResolver.RegisterLazySingleton(() => HomonymRepo, typeof(HomonymRepo));
+            dependencyResolver.RegisterLazySingleton(() => VocabTermRepo, typeof(VocabTermRepo));
         }
 
         public IRepository<Translation> GetTranslationRepo(TranslationType translationType, string langCode)
@@ -94,24 +94,24 @@ namespace TTKSCore
             get => new FirebaseOfflineRepo<Audiobook>(_firebaseClient, PATH_AUDIOBOOKS);
         }
 
-        private IRepository<ExampleSentence> SentenceRepo
+        private SentenceRepo SentenceRepo
         {
-            get => new FirebaseOfflineRepo<ExampleSentence>(_firebaseClient, PATH_SENTENCES);
+            get => new SentenceRepo(_firebaseClient, PATH_SENTENCES);
         }
 
-        private IRepository<GrammarPrinciple> GrammarRepo
+        private GrammarRepo GrammarRepo
         {
-            get => new FirebaseOfflineRepo<GrammarPrinciple>(_firebaseClient, PATH_GRAMMAR);
+            get => new GrammarRepo(_firebaseClient, PATH_GRAMMAR);
         }
 
-        private IRepository<StringEntity> HomonymRepo
+        private HomonymRepo HomonymRepo
         {
-            get => new FirebaseOfflineRepo<StringEntity>(_firebaseClient, PATH_HOMONYMS, NODE_HOMONYMS);
+            get => new HomonymRepo(_firebaseClient, PATH_HOMONYMS, NODE_HOMONYMS);
         }
 
-        private IRepository<VocabTerm> VocabTermRepo
+        private VocabTermRepo VocabTermRepo
         {
-            get => new FirebaseOfflineRepo<VocabTerm>(_firebaseClient, PATH_VOCAB);
+            get => new VocabTermRepo(_firebaseClient, PATH_VOCAB);
         }
 
         private IRepository<VocabImage> VocabImageRepo

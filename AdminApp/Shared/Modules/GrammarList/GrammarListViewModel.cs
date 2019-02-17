@@ -39,6 +39,21 @@ namespace TongTongAdmin.Modules
 
         public ObservableCollection<IGrammarItemViewModel> Items { get; }
 
+        private IObservable<Unit> DoLoadItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        private IObservable<Unit> DoSaveItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        private IObservable<Unit> DoDeleteItem()
+        {
+            throw new NotImplementedException();
+        }
+
         public IGrammarItemViewModel SelectedItem
         {
             get => _selectedItem;

@@ -3,9 +3,9 @@ using Firebase.Database.Offline;
 
 namespace TTKSCore.Models
 {
-    public class HomonymRepo : FirebaseOfflineCacheRepo<StringEntity>
+    public class VocabTermRepo : FirebaseOfflineCacheRepo<VocabTerm>
     {
-        public HomonymRepo(
+        public VocabTermRepo(
             FirebaseClient client,
             string path,
             string key = "",

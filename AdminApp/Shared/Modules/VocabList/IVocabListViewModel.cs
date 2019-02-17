@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reactive;
-using GameCtor.Repository;
 using ReactiveUI;
 using TTKSCore.Models;
 
@@ -23,10 +21,10 @@ namespace TongTongAdmin.Modules
 
         IVocabItemViewModel SelectedItem { get; set; }
 
-        IRepository<VocabTerm> VocabTermRepo { get; }
+        VocabTermRepo VocabTermRepo { get; }
 
         ObservableCollection<IVocabItemViewModel> Items { get; }
 
-        List<StringEntity> Homonyms { get; }
+        ReadOnlyObservableCollection<StringEntity> Homonyms { get; }
     }
 }

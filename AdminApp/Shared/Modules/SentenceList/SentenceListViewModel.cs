@@ -25,15 +25,7 @@ namespace TongTongAdmin.Modules
             Items = new ObservableCollection<ISentenceItemViewModel>();
             ConfirmDelete = new Interaction<string, bool>();
 
-            LoadItems = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return SentenceRepo
-                        .GetItems(false)
-                        .SelectMany(x => x)
-                        .Do(x => Items.Add(new SentenceItemViewModel(x)))
-                        .Select(_ => Unit.Default);
-                });
+            LoadItems = ReactiveCommand.CreateFromObservable(DoLoadItems);
 
             CreateItem = ReactiveCommand.Create(
                 () => Items.Add(new SentenceItemViewModel(new ExampleSentence())));
@@ -42,27 +34,9 @@ namespace TongTongAdmin.Modules
                 .WhenAnyValue(x => x.SelectedItem)
                 .Select(x => x != null);
 
-            SaveItem = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return SelectedItem.Model.Id != null ?
-                        SentenceRepo.Upsert(SelectedItem.Model) :
-                        SentenceRepo.Add(SelectedItem.Model);
-                },
-                canDeleteOrSaveItem);
+            SaveItem = ReactiveCommand.CreateFromObservable(DoSaveItem, canDeleteOrSaveItem);
 
-            DeleteItem = ReactiveCommand.CreateFromObservable(
-                () =>
-                {
-                    return ConfirmDelete
-                        .Handle(SelectedItem.Ko)
-                        .Where(result => result)
-                        //.SelectMany(_ => DeleteFilesAndDbEntry())
-                        .ObserveOn(RxApp.MainThreadScheduler)
-                        .Do(_ => Items.Remove(SelectedItem))
-                        .Select(_ => Unit.Default);
-                },
-                canDeleteOrSaveItem);
+            DeleteItem = ReactiveCommand.CreateFromObservable(DoDeleteItem, canDeleteOrSaveItem);
         }
 
         public override string Title => "Sentences";
@@ -80,6 +54,33 @@ namespace TongTongAdmin.Modules
         public IRepository<ExampleSentence> SentenceRepo { get; }
 
         public ObservableCollection<ISentenceItemViewModel> Items { get; }
+
+        private IObservable<Unit> DoLoadItems()
+        {
+            return SentenceRepo
+                .GetItems(false)
+                .SelectMany(x => x)
+                .Do(x => Items.Add(new SentenceItemViewModel(x)))
+                .Select(_ => Unit.Default);
+        }
+
+        private IObservable<Unit> DoSaveItem()
+        {
+            return SelectedItem.Model.Id != null ?
+                SentenceRepo.Upsert(SelectedItem.Model) :
+                SentenceRepo.Add(SelectedItem.Model);
+        }
+
+        private IObservable<Unit> DoDeleteItem()
+        {
+            return ConfirmDelete
+                .Handle(SelectedItem.Ko)
+                .Where(result => result)
+                //.SelectMany(_ => DeleteFilesAndDbEntry())
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Do(_ => Items.Remove(SelectedItem))
+                .Select(_ => Unit.Default);
+        }
 
         public ISentenceItemViewModel SelectedItem
         {

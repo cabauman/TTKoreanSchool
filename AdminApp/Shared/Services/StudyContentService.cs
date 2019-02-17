@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using DynamicData;
 using Splat;
 using TTKSCore.Models;
@@ -7,33 +8,72 @@ namespace TongTongAdmin.Services
 {
     public class StudyContentService
     {
+        private SentenceRepo _sentenceRepo;
+        private GrammarRepo _grammarRepo;
         private HomonymRepo _homonymRepo;
-        private ISourceCache<StringEntity, string> _homonymCache;
+        private VocabTermRepo _vocabTermRepo;
 
-        public StudyContentService(HomonymRepo homonymRepo = null)
+        public StudyContentService(
+            SentenceRepo sentenceRepo = null,
+            GrammarRepo grammarRepo = null,
+            HomonymRepo homonymRepo = null,
+            VocabTermRepo vocabTermRepo = null)
         {
-            //VocabCache = new SourceCache<VocabTerm, string>(x => x.Id);
-            //GrammarCache = new SourceCache<GrammarPrinciple, string>(x => x.Id);
-            //SentenceCache = new SourceCache<ExampleSentence, string>(x => x.Id);
-            //VocabImageCache = new SourceCache<VocabImage, string>(x => x.Id);
         }
 
-        public ISourceCache<VocabTerm, string> VocabCache { get; }
+        public IObservable<ReadOnlyObservableCollection<ExampleSentence>> GetSentenceChangeSet()
+        {
+            if (_sentenceRepo == null)
+            {
+                _sentenceRepo = Locator.Current.GetService<SentenceRepo>();
+            }
 
-        public ISourceCache<GrammarPrinciple, string> GrammarCache { get; }
+            return _sentenceRepo.GetItems();
+        }
 
-        public ISourceCache<ExampleSentence, string> SentenceCache { get; }
+        public IObservable<ReadOnlyObservableCollection<GrammarPrinciple>> GetGrammarChangeSet()
+        {
+            if (_grammarRepo == null)
+            {
+                _grammarRepo = Locator.Current.GetService<GrammarRepo>();
+            }
 
-        public ISourceCache<VocabImage, string> VocabImageCache { get; }
+            return _grammarRepo.GetItems();
+        }
 
-        public IObservable<IChangeSet<StringEntity, string>> GetHomonymChangeSet()
+        public IObservable<ReadOnlyObservableCollection<StringEntity>> GetHomonymChangeSet()
         {
             if (_homonymRepo == null)
             {
                 _homonymRepo = Locator.Current.GetService<HomonymRepo>();
             }
 
-            return _homonymRepo.GetChangeSet();
+            return _homonymRepo.GetItems();
+        }
+
+        public IObservable<ReadOnlyObservableCollection<VocabTerm>> GetVocabChangeSet()
+        {
+            if (_vocabTermRepo == null)
+            {
+                _vocabTermRepo = Locator.Current.GetService<VocabTermRepo>();
+            }
+
+            return _vocabTermRepo.GetItems();
+        }
+
+        //public IObservable<IChangeSet<VocabTerm, string>> GetVocabChangeSet()
+        //{
+        //    if (_vocabTermRepo == null)
+        //    {
+        //        _vocabTermRepo = Locator.Current.GetService<VocabTermRepo>();
+        //    }
+
+        //    return _vocabTermRepo.GetChangeSet();
+        //}
+
+        public IObservable<IChangeSet<VocabImage, string>> VocabImageChangeSet()
+        {
+            throw new NotImplementedException();
         }
     }
 }

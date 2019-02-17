@@ -4,6 +4,7 @@ using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using DynamicData;
+using Firebase.Database;
 using GameCtor.Repository;
 using GameCtor.RxNavigation;
 using ReactiveUI;
@@ -16,24 +17,24 @@ namespace TongTongAdmin.Modules
     public class HomonymListViewModel : BasePageViewModel, IHomonymListViewModel, ISupportsActivation
     {
         private readonly ReadOnlyObservableCollection<IHomonymItemViewModel> _homonymItems;
-        private readonly ISourceList<StringEntity> _homonyms;
+        private readonly ISourceCache<StringEntity, string> _homonymCache;
 
         private IHomonymItemViewModel _selectedItem;
 
         public HomonymListViewModel(
+            HomonymRepo homonymRepo = null,
             IViewStackService viewStackService = null,
-            IRepository<StringEntity> homonymRepo = null,
             IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
-            HomonymRepo = homonymRepo ?? Locator.Current.GetService<IRepository<StringEntity>>();
+            HomonymRepo = homonymRepo ?? Locator.Current.GetService<HomonymRepo>();
             mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
             ConfirmDelete = new Interaction<string, bool>();
-            _homonyms = new SourceList<StringEntity>();
+            _homonymCache = new SourceCache<StringEntity, string>(x => x.Id);
 
             LoadItems = ReactiveCommand.CreateFromObservable(DoLoadItems);
 
-            var changeSet = _homonyms
+            var changeSet = _homonymCache
                 .Connect()
                 .Transform(model => new HomonymItemViewModel(model) as IHomonymItemViewModel)
                 .SubscribeMany(item => item.ReceivedFocusStream.Where(flag => flag).Subscribe(flag => SelectedItem = item))
@@ -46,7 +47,7 @@ namespace TongTongAdmin.Modules
                 .Subscribe(_ => MakeSureItemIsSelected());
 
             CreateItem = ReactiveCommand.Create(
-                () => _homonyms.Add(new StringEntity()));
+                () => _homonymCache.AddOrUpdate(new StringEntity() { Id = FirebaseKeyGenerator.Next() }));
 
             var canDeleteOrSaveItem = this
                 .WhenAnyValue(x => x.SelectedItem)
@@ -69,7 +70,7 @@ namespace TongTongAdmin.Modules
 
         public Interaction<string, bool> ConfirmDelete { get; }
 
-        public IRepository<StringEntity> HomonymRepo { get; }
+        public HomonymRepo HomonymRepo { get; }
 
         public IHomonymItemViewModel SelectedItem
         {
@@ -85,7 +86,7 @@ namespace TongTongAdmin.Modules
         {
             return HomonymRepo
                 .GetItems(false)
-                .Do(x => _homonyms.AddRange(x))
+                .Do(x => _homonymCache.AddOrUpdate(x))
                 .Select(_ => Unit.Default);
         }
 
@@ -103,7 +104,7 @@ namespace TongTongAdmin.Modules
                 .Where(result => result)
                 //.SelectMany(_ => DeleteFilesAndDbEntry())
                 //.ObserveOn(RxApp.MainThreadScheduler)
-                .Do(_ => _homonyms.Remove(SelectedItem.Model))
+                .Do(_ => _homonymCache.Remove(SelectedItem.Model))
                 .Select(_ => Unit.Default);
         }
 

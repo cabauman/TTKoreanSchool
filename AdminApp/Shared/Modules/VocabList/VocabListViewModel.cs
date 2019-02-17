@@ -21,23 +21,27 @@ namespace TongTongAdmin.Modules
     public class VocabListViewModel : BasePageViewModel, IVocabListViewModel
     {
         private IVocabItemViewModel _selectedItem;
+        private ReadOnlyObservableCollection<StringEntity> _homonyms;
         private IDictionary<string, IVocabItemViewModel> _modifiedTermMap = new Dictionary<string, IVocabItemViewModel>();
         private IDictionary<string, IVocabItemViewModel> _modifiedEnTranslationMap = new Dictionary<string, IVocabItemViewModel>();
 
         public VocabListViewModel(
-            IRepository<VocabTerm> vocabTermRepo = null,
+            VocabTermRepo vocabTermRepo = null,
             TranslationRepoFactory translationRepoFactory = null,
             StudyContentService studyContentService = null,
             IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
-            VocabTermRepo = vocabTermRepo ?? Locator.Current.GetService<IRepository<VocabTerm>>();
+            VocabTermRepo = vocabTermRepo ?? Locator.Current.GetService<VocabTermRepo>();
             translationRepoFactory = translationRepoFactory ?? Locator.Current.GetService<TranslationRepoFactory>();
             TranslationRepo = translationRepoFactory.Create(TranslationType.Vocab, "en");
             studyContentService = studyContentService ?? Locator.Current.GetService<StudyContentService>();
             Items = new ObservableCollection<IVocabItemViewModel>();
             ConfirmDelete = new Interaction<string, bool>();
-            Homonyms = studyContentService.Homonyms;
+
+            studyContentService
+                .GetHomonymChangeSet()
+                .Subscribe(x => _homonyms = x);
 
             SubscribeToItemModifications();
 
@@ -70,13 +74,13 @@ namespace TongTongAdmin.Modules
 
         public Interaction<string, bool> ConfirmDelete { get; }
 
-        public IRepository<VocabTerm> VocabTermRepo { get; }
+        public VocabTermRepo VocabTermRepo { get; }
 
         public IRepository<Translation> TranslationRepo { get; }
 
         public ObservableCollection<IVocabItemViewModel> Items { get; }
 
-        public List<StringEntity> Homonyms { get; }
+        public ReadOnlyObservableCollection<StringEntity> Homonyms => _homonyms;
 
         public IVocabItemViewModel SelectedItem
         {
@@ -129,7 +133,7 @@ namespace TongTongAdmin.Modules
                     });
         }
 
-        IObservable<Unit> DoDeleteItem()
+        private IObservable<Unit> DoDeleteItem()
         {
             return ConfirmDelete
                 .Handle(SelectedItem.Ko)

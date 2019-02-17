@@ -20,7 +20,7 @@ namespace TongTongAdmin.Modules
 
         IHomonymItemViewModel SelectedItem { get; set; }
 
-        IRepository<StringEntity> HomonymRepo { get; }
+        HomonymRepo HomonymRepo { get; }
 
         ReadOnlyObservableCollection<IHomonymItemViewModel> Items { get; }
     }
