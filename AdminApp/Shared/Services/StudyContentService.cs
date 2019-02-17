@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using DynamicData;
+using Splat;
 using TTKSCore.Models;
 
 namespace TongTongAdmin.Services
 {
     public class StudyContentService
     {
-        public StudyContentService()
+        private HomonymRepo _homonymRepo;
+        private ISourceCache<StringEntity, string> _homonymCache;
+
+        public StudyContentService(HomonymRepo homonymRepo = null)
         {
             //VocabCache = new SourceCache<VocabTerm, string>(x => x.Id);
             //GrammarCache = new SourceCache<GrammarPrinciple, string>(x => x.Id);
@@ -24,11 +26,14 @@ namespace TongTongAdmin.Services
 
         public ISourceCache<VocabImage, string> VocabImageCache { get; }
 
-        public List<StringEntity> Homonyms { get; } = new List<StringEntity>
+        public IObservable<IChangeSet<StringEntity, string>> GetHomonymChangeSet()
         {
-            new StringEntity() { Id = "id1", Value = "123"},
-            new StringEntity() { Id = "id2", Value = "456"},
-            new StringEntity() { Id = "id3", Value = "789"},
-        };
+            if (_homonymRepo == null)
+            {
+                _homonymRepo = Locator.Current.GetService<HomonymRepo>();
+            }
+
+            return _homonymRepo.GetChangeSet();
+        }
     }
 }
