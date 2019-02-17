@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rxui:ReactiveContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+             xmlns:modules="clr-namespace:TTKS.Admin.Modules"
+             x:TypeArguments="modules:ISignInViewModel"
+             x:Class="TTKS.Admin.Modules.SignInPage">
+    <ContentPage.Content>
+        <StackLayout
+            Spacing="10"
+            Padding="10">
+            <Label
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Welcome to Xamarin.Forms!!!!" />
+            <Button
+                x:Name="GoogleSignInButton"
+                VerticalOptions="Center"
+                Text="Sign In with Google" />
+            <Button
+                x:Name="FacebookSignInButton"
+                VerticalOptions="Center"
+                Text="Sign In with Facebook" />
+            <Button
+                x:Name="AnonymousSignInButton"
+                VerticalOptions="Center"
+                Text="Continue anonymously" />
+        </StackLayout>
+    </ContentPage.Content>
+</rxui:ReactiveContentPage>

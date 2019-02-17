@@ -1,0 +1,245 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="3.2.0" />
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.1" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.1" />
+    <PackageReference Include="MediaManager.Unofficial" Version="1.1.0" />
+    <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.13.0" />
+    <PackageReference Include="ReactiveUI" Version="9.10.7" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="9.10.7" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="16.3.0.29" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="16.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="16.3.0.29" />
+    <PackageReference Include="System.Reactive" Version="4.1.2" />
+    <PackageReference Include="System.Reactive.Compatibility" Version="4.1.2" />
+    <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.0.135" />  
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\TTKS.Core\TTKS.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GameCtor.FirebaseAuth">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseAuth.DotNet">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseDatabase.DotNet">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseDatabase.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseStorage.DotNet">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseStorage.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseStorage.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.LocalStorage">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth.DotNet\bin\Release\netstandard2.0\GameCtor.LocalStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.LocalStorage.XamarinEssentials">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\LocalStorage.XamarinEssentials\bin\Release\netstandard2.0\GameCtor.LocalStorage.XamarinEssentials.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.Repository">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.XamarinAuth">
+      <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\XamarinAuth\bin\Release\netstandard2.0\GameCtor.XamarinAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\AudioBookList\AudioBookListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\AudioBookList\Detail\AudiobookPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\AudioBookList\Item\AudiobookItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\GrammarList\Detail\GrammarPrinciplePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\GrammarList\GrammarListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\GrammarList\Item\GrammarItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\HangulList\HangulListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\HangulList\Item\HangulItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\HomonymList\HomonymListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\HomonymList\Item\HomonymItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\ImageList\Item\VocabImageItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\ImageList\VocabImageListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\MasterDetail\MasterCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\MasterDetail\MasterDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\SentenceList\Detail\SentencePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\SentenceList\Item\SentenceItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\SentenceList\SentenceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\SignIn\SignInPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\VocabList\Detail\VocabTermPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\VocabList\Item\VocabItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Modules\VocabList\VocabListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DataGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ItemDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ItemsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MenuPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewItemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\AudioBookList\AudioBookListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\AudioBookList\Detail\AudiobookPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\AudioBookList\Item\AudiobookItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\GrammarList\Detail\GrammarPrinciplePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\GrammarList\GrammarListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\GrammarList\Item\GrammarItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\HangulList\HangulListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\HangulList\Item\HangulItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\HomonymList\HomonymListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\HomonymList\Item\HomonymItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\ImageList\Item\VocabImageItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\ImageList\VocabImageListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\MasterDetail\MasterCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\MasterDetail\MasterDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\SentenceList\Detail\SentencePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\SentenceList\Item\SentenceItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\SentenceList\SentenceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\SignIn\SignInPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\VocabList\Detail\VocabTermPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\VocabList\Item\VocabItemCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Modules\VocabList\VocabListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\DataGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ItemDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ItemsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MenuPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\NewItemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+  
+</Project>

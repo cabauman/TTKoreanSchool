@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rxui:ReactiveContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:modules="clr-namespace:TTKS.Admin.Modules"
+             x:TypeArguments="modules:IAudiobookListViewModel"
+             x:Class="TTKS.Admin.Modules.AudiobookListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddButton" Text="Add" Icon="ic_add.png" />
+        <ToolbarItem x:Name="SaveButton" Text="Save" Icon="ic_save.png" />
+        <ToolbarItem x:Name="DeleteButton" Text="Delete" Icon="ic_delete.png" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <syncfusion:SfListView
+            x:Name="AudiobookListView"
+            SelectionMode="Single"
+            ItemSize="260"
+            ItemSpacing="10"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="FillAndExpand">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <modules:AudiobookItemCell />
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+            <syncfusion:SfListView.LayoutManager>
+                <syncfusion:GridLayout SpanCount="5" />
+            </syncfusion:SfListView.LayoutManager>
+        </syncfusion:SfListView>
+    </ContentPage.Content>
+</rxui:ReactiveContentPage>

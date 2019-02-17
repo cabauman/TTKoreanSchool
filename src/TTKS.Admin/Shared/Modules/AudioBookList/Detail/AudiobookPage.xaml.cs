@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ReactiveUI.XamForms;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace TTKS.Admin.Modules
+{
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class AudiobookPage : ReactiveContentPage<IAudiobookViewModel>
+    {
+		public AudiobookPage()
+		{
+			InitializeComponent();
+		}
+	}
+}

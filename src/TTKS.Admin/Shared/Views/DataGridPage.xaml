@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms" 
+             x:Class="TTKS.Admin.Views.DataGridPage"
+             xmlns:local="clr-namespace:TTKS.Admin.Services;assembly=TTKS.Admin"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepository x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <syncfusion:SfDataGrid x:Name="dataGrid"
+                               ColumnSizer="Star"
+                               VerticalOptions="FillAndExpand"
+                               NavigationMode="Cell"
+                               SelectionMode="Single"
+                               AllowEditing="True"
+                               EditTapAction="OnDoubleTap"
+                               EditorSelectionBehavior="MoveLast"
+                               ItemsSource="{Binding OrderInfoCollection}">
+            </syncfusion:SfDataGrid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
