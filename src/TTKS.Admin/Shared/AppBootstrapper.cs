@@ -64,7 +64,7 @@ namespace TTKS.Admin
             var viewStackService = new ViewStackService(NavigationShell);
             Locator.CurrentMutable.RegisterConstant(viewStackService, typeof(IViewStackService));
             Locator.CurrentMutable.Register(() => new AuthService(), typeof(IAuthService));
-            FirebaseAuthService = new FirebaseAuthService(ApiKeys.FIREBASE, new LocalStorageService());
+            FirebaseAuthService = new FirebaseAuthService(ApiKeys.FIREBASE, new SecureStorage());
             Locator.CurrentMutable.RegisterConstant(FirebaseAuthService, typeof(IFirebaseAuthService));
             Locator.CurrentMutable.RegisterLazySingleton(() => new FirebaseStorageService(new FirebaseStorage("tt-korean-academy.appspot.com")), typeof(IFirebaseStorageService));
             Locator.CurrentMutable.RegisterLazySingleton(() => new StudyContentService(), typeof(StudyContentService));
