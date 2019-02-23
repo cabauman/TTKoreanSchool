@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ReactiveUI;
 using System.Threading.Tasks;
-using TTKS.Core.Common;
+using TTKS.Admin.Common;
 using TTKS.Core.Config;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Distribute;

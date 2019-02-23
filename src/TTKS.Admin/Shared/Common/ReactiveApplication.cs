@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using Xamarin.Forms;
 
-namespace TTKS.Core.Common
+namespace TTKS.Admin.Common
 {
     public class ReactiveApplication<TViewModel> : Application, IViewFor<TViewModel>
         where TViewModel : class

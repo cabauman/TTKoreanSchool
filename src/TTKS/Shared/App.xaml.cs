@@ -4,8 +4,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ReactiveUI;
 using System.Threading.Tasks;
+using TTKS.Common;
 using Microsoft.AppCenter.Distribute;
-using TTKS.Core.Common;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TTKS
