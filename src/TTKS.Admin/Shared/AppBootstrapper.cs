@@ -73,21 +73,7 @@ namespace TTKS.Admin
 
         private void RegisterViews()
         {
-            Locator.CurrentMutable.Register(() => new MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
-            Locator.CurrentMutable.Register(() => new AudiobookListPage(), typeof(IViewFor<IAudiobookListViewModel>));
-            Locator.CurrentMutable.Register(() => new AudiobookItemCell(), typeof(IViewFor<IAudiobookItemViewModel>));
-            Locator.CurrentMutable.Register(() => new AudiobookPage(), typeof(IViewFor<IAudiobookViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabListPage(), typeof(IViewFor<IVocabListViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabItemCell(), typeof(IViewFor<IVocabItemViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabTermPage(), typeof(IViewFor<IVocabTermViewModel>));
-            Locator.CurrentMutable.Register(() => new HomonymListPage(), typeof(IViewFor<IHomonymListViewModel>));
-            Locator.CurrentMutable.Register(() => new HomonymItemCell(), typeof(IViewFor<IHomonymItemViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarListPage(), typeof(IViewFor<IGrammarListViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarItemCell(), typeof(IViewFor<IGrammarItemViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarPrinciplePage(), typeof(IViewFor<IGrammarPrincipleViewModel>));
-            Locator.CurrentMutable.Register(() => new SentenceListPage(), typeof(IViewFor<ISentenceListViewModel>));
-            Locator.CurrentMutable.Register(() => new SentenceItemCell(), typeof(IViewFor<ISentenceItemViewModel>));
-            Locator.CurrentMutable.Register(() => new SentencePage(), typeof(IViewFor<ISentenceViewModel>));
+            Locator.CurrentMutable.RegisterViewsForViewModels(GetType().Assembly);
         }
 
         private void RegisterViewModels()

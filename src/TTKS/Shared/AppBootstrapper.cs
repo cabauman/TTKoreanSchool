@@ -66,21 +66,7 @@ namespace TTKS
 
         private void RegisterViews()
         {
-            Locator.CurrentMutable.Register(() => new MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
-            Locator.CurrentMutable.Register(() => new AboutUsPage(), typeof(IViewFor<IAboutUsViewModel>));
-            Locator.CurrentMutable.Register(() => new AudioBookListPage(), typeof(IViewFor<IAudioBookListViewModel>));
-            Locator.CurrentMutable.Register(() => new AudioBookItemCell(), typeof(IViewFor<IAudioBookItemViewModel>));
-            Locator.CurrentMutable.Register(() => new AudioBookPage(), typeof(IViewFor<IAudioBookViewModel>));
-            Locator.CurrentMutable.Register(() => new ConjugatorPage(), typeof(IViewFor<IConjugatorViewModel>));
-            Locator.CurrentMutable.Register(() => new FlashcardActivityPage(), typeof(IViewFor<IFlashcardActivityViewModel>));
-            Locator.CurrentMutable.Register(() => new GrammarListPage(), typeof(IViewFor<IGrammarListViewModel>));
-            Locator.CurrentMutable.Register(() => new HangulHomePage(), typeof(IViewFor<IHangulHomeViewModel>));
-            Locator.CurrentMutable.Register(() => new HangulListPage(), typeof(IViewFor<IHangulListViewModel>));
-            Locator.CurrentMutable.Register(() => new HomePage(), typeof(IViewFor<IHomeViewModel>));
-            Locator.CurrentMutable.Register(() => new MatchGamePage(), typeof(IViewFor<IMatchGameViewModel>));
-            Locator.CurrentMutable.Register(() => new SignInPage(), typeof(IViewFor<ISignInViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabSetListPage(), typeof(IViewFor<IVocabSetListViewModel>));
-            Locator.CurrentMutable.Register(() => new VocabTermListPage(), typeof(IViewFor<IVocabTermListViewModel>));
+            Locator.CurrentMutable.RegisterViewsForViewModels(GetType().Assembly);
         }
 
         private void RegisterViewModels()
