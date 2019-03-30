@@ -18,6 +18,16 @@ namespace TTKS.Core.Common
             Write(message, logLevel);
         }
 
+        public void Write(Exception exception, [Localizable(false)] string message, LogLevel logLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Write(Exception exception, [Localizable(false)] string message, [Localizable(false)] Type type, LogLevel logLevel)
+        {
+            throw new NotImplementedException();
+        }
+
         public LogLevel Level { get; set; }
     }
 }

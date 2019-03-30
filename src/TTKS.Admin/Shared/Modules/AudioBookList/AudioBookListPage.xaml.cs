@@ -27,7 +27,7 @@ namespace TTKS.Admin.Modules
 
         private void PopulateFromViewModel(IAudiobookListViewModel vm)
         {
-            //ViewModel.LoadItems.Execute().Subscribe();
+            ViewModel.LoadItems.Execute().Subscribe();
             AudiobookListView.ItemsSource = vm.AudiobookItems;
         }
 

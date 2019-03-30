@@ -11,7 +11,7 @@ using Microsoft.AppCenter.Distribute;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TTKS.Admin
 {
-    public partial class App : ReactiveApplication<AppBootstrapper>
+    public partial class App : ReactiveApplication
     {
         public App()
         {

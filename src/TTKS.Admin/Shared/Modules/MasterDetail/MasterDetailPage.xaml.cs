@@ -16,6 +16,8 @@ namespace TTKS.Admin.Modules
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterDetailPage : ReactiveMasterDetailPage<MasterDetailViewModel>
     {
+        public MasterDetailPage() { }
+
         public MasterDetailPage(IViewShell detailView)
         {
             Detail = (Xamarin.Forms.Page)detailView;

@@ -74,6 +74,7 @@ namespace TTKS.Admin
         private void RegisterViews()
         {
             Locator.CurrentMutable.RegisterViewsForViewModels(GetType().Assembly);
+            Locator.CurrentMutable.Register(() => new MasterDetailPage(NavigationShell), typeof(IViewFor<MasterDetailViewModel>));
         }
 
         private void RegisterViewModels()

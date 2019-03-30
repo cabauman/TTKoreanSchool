@@ -33,6 +33,12 @@ namespace TTKS.Modules
                 .Select(x => Locator.Current.GetService<IPageViewModel>(x.TargetType.FullName))
                 .InvokeCommand(NavigateToMenuItem);
 
+            NavigateToMenuItem.ThrownExceptions.Subscribe(
+                x =>
+                {
+                    Console.WriteLine(x.Message);
+                });
+
             SignOut = ReactiveCommand.Create(() => firebaseAuthService.SignOut());
 
             SignOut.Subscribe(_ => appBootstrapper.MainView = new SignInViewModel(appBootstrapper));

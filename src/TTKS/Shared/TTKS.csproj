@@ -10,18 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FirebaseAuthentication.net" Version="3.2.0" />
-    <PackageReference Include="FirebaseDatabase.net" Version="4.0.1" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="3.3.0" />
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.3" />
     <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.1" />
     <PackageReference Include="MediaManager.Unofficial" Version="1.1.0" />
     <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.13.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.14.0" />
     <PackageReference Include="ReactiveUI" Version="9.11.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="9.11.1" />
-    <PackageReference Include="System.Reactive" Version="4.1.3" />
-    <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="3.5.0.169047" />  
+    <PackageReference Include="System.Reactive" Version="4.2.0" />
+    <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />  
   </ItemGroup>
 
   <ItemGroup>
@@ -53,93 +53,6 @@
     <Reference Include="GameCtor.XamarinAuth">
       <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\XamarinAuth\bin\Release\netstandard2.0\GameCtor.XamarinAuth.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\AboutUs\AboutUsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\AudioBookList\AudioBookItemCell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\AudioBookList\AudioBookListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\AudioBookList\AudioBookPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\ConjugatorSettings\ConjugatorSettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\Conjugator\ConjugatorPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\FlashcardActivity\FlashcardActivityPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\GrammarList\GrammarListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\GrammarList\GrammarPrincipleItemCell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\HangulHome\HangulHomePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\HangulList\HangulLetterPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\HangulList\HangulListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\Home\HomePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\MasterDetail\MasterCell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\MasterDetail\MasterDetailPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\MatchGame\MatchGamePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\SignIn\SignInPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\VocabSetList\VocabSetItemCell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\VocabSetList\VocabSetListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\VocabTermList\VocabTermItemCell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Modules\VocabTermList\VocabTermListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\AboutPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\ItemDetailPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\ItemsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\MenuPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\NewItemPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
   </ItemGroup>
   
 </Project>

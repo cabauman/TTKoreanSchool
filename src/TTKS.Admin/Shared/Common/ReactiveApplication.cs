@@ -3,15 +3,14 @@ using Xamarin.Forms;
 
 namespace TTKS.Admin.Common
 {
-    public class ReactiveApplication<TViewModel> : Application, IViewFor<TViewModel>
-        where TViewModel : class
+    public class ReactiveApplication : Application, IViewFor<AppBootstrapper>
     {
-        public TViewModel ViewModel { get; set; }
+        public AppBootstrapper ViewModel { get; set; }
 
         object IViewFor.ViewModel
         {
             get => ViewModel;
-            set => ViewModel = (TViewModel)value;
+            set => ViewModel = (AppBootstrapper)value;
         }
     }
 }
