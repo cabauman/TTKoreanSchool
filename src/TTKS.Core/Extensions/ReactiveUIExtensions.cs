@@ -14,7 +14,7 @@ namespace TTKS.Core
         // Credit: Kent Boogaart
         // https://github.com/kentcb/YouIandReactiveUI
         /// </remarks>
-        public static IObservable<bool> GetIsActivated(this ISupportsActivation @this) =>
+        public static IObservable<bool> GetIsActivated(this IActivatableViewModel @this) =>
             Observable
                 .Merge(
                     @this.Activator.Activated.Select(_ => true),
@@ -29,7 +29,7 @@ namespace TTKS.Core
         // Credit: Kent Boogaart
         // https://github.com/kentcb/YouIandReactiveUI
         /// </remarks>
-        public static IObservable<bool> GetIsActivated(this IActivatable @this)
+        public static IObservable<bool> GetIsActivated(this IActivatableView @this)
         {
             var activationForViewFetcher = Locator.Current.GetService<IActivationForViewFetcher>();
             return activationForViewFetcher

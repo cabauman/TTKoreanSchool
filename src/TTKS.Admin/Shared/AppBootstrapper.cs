@@ -56,10 +56,6 @@ namespace TTKS.Admin
 
         private void RegisterServices()
         {
-
-            Locator.CurrentMutable.InitializeSplat();
-            Locator.CurrentMutable.InitializeReactiveUI();
-
             NavigationShell = new ViewShell(RxApp.TaskpoolScheduler, RxApp.MainThreadScheduler, ViewLocator.Current);
             var viewStackService = new ViewStackService(NavigationShell);
             Locator.CurrentMutable.RegisterConstant(viewStackService, typeof(IViewStackService));

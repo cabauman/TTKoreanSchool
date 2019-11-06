@@ -6,8 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.3" />
-    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.1" />
-    <PackageReference Include="ReactiveUI" Version="9.11.1" />
+    <PackageReference Include="ReactiveUI" Version="10.5.7" />
     <PackageReference Include="System.Reactive" Version="4.2.0" />
   </ItemGroup>
 
@@ -23,6 +22,15 @@
     </Reference>
     <Reference Include="GameCtor.Repository">
       <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\Repository\bin\Release\netstandard2.0\GameCtor.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="KoreanRomanisation">
+      <HintPath>KoreanRomanisation.dll</HintPath>
+    </Reference>
+    <Reference Include="RxNavigation">
+      <HintPath>..\..\..\RxNavigation\src\RxNavigation.XamForms\bin\Release\netstandard2.0\RxNavigation.dll</HintPath>
+    </Reference>
+    <Reference Include="RxNavigation.XamForms">
+      <HintPath>..\..\..\RxNavigation\src\RxNavigation.XamForms\bin\Release\netstandard2.0\RxNavigation.XamForms.dll</HintPath>
     </Reference>
   </ItemGroup>
   

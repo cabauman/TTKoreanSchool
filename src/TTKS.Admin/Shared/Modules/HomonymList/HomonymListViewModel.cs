@@ -14,7 +14,7 @@ using TTKS.Core.Models;
 
 namespace TTKS.Admin.Modules
 {
-    public class HomonymListViewModel : BasePageViewModel, IHomonymListViewModel, ISupportsActivation
+    public class HomonymListViewModel : BasePageViewModel, IHomonymListViewModel, IActivatableViewModel
     {
         private readonly ReadOnlyObservableCollection<IHomonymItemViewModel> _homonymItems;
         private readonly ISourceCache<StringEntity, string> _homonymCache;

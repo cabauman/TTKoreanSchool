@@ -17,7 +17,7 @@ using TTKS.Core.Models;
 
 namespace TTKS.Admin.Modules
 {
-    public class AudiobookItemViewModel : ReactiveObject, IAudiobookItemViewModel, ISupportsActivation
+    public class AudiobookItemViewModel : ReactiveObject, IAudiobookItemViewModel, IActivatableViewModel
     {
         private readonly ObservableAsPropertyHelper<string> _imageUrl;
         private readonly ObservableAsPropertyHelper<string> _audioUrl;

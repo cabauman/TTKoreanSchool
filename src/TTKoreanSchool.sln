@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTKS.Android", "TTKS\Android\TTKS.Android.csproj", "{24CE3C36-16B9-426D-AA0C-5961ECF8D88C}"
 EndProject
@@ -25,16 +25,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTKS.Admin.UWP", "TTKS.Admi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTKS.Admin", "TTKS.Admin\Shared\TTKS.Admin.csproj", "{B2CA10C2-B9B1-4021-92DE-463DFD228AB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTKS.Benchmarks", "TTKS.Benchmarks\TTKS.Benchmarks.csproj", "{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B441838-EA28-498F-B58D-9D86264D627D}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTKS.Tests", "TTKS\Tests\TTKS.Tests.csproj", "{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTKS.Tests", "TTKS\Tests\TTKS.Tests.csproj", "{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTKS.Admin.Tests", "TTKS.Admin\Tests\TTKS.Admin.Tests.csproj", "{A420E4D4-3231-4ED4-A9C4-D813A68121E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTKS.Admin.Tests", "TTKS.Admin\Tests\TTKS.Admin.Tests.csproj", "{A420E4D4-3231-4ED4-A9C4-D813A68121E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -552,54 +550,6 @@ Global
 		{B2CA10C2-B9B1-4021-92DE-463DFD228AB4}.Release|x64.Build.0 = Release|Any CPU
 		{B2CA10C2-B9B1-4021-92DE-463DFD228AB4}.Release|x86.ActiveCfg = Release|Any CPU
 		{B2CA10C2-B9B1-4021-92DE-463DFD228AB4}.Release|x86.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|x64.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|x64.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Ad-Hoc|x86.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|ARM.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|x64.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|x64.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.AppStore|x86.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|ARM.Build.0 = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|x64.Build.0 = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Debug|x86.Build.0 = Debug|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|ARM.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|ARM.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|iPhone.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|x64.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|x64.Build.0 = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|x86.ActiveCfg = Release|Any CPU
-		{DB35ECD8-60ED-4A4E-937A-DB1636ED3E61}.Release|x86.Build.0 = Release|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU

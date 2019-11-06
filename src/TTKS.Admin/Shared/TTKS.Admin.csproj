@@ -10,19 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs" Version="7.0.4" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.3.0" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.3" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
-    <PackageReference Include="GameCtor.RxNavigation.XamForms" Version="1.0.1" />
     <PackageReference Include="MediaManager.Unofficial" Version="1.1.0" />
     <PackageReference Include="MediaManager.Unofficial.Reactive" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.14.0" />
-    <PackageReference Include="ReactiveUI" Version="9.11.1" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="9.11.1" />
-    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="17.1.0.38" />
-    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.1.0.38" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.1.0.38" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="2.5.0" />
+    <PackageReference Include="ReactiveUI" Version="10.5.7" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="10.5.7" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="17.3.0.26" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.3.0.26" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.3.0.26" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.6.0" />
     <PackageReference Include="System.Reactive" Version="4.2.0" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
@@ -58,6 +58,12 @@
     </Reference>
     <Reference Include="GameCtor.XamarinAuth">
       <HintPath>..\..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\XamarinAuth\bin\Release\netstandard2.0\GameCtor.XamarinAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="RxNavigation">
+      <HintPath>..\..\..\..\RxNavigation\src\RxNavigation.XamForms\bin\Release\netstandard2.0\RxNavigation.dll</HintPath>
+    </Reference>
+    <Reference Include="RxNavigation.XamForms">
+      <HintPath>..\..\..\..\RxNavigation\src\RxNavigation.XamForms\bin\Release\netstandard2.0\RxNavigation.XamForms.dll</HintPath>
     </Reference>
   </ItemGroup>
 

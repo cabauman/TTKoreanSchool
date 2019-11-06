@@ -20,7 +20,7 @@ using TTKS.Core.Models;
 
 namespace TTKS.Admin.Modules
 {
-    public class AudiobookListViewModel : BasePageViewModel, IAudiobookListViewModel, ISupportsActivation
+    public class AudiobookListViewModel : BasePageViewModel, IAudiobookListViewModel, IActivatableViewModel
     {
         //private readonly ObservableCollection<IAudiobookItemViewModel> _audiobookItems;
         private readonly ReadOnlyObservableCollection<IAudiobookItemViewModel> _audiobookVms;
