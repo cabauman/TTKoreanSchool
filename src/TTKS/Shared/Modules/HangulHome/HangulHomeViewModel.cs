@@ -14,6 +14,6 @@ namespace TTKS.Modules
         {
         }
 
-        public override string Title => "Hangul";
+        public override string Title => Resx.AppResources.Hangul;
     }
 }

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="ko" original="TTKS/LOCALIZATION/APPRESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6914.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="TTKS/RESX/APPRESOURCES.RESX">
+        <trans-unit id="Hangul" translate="yes" xml:space="preserve">
+          <source>Hangul</source>
+          <target state="new">Hangul</target>
+        </trans-unit>
+        <trans-unit id="HelloTest" translate="yes" xml:space="preserve">
+          <source>Hello</source>
+          <target state="new">Hello</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">A test.</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
