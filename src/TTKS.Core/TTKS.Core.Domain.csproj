@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.3" />
+    <PackageReference Include="ReactiveUI" Version="10.5.7" />
+    <PackageReference Include="System.Reactive" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GameCtor.FirebaseAuth">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseAuth\bin\Release\netstandard2.0\GameCtor.FirebaseAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseDatabase.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseDatabase.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseDatabase.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.FirebaseStorage.DotNet">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\FirebaseStorage.DotNet\bin\Release\netstandard2.0\GameCtor.FirebaseStorage.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GameCtor.Repository">
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\GameCtor.XPlatLibs\Repository\bin\Release\netstandard2.0\GameCtor.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="KoreanRomanisation">
+      <HintPath>KoreanRomanisation.dll</HintPath>
+    </Reference>
+    <Reference Include="RxNavigation">
+      <HintPath>..\..\..\RxNavigation\src\RxNavigation.XamForms\bin\Release\netstandard2.0\RxNavigation.dll</HintPath>
+    </Reference>
+    <Reference Include="RxNavigation.XamForms">
+      <HintPath>..\..\..\RxNavigation\src\RxNavigation.XamForms\bin\Release\netstandard2.0\RxNavigation.XamForms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Contracts\Services\" />
+    <Folder Include="Contracts\Repositories\" />
+  </ItemGroup>
+  
+</Project>

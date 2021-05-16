@@ -22,12 +22,12 @@ namespace TTKS.Admin.Modules
         private IHomonymItemViewModel _selectedItem;
 
         public HomonymListViewModel(
-            HomonymRepo homonymRepo = null,
+            HomonymRepository homonymRepo = null,
             IViewStackService viewStackService = null,
             IScheduler mainScheduler = null)
                 : base(viewStackService)
         {
-            HomonymRepo = homonymRepo ?? Locator.Current.GetService<HomonymRepo>();
+            HomonymRepo = homonymRepo ?? Locator.Current.GetService<HomonymRepository>();
             mainScheduler = mainScheduler ?? RxApp.MainThreadScheduler;
             ConfirmDelete = new Interaction<string, bool>();
             _homonymCache = new SourceCache<StringEntity, string>(x => x.Id);
@@ -70,7 +70,7 @@ namespace TTKS.Admin.Modules
 
         public Interaction<string, bool> ConfirmDelete { get; }
 
-        public HomonymRepo HomonymRepo { get; }
+        public HomonymRepository HomonymRepo { get; }
 
         public IHomonymItemViewModel SelectedItem
         {

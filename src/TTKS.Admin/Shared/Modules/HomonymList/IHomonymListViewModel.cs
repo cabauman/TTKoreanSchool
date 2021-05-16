@@ -20,7 +20,7 @@ namespace TTKS.Admin.Modules
 
         IHomonymItemViewModel SelectedItem { get; set; }
 
-        HomonymRepo HomonymRepo { get; }
+        HomonymRepository HomonymRepo { get; }
 
         ReadOnlyObservableCollection<IHomonymItemViewModel> Items { get; }
     }

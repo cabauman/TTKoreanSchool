@@ -8,16 +8,16 @@ namespace TTKS.Admin.Services
 {
     public class StudyContentService
     {
-        private SentenceRepo _sentenceRepo;
-        private GrammarRepo _grammarRepo;
-        private HomonymRepo _homonymRepo;
-        private VocabTermRepo _vocabTermRepo;
+        private SentenceRepository _sentenceRepo;
+        private GrammarPrincipleRepository _grammarRepo;
+        private HomonymRepository _homonymRepo;
+        private VocabTermRepository _vocabTermRepo;
 
         public StudyContentService(
-            SentenceRepo sentenceRepo = null,
-            GrammarRepo grammarRepo = null,
-            HomonymRepo homonymRepo = null,
-            VocabTermRepo vocabTermRepo = null)
+            SentenceRepository sentenceRepo = null,
+            GrammarPrincipleRepository grammarRepo = null,
+            HomonymRepository homonymRepo = null,
+            VocabTermRepository vocabTermRepo = null)
         {
         }
 
@@ -25,7 +25,7 @@ namespace TTKS.Admin.Services
         {
             if (_sentenceRepo == null)
             {
-                _sentenceRepo = Locator.Current.GetService<SentenceRepo>();
+                _sentenceRepo = Locator.Current.GetService<SentenceRepository>();
             }
 
             return _sentenceRepo.GetItems();
@@ -35,7 +35,7 @@ namespace TTKS.Admin.Services
         {
             if (_grammarRepo == null)
             {
-                _grammarRepo = Locator.Current.GetService<GrammarRepo>();
+                _grammarRepo = Locator.Current.GetService<GrammarPrincipleRepository>();
             }
 
             return _grammarRepo.GetItems();
@@ -45,7 +45,7 @@ namespace TTKS.Admin.Services
         {
             if (_homonymRepo == null)
             {
-                _homonymRepo = Locator.Current.GetService<HomonymRepo>();
+                _homonymRepo = Locator.Current.GetService<HomonymRepository>();
             }
 
             return _homonymRepo.GetItems();
@@ -55,7 +55,7 @@ namespace TTKS.Admin.Services
         {
             if (_vocabTermRepo == null)
             {
-                _vocabTermRepo = Locator.Current.GetService<VocabTermRepo>();
+                _vocabTermRepo = Locator.Current.GetService<VocabTermRepository>();
             }
 
             return _vocabTermRepo.GetItems();

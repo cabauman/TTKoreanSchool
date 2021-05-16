@@ -29,9 +29,9 @@
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.34" />  
   </ItemGroup>
-  
+
   <ItemGroup>
-    <ProjectReference Include="..\..\TTKS.Core\TTKS.Core.csproj" />
+    <ProjectReference Include="..\..\TTKS.Core\TTKS.Core.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

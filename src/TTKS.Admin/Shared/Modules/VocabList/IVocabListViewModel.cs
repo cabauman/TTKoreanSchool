@@ -21,7 +21,7 @@ namespace TTKS.Admin.Modules
 
         IVocabItemViewModel SelectedItem { get; set; }
 
-        VocabTermRepo VocabTermRepo { get; }
+        VocabTermRepository VocabTermRepo { get; }
 
         ObservableCollection<IVocabItemViewModel> Items { get; }
 

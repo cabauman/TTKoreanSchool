@@ -3,7 +3,9 @@
     <Product>TT Korean School ($(TargetFramework))</Product>
     <Platform>AnyCPU</Platform>
     <IsTestProject>$(MSBuildProjectName.Contains('Tests'))</IsTestProject>
-    <DebugType>embedded</DebugType> 
+    <DebugType>embedded</DebugType>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>

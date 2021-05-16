@@ -26,13 +26,13 @@ namespace TTKS.Admin.Modules
         private IDictionary<string, IVocabItemViewModel> _modifiedEnTranslationMap = new Dictionary<string, IVocabItemViewModel>();
 
         public VocabListViewModel(
-            VocabTermRepo vocabTermRepo = null,
+            VocabTermRepository vocabTermRepo = null,
             TranslationRepoFactory translationRepoFactory = null,
             StudyContentService studyContentService = null,
             IViewStackService viewStackService = null)
                 : base(viewStackService)
         {
-            VocabTermRepo = vocabTermRepo ?? Locator.Current.GetService<VocabTermRepo>();
+            VocabTermRepo = vocabTermRepo ?? Locator.Current.GetService<VocabTermRepository>();
             translationRepoFactory = translationRepoFactory ?? Locator.Current.GetService<TranslationRepoFactory>();
             TranslationRepo = translationRepoFactory.Create(TranslationType.Vocab, "en");
             studyContentService = studyContentService ?? Locator.Current.GetService<StudyContentService>();
@@ -74,7 +74,7 @@ namespace TTKS.Admin.Modules
 
         public Interaction<string, bool> ConfirmDelete { get; }
 
-        public VocabTermRepo VocabTermRepo { get; }
+        public VocabTermRepository VocabTermRepo { get; }
 
         public IRepository<Translation> TranslationRepo { get; }
 
@@ -157,10 +157,7 @@ namespace TTKS.Admin.Modules
                 .OnItemRemoved(
                     x =>
                     {
-                        if (_modifiedTermMap.ContainsKey(x.Model.Id))
-                        {
-                            _modifiedTermMap.Remove(x.Model.Id);
-                        }
+                        _modifiedTermMap.Remove(x.Model.Id);
                     })
                 .Subscribe();
 
@@ -175,10 +172,7 @@ namespace TTKS.Admin.Modules
                 .OnItemRemoved(
                     x =>
                     {
-                        if (_modifiedEnTranslationMap.ContainsKey(x.Model.Id))
-                        {
-                            _modifiedEnTranslationMap.Remove(x.Model.Id);
-                        }
+                        _modifiedEnTranslationMap.Remove(x.Model.Id);
                     })
                 .Subscribe();
         }
